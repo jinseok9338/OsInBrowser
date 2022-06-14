@@ -1,0 +1,4 @@
+# Commands to start on workspace startup
+tasks:
+  - init: install sass and install trunk
+    command: rustup target add wasm32-unknown-unknown && cargo install trunk && npm install -g sass

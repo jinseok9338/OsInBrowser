@@ -1,9 +1,7 @@
-use yew::{function_component, html};
+mod apps;
+mod utils;
 
-#[function_component(HelloWorld)]
-fn hello_world() -> Html {
-    html! { "Hello world" }
-}
+use crate::apps::hello_world::HelloWorld;
 
 fn main() {
     yew::start_app::<HelloWorld>();
