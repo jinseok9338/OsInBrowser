@@ -1,8 +1,8 @@
 mod apps;
+mod index;
 mod utils;
 
-use crate::apps::hello_world::HelloWorld;
-
+use index::App;
 fn main() {
-    yew::start_app::<HelloWorld>();
+    yew::start_app::<App>();
 }
