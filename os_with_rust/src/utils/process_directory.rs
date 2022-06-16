@@ -48,7 +48,6 @@ impl Reducible for ProcessesState {
                     process: action.process.process,
                     process_name: action.process.process_name,
                 });
-                log!(format!("{:?}", &old_processes));
                 old_processes
             }
             &_ => self.processes.clone(),
