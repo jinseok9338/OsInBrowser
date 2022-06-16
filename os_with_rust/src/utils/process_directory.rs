@@ -1,30 +1,37 @@
 use std::rc::Rc;
 
+use gloo_console::log;
 use yew::{
-    function_component, html, use_context, use_reducer, Children, ContextProvider, Properties,
-    Reducible, UseReducerHandle,
+    function_component, html, use_context, use_reducer, virtual_dom::VNode, Children,
+    ContextProvider, Properties, Reducible, UseReducerHandle,
 };
 
 /// reducer's Action
 pub struct ProcessAction {
-    process_name: String,
-    action_type: String,
+    pub process: ProcessState,
+    pub action_type: String,
 }
 
 /// reducer's State
-#[derive(Clone, PartialEq)]
-struct ProcessState {
-    process: String,
+#[derive(Clone, PartialEq, Debug)]
+pub struct ProcessState {
+    pub process_name: Option<String>,
+    pub process: Option<VNode>,
 }
 
 #[derive(Clone, PartialEq)]
 pub struct ProcessesState {
-    processes: Vec<ProcessState>,
+    pub processes: Vec<ProcessState>,
 }
 
 impl Default for ProcessesState {
     fn default() -> Self {
-        Self { processes: vec![] }
+        Self {
+            processes: vec![ProcessState {
+                process_name: Some("this is hello world".to_owned()),
+                process: Some(html! {<h1>{"hello"}</h1>}),
+            }],
+        }
     }
 }
 
@@ -35,17 +42,20 @@ impl Reducible for ProcessesState {
     /// Reducer Function
     fn reduce(self: Rc<Self>, action: Self::Action) -> Rc<Self> {
         let add_process = {
-            |process_name: &String| {
+            |process: &ProcessState| {
                 let mut old_processes = self.processes.clone();
                 old_processes.push(ProcessState {
-                    process: process_name.to_owned(),
-                })
+                    process_name: process.process_name.clone(),
+                    process: process.process.clone(),
+                });
+                return old_processes;
             }
         };
 
         let next_ctr = match action.action_type.as_ref() {
             "add_process" => {
-                add_process(&action.process_name);
+                add_process(&action.process);
+                log!("log_added");
                 self.processes.clone()
             }
             &_ => todo!(),

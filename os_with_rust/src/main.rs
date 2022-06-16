@@ -1,4 +1,5 @@
 mod apps;
+mod components;
 mod index;
 mod utils;
 

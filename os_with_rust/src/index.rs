@@ -1,3 +1,6 @@
+use crate::components::back_ground::BackGround;
+use crate::components::main::Main;
+
 use crate::utils::process_directory::ProcessDirectoryContextProvider;
 use yew::prelude::*;
 
@@ -5,7 +8,9 @@ use yew::prelude::*;
 pub fn app() -> Html {
     html! {
     <ProcessDirectoryContextProvider>
-        <h1>{"Hello World"}</h1>
+        <BackGround>
+            <Main/>
+        </BackGround>
     </ProcessDirectoryContextProvider>
     }
 }
