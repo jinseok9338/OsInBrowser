@@ -41,28 +41,21 @@ impl Reducible for ProcessesState {
 
     /// Reducer Function
     fn reduce(self: Rc<Self>, action: Self::Action) -> Rc<Self> {
-        let add_process = {
-            |process: &ProcessState| {
-                let mut old_processes = self.processes.clone();
-                old_processes.push(ProcessState {
-                    process_name: process.process_name.clone(),
-                    process: process.process.clone(),
-                });
-                return old_processes;
-            }
-        };
-
         let next_ctr = match action.action_type.as_ref() {
             "add_process" => {
-                add_process(&action.process);
-                log!("log_added");
-                self.processes.clone()
+                let mut old_processes = self.processes.clone();
+                old_processes.push(ProcessState {
+                    process: action.process.process,
+                    process_name: action.process.process_name,
+                });
+                log!(format!("{:?}", &old_processes));
+                old_processes
             }
-            &_ => todo!(),
+            &_ => self.processes.clone(),
         };
 
         Self {
-            processes: next_ctr,
+            processes: next_ctr.to_vec(),
         }
         .into()
     }
