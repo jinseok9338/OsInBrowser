@@ -13,20 +13,13 @@ pub struct WindowProps {
 #[styled_component(WindowComponent)]
 pub fn window(props: &WindowProps) -> Html {
     let div_ref = use_node_ref();
-    log!(format!("{:?}", &div_ref));
 
     let coordinate = use_draggable(div_ref.clone());
 
     html! {
-        <div class={classes!("window_container", css!(
-                r#"
-                top: ${top};
-                left: ${left};
-                "#
-            ,top=format!("{top}px", top = coordinate.dx),
-            left=format!("{left}px", left = coordinate.dy)))}
-            ref={div_ref} >
-            <div class="row">
+        <div class={classes!("window_container", css!("transform: translate3d(${dx}px, ${dy}px, 0);",dx=&coordinate.dx, dy=&coordinate.dy))}
+             >
+            <div class="row" ref={div_ref}>
                 <div class="column left">
                     <span class="dot" style="background:#ED594A;"></span> // this is for closing the window
                     <span class="dot" style="background:#FDD800;"></span> // this is for minimizing
@@ -34,9 +27,18 @@ pub fn window(props: &WindowProps) -> Html {
                 </div>
             </div>
 
-            <div  class="content">
+            <div class="content">
+
                 {props.children.clone()}
             </div>
       </div>
     }
 }
+
+// css!(
+//     r#"
+//     top: ${top};
+//     left: ${left};
+//     "#
+// ,top=format!("{top}px", top = coordinate.dx),
+// left=format!("{left}px", left = coordinate.dy))

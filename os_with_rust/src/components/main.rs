@@ -1,7 +1,7 @@
 use crate::apps::hello_world::HelloWorld;
 use crate::components::window::window::WindowComponent;
 use crate::utils::process_directory::{use_process_context, ProcessAction, ProcessState};
-use gloo_console::log;
+
 use yew::prelude::*;
 
 #[function_component(Main)]
@@ -24,14 +24,12 @@ pub fn main() -> Html {
         })
     };
 
-    log!(format!("{:?}", &processes));
-
     html! {
         <div>
             <button {onclick}>{"clickMe"}</button>
             {
                 processes.into_iter().map(|process| {
-                    html!{<WindowComponent key={process.process_name.clone().unwrap()}>{ process.process.unwrap() }</WindowComponent>}
+                    html!{<WindowComponent >{ process.process.unwrap() }</WindowComponent>}
                 }).collect::<Html>()
             }
         </div>
