@@ -12,10 +12,10 @@ pub struct WindowProps {
 
 #[styled_component(WindowComponent)]
 pub fn window(props: &WindowProps) -> Html {
-    let node = use_node_ref();
-    log!(format!("{:?}", &node));
+    let div_ref = use_node_ref();
+    log!(format!("{:?}", &div_ref));
 
-    let coordinate = use_draggable(node.clone());
+    let coordinate = use_draggable(div_ref.clone());
 
     html! {
         <div class={classes!("window_container", css!(
@@ -25,7 +25,7 @@ pub fn window(props: &WindowProps) -> Html {
                 "#
             ,top=format!("{top}px", top = coordinate.dx),
             left=format!("{left}px", left = coordinate.dy)))}
-            ref={node.clone()} >
+            ref={div_ref} >
             <div class="row">
                 <div class="column left">
                     <span class="dot" style="background:#ED594A;"></span> // this is for closing the window

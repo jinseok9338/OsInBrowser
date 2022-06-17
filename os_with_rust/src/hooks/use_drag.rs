@@ -17,7 +17,9 @@ pub fn use_draggable(node: NodeRef) -> Coordinate {
     let window: Window = window().unwrap();
     let window_for_event_listener: Window = window.clone();
     log!(format!("{:?}", &node));
-    let element = node.cast::<HtmlDivElement>().unwrap();
+    let element = node
+        .cast::<HtmlDivElement>()
+        .expect("div_ref not attached to div element");
 
     use_effect_with_deps(
         move |_| {
