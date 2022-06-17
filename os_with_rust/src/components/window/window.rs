@@ -1,29 +1,31 @@
+use gloo_console::log;
+
 use yew::prelude::*;
 
-use crate::hooks::use_raf_state::use_raf_state;
+use crate::hooks::use_drag::use_draggable;
+use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
 pub struct WindowProps {
     pub children: Children,
 }
 
-#[function_component(Window)]
+#[styled_component(WindowComponent)]
 pub fn window(props: &WindowProps) -> Html {
-    let state = use_raf_state(|| (0f64, 0f64));
+    let node = use_node_ref();
+    log!(format!("{:?}", &node));
 
-    {
-        let state = state.clone();
-        use_event_with_window("resize", move |e: Event| {
-            let window: Window = e.target_unchecked_into();
-            state.set((
-                window.inner_width().unwrap().as_f64().unwrap(),
-                window.inner_height().unwrap().as_f64().unwrap(),
-            ));
-        });
-    }
+    let coordinate = use_draggable(node.clone());
 
     html! {
-        <div class="window_container">
+        <div class={classes!("window_container", css!(
+                r#"
+                top: ${top};
+                left: ${left};
+                "#
+            ,top=format!("{top}px", top = coordinate.dx),
+            left=format!("{left}px", left = coordinate.dy)))}
+            ref={node.clone()} >
             <div class="row">
                 <div class="column left">
                     <span class="dot" style="background:#ED594A;"></span> // this is for closing the window
@@ -32,8 +34,8 @@ pub fn window(props: &WindowProps) -> Html {
                 </div>
             </div>
 
-            <div class="content">
-            {props.children.clone()}
+            <div  class="content">
+                {props.children.clone()}
             </div>
       </div>
     }

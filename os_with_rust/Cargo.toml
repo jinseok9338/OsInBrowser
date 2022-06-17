@@ -13,9 +13,13 @@ wasm-bindgen-futures = "0.4"
 serde = "1"
 js-sys = "0.3"
 gloo = "0.7"
+stylist = { version="0.10.0", features = [
+    "yew_integration",
+    "yew_use_style",
+] }
 
 [dependencies.web-sys]
-version = "0.3"
+version = "0.3.58"
 features = [
     "BeforeUnloadEvent",
     "Element",
@@ -43,4 +47,11 @@ features = [
     "HtmlCollection",
     "Blob",
     "StorageEvent",
+    "HtmlDivElement",
+    "HtmlElement",
+    "DragEvent",
+    "MouseEvent",
+    "EventListenerOptions",
+    
+  
 ]

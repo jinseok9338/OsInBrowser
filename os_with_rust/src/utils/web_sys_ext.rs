@@ -4,7 +4,7 @@
 #![allow(unused_imports)]
 #![allow(clippy::unused_unit)]
 use wasm_bindgen::{self, prelude::*};
-use web_sys::{DataTransfer, DomRectReadOnly, Element, Event, EventTarget, Window};
+use web_sys::{DataTransfer, DomRectReadOnly, Element, Event, EventTarget};
 
 #[wasm_bindgen]
 extern "C" {
@@ -33,6 +33,55 @@ extern "C" {
 
     # [wasm_bindgen (structural , method , getter , js_class = "ResizeObserverEntry" , js_name = contentRect)]
     pub fn content_rect(this: &ResizeObserverEntry) -> DomRectReadOnly;
+}
+
+#[wasm_bindgen]
+extern "C" {
+    # [wasm_bindgen (extends = Event , extends = :: js_sys :: Object , js_name = ClipboardEvent , typescript_type = "ClipboardEvent")]
+    #[derive(Debug, Clone, PartialEq, Eq)]
+    pub type ClipboardEvent;
+
+    # [wasm_bindgen (structural , method , getter , js_class = "ClipboardEvent" , js_name = clipboardData)]
+    pub fn clipboard_data(this: &ClipboardEvent) -> Option<DataTransfer>;
+}
+
+#[wasm_bindgen]
+extern "C" {
+    # [wasm_bindgen (extends = EventTarget , extends = :: js_sys :: Object , js_name = Clipboard , typescript_type = "Clipboard")]
+    #[derive(Debug, Clone, PartialEq, Eq)]
+    pub type Clipboard;
+
+    # [wasm_bindgen (method , structural , js_class = "Clipboard" , js_name = read)]
+    pub fn read(this: &Clipboard) -> ::js_sys::Promise;
+
+    # [wasm_bindgen (method , structural , js_class = "Clipboard" , js_name = readText)]
+    pub fn read_text(this: &Clipboard) -> ::js_sys::Promise;
+
+    # [wasm_bindgen (method , structural , js_class = "Clipboard" , js_name = write)]
+    pub fn write(this: &Clipboard, data: &::wasm_bindgen::JsValue) -> ::js_sys::Promise;
+
+    # [wasm_bindgen (method , structural , js_class = "Clipboard" , js_name = writeText)]
+    pub fn write_text(this: &Clipboard, data: &str) -> ::js_sys::Promise;
+}
+
+#[wasm_bindgen]
+extern "C" {
+    # [wasm_bindgen (extends = :: js_sys :: Object , js_name = Navigator , typescript_type = "Navigator")]
+    #[derive(Debug, Clone, PartialEq, Eq)]
+    pub type Navigator;
+
+    # [wasm_bindgen (structural , method , getter , js_class = "Navigator" , js_name = clipboard)]
+    pub fn clipboard(this: &Navigator) -> Option<Clipboard>;
+}
+
+#[wasm_bindgen]
+extern "C" {
+    # [wasm_bindgen (extends = EventTarget , extends = :: js_sys :: Object , js_name = Window , typescript_type = "Window")]
+    #[derive(Debug, Clone, PartialEq, Eq)]
+    pub type Window;
+
+    # [wasm_bindgen (structural , method , getter , js_class = "Window" , js_name = navigator)]
+    pub fn navigator(this: &Window) -> Navigator;
 }
 
 pub fn window() -> Option<Window> {
