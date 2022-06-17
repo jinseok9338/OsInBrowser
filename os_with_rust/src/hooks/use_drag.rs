@@ -84,7 +84,6 @@ pub fn use_draggable(reference: NodeRef) -> Coordinate {
                     element
                         .remove_event_listener_with_callback("mousedown", &handle_mouse_down)
                         .unwrap_throw();
-                    log!("mousedown unattached");
                 }
             },
             [dx, dy], // dependents

@@ -4,4 +4,5 @@ pub mod use_event;
 pub mod use_measure;
 pub mod use_mut_latest;
 pub mod use_raf_state;
+pub mod use_resize;
 pub mod use_unmount;
