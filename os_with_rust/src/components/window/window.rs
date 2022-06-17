@@ -16,18 +16,12 @@ pub fn window(props: &WindowProps) -> Html {
     let div_ref = use_node_ref();
 
     let coordinate = use_draggable(row_ref.clone());
-    let height_and_width = use_resizable(div_ref.clone());
 
-    log!(format!(
-        "{:?},{:?}",
-        &height_and_width.width, &height_and_width.height
-    ));
     html! {
         <div class={classes!("window_container", css!(r#"
         transform: translate3d(${dx}px, ${dy}px, 0);
-        width: ${width};
-        height: ${height};
-        "#,dx=&coordinate.dx, dy=&coordinate.dy, width =height_and_width.width, height=height_and_width.height))}
+     
+        "#,dx=&coordinate.dx, dy=&coordinate.dy,))}
         >
             <div class="row" ref={row_ref}>
                 <div class="column left">
