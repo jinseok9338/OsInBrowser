@@ -1,5 +1,7 @@
 use yew::prelude::*;
 
+use crate::hooks::use_raf_state::use_raf_state;
+
 #[derive(Properties, PartialEq)]
 pub struct WindowProps {
     pub children: Children,
@@ -7,6 +9,19 @@ pub struct WindowProps {
 
 #[function_component(Window)]
 pub fn window(props: &WindowProps) -> Html {
+    let state = use_raf_state(|| (0f64, 0f64));
+
+    {
+        let state = state.clone();
+        use_event_with_window("resize", move |e: Event| {
+            let window: Window = e.target_unchecked_into();
+            state.set((
+                window.inner_width().unwrap().as_f64().unwrap(),
+                window.inner_height().unwrap().as_f64().unwrap(),
+            ));
+        });
+    }
+
     html! {
         <div class="window_container">
             <div class="row">

@@ -8,3 +8,39 @@ edition = "2021"
 [dependencies]
 yew = "0.19"
 gloo-console = "0.2.1"
+wasm-bindgen = "0.2"
+wasm-bindgen-futures = "0.4"
+serde = "1"
+js-sys = "0.3"
+gloo = "0.7"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "BeforeUnloadEvent",
+    "Element",
+    "UrlSearchParams",
+    "WebSocket",
+    "MessageEvent",
+    "CloseEvent",
+    "BinaryType",
+    "DomRectReadOnly",
+    "Navigator",
+    "Geolocation",
+    "Coordinates",
+    "Position",
+    "PositionError",
+    "PositionOptions",
+    "File",
+    "DataTransfer",
+    "DataTransferItem",
+    "DataTransferItemList",
+    "HtmlMediaElement",
+    "TimeRanges",
+    "Touch",
+    "TouchList",
+    "HtmlLinkElement",
+    "HtmlCollection",
+    "Blob",
+    "StorageEvent",
+]

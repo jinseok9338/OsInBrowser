@@ -1,5 +1,5 @@
 use crate::apps::hello_world::HelloWorld;
-use crate::components::window::Window;
+use crate::components::window::window::Window;
 use crate::utils::process_directory::{use_process_context, ProcessAction, ProcessState};
 use gloo_console::log;
 use yew::prelude::*;
