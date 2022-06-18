@@ -89,14 +89,14 @@ struct Coordinate {
 }
 
 pub fn use_resizable(node: NodeRef, id: String) {
+    let state = use_measure(node.clone());
     let x_and_y_coordinate = use_raf_state(|| Coordinate {
-        x: 0 as f64,
-        y: 0 as f64,
+        x: state.x,
+        y: state.y,
     });
 
     let x = x_and_y_coordinate.x;
     let y = x_and_y_coordinate.y;
-    let state = use_measure(node.clone());
 
     {
         use_effect_with_deps(
