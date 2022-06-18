@@ -2,7 +2,7 @@ use gloo_console::log;
 
 use yew::prelude::*;
 
-use crate::hooks::{use_drag::use_draggable, use_measure::use_measure, use_resize::use_resizable};
+use crate::hooks::{use_drag::use_draggable, use_resize::use_resizable};
 use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
@@ -21,7 +21,8 @@ pub fn window(props: &WindowProps) -> Html {
 
     html! {
         <div class={classes!("window_container", css!(r#"
-        transform: translate3d(${dx}px, ${dy}px, 0);
+        left: ${dx}px;
+        top: ${dy}px;
         "#,dx=&coordinate.dx, dy=&coordinate.dy,))}
         ref={div_ref}
         >

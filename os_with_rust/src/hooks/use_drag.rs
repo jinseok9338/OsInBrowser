@@ -3,7 +3,7 @@ use gloo_console::log;
 use js_sys::Function;
 use wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
 use web_sys::{AddEventListenerOptions, HtmlDivElement, MouseEvent};
-use yew::{use_effect_with_deps, use_state, NodeRef};
+use yew::{use_effect_with_deps, NodeRef};
 
 use super::use_raf_state::use_raf_state;
 
@@ -18,6 +18,7 @@ pub fn use_draggable(reference: NodeRef) -> Coordinate {
 
     let dx = (*x_and_y_coordinate).dx;
     let dy = (*x_and_y_coordinate).dy;
+    log!("invoked");
 
     {
         use_effect_with_deps(
