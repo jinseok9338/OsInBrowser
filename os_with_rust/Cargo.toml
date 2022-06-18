@@ -57,7 +57,7 @@ features = [
     "NodeList",
     "CssStyleDeclaration",
     "DomRect",
-    "Element"
+    "DomTokenList"
 ]
 
 [dependencies.uuid]

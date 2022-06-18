@@ -2,7 +2,7 @@ use gloo_console::log;
 
 use yew::prelude::*;
 
-use crate::hooks::{use_drag::use_draggable, use_resize::use_resizable};
+use crate::hooks::{use_drag::use_draggable, use_measure::use_measure, use_resize::use_resizable};
 use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
@@ -17,14 +17,15 @@ pub fn window(props: &WindowProps) -> Html {
     let div_ref = use_node_ref();
 
     let coordinate = use_draggable(row_ref.clone());
+    use_resizable(div_ref.clone(), props.id.clone());
 
     html! {
         <div class={classes!("window_container", css!(r#"
         transform: translate3d(${dx}px, ${dy}px, 0);
-     
         "#,dx=&coordinate.dx, dy=&coordinate.dy,))}
+        ref={div_ref}
         >
-            <div class="resizers">
+            <div class="resizers" >
                 <div  class={classes!("resizer", "top-left", {props.id.clone()})}></div>
                 <div class={classes!("resizer", "top-right", {props.id.clone()})}></div>
                 <div class={classes!("resizer", "bottom-left", {props.id.clone()})}></div>
@@ -37,7 +38,7 @@ pub fn window(props: &WindowProps) -> Html {
                     </div>
                 </div>
 
-                <div  ref={div_ref} class="content">
+                <div   class="content">
 
                     {props.children.clone()}
                 </div>

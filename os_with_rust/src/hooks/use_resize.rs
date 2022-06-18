@@ -1,14 +1,9 @@
-use super::use_raf_state::use_raf_state;
-use crate::hooks::use_measure::use_measure;
+use super::{use_measure::use_measure, use_raf_state::use_raf_state};
 use gloo_console::log;
 use js_sys::Function;
+use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::JsCast;
-use wasm_bindgen::{prelude::Closure, UnwrapThrowExt};
-
-use web_sys::{
-    window, AddEventListenerOptions, Document, HtmlDivElement, MouseEvent, NodeList, Window,
-};
-use web_sys::{HtmlElement, Node};
+use web_sys::{window, Document, Element, HtmlCollection, HtmlDivElement, MouseEvent};
 use yew::{use_effect_with_deps, NodeRef};
 // function makeResizableDiv(div) {
 //     const element = document.querySelector(div);
@@ -93,71 +88,264 @@ struct Coordinate {
     pub y: f64,
 }
 
-pub fn use_resizable(node: NodeRef, id: String) -> Coordinate {
-    // Elements
-    let window = window().unwrap();
-    let document: Document = window.clone().document().unwrap();
-    let element = node.cast::<HtmlDivElement>().unwrap();
-    let resizers: NodeList = document
-        .query_selector_all(format!(".{id}", id = &id).as_ref())
-        .unwrap();
-
-    //bunch of variables
+pub fn use_resizable(node: NodeRef, id: String) {
     let x_and_y_coordinate = use_raf_state(|| Coordinate {
-        x: element.get_bounding_client_rect().x(),
-        y: element.get_bounding_client_rect().y(),
+        x: 0 as f64,
+        y: 0 as f64,
     });
-    const MINIMUM_SIZE: i32 = 20;
 
-    use_effect_with_deps(
-        move |_| {
-            let update_value =
-                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
-                    event.prevent_default();
-                    let original_width = element
-                        .style()
-                        .get_property_value("width")
-                        .unwrap()
-                        .replace("px", "")
-                        .parse::<i32>()
-                        .unwrap();
-                    let original_height = element
-                        .style()
-                        .get_property_value("height")
-                        .unwrap()
-                        .replace("px", "")
-                        .parse::<i32>()
-                        .unwrap();
-                    let original_x = x_and_y_coordinate.x;
-                    let original_y = x_and_y_coordinate.y;
-                    let original_mouse_x = event.page_x();
-                    let original_mouse_y = event.page_y();
-                    window.add_event_listener_with_callback("mousemove", &resize);
-                    window.add_event_listener_with_callback("mouseup", &stop_resize);
-                }))
-                .into_js_value()
-                .dyn_into::<Function>()
-                .unwrap();
+    let x = x_and_y_coordinate.x;
+    let y = x_and_y_coordinate.y;
+    let state = use_measure(node.clone());
 
-            //For init_resize_variables
-            let resizers_for_init_resize = resizers.clone();
-            let init_resize =
-                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |_event: MouseEvent| {
-                    // add Event_listener
-                    for x in 0..resizers_for_init_resize.length() {
-                        resizers_for_init_resize
-                            .item(x)
-                            .unwrap()
-                            .add_event_listener_with_callback("mousedown", &update_value);
-                    }
-                }))
-                .into_js_value()
-                .dyn_into::<Function>()
-                .unwrap();
-            || ();
-        },
-        (), // dependents
-    );
+    {
+        use_effect_with_deps(
+            move |_| {
+                let window = window().unwrap();
+                let window_for_closure = window.clone();
+                let document: Document = window.clone().document().unwrap();
+                let element = node.cast::<HtmlDivElement>().unwrap();
+                let resizers: HtmlCollection = document.get_elements_by_class_name(&id);
+
+                //bunch of variables
+
+                const MINIMUM_SIZE: i32 = 20;
+
+                x_and_y_coordinate.set(Coordinate {
+                    x: element.get_bounding_client_rect().x(),
+                    y: element.get_bounding_client_rect().y(),
+                });
+
+                //For init_resize_variables
+                let resizers = resizers.clone();
+                let element = element.clone();
+                // add Event_listener
+                for n in 0..resizers.length() {
+                    let current_resizer: Element = resizers.item(n).unwrap();
+
+                    let window_for_closure = window_for_closure.clone();
+                    let current_resizer_for_closure = current_resizer.clone();
+                    let element: HtmlDivElement = element.clone();
+                    let window = window.clone();
+                    let x_and_y_coordinate = x_and_y_coordinate.clone();
+                    current_resizer
+                        .add_event_listener_with_callback(
+                            "mousedown",
+                            // Update_value_closure
+                            &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
+                                move |event: MouseEvent| {
+                                    event.prevent_default();
+                                    let original_width = state.width;
+
+                                    let original_height = state.height;
+                                    let original_x = x_and_y_coordinate.x;
+                                    let original_y = x_and_y_coordinate.y;
+                                    let original_mouse_x = event.page_x();
+                                    let original_mouse_y = event.page_y();
+
+                                    //Resize Closure
+                                    let current_resizer_for_closure =
+                                        current_resizer_for_closure.clone();
+                                    let element = element.clone();
+                                    let resize = Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
+                                        move |event: MouseEvent| {
+                                            if current_resizer_for_closure
+                                                .class_list()
+                                                .contains("bottom-right")
+                                            {
+                                                let width = original_width as i32
+                                                    + (event.page_x() - original_mouse_x);
+                                                let height = original_height as i32
+                                                    + (event.page_y() - original_mouse_y);
+                                                if width > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "width",
+                                                            &format!("{width}px", width = width),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                                if height > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "height",
+                                                            &format!("{height}px", height = height),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                            } else if current_resizer_for_closure
+                                                .class_list()
+                                                .contains("bottom-left")
+                                            {
+                                                let height = original_height as i32
+                                                    + (event.page_y() - original_mouse_y);
+                                                let width = original_width as i32
+                                                    + (event.page_x() - original_mouse_x);
+                                                if height > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "height",
+                                                            &format!("{height}px", height = height),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                                if width > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "width",
+                                                            &format!("{width}px", width = width),
+                                                        )
+                                                        .unwrap();
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "left",
+                                                            &format!(
+                                                                "{left}px",
+                                                                left = original_x
+                                                                    + (event.page_x()
+                                                                        - original_mouse_x)
+                                                                        as f64
+                                                            ),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                            } else if current_resizer_for_closure
+                                                .class_list()
+                                                .contains("top-right")
+                                            {
+                                                let width = original_width as i32
+                                                    + (event.page_x() - original_mouse_x);
+                                                let height = original_height as i32
+                                                    + (event.page_y() - original_mouse_y);
+                                                if width > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "width",
+                                                            &format!("{width}px", width = width),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                                if height > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "height",
+                                                            &format!("{height}px", height = height),
+                                                        )
+                                                        .unwrap();
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "top",
+                                                            &format!(
+                                                                "{top}px",
+                                                                top = original_y as f64
+                                                                    + (event.page_y()
+                                                                        - original_mouse_y)
+                                                                        as f64
+                                                            ),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                            } else {
+                                                let width = original_width as i32
+                                                    - (event.page_x() - original_mouse_x);
+                                                let height = original_height as i32
+                                                    - (event.page_y() - original_mouse_y);
+                                                if width > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "width",
+                                                            &format!("{width}px", width = width),
+                                                        )
+                                                        .unwrap();
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "left",
+                                                            &format!(
+                                                                "{left}px",
+                                                                left = original_x
+                                                                    + (event.page_x()
+                                                                        - original_mouse_x)
+                                                                        as f64
+                                                            ),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                                if height > MINIMUM_SIZE {
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "height",
+                                                            &format!("{height}px", height = height),
+                                                        )
+                                                        .unwrap();
+                                                    element
+                                                        .style()
+                                                        .set_property(
+                                                            "top",
+                                                            &format!(
+                                                                "{top}px",
+                                                                top = original_y as f64
+                                                                    + (event.page_y()
+                                                                        - original_mouse_y)
+                                                                        as f64
+                                                            ),
+                                                        )
+                                                        .unwrap();
+                                                }
+                                            }
+                                        },
+                                    ))
+                                    .into_js_value()
+                                    .dyn_into::<Function>()
+                                    .unwrap();
+
+                                    window
+                                        .add_event_listener_with_callback("mousemove", &resize)
+                                        .unwrap();
+
+                                    let window_for_closure = window_for_closure.clone();
+                                    window
+                                        .add_event_listener_with_callback(
+                                            "mouseup",
+                                            &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
+                                                move |_event: MouseEvent| {
+                                                    window_for_closure
+                                                        .remove_event_listener_with_callback(
+                                                            "mousemove",
+                                                            &resize,
+                                                        )
+                                                        .unwrap();
+                                                },
+                                            ))
+                                            .into_js_value()
+                                            .dyn_into::<Function>()
+                                            .unwrap(),
+                                        )
+                                        .unwrap();
+                                },
+                            ))
+                            .into_js_value()
+                            .dyn_into::<Function>()
+                            .unwrap(),
+                        )
+                        .unwrap();
+                }
+
+                move || ()
+            },
+            [x, y], // dependents
+        );
+    }
 }
 
 // THis is closure hell ... Darn it...
