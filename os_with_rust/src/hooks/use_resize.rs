@@ -1,141 +1,163 @@
+use super::use_raf_state::use_raf_state;
 use crate::hooks::use_measure::use_measure;
 use gloo_console::log;
 use js_sys::Function;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::{prelude::Closure, UnwrapThrowExt};
-use web_sys::{window, AddEventListenerOptions, HtmlDivElement, MouseEvent, Window};
+
+use web_sys::{
+    window, AddEventListenerOptions, Document, HtmlDivElement, MouseEvent, NodeList, Window,
+};
+use web_sys::{HtmlElement, Node};
 use yew::{use_effect_with_deps, NodeRef};
+// function makeResizableDiv(div) {
+//     const element = document.querySelector(div);
+//     const resizers = document.querySelectorAll(div + ' .resizer')
+//     const minimum_size = 20;
+//     let original_width = 0;
+//     let original_height = 0;
+//     let original_x = 0;
+//     let original_y = 0;
+//     let original_mouse_x = 0;
+//     let original_mouse_y = 0;
+//     for (let i = 0;i < resizers.length; i++) {
+//       const currentResizer = resizers[i];
+//       currentResizer.addEventListener('mousedown', function(e) {
+//         e.preventDefault()
+//         original_width = parseFloat(getComputedStyle(element, null).getPropertyValue('width').replace('px', ''));
+//         original_height = parseFloat(getComputedStyle(element, null).getPropertyValue('height').replace('px', ''));
+//         original_x = element.getBoundingClientRect().left;
+//         original_y = element.getBoundingClientRect().top;
+//         original_mouse_x = e.pageX;
+//         original_mouse_y = e.pageY;
+//         window.addEventListener('mousemove', resize)
+//         window.addEventListener('mouseup', stopResize)
+//       })
 
-use super::use_raf_state::use_raf_state;
+//       function resize(e) {
+//         if (currentResizer.classList.contains('bottom-right')) {
+//           const width = original_width + (e.pageX - original_mouse_x);
+//           const height = original_height + (e.pageY - original_mouse_y)
+//           if (width > minimum_size) {
+//             element.style.width = width + 'px'
+//           }
+//           if (height > minimum_size) {
+//             element.style.height = height + 'px'
+//           }
+//         }
+//         else if (currentResizer.classList.contains('bottom-left')) {
+//           const height = original_height + (e.pageY - original_mouse_y)
+//           const width = original_width - (e.pageX - original_mouse_x)
+//           if (height > minimum_size) {
+//             element.style.height = height + 'px'
+//           }
+//           if (width > minimum_size) {
+//             element.style.width = width + 'px'
+//             element.style.left = original_x + (e.pageX - original_mouse_x) + 'px'
+//           }
+//         }
+//         else if (currentResizer.classList.contains('top-right')) {
+//           const width = original_width + (e.pageX - original_mouse_x)
+//           const height = original_height - (e.pageY - original_mouse_y)
+//           if (width > minimum_size) {
+//             element.style.width = width + 'px'
+//           }
+//           if (height > minimum_size) {
+//             element.style.height = height + 'px'
+//             element.style.top = original_y + (e.pageY - original_mouse_y) + 'px'
+//           }
+//         }
+//         else {
+//           const width = original_width - (e.pageX - original_mouse_x)
+//           const height = original_height - (e.pageY - original_mouse_y)
+//           if (width > minimum_size) {
+//             element.style.width = width + 'px'
+//             element.style.left = original_x + (e.pageX - original_mouse_x) + 'px'
+//           }
+//           if (height > minimum_size) {
+//             element.style.height = height + 'px'
+//             element.style.top = original_y + (e.pageY - original_mouse_y) + 'px'
+//           }
+//         }
+//       }
 
-// var p = document.querySelector('p');
+//       function stopResize() {
+//         window.removeEventListener('mousemove', resize)
+//       }
+//     }
+//   }
 
-// p.addEventListener('click', function init() {
-//     p.removeEventListener('click', init, false);
-//     p.className = p.className + ' resizable';
-//     var resizer = document.createElement('div');
-//     resizer.className = 'resizer';
-//     p.appendChild(resizer);
-//     resizer.addEventListener('mousedown', initDrag, false);
-// }, false);
-
-// var startX, startY, startWidth, startHeight;
-
-// function initDrag(e) {
-//    startX = e.clientX;
-//    startY = e.clientY;
-//    startWidth = parseInt(document.defaultView.getComputedStyle(p).width, 10);
-//    startHeight = parseInt(document.defaultView.getComputedStyle(p).height, 10);
-//    document.documentElement.addEventListener('mousemove', doDrag, false);
-//    document.documentElement.addEventListener('mouseup', stopDrag, false);
-// }
-
-// function doDrag(e) {
-//    p.style.width = (startWidth + e.clientX - startX) + 'px';
-//    p.style.height = (startHeight + e.clientY - startY) + 'px';
-// }
-
-// function stopDrag(e) {
-//     document.documentElement.removeEventListener('mousemove', doDrag, false);    document.documentElement.removeEventListener('mouseup', stopDrag, false);
-// }
-
-//Closure Hell..... Shit...
 #[derive(PartialEq, Default, Clone)]
-pub struct Coordinate {
-    pub width: f64,
-    pub height: f64,
+struct Coordinate {
+    pub x: f64,
+    pub y: f64,
 }
 
-pub fn use_resizable(node: NodeRef) -> Coordinate {
-    let height_width_state = use_measure(node.clone());
-    let x_and_y_coordinate = use_raf_state(Coordinate::default);
-    let width = (*x_and_y_coordinate).width;
-    let height = (*x_and_y_coordinate).height;
+pub fn use_resizable(node: NodeRef, id: String) -> Coordinate {
+    // Elements
+    let window = window().unwrap();
+    let document: Document = window.clone().document().unwrap();
+    let element = node.cast::<HtmlDivElement>().unwrap();
+    let resizers: NodeList = document
+        .query_selector_all(format!(".{id}", id = &id).as_ref())
+        .unwrap();
 
-    let window: Window = window().unwrap();
-    let window_for_init_drag = window.clone();
+    //bunch of variables
+    let x_and_y_coordinate = use_raf_state(|| Coordinate {
+        x: element.get_bounding_client_rect().x(),
+        y: element.get_bounding_client_rect().y(),
+    });
+    const MINIMUM_SIZE: i32 = 20;
 
-    let window_for_do_drag = window.clone();
-    {
-        use_effect_with_deps(
-            move |_| {
-                let node_to_element = node.cast::<HtmlDivElement>().unwrap();
-
-                //This is for defining init_drag function
-                let init_drag =
-                    Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
-                        let start_x = event.client_x();
-                        let start_y = event.client_y();
-
-                        let start_width = height_width_state.width;
-                        let start_height = height_width_state.height;
-                        let x_and_y_coordinate_for_do_drag = x_and_y_coordinate.clone();
-
-                        //This is for defining do_drag function
-                        let do_drag = Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
-                            move |event: MouseEvent| {
-                                x_and_y_coordinate_for_do_drag.set(Coordinate {
-                                    width: start_width + event.client_x() as f64 - start_x as f64,
-                                    height: start_height + event.client_y() as f64 - start_y as f64,
-                                });
-                                log!("dragging");
-                            },
-                        ))
-                        .into_js_value()
-                        .dyn_into::<Function>()
+    use_effect_with_deps(
+        move |_| {
+            let update_value =
+                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                    event.prevent_default();
+                    let original_width = element
+                        .style()
+                        .get_property_value("width")
+                        .unwrap()
+                        .replace("px", "")
+                        .parse::<i32>()
                         .unwrap();
-
-                        //invoke do drag with mousemove action type
-                        window_for_init_drag
-                            .add_event_listener_with_callback_and_add_event_listener_options(
-                                "mousemove",
-                                &do_drag,
-                                &AddEventListenerOptions::new().once(true),
-                            )
-                            .unwrap_throw();
-
-                        let window_for_stop_drag = window.clone();
-                        // this is for defining stop_drag
-                        let stop_drag = Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
-                            move |_event: MouseEvent| {
-                                window_for_stop_drag
-                                    .remove_event_listener_with_callback("mousemove", &do_drag)
-                                    .unwrap_throw();
-                                log!("stopdragging");
-                            },
-                        ))
-                        .into_js_value()
-                        .dyn_into::<Function>()
+                    let original_height = element
+                        .style()
+                        .get_property_value("height")
+                        .unwrap()
+                        .replace("px", "")
+                        .parse::<i32>()
                         .unwrap();
+                    let original_x = x_and_y_coordinate.x;
+                    let original_y = x_and_y_coordinate.y;
+                    let original_mouse_x = event.page_x();
+                    let original_mouse_y = event.page_y();
+                    window.add_event_listener_with_callback("mousemove", &resize);
+                    window.add_event_listener_with_callback("mouseup", &stop_resize);
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap();
 
-                        // invoke stop_drag
-                        window_for_do_drag
-                            .add_event_listener_with_callback_and_add_event_listener_options(
-                                "mouseup",
-                                &stop_drag,
-                                &AddEventListenerOptions::new().once(true),
-                            )
-                            .unwrap_throw();
-                    }))
-                    .into_js_value()
-                    .dyn_into::<Function>()
-                    .unwrap();
-
-                // invoke init_drag
-                node_to_element
-                    .add_event_listener_with_callback_and_add_event_listener_options(
-                        "mousemove",
-                        &init_drag,
-                        &AddEventListenerOptions::new().once(true),
-                    )
-                    .unwrap_throw();
-                log!("init dragging");
-                || {}
-            },
-            [width, height], // dependents
-        );
-    }
-    Coordinate { width, height }
+            //For init_resize_variables
+            let resizers_for_init_resize = resizers.clone();
+            let init_resize =
+                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |_event: MouseEvent| {
+                    // add Event_listener
+                    for x in 0..resizers_for_init_resize.length() {
+                        resizers_for_init_resize
+                            .item(x)
+                            .unwrap()
+                            .add_event_listener_with_callback("mousedown", &update_value);
+                    }
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap();
+            || ();
+        },
+        (), // dependents
+    );
 }
 
 // THis is closure hell ... Darn it...

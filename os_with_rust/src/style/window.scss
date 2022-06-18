@@ -1,11 +1,45 @@
 /* The browser window */
 .window_container {
-  border: 3px solid #f55454;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
-  resize: both;
-  overflow: auto;
+  position: absolute;
+  overflow:hidden;
 }
+
+.window_container .resizers{
+  width: 100%;
+  height: 100%;
+  border: 3px solid #4286f4;
+  box-sizing: border-box;
+}
+
+.window_container .resizers .resizer{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid #4286f4;
+  position: absolute;
+}
+.window_container .resizers .resizer.top-left {
+  left: -5px;
+  top: -5px;
+  cursor: nwse-resize; /*resizer cursor*/
+}
+.window_container .resizers .resizer.top-right {
+  right: -5px;
+  top: -5px;
+  cursor: nesw-resize;
+}
+.window_container .resizers .resizer.bottom-left {
+  left: -5px;
+  bottom: -5px;
+  cursor: nesw-resize;
+}
+.window_container .resizers .resizer.bottom-right {
+  right: -5px;
+  bottom: -5px;
+  cursor: nwse-resize;
+}
+
 
 /* Container for columns and the top "toolbar" */
 .row {
@@ -24,6 +58,7 @@
   width: 50px;
   display: flex;
   justify-content: space-between;
+  background: #4b1da0;
 }
 
 .middle {

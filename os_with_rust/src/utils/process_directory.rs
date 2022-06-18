@@ -1,6 +1,6 @@
-use std::rc::Rc;
-
 use gloo_console::log;
+use std::rc::Rc;
+use uuid::Uuid;
 use yew::{
     function_component, html, use_context, use_reducer, virtual_dom::VNode, Children,
     ContextProvider, Properties, Reducible, UseReducerHandle,
@@ -17,6 +17,7 @@ pub struct ProcessAction {
 pub struct ProcessState {
     pub process_name: Option<String>,
     pub process: Option<VNode>,
+    pub id: Option<Uuid>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -29,7 +30,8 @@ impl Default for ProcessesState {
         Self {
             processes: vec![ProcessState {
                 process_name: Some("this is hello world".to_owned()),
-                process: Some(html! {<h1>{"hello"}</h1>}),
+                process: Some(html! {<h1>{"this is hello world"}</h1>}),
+                id: Some(Uuid::new_v4()),
             }],
         }
     }
@@ -47,6 +49,7 @@ impl Reducible for ProcessesState {
                 old_processes.push(ProcessState {
                     process: action.process.process,
                     process_name: action.process.process_name,
+                    id: action.process.id,
                 });
                 old_processes
             }
