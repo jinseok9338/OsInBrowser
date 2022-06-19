@@ -2,7 +2,9 @@ use gloo_console::log;
 
 use yew::prelude::*;
 
-use crate::hooks::{use_drag::use_draggable, use_resize::use_resizable};
+use crate::hooks::{
+    use_drag::use_draggable, use_resize::use_resizable, use_resize_2::use_resize_2,
+};
 use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
@@ -14,23 +16,26 @@ pub struct WindowProps {
 #[styled_component(WindowComponent)]
 pub fn window(props: &WindowProps) -> Html {
     let row_ref = use_node_ref();
-    let div_ref = use_node_ref();
+    let top_right_ref = use_node_ref();
+    let bottom_right_ref = use_node_ref();
+    let window_ref = use_node_ref();
 
     let coordinate = use_draggable(row_ref.clone());
-    use_resizable(div_ref.clone(), props.id.clone());
+    let new_width = use_resize_2(top_right_ref.clone(), window_ref.clone());
 
     html! {
         <div class={classes!("window_container", css!(r#"
         left: ${dx}px;
         top: ${dy}px;
-        "#,dx=&coordinate.dx, dy=&coordinate.dy,))}
-        ref={div_ref}
+        width: ${width}px !important;
+        "#,dx=&coordinate.dx, dy=&coordinate.dy, width=new_width.width))}
+        ref={window_ref}
         >
             <div class="resizers" >
-                <div  class={classes!("resizer", "top-left", {props.id.clone()})}></div>
-                <div class={classes!("resizer", "top-right", {props.id.clone()})}></div>
-                <div class={classes!("resizer", "bottom-left", {props.id.clone()})}></div>
-                <div class={classes!("resizer", "bottom-right", {props.id.clone()})}></div>
+                <div  class={classes!("resizer", "top-left", {props.id.clone()})} ></div>
+                <div class={classes!("resizer", "top-right", {props.id.clone()})} ref={top_right_ref}></div>
+                <div class={classes!("resizer", "bottom-left", {props.id.clone()})} ></div>
+                <div class={classes!("resizer", "bottom-right", {props.id.clone()})} ></div>
                 <div class="row" ref={row_ref}>
                     <div class="column left">
                         <span class="dot" style="background:#ED594A;"></span> // this is for closing the window
@@ -39,7 +44,7 @@ pub fn window(props: &WindowProps) -> Html {
                     </div>
                 </div>
 
-                <div   class="content">
+                <div class="content">
 
                     {props.children.clone()}
                 </div>

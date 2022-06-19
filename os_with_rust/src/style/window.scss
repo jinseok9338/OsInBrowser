@@ -2,8 +2,8 @@
 .window_container {
   position: absolute;
   overflow: hidden;
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: fit-content;
 }
 
 .window_container .resizers {
