@@ -5,7 +5,7 @@ use wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
 use web_sys::{AddEventListenerOptions, HtmlDivElement, MouseEvent};
 use yew::{use_effect_with_deps, NodeRef};
 
-use super::use_raf_state::use_raf_state;
+use super::{use_raf_state::use_raf_state, use_resize_2::TopLeft};
 
 #[derive(PartialEq, Default, Clone)]
 pub struct Coordinate {
@@ -13,8 +13,8 @@ pub struct Coordinate {
     pub dy: f64,
 }
 
-pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
-    let x_and_y_coordinate = use_raf_state(Coordinate::default);
+pub fn use_draggable(reference: NodeRef, div_ref: NodeRef, top: f64, left: f64) {
+    let x_and_y_coordinate = use_raf_state(|| Coordinate { dx: left, dy: top });
 
     let dx = (*x_and_y_coordinate).dx;
     let dy = (*x_and_y_coordinate).dy;

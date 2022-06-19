@@ -86,17 +86,9 @@ pub struct TopLeft {
     pub left: f64,
 }
 
-pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
+pub fn use_resize_2(node: NodeRef, div_ref: NodeRef, height: i32, width: i32) -> NewWidthHeight {
     let is_resizable = use_raf_state(|| IsResizable { resizable: false });
-    let new_width_height = use_raf_state(|| NewWidthHeight {
-        width: 500 as i32,
-        height: 500 as i32,
-    }); // init value will exist
-
-    let new_top_left_position = use_raf_state(|| TopLeft {
-        top: 0 as f64,
-        left: 0 as f64,
-    });
+    let new_width_height = use_raf_state(|| NewWidthHeight { width, height }); // init value will exist
 
     let original_mouse_x_y = use_raf_state(|| XYPosition {
         x: 0 as f64,
