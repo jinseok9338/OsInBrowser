@@ -17,18 +17,19 @@ pub struct WindowProps {
 pub fn window(props: &WindowProps) -> Html {
     let row_ref = use_node_ref();
     let top_right_ref = use_node_ref();
-    let bottom_right_ref = use_node_ref();
     let window_ref = use_node_ref();
 
-    let coordinate = use_draggable(row_ref.clone());
-    let new_width = use_resize_2(top_right_ref.clone(), window_ref.clone());
+    use_draggable(row_ref.clone(), window_ref.clone());
+    let new_width_height = use_resize_2(top_right_ref.clone(), window_ref.clone());
 
     html! {
         <div class={classes!("window_container", css!(r#"
-        left: ${dx}px;
-        top: ${dy}px;
-        width: ${width}px !important;
-        "#,dx=&coordinate.dx, dy=&coordinate.dy, width=new_width.width))}
+        width: ${width}px;
+        height: ${height}px;
+        "#,
+         width=new_width_height.width,
+         height=new_width_height.height,
+    ))}
         ref={window_ref}
         >
             <div class="resizers" >

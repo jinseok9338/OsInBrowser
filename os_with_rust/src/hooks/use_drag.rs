@@ -13,16 +13,17 @@ pub struct Coordinate {
     pub dy: f64,
 }
 
-pub fn use_draggable(reference: NodeRef) -> Coordinate {
+pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
     let x_and_y_coordinate = use_raf_state(Coordinate::default);
 
     let dx = (*x_and_y_coordinate).dx;
     let dy = (*x_and_y_coordinate).dy;
-    log!("invoked");
 
     {
         use_effect_with_deps(
             move |_| {
+                let window_element = div_ref.cast::<HtmlDivElement>().unwrap();
+
                 let element = reference
                     .cast::<HtmlDivElement>()
                     .expect("div_ref not attached to div element");
@@ -35,7 +36,7 @@ pub fn use_draggable(reference: NodeRef) -> Coordinate {
                         let x_and_y_coordinate_handle_mouse_move = x_and_y_coordinate.clone();
                         let start_x = event.page_x() as f64 - dx;
                         let start_y = event.page_y() as f64 - dy;
-
+                        let window_element_for_handle_mouse_move = window_element.clone();
                         let handle_mouse_move = Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(
                             move |event: MouseEvent| {
                                 let new_dx = event.page_x() as f64 - start_x;
@@ -44,6 +45,14 @@ pub fn use_draggable(reference: NodeRef) -> Coordinate {
                                     dx: new_dx,
                                     dy: new_dy,
                                 });
+                                window_element_for_handle_mouse_move
+                                    .style()
+                                    .set_property("left", &format!("{left}px", left = new_dx))
+                                    .unwrap();
+                                window_element_for_handle_mouse_move
+                                    .style()
+                                    .set_property("top", &format!("{top}px", top = new_dy))
+                                    .unwrap();
                             },
                         ))
                         .into_js_value()
@@ -90,5 +99,4 @@ pub fn use_draggable(reference: NodeRef) -> Coordinate {
             [dx, dy], // dependents
         );
     }
-    Coordinate { dx, dy }
 }
