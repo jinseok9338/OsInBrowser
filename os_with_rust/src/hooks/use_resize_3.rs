@@ -133,7 +133,95 @@
 
 // export default App;
 
+use gloo::history::History;
+use js_sys::Function;
+use wasm_bindgen::{prelude::Closure, JsCast};
+use web_sys::{window, HtmlDivElement};
+use yew::prelude::*;
 
-pub fn use_resize_3 {
-    
+use crate::hooks::use_effect_once::use_effect_once;
+
+#[derive(Properties, PartialEq)]
+pub struct ResizerHandlerProps {
+    div_ref: NodeRef,
+    left_ref: NodeRef,
+    right_ref: NodeRef,
+    top_ref: NodeRef,
+    bottom_ref: NodeRef,
+}
+
+#[function_component(ResizerHandler)]
+pub fn resizer_handler(props: &ResizerHandlerProps) -> Html {
+    use_effect_once(move || {
+        {
+            // bunch of variables
+            let resizable_element = props.div_ref.clone().cast::<HtmlDivElement>().unwrap();
+            let window = window().unwrap();
+            let styles = resizable_element.style();
+            let width: i32 = styles
+                .get_property_value("width")
+                .unwrap()
+                .as_str()
+                .replace("px", "")
+                .parse()
+                .unwrap();
+            let height: i32 = styles
+                .get_property_value("height")
+                .unwrap()
+                .as_str()
+                .replace("px", "")
+                .parse()
+                .unwrap();
+            let x = 0;
+            let y = 0;
+
+            // styles.set_property("top","50px");
+            // styles.set_property("left","50px");
+
+            //Right resize
+            let on_mouse_move_right_resize =
+                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                    window.remove_event_listener_with_callback(
+                        "mousemove",
+                        &on_mouse_move_right_resize,
+                    );
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap();
+
+            let on_mouse_down_right_resize =
+                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                    let x = event.client_x();
+                    resizable_element
+                        .style()
+                        .set_property("left", styles.get_property_value("left").unwrap().as_str());
+                    resizable_element.style().remove_property("right");
+
+                    window
+                        .add_event_listener_with_callback("mousemove", &on_mouse_move_right_resize);
+                    window.add_event_listener_with_callback("mouseup", &on_mouse_up_right_resize);
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap();
+
+            //Top resize
+            let on_mouse_move_top_resize =
+                Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                    let dy = event.client_y() - y;
+                    let height = height - dy;
+                    let y = event.client_y();
+                    resizable_element
+                        .style()
+                        .set_property("height", &format!("{:?}px", height));
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap();
+        }
+        || {}
+    });
+
+    html! {}
 }
