@@ -12,12 +12,21 @@ pub struct ProcessAction {
     pub action_type: String,
 }
 
+#[derive(Clone, PartialEq, Debug)]
+pub struct Dimension {
+    pub height: f64,
+    pub width: f64,
+    pub top: f64,
+    pub left: f64,
+}
+
 /// reducer's State
 #[derive(Clone, PartialEq, Debug)]
 pub struct ProcessState {
     pub process_name: Option<String>,
     pub process: Option<VNode>,
     pub id: Option<Uuid>,
+    pub dimension: Option<Dimension>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -32,6 +41,12 @@ impl Default for ProcessesState {
                 process_name: Some("this is hello world".to_owned()),
                 process: Some(html! {<h1>{"this is hello world"}</h1>}),
                 id: Some(Uuid::new_v4()),
+                dimension: Some(Dimension {
+                    height: 500.0,
+                    width: 500.0,
+                    left: 100.0,
+                    top: 100.0,
+                }),
             }],
         }
     }
@@ -50,6 +65,7 @@ impl Reducible for ProcessesState {
                     process: action.process.process,
                     process_name: action.process.process_name,
                     id: action.process.id,
+                    dimension: action.process.dimension,
                 });
                 old_processes
             }

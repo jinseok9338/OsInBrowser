@@ -13,8 +13,11 @@ pub struct Coordinate {
     pub dy: f64,
 }
 
-pub fn use_draggable(reference: NodeRef, div_ref: NodeRef, top: f64, left: f64) {
-    let x_and_y_coordinate = use_raf_state(|| Coordinate { dx: left, dy: top });
+pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
+    let x_and_y_coordinate = use_raf_state(|| Coordinate {
+        dx: 0 as f64,
+        dy: 0 as f64,
+    });
 
     let dx = (*x_and_y_coordinate).dx;
     let dy = (*x_and_y_coordinate).dy;

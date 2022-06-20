@@ -1,6 +1,8 @@
 use crate::apps::hello_world::HelloWorld;
 use crate::components::window::window::WindowComponent;
-use crate::utils::process_directory::{use_process_context, ProcessAction, ProcessState};
+use crate::utils::process_directory::{
+    use_process_context, Dimension, ProcessAction, ProcessState,
+};
 
 use uuid::Uuid;
 use yew::prelude::*;
@@ -21,6 +23,12 @@ pub fn main() -> Html {
                     process_name: Some("hello_world".to_owned()),
                     process: Some(html! {<HelloWorld/>}),
                     id: Some(Uuid::new_v4()),
+                    dimension: Some(Dimension {
+                        height: 500.0,
+                        width: 500.0,
+                        left: 100.0,
+                        top: 100.0,
+                    }),
                 },
             });
         })
@@ -31,7 +39,11 @@ pub fn main() -> Html {
             <button {onclick}>{"clickMe"}</button>
             {
                 processes.into_iter().map(|process| {
-                    html!{<WindowComponent key={process.id.unwrap().to_string()} id={process.id.unwrap().to_string()} >{ process.process.unwrap() }</WindowComponent>}
+                    html!{
+                    <WindowComponent key={process.id.unwrap().to_string()}
+                     id={process.id.unwrap().to_string()}
+                    dimension={process.dimension.unwrap()} >
+                    { process.process.unwrap() }</WindowComponent>}
                 }).collect::<Html>()
             }
         </div>
