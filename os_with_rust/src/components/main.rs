@@ -15,7 +15,7 @@ pub fn main() -> Html {
 
     let onclick = {
         let process_directory_context_for_closure = process_directory_context_for_closure.clone();
-        Callback::from(move |_| {
+        Callback::from(move |_event: MouseEvent| {
             let processes = process_directory_context_for_closure.clone();
             processes.dispatch(ProcessAction {
                 action_type: "add_process".to_owned(),
@@ -36,7 +36,7 @@ pub fn main() -> Html {
 
     html! {
         <div>
-            <button {onclick}>{"clickMe"}</button>
+
             {
                 processes.into_iter().map(|process| {
                     html!{

@@ -29,12 +29,11 @@ pub struct TopLeft {
     pub left: f64,
 }
 
-pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
+pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) {
     let is_resizable = use_raf_state(|| IsResizable { resizable: false });
-    let new_width_height = use_raf_state(|| NewWidthHeight {
-        width: 500,
-        height: 500,
-    }); // init value will exist
+
+    let original_width = use_raf_state(|| 500);
+    let original_height = use_raf_state(|| 500);
 
     let original_mouse_x_y = use_raf_state(|| XYPosition {
         x: 0 as f64,
@@ -52,10 +51,12 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
     const MIN_HEIGHT: i32 = 100;
     const MAX_HEIGHT: i32 = 1080;
 
-    let new_width_height_for_effect = new_width_height.clone();
+    let original_width_for_effect = original_width.clone();
+    let original_height_for_effect = original_height.clone();
     let is_resizable_for_effect = is_resizable.clone();
     let original_mouse_x_y_for_effect = original_mouse_x_y.clone();
     let original_x_y_for_effect = original_x_y.clone();
+
     use_effect(move || {
         let div_element = div_ref.cast::<HtmlDivElement>().unwrap();
         let element = node.cast::<HtmlDivElement>().unwrap();
@@ -64,8 +65,10 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
         let original_mouse_x_y_for_effect_for_handle_size = original_mouse_x_y_for_effect.clone();
         let original_x_y_for_effect_for_handle_size = original_x_y_for_effect.clone();
         let div_element_for_handle_resizr = div_element.clone();
-        let handle_resize =
+
+        let handle_mouse_down =
             Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                event.prevent_default();
                 original_mouse_x_y_for_effect_for_handle_size.set(XYPosition {
                     x: event.page_x() as f64,
                     y: event.page_y() as f64,
@@ -78,6 +81,7 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
                         .get_bounding_client_rect()
                         .top(),
                 });
+
                 is_resizable_for_handle_resize.set(IsResizable { resizable: true })
             }))
             .into_js_value()
@@ -89,38 +93,37 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
             original_mouse_x_y_for_effect.clone();
         let div_element_for_handle_mouse_move = div_element.clone();
         let original_x_y_for_effect_for_handle_mouse_move = original_x_y_for_effect.clone();
+        let original_width_for_handle_mouse_move = original_width_for_effect.clone();
+        let original_height_for_handle_mouse_move = original_height_for_effect.clone();
 
         let handle_mouse_move =
             Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
                 if is_resizable_for_handle_mouse_move.resizable {
-                    let original_width = new_width_height_for_effect.width;
-                    let original_height = new_width_height_for_effect.height;
                     let original_mouse_x = original_mouse_x_y_for_effect_for_handle_mouse_move.x;
                     let original_mouse_y = original_mouse_x_y_for_effect_for_handle_mouse_move.y;
                     let original_x = original_x_y_for_effect_for_handle_mouse_move.x;
                     let original_y = original_x_y_for_effect_for_handle_mouse_move.x;
 
-                    let width = original_width + (event.page_x() - original_mouse_x as i32);
-                    let height = original_height - (event.page_y() - original_mouse_y as i32);
+                    let width = *original_width_for_handle_mouse_move
+                        + (event.page_x() - original_mouse_x as i32);
+                    let height = *original_height_for_handle_mouse_move
+                        - (event.page_y() - original_mouse_y as i32);
 
-                    if width > MIN_WIDTH && height > MIN_HEIGHT {
-                        new_width_height_for_effect.set(NewWidthHeight { width, height });
-                        let top = original_y + (event.page_y() as f64 - original_mouse_y);
-                        // set the top to the element div
+                    if width > MIN_WIDTH {
+                        original_width_for_handle_mouse_move.set(width);
+
                         div_element_for_handle_mouse_move
                             .style()
-                            .set_property("top", &format!("{top}px", top = top))
+                            .set_property("width", &format!("{width}px", width = width))
                             .unwrap();
-                    } else if width > MIN_WIDTH && height < MIN_HEIGHT {
-                        new_width_height_for_effect.set(NewWidthHeight {
-                            width,
-                            height: original_height,
-                        });
-                    } else if height > MIN_HEIGHT && width < MAX_WIDTH {
-                        new_width_height_for_effect.set(NewWidthHeight {
-                            width: original_width,
-                            height,
-                        });
+                    }
+                    if height > MIN_HEIGHT {
+                        original_height_for_handle_mouse_move.set(height);
+                        div_element_for_handle_mouse_move
+                            .style()
+                            .set_property("height", &format!("{height}px", height = height))
+                            .unwrap();
+
                         let top = original_y + (event.page_y() as f64 - original_mouse_y);
                         // set the top to the element div
                         div_element_for_handle_mouse_move
@@ -144,7 +147,7 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
             .unwrap();
 
         element
-            .add_event_listener_with_callback("mousedown", &handle_resize)
+            .add_event_listener_with_callback("mousedown", &handle_mouse_down)
             .unwrap();
         window
             .add_event_listener_with_callback("mousemove", &handle_mouse_move)
@@ -156,7 +159,7 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
         let element_for_clean_up = element.clone();
         move || {
             element_for_clean_up
-                .remove_event_listener_with_callback("mousedown", &handle_resize)
+                .remove_event_listener_with_callback("mousedown", &handle_mouse_down)
                 .unwrap();
             window
                 .remove_event_listener_with_callback("mousemove", &handle_mouse_move)
@@ -166,9 +169,4 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) -> NewWidthHeight {
                 .unwrap();
         }
     });
-
-    return NewWidthHeight {
-        width: new_width_height.width,
-        height: new_width_height.height,
-    };
 }

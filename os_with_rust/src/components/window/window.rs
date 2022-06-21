@@ -2,13 +2,7 @@ use gloo_console::log;
 
 use yew::prelude::*;
 
-use crate::{
-    hooks::{
-        use_drag::use_draggable, use_raf_state::use_raf_state, use_resize::use_resizable,
-        use_resize_2::use_resize_2,
-    },
-    utils::process_directory::Dimension,
-};
+use crate::{hooks::use_drag::use_draggable, utils::process_directory::Dimension};
 use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
@@ -30,6 +24,12 @@ pub fn window(props: &WindowProps) -> Html {
     let ref_top = use_node_ref();
     let ref_right = use_node_ref();
     let ref_bottom = use_node_ref();
+
+    let ref_bottom_left = use_node_ref();
+    let ref_bottom_right = use_node_ref();
+    let ref_top_right = use_node_ref();
+    let ref_top_left = use_node_ref();
+
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
 
@@ -39,11 +39,15 @@ pub fn window(props: &WindowProps) -> Html {
     <div class={classes!("window_container")}
     ref={container_ref}
     >
-        <div class="resizeable">
-            <div  class={classes!("resizer", "resizer-l", {props.id.clone()})} ></div>
-            <div class={classes!("resizer", "resizer-t", {props.id.clone()})} ></div>
-            <div class={classes!("resizer", "resizer-r", {props.id.clone()})} ></div>
-            <div class={classes!("resizer", "resizer-b", {props.id.clone()})} ></div>
+        <div class="resizeable" ref={resizable_ref}>
+            <div  class={classes!("resizer", "resizer-l", {props.id.clone()})} ref={ref_left} ></div>
+            <div class={classes!("resizer", "resizer-t", {props.id.clone()})} ref={ref_top}></div>
+            <div class={classes!("resizer", "resizer-r", {props.id.clone()})} ref={ref_right}></div>
+            <div class={classes!("resizer", "resizer-b", {props.id.clone()})} ref={ref_bottom}></div>
+            <div class={classes!("resizer", "resizer-tr", {props.id.clone()})} ref={ref_top_right}></div>
+            <div class={classes!("resizer", "resizer-tl", {props.id.clone()})} ref={ref_top_left}></div>
+            <div class={classes!("resizer", "resizer-br", {props.id.clone()})} ref={ref_bottom_right}></div>
+            <div class={classes!("resizer", "resizer-bl", {props.id.clone()})} ref={ref_bottom_left}></div>
 
             <div>
                 <div class="row" ref={row_ref}>
