@@ -2,6 +2,7 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background: url(https://uhdwallpapers.org/uploads/converted/20/06/25/macos-big-sur-wwdc-2560x1440_785884-mm-90.jpg);
 }
 
 * {
@@ -12,5 +13,18 @@ body {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  background-color: rgb(88, 221, 54);
+
+  font-family: "San Francisco";
+}
+
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 400;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-regular-webfont.woff");
+}
+
+@font-face {
+  font-family: "San Francisco";
+  font-weight: 800;
+  src: url("https://applesocial.s3.amazonaws.com/assets/styles/fonts/sanfrancisco/sanfranciscodisplay-bold-webfont.woff");
 }

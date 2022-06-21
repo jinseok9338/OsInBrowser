@@ -77,14 +77,14 @@
   float: left;
 }
 
-.left {
+.row-left {
   width: 50px;
   display: flex;
   justify-content: space-between;
   background: #4b1da0;
 }
 
-.middle {
+.row-middle {
   width: 75%;
 }
 
@@ -96,7 +96,7 @@
 }
 
 /* Three dots */
-.dot {
+.row-dot {
   margin-top: 4px;
   height: 12px;
   width: 12px;

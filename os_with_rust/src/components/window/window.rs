@@ -39,32 +39,16 @@ pub fn window(props: &WindowProps) -> Html {
     <div class={classes!("window_container")}
     ref={container_ref}
     >
-        <div class="resizeable" ref={resizable_ref}>
-            <div  class={classes!("resizer", "resizer-l", {props.id.clone()})} ref={ref_left} ></div>
-            <div class={classes!("resizer", "resizer-t", {props.id.clone()})} ref={ref_top}></div>
-            <div class={classes!("resizer", "resizer-r", {props.id.clone()})} ref={ref_right}></div>
-            <div class={classes!("resizer", "resizer-b", {props.id.clone()})} ref={ref_bottom}></div>
-            <div class={classes!("resizer", "resizer-tr", {props.id.clone()})} ref={ref_top_right}></div>
-            <div class={classes!("resizer", "resizer-tl", {props.id.clone()})} ref={ref_top_left}></div>
-            <div class={classes!("resizer", "resizer-br", {props.id.clone()})} ref={ref_bottom_right}></div>
-            <div class={classes!("resizer", "resizer-bl", {props.id.clone()})} ref={ref_bottom_left}></div>
-
-            <div>
                 <div class="row" ref={row_ref}>
-                    <div class="column left">
-                        <span class="dot" style="background:#ED594A;"></span> // this is for closing the window
-                        <span class="dot" style="background:#FDD800;"></span> // this is for minimizing
-                        <span class="dot" style="background:#5AC05A;"></span> // this is for expanding
+                    <div class="column row-left">
+                        <span class="row-dot" style="background:#ED594A;"></span> // this is for closing the window
+                        <span class="row-dot" style="background:#FDD800;"></span> // this is for minimizing
+                        <span class="row-dot" style="background:#5AC05A;"></span> // this is for expanding
                     </div>
                 </div>
-
                 <div class="content">
                     {props.children.clone()}
                 </div>
-
-            </div>
-
-        </div>
     </div>
     }
 }

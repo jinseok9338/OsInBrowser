@@ -1,4 +1,5 @@
 use crate::apps::hello_world::HelloWorld;
+use crate::components::desktop::desktop::Desktop;
 use crate::components::window::window::WindowComponent;
 use crate::utils::process_directory::{
     use_process_context, Dimension, ProcessAction, ProcessState,
@@ -36,7 +37,7 @@ pub fn main() -> Html {
 
     html! {
         <div>
-
+            <Desktop>
             {
                 processes.into_iter().map(|process| {
                     html!{
@@ -46,6 +47,7 @@ pub fn main() -> Html {
                     { process.process.unwrap() }</WindowComponent>}
                 }).collect::<Html>()
             }
+            </Desktop>
         </div>
     }
 }
