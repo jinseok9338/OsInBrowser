@@ -1,81 +1,74 @@
+use crate::apps::hello_world::HelloWorld;
 use js_sys::Function;
+use uuid::Uuid;
 use wasm_bindgen::{prelude::Closure, JsCast};
-use web_sys::{window, Element, HtmlCollection, HtmlDivElement, HtmlElement, NodeList};
+use web_sys::{window, Document, Element, HtmlCollection, HtmlDivElement, HtmlElement, NodeList};
 use yew::prelude::*;
 
-use crate::hooks::use_effect_once::use_effect_once;
+use crate::{
+    hooks::use_effect_once::use_effect_once,
+    utils::{
+        dock::focus,
+        process_directory::{
+            use_process_context, Dimension, ProcessAction, ProcessState, ProcessesState,
+        },
+    },
+};
 
 #[derive(Properties, PartialEq)]
-pub struct DockProps {}
+pub struct DockProps {
+    // processes: ProcessesState,
+}
 
 #[function_component(Dock)]
 pub fn dock(props: &DockProps) -> Html {
     let window = window().unwrap();
 
-    fn focus(index: i32, element: HtmlElement, icons_ref: Vec<NodeRef>) {
-        let previous = index - 1;
-        let previous1 = index - 2;
-        let next = index + 1;
-        let next2 = index + 2;
-
-        if previous == -1 {
-            // first element
-            element
-                .style()
-                .set_property("trasnform", "scale(1.5)  translateY(-10px)")
-                .unwrap();
-        } else if next == icons_ref.len() as i32 {
-            // last element
-            element
-                .style()
-                .set_property("trasnform", "scale(1.5)  translateY(-10px)")
-                .unwrap();
-        } else {
-            element
-                .style()
-                .set_property("trasnform", "scale(1.5)  translateY(-10px)")
-                .unwrap();
-
-            icons_ref[previous as usize]
-                .cast::<HtmlElement>()
-                .unwrap()
-                .style()
-                .set_property("trasnform", "scale(1.2) translateY(-6px)")
-                .unwrap();
-
-            icons_ref[previous1 as usize]
-                .cast::<HtmlElement>()
-                .unwrap()
-                .style()
-                .set_property("trasnform", "scale(1.1)")
-                .unwrap();
-            icons_ref[next as usize]
-                .cast::<HtmlElement>()
-                .unwrap()
-                .style()
-                .set_property("trasnform", "scale(1.2) translateY(-6px)")
-                .unwrap();
-            icons_ref[next2 as usize]
-                .cast::<HtmlElement>()
-                .unwrap()
-                .style()
-                .set_property("trasnform", "scale(1.1)")
-                .unwrap();
-        }
-    }
-
-    use_effect_once(move || {
-        let icons_ref: Vec<NodeRef> = vec![]; // let icons = document.querySelectorAll(".ico");
-        let length = icons_ref.len(); // let length = icons.length;
+    use_effect(move || {
+        let document: Document = window.document().unwrap();
+        let icons: HtmlCollection = document.get_elements_by_class_name("ico");
+        // let icons = document.querySelectorAll(".ico");
+        let length = icons.length(); // let length = icons.length;
 
         for index in 0..length {
-            let element = icons_ref[index].cast::<HtmlElement>().unwrap();
+            let icons_for_loop = icons.clone();
+            let element: HtmlElement = icons_for_loop
+                .item(index)
+                .expect("this is not HTMLElement1")
+                .unchecked_into::<HtmlElement>();
+
+            let element_for_closure = element.clone();
+            let icons_for_closure = icons.clone();
 
             element
                 .add_event_listener_with_callback(
                     "mouseover",
-                    &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
-                        focus(index as i32, element, icons_ref);
+                    &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |_event: MouseEvent| {
+                        let icons = icons_for_closure.clone();
+                        let element = element_for_closure.clone();
+                        focus(index as i32, element, icons);
+                    }))
+                    .into_js_value()
+                    .dyn_into::<Function>()
+                    .unwrap(),
+                )
+                .unwrap();
+            let icons_for_mouse_leave = icons.clone();
+
+            element
+                .add_event_listener_with_callback(
+                    "mouseleave",
+                    &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |_event: MouseEvent| {
+                        for index in 0..length {
+                            let element = icons_for_mouse_leave
+                                .item(index)
+                                .expect("this is not element")
+                                .unchecked_into::<HtmlElement>();
+                            element
+                                .style()
+                                .set_property("transform", "scale(1) translateY(0px)")
+                                .unwrap();
+                        }
                     }))
                     .into_js_value()
                     .dyn_into::<Function>()
@@ -83,47 +76,37 @@ pub fn dock(props: &DockProps) -> Html {
                 )
                 .unwrap();
         }
+
         || {}
     });
-
-    // icons.forEach((item, index) => {
-    //   item.addEventListener("mouseover", (e) => {
-    //     focus(e.target, index);
-    //   });
-    //   item.addEventListener("mouseleave", (e) => {
-    //     icons.forEach((item) => {
-    //       item.style.transform = "scale(1)  translateY(0px)";
-    //     });
-    //   });
-    // });
-
-    // const focus = (elem, index) => {
-    //   let previous = index - 1;
-    //   let previous1 = index - 2;
-    //   let next = index + 1;
-    //   let next2 = index + 2;
-
-    //   if (previous == -1) {
-    //     console.log("first element");
-    //     elem.style.transform = "scale(1.5)  translateY(-10px)";
-    //   } else if (next == icons.length) {
-    //     elem.style.transform = "scale(1.5)  translateY(-10px)";
-    //     console.log("last element");
-    //   } else {
-    //     elem.style.transform = "scale(1.5)  translateY(-10px)";
-    //     icons[previous].style.transform = "scale(1.2) translateY(-6px)";
-    //     icons[previous1].style.transform = "scale(1.1)";
-    //     icons[next].style.transform = "scale(1.2) translateY(-6px)";
-    //     icons[next2].style.transform = "scale(1.1)";
-    //   }
-    // };
-
+    let process_directory_context_for_closure = use_process_context();
+    let onclick = {
+        let process_directory_context_for_closure = process_directory_context_for_closure.clone();
+        Callback::from(move |_event: MouseEvent| {
+            let processes = process_directory_context_for_closure.clone();
+            processes.dispatch(ProcessAction {
+                action_type: "add_process".to_owned(),
+                process: ProcessState {
+                    process_name: Some("hello_world".to_owned()),
+                    process: Some(html! {<HelloWorld/>}),
+                    id: Some(Uuid::new_v4()),
+                    dimension: Some(Dimension {
+                        height: 500.0,
+                        width: 500.0,
+                        left: 100.0,
+                        top: 100.0,
+                    }),
+                    is_full_size: Some(false),
+                },
+            });
+        })
+    };
     html! {
         <div class="dock">
         <div class="dock-container">
           <li class="li-1">
             <div class="name">{"Finder"}</div>
-            <img class="ico" src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png" alt=""/>
+            <img class="ico"  {onclick} src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png" alt=""/>
           </li>
           <li class="li-2">
             <div class="name">{"Siri"}</div>

@@ -14,27 +14,6 @@ pub fn main() -> Html {
     let process_directory_context_for_closure = process_directory_context.clone();
     let processes = process_directory_context.processes.clone();
 
-    let onclick = {
-        let process_directory_context_for_closure = process_directory_context_for_closure.clone();
-        Callback::from(move |_event: MouseEvent| {
-            let processes = process_directory_context_for_closure.clone();
-            processes.dispatch(ProcessAction {
-                action_type: "add_process".to_owned(),
-                process: ProcessState {
-                    process_name: Some("hello_world".to_owned()),
-                    process: Some(html! {<HelloWorld/>}),
-                    id: Some(Uuid::new_v4()),
-                    dimension: Some(Dimension {
-                        height: 500.0,
-                        width: 500.0,
-                        left: 100.0,
-                        top: 100.0,
-                    }),
-                },
-            });
-        })
-    };
-
     html! {
         <div>
             <Desktop>

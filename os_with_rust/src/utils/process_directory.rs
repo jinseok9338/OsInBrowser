@@ -27,6 +27,7 @@ pub struct ProcessState {
     pub process: Option<VNode>,
     pub id: Option<Uuid>,
     pub dimension: Option<Dimension>,
+    pub is_full_size: Option<bool>,
 }
 
 #[derive(Clone, PartialEq)]
@@ -39,7 +40,7 @@ impl Default for ProcessesState {
         Self {
             processes: vec![ProcessState {
                 process_name: Some("this is hello world".to_owned()),
-                process: Some(html! {<h1>{"this is hello world"}</h1>}),
+                process: Some(html! {<h1>{"this is hello world with button"}</h1>}),
                 id: Some(Uuid::new_v4()),
                 dimension: Some(Dimension {
                     height: 500.0,
@@ -47,6 +48,7 @@ impl Default for ProcessesState {
                     left: 100.0,
                     top: 100.0,
                 }),
+                is_full_size: Some(false),
             }],
         }
     }
@@ -66,8 +68,18 @@ impl Reducible for ProcessesState {
                     process_name: action.process.process_name,
                     id: action.process.id,
                     dimension: action.process.dimension,
+                    is_full_size: action.process.is_full_size,
                 });
                 old_processes
+            }
+            "exit_process" => {
+                let old_processes = self.processes.clone();
+                let result = old_processes
+                    .into_iter()
+                    .filter(|process| process.id != action.process.id)
+                    .collect::<Vec<ProcessState>>();
+
+                result
             }
             &_ => self.processes.clone(),
         };
