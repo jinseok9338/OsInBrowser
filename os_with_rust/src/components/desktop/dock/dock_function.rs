@@ -77,6 +77,62 @@ pub fn focus(index: i32, element: HtmlElement, icons: HtmlCollection) {
             .style()
             .set_property("transform", "scale(1.5)  translateY(-10px)")
             .expect("transoform is not setting in");
+
+        let previous_element = icons
+            .item(previous as u32)
+            .expect("this is not HTMLElement")
+            .unchecked_into::<HtmlElement>();
+
+        previous_element
+            .style()
+            .set_property("transform", "scale(1.2) translateY(-6px)")
+            .unwrap();
+
+        let previous_1_element: HtmlElement = icons
+            .item(previous1 as u32)
+            .expect("this is not HTMLElement2")
+            .unchecked_into::<HtmlElement>();
+
+        previous_1_element
+            .style()
+            .set_property("transform", "scale(1.1)")
+            .unwrap();
+    } else if next2 == icons.length() as i32 {
+        // second to the last element
+        element
+            .style()
+            .set_property("transform", "scale(1.5)  translateY(-10px)")
+            .unwrap();
+
+        let previous_element = icons
+            .item(previous as u32)
+            .expect("this is not HTMLElement")
+            .unchecked_into::<HtmlElement>();
+
+        previous_element
+            .style()
+            .set_property("transform", "scale(1.2) translateY(-6px)")
+            .unwrap();
+
+        let previous_1_element: HtmlElement = icons
+            .item(previous1 as u32)
+            .expect("this is not HTMLElement2")
+            .unchecked_into::<HtmlElement>();
+
+        previous_1_element
+            .style()
+            .set_property("transform", "scale(1.1)")
+            .unwrap();
+
+        let next_element: HtmlElement = icons
+            .item(next as u32)
+            .expect("this is not HTMLElement")
+            .unchecked_into::<HtmlElement>();
+
+        next_element
+            .style()
+            .set_property("transform", "scale(1.2) translateY(-6px)")
+            .unwrap();
     } else {
         element
             .style()
