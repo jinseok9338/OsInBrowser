@@ -1,42 +1,35 @@
-use crate::utils::web_sys_ext::{window, Window};
 use gloo_console::log;
 use js_sys::Function;
 use wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
-use web_sys::{AddEventListenerOptions, HtmlDivElement, MouseEvent};
-use yew::{use_effect_with_deps, NodeRef};
+use web_sys::{window, AddEventListenerOptions, HtmlDivElement, MouseEvent, Window};
+use yew::{use_effect, use_effect_with_deps, NodeRef};
 
-use super::{use_raf_state::use_raf_state, use_resize_2::TopLeft};
+use super::use_measure::{use_measure, UseMeasureState};
 
-#[derive(PartialEq, Default, Clone)]
-pub struct Coordinate {
-    pub dx: f64,
-    pub dy: f64,
-}
-
-pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
-    let x_and_y_coordinate = use_raf_state(|| Coordinate {
-        dx: 0 as f64,
-        dy: 0 as f64,
-    });
-
-    let dx = (*x_and_y_coordinate).dx;
-    let dy = (*x_and_y_coordinate).dy;
-
+pub fn use_draggable(reference: NodeRef, state: UseMeasureState) {
     {
-        use_effect_with_deps(
-            move |_| {
-                let window_element = div_ref.cast::<HtmlDivElement>().unwrap();
-
+        use_effect(
+            move || {
                 let element = reference
                     .cast::<HtmlDivElement>()
                     .expect("div_ref not attached to div element");
-                let x_and_y_coordinate_for_use_effect = x_and_y_coordinate.clone();
+                let window = window().unwrap();
+                let document = window.document().unwrap();
 
-                let dx = (*x_and_y_coordinate_for_use_effect).dx;
-                let dy = (*x_and_y_coordinate_for_use_effect).dy;
                 let handle_mouse_down =
                     Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
-                        let x_and_y_coordinate_handle_mouse_move = x_and_y_coordinate.clone();
+                        let window_element = document
+                            .get_elements_by_class_name("window_container")
+                            .item(0)
+                            .unwrap()
+                            .unchecked_into::<HtmlDivElement>();
+
+                        let dx = &state.x;
+
+                        let dy = &state.y;
+
+                        log!(format!("{:?}", &dx));
+
                         let start_x = event.page_x() as f64 - dx;
                         let start_y = event.page_y() as f64 - dy;
                         let window_element_for_handle_mouse_move = window_element.clone();
@@ -44,10 +37,7 @@ pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
                             move |event: MouseEvent| {
                                 let new_dx = event.page_x() as f64 - start_x;
                                 let new_dy = event.page_y() as f64 - start_y;
-                                x_and_y_coordinate_handle_mouse_move.set(Coordinate {
-                                    dx: new_dx,
-                                    dy: new_dy,
-                                });
+
                                 window_element_for_handle_mouse_move
                                     .style()
                                     .set_property("left", &format!("{left}px", left = new_dx))
@@ -61,7 +51,7 @@ pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
                         .into_js_value()
                         .dyn_into::<Function>()
                         .unwrap();
-                        let window: Window = window().unwrap();
+
                         let window_for_event_listener: Window = window.clone();
                         window
                             .add_event_listener_with_callback("mousemove", &handle_mouse_move)
@@ -99,7 +89,7 @@ pub fn use_draggable(reference: NodeRef, div_ref: NodeRef) {
                         .unwrap_throw();
                 }
             },
-            [dx, dy], // dependents
+            // dependents
         );
     }
 }

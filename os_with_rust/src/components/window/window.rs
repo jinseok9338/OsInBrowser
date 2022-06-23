@@ -9,7 +9,7 @@ use yew::prelude::*;
 use crate::{
     components::window::window_function::{enlarge, exit},
     context::process_directory_context::use_process_context,
-    hooks::use_drag::use_draggable,
+    hooks::{use_drag::use_draggable, use_measure::use_measure},
     types::process_directory::Dimension,
 };
 use stylist::yew::styled_component;
@@ -42,8 +42,9 @@ pub fn window(props: &WindowProps) -> Html {
 
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
+    let state = use_measure(container_ref.clone());
 
-    use_draggable(row_ref.clone(), container_ref.clone());
+    use_draggable(row_ref.clone(), state);
     let process_directory_context = use_process_context();
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_exit = id.clone();
@@ -62,15 +63,15 @@ pub fn window(props: &WindowProps) -> Html {
 
     let enlarge = {
         Callback::from(move |_e: MouseEvent| {
-            let processes = process_directory_context_for_closure.clone();
-            let processes = &processes.processes;
+            let processes_handler = process_directory_context_for_closure.clone();
+            let processes = &processes_handler.processes;
 
             let process = processes
                 .into_iter()
                 .find(|process| process.id.unwrap().to_string() == id_for_enlarge.clone())
                 .unwrap();
             let element = container_ref_clone.cast::<HtmlDivElement>().unwrap();
-            enlarge(process, element);
+            enlarge(process, element, &processes_handler);
         })
     };
 

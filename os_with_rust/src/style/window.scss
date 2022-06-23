@@ -1,11 +1,13 @@
 /* The browser window */
 .window_container {
   border-radius: 5px;
-
+  top: 0px;
+  left: 0px;
   background: #ffbc97;
   position: absolute;
   width: 500px;
   height: 500px;
+  transition: width 0.3s, height 0.3s;
 }
 
 .resizeable {

@@ -7,12 +7,20 @@ use crate::{
     types::process_directory::{ProcessAction, ProcessState},
 };
 
-pub fn enlarge(process: &ProcessState, element: HtmlDivElement) {
+pub fn enlarge(
+    process: &ProcessState,
+    element: HtmlDivElement,
+    processes: &UseReducerHandle<ProcessesState>,
+) {
     if !process.is_full_size.unwrap() {
         element.style().set_property("width", "100vw").unwrap();
         element.style().set_property("height", "100vh").unwrap();
         element.style().set_property("top", "0px").unwrap();
         element.style().set_property("left", "0px").unwrap();
+        processes.dispatch(ProcessAction {
+            action_type: "enlarge".to_owned(),
+            process: process.to_owned(),
+        })
 
     // Need to make is_full to true
     } else {
@@ -38,6 +46,11 @@ pub fn enlarge(process: &ProcessState, element: HtmlDivElement) {
             .style()
             .set_property("left", &format!("{:?}px", left))
             .unwrap();
+
+        processes.dispatch(ProcessAction {
+            action_type: "enlarge".to_owned(),
+            process: process.to_owned(),
+        })
 
         // Need to make is_full to false
     }

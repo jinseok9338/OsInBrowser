@@ -59,6 +59,31 @@ impl Reducible for ProcessesState {
 
                 result
             }
+            "enlarge" => {
+                let old_processes = self.processes.clone();
+                let new_processes = old_processes
+                    .into_iter()
+                    .map(|process| {
+                        let id = action.process.id.unwrap();
+                        log!(&id.to_string());
+                        log!(&process.id.unwrap().to_string());
+
+                        match process.id.unwrap() {
+                            _ if process.id.unwrap() == id => ProcessState {
+                                dimension: process.dimension,
+                                id: process.id,
+                                is_full_size: Some(!process.is_full_size.unwrap()),
+                                process: process.process,
+                                process_name: process.process_name,
+                            },
+                            _ => process,
+                        }
+                    })
+                    .collect::<Vec<ProcessState>>();
+
+                new_processes
+            }
+
             &_ => self.processes.clone(),
         };
 

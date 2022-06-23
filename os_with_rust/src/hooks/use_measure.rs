@@ -6,7 +6,7 @@ use super::use_raf_state;
 use crate::hooks::use_raf_state::use_raf_state;
 use crate::utils::web_sys_ext::{ResizeObserver, ResizeObserverEntry};
 
-#[derive(PartialEq, Default, Clone)]
+#[derive(PartialEq, Default, Clone, Debug)]
 pub struct UseMeasureState {
     pub x: f64,
     pub y: f64,
