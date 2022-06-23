@@ -1,8 +1,11 @@
 use uuid::Uuid;
-use web_sys::{HtmlDivElement, HtmlElement};
+use web_sys::HtmlDivElement;
 use yew::UseReducerHandle;
 
-use super::process_directory::{ProcessAction, ProcessState, ProcessesState};
+use crate::{
+    context::process_directory_context::ProcessesState,
+    types::process_directory::{ProcessAction, ProcessState},
+};
 
 pub fn enlarge(process: &ProcessState, element: HtmlDivElement) {
     if !process.is_full_size.unwrap() {

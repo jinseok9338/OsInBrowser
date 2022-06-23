@@ -1,7 +1,6 @@
-use crate::components::desktop::dock::Dock;
-use crate::components::desktop::menubar::MenuBar;
+use crate::components::desktop::dock::dock::Dock;
+use crate::components::desktop::menubar::menubar::MenuBar;
 use yew::prelude::*;
-
 #[derive(Properties, PartialEq)]
 pub struct DesktopProps {
     pub children: Children,

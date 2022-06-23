@@ -1,19 +1,16 @@
-use crate::apps::hello_world::HelloWorld;
+use crate::{
+    apps::hello_world::HelloWorld,
+    components::desktop::dock::dock_function::focus,
+    context::process_directory_context::use_process_context,
+    types::process_directory::{Dimension, ProcessAction, ProcessState},
+};
 use js_sys::Function;
 use uuid::Uuid;
 use wasm_bindgen::{prelude::Closure, JsCast};
 use web_sys::{window, Document, Element, HtmlCollection, HtmlDivElement, HtmlElement, NodeList};
 use yew::prelude::*;
 
-use crate::{
-    hooks::use_effect_once::use_effect_once,
-    utils::{
-        dock::focus,
-        process_directory::{
-            use_process_context, Dimension, ProcessAction, ProcessState, ProcessesState,
-        },
-    },
-};
+use crate::hooks::use_effect_once::use_effect_once;
 
 #[derive(Properties, PartialEq)]
 pub struct DockProps {

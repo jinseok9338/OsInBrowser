@@ -1,11 +1,8 @@
 use crate::apps::hello_world::HelloWorld;
 use crate::components::desktop::desktop::Desktop;
 use crate::components::window::window::WindowComponent;
-use crate::utils::process_directory::{
-    use_process_context, Dimension, ProcessAction, ProcessState,
-};
+use crate::context::process_directory_context::use_process_context;
 
-use uuid::Uuid;
 use yew::prelude::*;
 
 #[function_component(Main)]

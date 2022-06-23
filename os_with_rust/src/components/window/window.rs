@@ -7,11 +7,10 @@ use web_sys::HtmlDivElement;
 use yew::prelude::*;
 
 use crate::{
+    components::window::window_function::{enlarge, exit},
+    context::process_directory_context::use_process_context,
     hooks::use_drag::use_draggable,
-    utils::{
-        process_directory::{use_process_context, Dimension, ProcessAction, ProcessState},
-        window::{enlarge, exit},
-    },
+    types::process_directory::Dimension,
 };
 use stylist::yew::styled_component;
 
