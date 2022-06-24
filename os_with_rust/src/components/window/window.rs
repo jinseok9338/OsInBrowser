@@ -8,17 +8,15 @@ use yew::prelude::*;
 
 use crate::{
     components::window::window_function::{enlarge, exit},
-    context::process_directory_context::use_process_context,
+    context::process_directory_context::{process_directory, use_process_context},
     hooks::{use_drag::use_draggable, use_measure::use_measure},
-    types::process_directory::Dimension,
+    types::process_directory::{Dimension, ProcessState},
 };
 use stylist::yew::styled_component;
 
 #[derive(Properties, PartialEq)]
 pub struct WindowProps {
-    pub children: Children,
-    pub id: String,
-    pub dimension: Dimension,
+    pub process: ProcessState,
 }
 #[derive(PartialEq, Default, Clone)]
 pub struct TopLeft {
@@ -28,7 +26,8 @@ pub struct TopLeft {
 
 #[styled_component(WindowComponent)]
 pub fn window(props: &WindowProps) -> Html {
-    let id = props.id.clone();
+    let process_directory_context = use_process_context();
+    let id = props.process.id.unwrap().to_string().clone();
     // let resizable_ref = use_node_ref();
     // let ref_left = use_node_ref();
     // let ref_top = use_node_ref();
@@ -42,10 +41,11 @@ pub fn window(props: &WindowProps) -> Html {
 
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
-    let state = use_measure(container_ref.clone());
+    let process = props.process.clone();
 
-    use_draggable(row_ref.clone(), state);
-    let process_directory_context = use_process_context();
+    let dimension = process.dimension.clone().unwrap();
+    use_draggable(row_ref.clone(), process);
+
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_exit = id.clone();
 
@@ -76,7 +76,16 @@ pub fn window(props: &WindowProps) -> Html {
     };
 
     html! {
-    <div class={classes!("window_container", props.id.clone())}
+    <div class={classes!("window_container", id.clone(),
+     css!(r#"
+    top: ${top}px;
+    width: ${width}px;
+    left: ${left}px;
+    height: ${height}px;
+    "#,top = dimension.top, 
+    width= dimension.width,
+     left= dimension.left,
+      height= dimension.height))}
     ref={container_ref}
     >
                 <div class="row" ref={row_ref}>
@@ -87,7 +96,7 @@ pub fn window(props: &WindowProps) -> Html {
                     </div>
                 </div>
                 <div class="content">
-                    {props.children.clone()}
+                    {props.process.process.clone().unwrap()}
                 </div>
     </div>
     }

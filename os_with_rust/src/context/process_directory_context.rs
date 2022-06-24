@@ -2,8 +2,8 @@ use gloo_console::log;
 use std::rc::Rc;
 use uuid::Uuid;
 use yew::{
-    function_component, html, use_context, use_reducer, virtual_dom::VNode, Children,
-    ContextProvider, Properties, Reducible, UseReducerHandle,
+    function_component, html, use_context, use_reducer, Children, ContextProvider, Properties,
+    Reducible, UseReducerHandle,
 };
 
 use crate::types::process_directory::{Dimension, ProcessAction, ProcessState};
@@ -27,6 +27,7 @@ impl Default for ProcessesState {
                     top: 100.0,
                 }),
                 is_full_size: Some(false),
+                temp_dimension: None,
             }],
         }
     }
@@ -47,6 +48,7 @@ impl Reducible for ProcessesState {
                     id: action.process.id,
                     dimension: action.process.dimension,
                     is_full_size: action.process.is_full_size,
+                    temp_dimension: action.process.temp_dimension,
                 });
                 old_processes
             }
@@ -65,8 +67,6 @@ impl Reducible for ProcessesState {
                     .into_iter()
                     .map(|process| {
                         let id = action.process.id.unwrap();
-                        log!(&id.to_string());
-                        log!(&process.id.unwrap().to_string());
 
                         match process.id.unwrap() {
                             _ if process.id.unwrap() == id => ProcessState {
@@ -75,12 +75,36 @@ impl Reducible for ProcessesState {
                                 is_full_size: Some(!process.is_full_size.unwrap()),
                                 process: process.process,
                                 process_name: process.process_name,
+                                temp_dimension: process.temp_dimension,
                             },
                             _ => process,
                         }
                     })
                     .collect::<Vec<ProcessState>>();
 
+                new_processes
+            }
+            "change_the_dimension" => {
+                let old_processes = self.processes.clone();
+                let new_processes = old_processes
+                    .into_iter()
+                    .map(|process| {
+                        let id = action.process.id.unwrap();
+                        let dimension = action.process.dimension.clone();
+                        let temp_dimension = action.process.temp_dimension.clone();
+                        match process.id.unwrap() {
+                            _ if process.id.unwrap() == id => ProcessState {
+                                dimension,
+                                id: process.id,
+                                is_full_size: process.is_full_size,
+                                process: process.process,
+                                process_name: process.process_name,
+                                temp_dimension,
+                            },
+                            _ => process,
+                        }
+                    })
+                    .collect::<Vec<ProcessState>>();
                 new_processes
             }
 

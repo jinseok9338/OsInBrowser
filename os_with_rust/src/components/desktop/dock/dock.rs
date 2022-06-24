@@ -93,6 +93,7 @@ pub fn dock(props: &DockProps) -> Html {
                         left: 100.0,
                         top: 100.0,
                     }),
+                    temp_dimension: None,
                     is_full_size: Some(false),
                 },
             });

@@ -23,4 +23,5 @@ pub struct ProcessState {
     pub id: Option<Uuid>,
     pub dimension: Option<Dimension>,
     pub is_full_size: Option<bool>,
+    pub temp_dimension: Option<Dimension>,
 }
