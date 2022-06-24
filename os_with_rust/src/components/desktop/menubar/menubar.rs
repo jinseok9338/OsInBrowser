@@ -1,3 +1,8 @@
+use js_sys::{Date, Function};
+
+use wasm_bindgen::{prelude::Closure, JsCast, JsValue};
+use web_sys::window;
+
 use yew::prelude::*;
 
 #[derive(Properties, PartialEq)]
@@ -5,8 +10,36 @@ pub struct MenuBarProps {}
 
 #[function_component(MenuBar)]
 pub fn menubar(props: &MenuBarProps) -> Html {
-    html! {       <div class="menu-bar">
+    let time_handler = use_state_eq(|| {
+        Date::new(&JsValue::from_f64(Date::now()))
+            .to_time_string()
+            .to_string()
+    });
+    let time = &*time_handler.clone();
+    let time_handler_for_clone = time_handler.clone();
+    let window = window().unwrap();
 
+    use_effect(move || {
+        let set_time = Closure::<dyn Fn(Event)>::wrap(Box::new(move |_event: Event| {
+            let time_handler_for_use_effect = time_handler_for_clone.clone();
+            let now = Date::new(&JsValue::from_f64(Date::now()))
+                .to_time_string()
+                .to_string();
+            time_handler_for_use_effect.set(now.clone());
+        }))
+        .into_js_value()
+        .dyn_into::<Function>()
+        .unwrap();
+
+        window
+            .set_timeout_with_callback_and_timeout_and_arguments_0(&set_time, 1000)
+            .unwrap();
+
+        || {}
+    });
+    html! {
+
+        <div class="menu-bar">
        <div class="left">
            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1010px-Apple_logo_white.svg.png" class="apple-logo" width="20" height="45" alt=""/>
            <span class="menus active">{"Finder"}</span>
@@ -42,7 +75,7 @@ pub fn menubar(props: &MenuBarProps) -> Html {
            </div>
 
            <div class="menu-time">
-          {" Mon 31 May 05:30"}
+          {time.clone()}
            </div>
        </div>
 

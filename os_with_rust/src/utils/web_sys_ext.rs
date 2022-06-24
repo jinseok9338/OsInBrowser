@@ -84,7 +84,7 @@ extern "C" {
     pub fn navigator(this: &Window) -> Navigator;
 }
 
-pub fn window() -> Option<Window> {
+pub fn _window() -> Option<Window> {
     use wasm_bindgen::JsCast;
 
     js_sys::global().dyn_into::<Window>().ok()

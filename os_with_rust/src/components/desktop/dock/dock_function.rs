@@ -1,6 +1,5 @@
-use gloo_console::log;
 use wasm_bindgen::JsCast;
-use web_sys::{HtmlCollection, HtmlElement};
+use web_sys::{window, HtmlCollection, HtmlElement, MouseEvent};
 pub fn focus(index: i32, element: HtmlElement, icons: HtmlCollection) {
     let previous = index - 1;
     let previous1 = index - 2;
@@ -177,6 +176,21 @@ pub fn focus(index: i32, element: HtmlElement, icons: HtmlCollection) {
         next_2_element
             .style()
             .set_property("transform", "scale(1.1)")
+            .unwrap();
+    }
+}
+
+pub fn move_the_dock(event: MouseEvent, dock_element: HtmlElement) {
+    let window = window().unwrap();
+    if event.page_y() as f64 > window.inner_height().unwrap().as_f64().unwrap() - 80.0 {
+        dock_element
+            .style()
+            .set_property("transform", "translateY(0px)")
+            .unwrap();
+    } else {
+        dock_element
+            .style()
+            .set_property("transform", "translateY(70px)")
             .unwrap();
     }
 }

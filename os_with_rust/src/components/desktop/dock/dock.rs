@@ -1,16 +1,14 @@
 use crate::{
     apps::hello_world::HelloWorld,
-    components::desktop::dock::dock_function::focus,
+    components::desktop::dock::dock_function::{focus, move_the_dock},
     context::process_directory_context::use_process_context,
     types::process_directory::{Dimension, ProcessAction, ProcessState},
 };
 use js_sys::Function;
 use uuid::Uuid;
 use wasm_bindgen::{prelude::Closure, JsCast};
-use web_sys::{window, Document, Element, HtmlCollection, HtmlDivElement, HtmlElement, NodeList};
+use web_sys::{window, Document, HtmlCollection, HtmlElement};
 use yew::prelude::*;
-
-use crate::hooks::use_effect_once::use_effect_once;
 
 #[derive(Properties, PartialEq)]
 pub struct DockProps {
@@ -18,13 +16,15 @@ pub struct DockProps {
 }
 
 #[function_component(Dock)]
-pub fn dock(props: &DockProps) -> Html {
+pub fn dock(_props: &DockProps) -> Html {
     let window = window().unwrap();
 
     use_effect(move || {
-        let document: Document = window.document().unwrap();
-        let icons: HtmlCollection = document.get_elements_by_class_name("ico");
-        // let icons = document.querySelectorAll(".ico");
+        let window = window.clone();
+        let document_for_icon: Document = window.clone().document().unwrap();
+        let document_for_dock_element = window.clone().document().unwrap();
+
+        let icons: HtmlCollection = document_for_icon.get_elements_by_class_name("ico");
         let length = icons.length(); // let length = icons.length;
 
         for index in 0..length {
@@ -73,6 +73,24 @@ pub fn dock(props: &DockProps) -> Html {
                 )
                 .unwrap();
         }
+        let dock_element: HtmlElement = document_for_dock_element
+            .get_elements_by_class_name("dock-container")
+            .item(0)
+            .unwrap()
+            .unchecked_into::<HtmlElement>();
+
+        window
+            .add_event_listener_with_callback(
+                "mousemove",
+                &Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
+                    let dock_element_for_closure = dock_element.clone();
+                    move_the_dock(event, dock_element_for_closure);
+                }))
+                .into_js_value()
+                .dyn_into::<Function>()
+                .unwrap(),
+            )
+            .unwrap();
 
         || {}
     });

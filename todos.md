@@ -4,7 +4,11 @@
    - dispatch function [Done]
    - chagne the use_drag to use dimension [Done]
    - fix the bug [Done]
-   - another bug ....
-   - maybe refactor the code
+   - another bug .... [Done]
+   - doesn't go over the task bar [Done]
+   - maybe refactor the code ... a bit tedious but necessary
+   - add icon url for process_context
+1. show clock on the task bar [Done]
+   - little bit of trimming will work []
 1. complete use_resize
 1. display process name on the window bar and menu bar

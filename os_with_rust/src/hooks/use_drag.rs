@@ -40,9 +40,10 @@ pub fn use_draggable(reference: NodeRef, process: ProcessState) {
                     let process_directory_for_mouse_down = process_directory_context.clone();
                     let handle_mouse_move =
                         Closure::<dyn Fn(MouseEvent)>::wrap(Box::new(move |event: MouseEvent| {
-                            if !is_full_size {
-                                let new_dx = event.page_x() as f64 - start_x;
-                                let new_dy = event.page_y() as f64 - start_y;
+                            let new_dx = event.page_x() as f64 - start_x;
+                            let new_dy = event.page_y() as f64 - start_y;
+                            if !is_full_size && new_dy > 30.0 {
+                                // deosn't go overflow
                                 process_directory_for_mouse_down.dispatch(ProcessAction {
                                     action_type: "change_the_dimension".to_owned(),
                                     process: ProcessState {
