@@ -2,7 +2,6 @@ use wasm_bindgen::{prelude::*, JsCast};
 use web_sys::Element;
 use yew::prelude::*;
 
-use super::use_raf_state;
 use crate::hooks::use_raf_state::use_raf_state;
 use crate::utils::web_sys_ext::{ResizeObserver, ResizeObserverEntry};
 
@@ -54,7 +53,7 @@ pub struct UseMeasureState {
 ///     }
 /// }
 /// ```
-
+#[allow(dead_code)]
 pub fn use_measure(node: NodeRef) -> UseMeasureState {
     let state = use_raf_state(UseMeasureState::default);
 

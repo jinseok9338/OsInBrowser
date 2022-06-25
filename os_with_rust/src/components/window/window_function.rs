@@ -1,6 +1,5 @@
-use gloo_console::log;
 use uuid::Uuid;
-use web_sys::{window, HtmlDivElement};
+use web_sys::window;
 use yew::UseReducerHandle;
 
 use crate::{
@@ -8,11 +7,7 @@ use crate::{
     types::process_directory::{Dimension, ProcessAction, ProcessState},
 };
 
-pub fn enlarge(
-    process: &ProcessState,
-    element: HtmlDivElement,
-    processes: &UseReducerHandle<ProcessesState>,
-) {
+pub fn enlarge(process: &ProcessState, processes: &UseReducerHandle<ProcessesState>) {
     let original_dimension = &process.dimension.clone().unwrap();
     let window = window().unwrap();
     let inner_height = window.inner_height().unwrap().as_f64().unwrap();

@@ -54,12 +54,34 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 380px;
+    width: 480px;
     margin-right: 20px;
+
     .vol {
       transform: scale(0.6);
-      margin-right: -10px;
+      margin-right: -7px;
     }
+
+    .bluetooth {
+      transform: scale(0.6);
+      margin-right: -7px;
+    }
+
+    .wifi {
+      transform: scale(0.6);
+      margin-right: -7px;
+    }
+
+    .microphone {
+      transform: scale(0.6);
+      margin-right: -7px;
+    }
+
+    .search {
+      transform: scale(0.6);
+      margin-right: -7px;
+    }
+
     .menu-time {
       height: 100%;
       width: auto;
@@ -68,6 +90,7 @@ body {
       justify-content: center;
       color: #fff;
     }
+
     .menu-ico {
       height: 100%;
       width: 10px;
@@ -79,10 +102,6 @@ body {
         -webkit-filter: invert(100%);
         filter: invert(100%);
         transform: scale(0.5);
-      }
-      .siri {
-        transform: scale(0.7);
-        object-fit: fill;
       }
 
       i {
@@ -182,7 +201,6 @@ body {
         height: 100%;
         object-fit: cover;
         transition: 0.2s;
-        transition: transform 0.2s;
       }
       .ico-bin {
         width: 94% !important;

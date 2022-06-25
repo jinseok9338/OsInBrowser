@@ -1,4 +1,3 @@
-use crate::apps::hello_world::HelloWorld;
 use crate::components::desktop::desktop::Desktop;
 use crate::components::window::window::WindowComponent;
 use crate::context::process_directory_context::use_process_context;

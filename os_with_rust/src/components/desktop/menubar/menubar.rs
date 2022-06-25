@@ -9,7 +9,7 @@ use yew::prelude::*;
 pub struct MenuBarProps {}
 
 #[function_component(MenuBar)]
-pub fn menubar(props: &MenuBarProps) -> Html {
+pub fn menubar(_props: &MenuBarProps) -> Html {
     let time_handler = use_state_eq(|| {
         Date::new(&JsValue::from_f64(Date::now()))
             .to_time_string()
@@ -53,29 +53,29 @@ pub fn menubar(props: &MenuBarProps) -> Html {
 
        <div class="right">
            <div class="menu-ico">
-               <img src="https://freepngimg.com/download/united_states/76187-sound-information-united-business-states-address-email.png" width="30" height="30" alt="" class="vol"/>
+               <img src="./icons/high-volume.png" width="30" height="30" alt="" class="vol"/>
            </div>
            <div class="menu-ico">
-               <i class="fab fa-bluetooth-b"></i>
+                <img src="./icons/bluetooth.png" width="30" height="30" alt="" class="bluetooth"/>
            </div>
            <div class="menu-ico">
                <i class="fas fa-battery-half"></i>
            </div>
            <div class="menu-ico">
-               <i class="fas fa-wifi"></i>
+                <img src="./icons/wifi-signal.png" width="30" height="30" alt="" class="wifi"/>
            </div>
            <div class="menu-ico">
-               <i class="fas fa-search"></i>
+                <img src="./icons/search.png" width="30" height="30" alt="" class="search"/>
            </div>
            <div class="menu-ico">
                <img src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png" width="30" height="30" alt="" class="control-center"/>
            </div>
            <div class="menu-ico">
-               <img src="https://upload.wikimedia.org/wikipedia/en/8/8e/AppleSiriIcon2017.png" alt="" width="30" height="30" class="siri"/>
+                <img src="./icons/microphone.png" width="30" height="30" alt="" class="microphone"/>
            </div>
 
            <div class="menu-time">
-          {time.clone()}
+                {time.clone()}
            </div>
        </div>
 

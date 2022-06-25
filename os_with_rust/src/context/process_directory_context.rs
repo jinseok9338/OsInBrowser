@@ -1,4 +1,3 @@
-use gloo_console::log;
 use std::rc::Rc;
 use uuid::Uuid;
 use yew::{
@@ -15,21 +14,7 @@ pub struct ProcessesState {
 
 impl Default for ProcessesState {
     fn default() -> Self {
-        Self {
-            processes: vec![ProcessState {
-                process_name: Some("this is hello world".to_owned()),
-                process: Some(html! {<h1>{"this is hello world with button"}</h1>}),
-                id: Some(Uuid::new_v4()),
-                dimension: Some(Dimension {
-                    height: 500.0,
-                    width: 500.0,
-                    left: 100.0,
-                    top: 100.0,
-                }),
-                is_full_size: Some(false),
-                temp_dimension: None,
-            }],
-        }
+        Self { processes: vec![] }
     }
 }
 

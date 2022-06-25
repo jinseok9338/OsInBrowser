@@ -1,16 +1,10 @@
-use gloo_console::log;
-
-use js_sys::Function;
-use uuid::Uuid;
-use wasm_bindgen::{prelude::Closure, JsCast};
-use web_sys::HtmlDivElement;
 use yew::prelude::*;
 
 use crate::{
     components::window::window_function::{enlarge, exit},
-    context::process_directory_context::{process_directory, use_process_context},
-    hooks::{use_drag::use_draggable, use_measure::use_measure},
-    types::process_directory::{Dimension, ProcessState},
+    context::process_directory_context::use_process_context,
+    hooks::use_drag::use_draggable,
+    types::process_directory::ProcessState,
 };
 use stylist::yew::styled_component;
 
@@ -57,7 +51,6 @@ pub fn window(props: &WindowProps) -> Html {
         })
     };
 
-    let container_ref_clone = container_ref.clone();
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_enlarge = id.clone();
 
@@ -70,8 +63,8 @@ pub fn window(props: &WindowProps) -> Html {
                 .into_iter()
                 .find(|process| process.id.unwrap().to_string() == id_for_enlarge.clone())
                 .unwrap();
-            let element = container_ref_clone.cast::<HtmlDivElement>().unwrap();
-            enlarge(process, element, &processes_handler);
+
+            enlarge(process, &processes_handler);
         })
     };
 
@@ -93,6 +86,10 @@ pub fn window(props: &WindowProps) -> Html {
                         <span class="row-dot" style="background:#ED594A;" onclick={exit}></span> // this is for closing the window
                         <span class="row-dot" style="background:#FDD800;" ></span> // this is for minimizing
                         <span class="row-dot" style="background:#5AC05A;" onclick={enlarge}></span> // this is for expanding
+                    </div>
+
+                    <div class="column row-middle">
+                        <span>{props.process.process_name.clone().unwrap()}</span>
                     </div>
                 </div>
                 <div class="content">

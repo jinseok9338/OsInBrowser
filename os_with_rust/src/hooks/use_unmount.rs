@@ -1,5 +1,3 @@
-use yew::prelude::*;
-
 use crate::hooks::use_mut_latest::use_mut_latest;
 
 use super::use_effect_once::use_effect_once;

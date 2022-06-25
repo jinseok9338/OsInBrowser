@@ -34,6 +34,7 @@ use super::use_mut_latest::use_latest;
 /// }
 /// ```
 
+#[allow(dead_code)]
 pub fn use_event<T, F, E>(node: NodeRef, event_type: T, callback: F)
 where
     T: Into<Cow<'static, str>>,
@@ -103,7 +104,7 @@ where
 ///     }
 /// }
 /// ```
-
+#[allow(dead_code)]
 pub fn use_event_with_window<T, F, E>(event_type: T, callback: F)
 where
     T: Into<Cow<'static, str>>,

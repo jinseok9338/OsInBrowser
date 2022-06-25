@@ -1,15 +1,12 @@
-use gloo_console::log;
 use js_sys::Function;
 use wasm_bindgen::{prelude::Closure, JsCast, UnwrapThrowExt};
 use web_sys::{window, AddEventListenerOptions, HtmlDivElement, MouseEvent, Window};
-use yew::{use_effect, use_effect_with_deps, NodeRef};
+use yew::{use_effect, NodeRef};
 
 use crate::{
-    context::process_directory_context::{process_directory, use_process_context},
+    context::process_directory_context::use_process_context,
     types::process_directory::{Dimension, ProcessAction, ProcessState},
 };
-
-use super::use_measure::{use_measure, UseMeasureState};
 
 pub fn use_draggable(reference: NodeRef, process: ProcessState) {
     let process_directory_context = use_process_context();

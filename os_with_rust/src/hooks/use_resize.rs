@@ -1,5 +1,5 @@
 use super::{use_measure::use_measure, use_raf_state::use_raf_state};
-use gloo_console::log;
+
 use js_sys::Function;
 use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::JsCast;
@@ -89,10 +89,10 @@ struct Coordinate {
     pub height: f64,
     pub width: f64,
 }
-
+#[allow(dead_code)]
 pub fn use_resizable(node: NodeRef, id: String) {
     let state = use_measure(node.clone());
-    log!(format!("{:?},{:?}", &state.width, &state.height));
+
     let x_and_y_coordinate = use_raf_state(|| Coordinate {
         width: state.width,
         height: state.height,

@@ -1,12 +1,11 @@
-use crate::hooks::use_measure::use_measure;
 use crate::hooks::use_raf_state::use_raf_state;
-use gloo_console::log;
+
 use js_sys::Function;
 use wasm_bindgen::prelude::Closure;
 use wasm_bindgen::JsCast;
-use web_sys::{window, Element, HtmlCollection, HtmlDivElement};
-use web_sys::{Document, MouseEvent};
-use yew::{use_effect, use_effect_with_deps, NodeRef};
+use web_sys::MouseEvent;
+use web_sys::{window, HtmlDivElement};
+use yew::{use_effect, NodeRef};
 
 #[derive(PartialEq, Default, Clone)]
 pub struct IsResizable {
@@ -18,17 +17,17 @@ pub struct NewWidthHeight {
     pub width: i32,
     pub height: i32,
 }
-
+#[allow(dead_code)]
 pub struct XYPosition {
     x: f64,
     y: f64,
 }
-
+#[allow(dead_code)]
 pub struct TopLeft {
     pub top: f64,
     pub left: f64,
 }
-
+#[allow(dead_code)]
 pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) {
     let is_resizable = use_raf_state(|| IsResizable { resizable: false });
 
@@ -101,7 +100,7 @@ pub fn use_resize_2(node: NodeRef, div_ref: NodeRef) {
                 if is_resizable_for_handle_mouse_move.resizable {
                     let original_mouse_x = original_mouse_x_y_for_effect_for_handle_mouse_move.x;
                     let original_mouse_y = original_mouse_x_y_for_effect_for_handle_mouse_move.y;
-                    let original_x = original_x_y_for_effect_for_handle_mouse_move.x;
+
                     let original_y = original_x_y_for_effect_for_handle_mouse_move.x;
 
                     let width = *original_width_for_handle_mouse_move
