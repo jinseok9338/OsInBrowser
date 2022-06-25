@@ -81,6 +81,15 @@ pub fn window(props: &WindowProps) -> Html {
       height= dimension.height))}
     ref={container_ref}
     >
+                <div class="right-top resizer"></div>
+                <div class="right resizer"></div>
+                <div class="right-bottom resizer"></div>
+                <div class="top resizer"></div>
+                <div class="left-top resizer"></div>
+                <div class="left-bottom resizer"></div>
+                <div class="left resizer"></div>
+                <div class="bottom resizer"></div>
+
                 <div class="row" ref={row_ref}>
                     <div class="column row-left">
                         <span class="row-dot" style="background:#ED594A;" onclick={exit}></span> // this is for closing the window

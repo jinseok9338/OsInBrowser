@@ -10,6 +10,10 @@
    - add icon url for process_context
 1. show clock on the task bar [Done]
    - little bit of trimming will work []
-1. complete use_resize []
-1. window make over []
+1. complete use_resize [] -- this is crucial after this build 0.1 is complete
+1. window make over [Done]
 1. display process name on the window bar and menu bar
+   - process name on window bar [Done]
+   - process menus on task bar []
+1. DockerFile []
+1. Publish version 1.0 []

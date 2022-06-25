@@ -6,60 +6,69 @@
   transition: width 0.3s, height 0.3s;
 }
 
-.resizeable {
-  border: 2px solid #533535;
-  width: 100%;
-  height: 100%;
-  border-radius: 6px;
-  display: flex;
-  flex-direction: column;
-  min-width: 15px;
-  min-height: 15px;
-}
-
 .resizer {
   position: absolute;
   background: transparent;
 }
 
-.resizer-r {
-  cursor: col-resize;
-  height: 100%;
-  right: 0;
+.right-top {
+  cursor: ne-resize;
   top: 0;
-  width: 1px;
+  right: 0;
+  width: 5px;
+  height: 5px;
 }
 
-.resizer-t {
-  cursor: row-resize;
-  height: 1px;
-  left: 0;
+.right {
+  cursor: e-resize;
+  width: 2px;
+  right: 0;
+  height: 100%;
+}
+
+.right-bottom {
+  cursor: nw-resize;
+  right: 0;
+  bottom: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.top {
+  cursor: n-resize;
+  height: 2px;
   top: 0;
   width: 100%;
 }
 
-.resizer-b {
-  cursor: row-resize;
-  height: 1px;
+.left-top {
+  cursor: nw-resize;
   left: 0;
+  top: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.left-bottom {
+  cursor: ne-resize;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  height: 5px;
+}
+
+.bottom {
+  cursor: n-resize;
   bottom: 0;
   width: 100%;
-}
-
-.resizer-l {
-  cursor: col-resize;
-  height: 100%;
-  left: 0;
-  top: 0;
-  width: 1px;
-}
-
-.resizer-tr {
-  cursor: ne-resize;
-  right: 0;
-  top: 0;
-  width: 2px;
   height: 2px;
+}
+
+.left {
+  cursor: e-resize;
+  left: 0;
+  width: 2px;
+  height: 100%;
 }
 
 /* Container for columns and the top "toolbar" */
