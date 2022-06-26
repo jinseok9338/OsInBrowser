@@ -16,7 +16,23 @@ export const ProcessDirectoryProvider: ParentComponent<{
   color?: string;
   title?: string;
 }> = (props) => {
-  const [state, setState] = createStore([]);
+  const [state, setState] = createStore([
+    {
+      active: false,
+      iconPath: "",
+      dimension: {
+        heigth: 500,
+        left: 0,
+        top: 0,
+        width: 500,
+      },
+      id: "sadasd",
+      tempDimension: null,
+      isFullSize: false,
+      process: <h1>{"Hello"}</h1>,
+      processName: "Hellow world",
+    },
+  ] as unknown as ProcessState[]);
 
   const addProcess = (id: string) => {
     console.log("this works");
