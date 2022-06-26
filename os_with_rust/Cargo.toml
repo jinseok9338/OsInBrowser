@@ -12,7 +12,8 @@ wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 serde = "1"
 js-sys = "0.3"
-gloo = "0.7"
+gloo = "0.8"
+gloo-events = "0.1.2"
 wasm-timer = "0.2.5"
 stylist = { version="0.10.0", features = [
     "yew_integration",
@@ -58,7 +59,8 @@ features = [
     "NodeList",
     "CssStyleDeclaration",
     "DomRect",
-    "DomTokenList"
+    "DomTokenList",
+    
 ]
 
 [dependencies.uuid]

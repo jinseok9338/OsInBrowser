@@ -1,5 +1,6 @@
 use yew::prelude::*;
 
+use crate::hooks::use_resize_4::Resizer;
 use crate::{
     components::window::window_function::{enlarge, exit},
     context::process_directory_context::use_process_context,
@@ -23,22 +24,13 @@ pub fn window(props: &WindowProps) -> Html {
     let process_directory_context = use_process_context();
     let id = props.process.id.unwrap().to_string().clone();
 
-    // let ref_left = use_node_ref();
-    // let ref_top = use_node_ref();
-    // let ref_right = use_node_ref();
-    // let ref_bottom = use_node_ref();
-
-    // let ref_bottom_left = use_node_ref();
-    let ref_bottom_right = use_node_ref();
-    // let ref_top_right = use_node_ref();
-    // let ref_top_left = use_node_ref();
-
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
     let process = props.process.clone();
+    let process_for_resize = process.clone();
 
     let dimension = process.dimension.clone().unwrap();
-    use_draggable(row_ref.clone(), process);
+    use_draggable(row_ref.clone(), process, container_ref.clone());
 
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_exit = id.clone();
@@ -69,43 +61,28 @@ pub fn window(props: &WindowProps) -> Html {
     };
 
     html! {
-    <div class={classes!("window_container", id.clone(),
-     css!(r#"
-    top: ${top}px;
-    width: ${width}px;
-    left: ${left}px;
-    height: ${height}px;
-    "#,top = dimension.top, 
-    width= dimension.width,
-     left= dimension.left,
-      height= dimension.height))}
-    ref={container_ref}
-    >
-                <div class="right-top resizer"></div>
-                <div class="right resizer"></div>
-                <div class="right-bottom resizer" ref={ref_bottom_right}></div>
-                <div class="top resizer"></div>
-                <div class="left-top resizer"></div>
-                <div class="left-bottom resizer"></div>
-                <div class="left resizer"></div>
-                <div class="bottom resizer"></div>
+      <div class={classes!("window_container", id.clone()
+    )}
+    style ={format!("top: {top}px ; left: {left}px ;",top = dimension.top , left = dimension.left)}
+      ref={container_ref}
+      >
+                   <Resizer/>
+                  <div class="row" ref={row_ref}>
+                      <div class="column row-left">
+                          <span class="row-dot" style="background:#ED594A;" onclick={exit}></span> // this is for closing the window
+                          <span class="row-dot" style="background:#FDD800;" ></span> // this is for minimizing
+                          <span class="row-dot" style="background:#5AC05A;" onclick={enlarge}></span> // this is for expanding
+                      </div>
 
-                <div class="row" ref={row_ref}>
-                    <div class="column row-left">
-                        <span class="row-dot" style="background:#ED594A;" onclick={exit}></span> // this is for closing the window
-                        <span class="row-dot" style="background:#FDD800;" ></span> // this is for minimizing
-                        <span class="row-dot" style="background:#5AC05A;" onclick={enlarge}></span> // this is for expanding
-                    </div>
-
-                    <div class="column row-middle">
-                        <span>{props.process.process_name.clone().unwrap()}</span>
-                    </div>
-                </div>
-                <div class="content">
-                    {props.process.process.clone().unwrap()}
-                </div>
-    </div>
-    }
+                      <div class="column row-middle">
+                          <span>{props.process.process_name.clone().unwrap()}</span>
+                      </div>
+                  </div>
+                  <div class="content">
+                      {props.process.process.clone().unwrap()}
+                  </div>
+      </div>
+      }
 }
 
 // css!(
@@ -115,3 +92,13 @@ pub fn window(props: &WindowProps) -> Html {
 //     "#
 // ,top=format!("{top}px", top = coordinate.dx),
 // left=format!("{left}px", left = coordinate.dy))
+
+// ,css!(r#"
+//       top: ${top}px;
+//       width: ${width}px;
+//       left: ${left}px;
+//       height: ${height}px;
+//       "#,top = dimension.top,
+//       width= dimension.width,
+//        left= dimension.left,
+//         height= dimension.height)
