@@ -144,7 +144,7 @@ pub fn resize(
                 process,
             );
         }
-        &_ => todo!(),
+        &_ => {}
     }
 }
 

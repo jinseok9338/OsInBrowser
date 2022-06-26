@@ -3,7 +3,7 @@ use yew::prelude::*;
 use crate::{
     components::window::window_function::{enlarge, exit},
     context::process_directory_context::use_process_context,
-    hooks::{use_drag::use_draggable, use_resize_3::use_resize_3},
+    hooks::use_drag::use_draggable,
     types::process_directory::ProcessState,
 };
 use stylist::yew::styled_component;
@@ -36,11 +36,9 @@ pub fn window(props: &WindowProps) -> Html {
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
     let process = props.process.clone();
-    let process_for_resize = props.process.clone();
 
     let dimension = process.dimension.clone().unwrap();
     use_draggable(row_ref.clone(), process);
-    use_resize_3(process_for_resize, ref_bottom_right.clone());
 
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_exit = id.clone();
