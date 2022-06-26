@@ -3,7 +3,7 @@ use yew::prelude::*;
 use crate::{
     components::window::window_function::{enlarge, exit},
     context::process_directory_context::use_process_context,
-    hooks::use_drag::use_draggable,
+    hooks::{use_drag::use_draggable, use_resize_3::use_resize_3},
     types::process_directory::ProcessState,
 };
 use stylist::yew::styled_component;
@@ -22,23 +22,25 @@ pub struct TopLeft {
 pub fn window(props: &WindowProps) -> Html {
     let process_directory_context = use_process_context();
     let id = props.process.id.unwrap().to_string().clone();
-    // let resizable_ref = use_node_ref();
+
     // let ref_left = use_node_ref();
     // let ref_top = use_node_ref();
     // let ref_right = use_node_ref();
     // let ref_bottom = use_node_ref();
 
     // let ref_bottom_left = use_node_ref();
-    // let ref_bottom_right = use_node_ref();
+    let ref_bottom_right = use_node_ref();
     // let ref_top_right = use_node_ref();
     // let ref_top_left = use_node_ref();
 
     let row_ref = use_node_ref();
     let container_ref = use_node_ref();
     let process = props.process.clone();
+    let process_for_resize = props.process.clone();
 
     let dimension = process.dimension.clone().unwrap();
     use_draggable(row_ref.clone(), process);
+    use_resize_3(process_for_resize, ref_bottom_right.clone());
 
     let process_directory_context_for_closure = process_directory_context.clone();
     let id_for_exit = id.clone();
@@ -83,7 +85,7 @@ pub fn window(props: &WindowProps) -> Html {
     >
                 <div class="right-top resizer"></div>
                 <div class="right resizer"></div>
-                <div class="right-bottom resizer"></div>
+                <div class="right-bottom resizer" ref={ref_bottom_right}></div>
                 <div class="top resizer"></div>
                 <div class="left-top resizer"></div>
                 <div class="left-bottom resizer"></div>

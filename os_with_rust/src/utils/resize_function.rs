@@ -223,15 +223,15 @@ fn right_bottom_resize(
         temp_dimension: process.temp_dimension,
     };
 
-    if width > min_width {
+    if height > min_height {
         // unpdate dimension
         use_process_context.dispatch(ProcessAction {
             process: new_process.clone(),
             action_type: "change_the_dimension".to_owned(),
         })
     }
-    if height > min_height {
-        // update dimension
+    if width > min_width {
+        // unpdate dimension
         use_process_context.dispatch(ProcessAction {
             process: new_process.clone(),
             action_type: "change_the_dimension".to_owned(),
