@@ -1,10 +1,15 @@
-import type { Component } from "solid-js";
+import { createSignal, onCleanup } from "solid-js";
+import {
+  ProcessDirectoryProvider,
+  useProcess,
+} from "./context/processDirectory";
+import Main from "./main";
 
-const App: Component = () => {
+const App = () => {
   return (
-    <div>
-      <h1>{"Hello world"}</h1>
-    </div>
+    <ProcessDirectoryProvider>
+      <Main />
+    </ProcessDirectoryProvider>
   );
 };
 
