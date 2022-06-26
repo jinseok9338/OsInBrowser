@@ -17,3 +17,5 @@
    - process menus on task bar []
 1. DockerFile []
 1. Publish version 1.0 []
+
+sass --watch ./src/style:public/stylesheet
