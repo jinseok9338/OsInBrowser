@@ -3,7 +3,8 @@ import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
 
 const Main = () => {
-  const [state, { addProcess, deleteProcess }] = useProcess();
+  const [state, { addProcess, deleteProcess, changeProcessDimension }] =
+    useProcess();
   return (
     <>
       <For each={state}>
@@ -11,6 +12,9 @@ const Main = () => {
           <WindowComponent
             process={process.process}
             processName={process.processName!}
+            dimension={process.dimension!}
+            changeProcessDimension={changeProcessDimension}
+            id={process.id!}
           />
         )}
       </For>

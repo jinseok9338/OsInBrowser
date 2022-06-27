@@ -3,8 +3,6 @@
   border-radius: 5px;
   background: #ffbc97;
   position: absolute;
-
-  // transition: width 0.3s, height 0.3s;
 }
 
 .resizer {
@@ -75,13 +73,7 @@
 /* Container for columns and the top "toolbar" */
 .row {
   padding: 1px 5px 5px 5px;
-
-  background: -webkit-gradient(
-    linear,
-    left top,
-    left bottom,
-    color-stop(0, #ebebeb, color-stop(1, #d5d5d5))
-  );
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #ebebeb, color-stop(1, #d5d5d5)));
   background: -webkit-linear-gradient(top, #ebebeb, #d5d5d5);
   background: -moz-linear-gradient(top, #ebebeb, #d5d5d5);
   background: -ms-linear-gradient(top, #ebebeb, #d5d5d5);
@@ -137,3 +129,5 @@
   display: inline-block;
   cursor: pointer;
 }
+
+/*# sourceMappingURL=window.css.map */

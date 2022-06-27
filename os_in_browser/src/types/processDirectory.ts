@@ -10,18 +10,19 @@ export type ProcessesContextValue = [
   actions: {
     addProcess: (id: string) => void;
     deleteProcess: (id: string) => void;
+    changeProcessDimension: (id: string, dimension: Dimension) => void;
   }
 ];
 
 export interface ProcessState {
   processName?: string;
   process?: JSX.Element;
-  id?: String; // UUID
+  id?: string; // UUID
   dimension?: Dimension;
   isFullSize?: boolean;
-  tempDimension: Dimension;
-  iconPath: String;
-  active: boolean;
+  tempDimension?: Dimension;
+  iconPath?: string;
+  active?: boolean;
 }
 
 export interface Dimension {
