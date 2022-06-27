@@ -1,23 +1,74 @@
+import { createSignal, onMount } from "solid-js";
 import useResize from "../hooks/useResize";
+import { Dimension } from "../types/processDirectory";
 
-const Resizers = () => {
-  let rightBottomResizer;
-  let rightTopResizer;
-  let topResizer;
-  let rightResizer;
-  let leftBottomResizer;
-  let leftTopResizer;
-  let leftResizer;
-  let bottomResizer;
+type refType = HTMLDivElement | ((el: HTMLDivElement) => void) | undefined;
 
-  const rightBottomResize = useResize(rightBottomResizer);
-  const rightTopResize = useResize(rightTopResizer);
-  const topResize = useResize(topResizer);
-  const rightResize = useResize(rightResizer);
-  const leftBottomResize = useResize(leftBottomResizer);
-  const leftTopResize = useResize(leftTopResizer);
-  const leftResize = useResize(leftResizer);
-  const bottomResize = useResize(bottomResizer);
+interface ResizerFunctions {
+  rightBottomResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  rightTopResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  topResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  rightResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  leftBottomResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  leftTopResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  leftResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+  bottomResize: {
+    onMouseDown: (e: MouseEvent) => void;
+  };
+}
+
+interface resizerProps {
+  id: string;
+  dimension: Dimension;
+}
+
+const Resizers = ({ id, dimension }: resizerProps) => {
+  const [resizers, setResizers] = createSignal({} as ResizerFunctions);
+
+  let rightBottomResizer: refType;
+  let rightTopResizer: refType;
+  let topResizer: refType;
+  let rightResizer: refType;
+  let leftBottomResizer: refType;
+  let leftTopResizer: refType;
+  let leftResizer: refType;
+  let bottomResizer: refType;
+
+  onMount(() => {
+    const rightBottomResize = useResize(id, dimension, rightBottomResizer);
+    const rightTopResize = useResize(id, dimension, rightTopResizer);
+    const topResize = useResize(id, dimension, topResizer);
+    const rightResize = useResize(id, dimension, rightResizer);
+    const leftBottomResize = useResize(id, dimension, leftBottomResizer);
+    const leftTopResize = useResize(id, dimension, leftTopResizer);
+    const leftResize = useResize(id, dimension, leftResizer);
+    const bottomResize = useResize(id, dimension, bottomResizer);
+
+    setResizers({
+      rightBottomResize,
+      rightTopResize,
+      topResize,
+      rightResize,
+      leftBottomResize,
+      leftTopResize,
+      leftResize,
+      bottomResize,
+    });
+  });
 
   return (
     <>
@@ -26,7 +77,7 @@ const Resizers = () => {
       <div
         class="right-bottom resizer"
         ref={rightBottomResizer}
-        onmousedown={rightBottomResize.onMouseDown}
+        onmousedown={(e) => resizers()?.rightBottomResize?.onMouseDown(e)}
       ></div>
       <div class="top resizer" ref={topResizer}></div>
       <div class="left-top resizer" ref={leftTopResizer}></div>

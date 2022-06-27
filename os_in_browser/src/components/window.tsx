@@ -1,14 +1,5 @@
 import { JSX } from "solid-js/jsx-runtime";
-import {
-  batch,
-  Component,
-  createEffect,
-  createMemo,
-  createSignal,
-  onCleanup,
-  onMount,
-} from "solid-js";
-import { createStore } from "solid-js/store";
+
 import { Dimension } from "../types/processDirectory";
 import useDrag from "../hooks/useDrag";
 import Resizers from "./resizer";
@@ -35,7 +26,7 @@ const WindowComponent = ({
       class="window_container"
       style={`left:${dimension.left}px; top:${dimension.top}px; width:${dimension.width}px; height:${dimension.heigth}px`}
     >
-      <Resizers />
+      <Resizers id={id} dimension={dimension} />
       <div class="row" onMouseDown={onMouseDown}>
         <div class="column row-left">
           <span class="row-dot" style="background:#ED594A;"></span>
