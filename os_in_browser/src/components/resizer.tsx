@@ -81,7 +81,11 @@ const Resizers = ({ id, dimension }: resizerProps) => {
       ></div>
       <div class="top resizer" ref={topResizer}></div>
       <div class="left-top resizer" ref={leftTopResizer}></div>
-      <div class="left-bottom resizer" ref={leftBottomResizer}></div>
+      <div
+        class="left-bottom resizer"
+        ref={leftBottomResizer}
+        onmousedown={(e) => resizers()?.leftBottomResize?.onMouseDown(e)}
+      ></div>
       <div class="left resizer" ref={leftResizer}></div>
       <div class="bottom resizer" ref={bottomResizer}></div>
     </>

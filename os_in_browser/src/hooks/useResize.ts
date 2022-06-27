@@ -69,6 +69,18 @@ const useResize = (
 
     if (classList.contains("left-bottom")) {
       console.log("left-bottom");
+      const newWidth = width - (e.pageX - mouseX());
+      const newHeight = heigth + (e.pageY - mouseY());
+
+      if (newHeight > MINIMUM_HEIGHT && newWidth > MINIMUM_WIDTH) {
+        const newDimension = {
+          heigth: newHeight,
+          width: newWidth,
+          top,
+          left: left + (e.pageX - mouseX()),
+        } as Dimension;
+        changeProcessDimension(id, newDimension);
+      }
     }
 
     if (classList.contains("left")) {
