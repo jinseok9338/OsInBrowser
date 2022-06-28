@@ -72,22 +72,46 @@ const Resizers = ({ id, dimension }: resizerProps) => {
 
   return (
     <>
-      <div class="right-top resizer" ref={rightTopResizer}></div>
-      <div class="right resizer" ref={rightResizer}></div>
+      <div
+        class="right-top resizer"
+        ref={rightTopResizer}
+        onmousedown={(e) => resizers()?.rightTopResize?.onMouseDown(e)}
+      ></div>
+      <div
+        class="right resizer"
+        ref={rightResizer}
+        onmousedown={(e) => resizers()?.rightResize?.onMouseDown(e)}
+      ></div>
       <div
         class="right-bottom resizer"
         ref={rightBottomResizer}
         onmousedown={(e) => resizers()?.rightBottomResize?.onMouseDown(e)}
       ></div>
-      <div class="top resizer" ref={topResizer}></div>
-      <div class="left-top resizer" ref={leftTopResizer}></div>
+      <div
+        class="top resizer"
+        ref={topResizer}
+        onmousedown={(e) => resizers()?.topResize?.onMouseDown(e)}
+      ></div>
+      <div
+        class="left-top resizer"
+        ref={leftTopResizer}
+        onmousedown={(e) => resizers()?.leftTopResize?.onMouseDown(e)}
+      ></div>
       <div
         class="left-bottom resizer"
         ref={leftBottomResizer}
         onmousedown={(e) => resizers()?.leftBottomResize?.onMouseDown(e)}
       ></div>
-      <div class="left resizer" ref={leftResizer}></div>
-      <div class="bottom resizer" ref={bottomResizer}></div>
+      <div
+        class="left resizer"
+        ref={leftResizer}
+        onmousedown={(e) => resizers()?.leftResize?.onMouseDown(e)}
+      ></div>
+      <div
+        class="bottom resizer"
+        ref={bottomResizer}
+        onmousedown={(e) => resizers()?.bottomResize?.onMouseDown(e)}
+      ></div>
     </>
   );
 };

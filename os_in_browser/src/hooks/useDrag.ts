@@ -16,6 +16,7 @@ const useDrag = (
 
   const onMouseMove = (e: MouseEvent) => {
     // this is where the magic happens
+    e.preventDefault();
     let newLeft = e.pageX - left();
     let newTop = e.pageY - top();
 
@@ -58,10 +59,13 @@ const useDrag = (
   };
 
   const onMouseUp = (e: MouseEvent) => {
+    e.preventDefault();
     window.removeEventListener("mousemove", onMouseMove);
   };
 
   const onMouseDown = (e: MouseEvent) => {
+    e.preventDefault();
+
     setLeft(() => e.pageX - originalLeft);
     setTop(() => e.pageY - originalTop);
 
