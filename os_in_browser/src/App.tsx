@@ -4,10 +4,10 @@ import {
   useProcess,
 } from "./context/processDirectory";
 import Main from "./main";
-import "./assets/stylesheet/desktop.css";
-import "./assets/stylesheet/global.css";
-import "./assets/stylesheet/variables.css";
-import "./assets/stylesheet/window.css";
+import "./style/desktop.scss";
+import "./style/global.scss";
+import "./style/variables.scss";
+import "./style/window.scss";
 
 const App = () => {
   return (

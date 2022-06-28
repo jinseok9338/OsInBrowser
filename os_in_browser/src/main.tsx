@@ -1,4 +1,5 @@
 import { For } from "solid-js";
+import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
 
@@ -6,9 +7,9 @@ const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
   return (
-    <>
+    <Desktop>
       <For each={state}>
-        {(process, i) => (
+        {(process, _i) => (
           <WindowComponent
             process={process.process}
             processName={process.processName!}
@@ -18,7 +19,7 @@ const Main = () => {
           />
         )}
       </For>
-    </>
+    </Desktop>
   );
 };
 
