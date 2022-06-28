@@ -1,21 +1,11 @@
+// vite.config.js
 import solidPlugin from "vite-plugin-solid";
 
-import { defineConfig, ConfigEnv } from "vite";
+/**
+ *  @type {import('vite').UserConfig}
+ */
+const config = {
+  plugins: [solidPlugin()],
+};
 
-export default defineConfig((_configEnv: ConfigEnv) => {
-  return {
-    plugins: [solidPlugin()],
-    build: {
-      target: "esnext",
-      polyfillDynamicImport: false,
-    },
-    server: {
-      port: 3000,
-      strictPort: true,
-      hmr: {
-        port: 3000,
-      },
-    },
-    base: "./",
-  };
-});
+export default config;

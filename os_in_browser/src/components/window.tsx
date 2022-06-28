@@ -3,6 +3,7 @@ import { JSX } from "solid-js/jsx-runtime";
 import { Dimension } from "../types/processDirectory";
 import useDrag from "../hooks/useDrag";
 import Resizers from "./resizer";
+import { useProcess } from "../context/processDirectory";
 
 interface WindowComponentProps {
   processName: string;
@@ -20,6 +21,7 @@ const WindowComponent = ({
   changeProcessDimension,
 }: WindowComponentProps) => {
   const { onMouseDown } = useDrag(changeProcessDimension, id, dimension);
+  const [state, { deleteProcess, enlarge }] = useProcess();
 
   return (
     <div
@@ -29,9 +31,19 @@ const WindowComponent = ({
       <Resizers id={id} dimension={dimension} />
       <div class="row" onMouseDown={onMouseDown}>
         <div class="column row-left">
-          <span class="row-dot" style="background:#ED594A;"></span>
+          <span
+            class="row-dot"
+            style="background:#ED594A;"
+            onclick={() => deleteProcess(id)}
+          ></span>
           <span class="row-dot" style="background:#FDD800;"></span>
-          <span class="row-dot" style="background:#5AC05A;"></span>
+          <span
+            class="row-dot"
+            style="background:#5AC05A;"
+            onclick={(e: MouseEvent) => {
+              enlarge(id);
+            }}
+          ></span>
         </div>
 
         <div class="column row-middle">

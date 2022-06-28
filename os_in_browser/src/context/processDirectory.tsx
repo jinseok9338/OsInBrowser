@@ -5,8 +5,9 @@ import {
   ProcessesContextValue,
   ProcessState,
 } from "../types/processDirectory";
+import { processesDirectory } from "../utils/processes";
 
-const defaultState = [] as unknown as ProcessState[];
+const defaultState = [] as ProcessState[];
 
 const ProcessesContext = createContext<ProcessesContextValue>([
   defaultState,
@@ -14,6 +15,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
     addProcess: () => undefined,
     deleteProcess: () => undefined,
     changeProcessDimension: () => undefined,
+    enlarge: () => undefined,
   },
 ]);
 
@@ -21,28 +23,64 @@ export const ProcessDirectoryProvider: ParentComponent<{
   color?: string;
   title?: string;
 }> = (props) => {
-  const [state, setState] = createStore([
-    {
-      active: false,
-      iconPath: "",
-      dimension: {
-        heigth: 500,
-        left: 0,
-        top: 100,
-        width: 500,
-      },
-      id: "sadasd",
-      tempDimension: undefined,
-      isFullSize: false,
-      process: <h1>{"Hello"}</h1>,
-      processName: "Hellow world",
-    },
-  ] as ProcessState[]);
+  const [state, setState] = createStore([] as ProcessState[]);
 
   const addProcess = (id: string) => {
-    console.log("this works");
-  }; // Place Holder for now
-  const deleteProcess = (id: string) => {};
+    const process = processesDirectory.find((process) => (process.id = id));
+    const newProcesses = state.concat([process!]);
+    setState(newProcesses);
+  };
+  const deleteProcess = (id: string) => {
+    const newState = state.filter((process) => process.id != id);
+    setState(newState);
+  };
+
+  const enlarge = (id: string) => {
+    const process = state.find((process) => process.id == id);
+    if (process?.isFullSize) {
+      const newState = state.map((process) => {
+        if (process.id == id) {
+          return {
+            active: process.active,
+            dimension: process.tempDimension, // use the temp dimension to get back to the original dimension
+            iconPath: process.iconPath,
+            id,
+            isFullSize: !process.isFullSize,
+            process: process.process,
+            processName: process.processName,
+            tempDimension: undefined,
+          } as ProcessState;
+        } else {
+          return process;
+        }
+      });
+      setState(newState);
+    } else {
+      // if the window is not full size
+      const newState = state.map((process) => {
+        if (process.id == id) {
+          return {
+            active: process.active,
+            dimension: {
+              heigth: window.innerHeight,
+              width: window.innerWidth,
+              left: 0,
+              top: 0,
+            } as Dimension, // use the temp dimension to get back to the original dimension
+            iconPath: process.iconPath,
+            id,
+            isFullSize: !process.isFullSize,
+            process: process.process,
+            processName: process.processName,
+            tempDimension: process.dimension,
+          } as ProcessState;
+        } else {
+          return process;
+        }
+      });
+      setState(newState);
+    }
+  };
 
   const changeProcessDimension = (id: string, dimension: Dimension) => {
     const newState: ProcessState[] = state.map((process: ProcessState) => {
@@ -67,7 +105,10 @@ export const ProcessDirectoryProvider: ParentComponent<{
 
   return (
     <ProcessesContext.Provider
-      value={[state, { addProcess, deleteProcess, changeProcessDimension }]}
+      value={[
+        state,
+        { addProcess, deleteProcess, changeProcessDimension, enlarge },
+      ]}
     >
       {props.children}
     </ProcessesContext.Provider>

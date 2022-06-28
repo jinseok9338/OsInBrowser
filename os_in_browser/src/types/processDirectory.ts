@@ -11,6 +11,7 @@ export type ProcessesContextValue = [
     addProcess: (id: string) => void;
     deleteProcess: (id: string) => void;
     changeProcessDimension: (id: string, dimension: Dimension) => void;
+    enlarge: (id: string) => void;
   }
 ];
 

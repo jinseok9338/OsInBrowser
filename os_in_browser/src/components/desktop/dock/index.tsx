@@ -1,7 +1,13 @@
 import { onMount } from "solid-js";
+import { useProcess } from "../../../context/processDirectory";
 import useMoveDock from "./dockFunction";
 
-const Dock = () => {
+interface DockProps {
+  id: string;
+}
+
+const Dock = ({ id }: DockProps) => {
+  const [state, { addProcess }] = useProcess();
   useMoveDock();
 
   return (
@@ -13,6 +19,7 @@ const Dock = () => {
             class="ico"
             src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png"
             alt=""
+            onclick={() => addProcess("helloWorld")}
           />
         </li>
         <li class="li-2">

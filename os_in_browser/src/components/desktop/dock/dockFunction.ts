@@ -4,7 +4,9 @@ const useMoveDock = () => {
   onMount(() => {
     let icons = document.querySelectorAll(".ico");
     let length = icons.length;
-
+    let dock = document
+      .getElementsByClassName("dock-container")
+      .item(0) as HTMLElement;
     let HtmlElementIcons: HTMLElement[] = [];
 
     for (let i = 0; i < length; i++) {
@@ -20,15 +22,40 @@ const useMoveDock = () => {
       if (previous == -1) {
         console.log("first element");
         elem.style.transform = "scale(1.5)  translateY(-10px)";
-      } else if (next == icons.length) {
+        icons[next].style.transform = "scale(1.2) translateY(-6px)";
+        icons[next2].style.transform = "scale(1.1)";
+      } else if (previous1 == -1) {
+        // second element
         elem.style.transform = "scale(1.5)  translateY(-10px)";
+        icons[previous].style.transform = "scale(1.2) translateY(-6px)";
+        icons[next].style.transform = "scale(1.2) translateY(-6px)";
+        icons[next2].style.transform = "scale(1.1)";
+      } else if (next == icons.length) {
+        // last element
+        elem.style.transform = "scale(1.5)  translateY(-10px)";
+        icons[previous].style.transform = "scale(1.2) translateY(-6px)";
+        icons[previous1].style.transform = "scale(1.1)";
         console.log("last element");
+      } else if (next == icons.length - 1) {
+        // one before the last
+        elem.style.transform = "scale(1.5)  translateY(-10px)";
+        icons[previous].style.transform = "scale(1.2) translateY(-6px)";
+        icons[previous1].style.transform = "scale(1.1)";
+        icons[next].style.transform = "scale(1.2) translateY(-6px)";
       } else {
         elem.style.transform = "scale(1.5)  translateY(-10px)";
         icons[previous].style.transform = "scale(1.2) translateY(-6px)";
         icons[previous1].style.transform = "scale(1.1)";
         icons[next].style.transform = "scale(1.2) translateY(-6px)";
         icons[next2].style.transform = "scale(1.1)";
+      }
+    };
+
+    const moveDock = (e: MouseEvent, dock: HTMLElement) => {
+      if (e.pageY > window.innerHeight - 80.0) {
+        dock.style.transform = "translateY(0px)";
+      } else {
+        dock.style.transform = "translateY(70px)";
       }
     };
 
@@ -42,6 +69,8 @@ const useMoveDock = () => {
         });
       });
     });
+
+    window.addEventListener("mousemove", (e) => moveDock(e, dock));
   });
 };
 

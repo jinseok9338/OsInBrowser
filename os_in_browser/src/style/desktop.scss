@@ -27,7 +27,7 @@ body {
   backdrop-filter: blur(50px);
   -webkit-backdrop-filter: blur(50px);
 
-  .left {
+  .leftbar {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -50,7 +50,7 @@ body {
       color: #fff !important;
     }
   }
-  .right {
+  .rightbar {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
