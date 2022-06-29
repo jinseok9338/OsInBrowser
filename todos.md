@@ -18,7 +18,8 @@
      - change Active
    - hightlight the menus on hover on taskbar [Done]
    - trim the clock when clicked [Not implenting]
-1. DockerFile []
+1. DockerFile [Done]
+1. fix that the file menu disappearing issue []
 1. Publish version 1.0 []
 
 sass --watch ./src/style:public/stylesheet
