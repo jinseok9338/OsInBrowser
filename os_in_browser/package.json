@@ -5,7 +5,7 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "vite build",
+    "build": "APP_ENV=production vite build",
     "serve": "vite preview"
   },
   "license": "MIT",
