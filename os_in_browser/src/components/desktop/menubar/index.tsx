@@ -4,17 +4,29 @@ import wifiSignal from "./icons/wifi-signal.png";
 import search from "./icons/search.png";
 import microphone from "./icons/microphone.png";
 import { createEffect, createSignal, onCleanup } from "solid-js";
+import { useProcess } from "../../../context/processDirectory";
+import { ProcessState } from "../../../types/processDirectory";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
+  const [process, setProcess] = createSignal({} as ProcessState);
+  const [state, {}] = useProcess();
 
   createEffect((prev) => {
     setTimeout(() => {
       let now = new Date(Date.now());
+
       let dateStringNow = now.toLocaleString();
       setTime(dateStringNow);
     }, 1000);
     return time();
+  });
+
+  createEffect(() => {
+    const process = state.find((process) => process.active == true);
+    if (process) {
+      setProcess(process);
+    }
   });
 
   return (
@@ -23,17 +35,29 @@ const Menubar = () => {
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1010px-Apple_logo_white.svg.png"
           class="apple-logo"
-          width="20"
-          height="45"
+          width="18"
+          height="20"
           alt=""
         />
-        <span class="menus active">{"Finder"}</span>
-        <span class="menus">{"File"}</span>
-        <span class="menus">{"Edit"}</span>
-        <span class="menus">{"View"}</span>
-        <span class="menus">{"Go"}</span>
-        <span class="menus">{"Window"}</span>
-        <span class="menus">{"Help"}</span>
+        <div class="menus">
+          {Object.keys(process()).length != 0
+            ? process().processName
+            : "Finder"}
+        </div>
+        {Object.keys(process()).length != 0 ? (
+          process().menus?.map((menu) => (
+            <div class="menus">{menu.starting}</div>
+          ))
+        ) : (
+          <>
+            <div class="menus">{"File"}</div>
+            <div class="menus">{"Edit"}</div>
+            <div class="menus">{"View"}</div>
+            <div class="menus">{"Go"}</div>
+            <div class="menus">{"Window"}</div>
+            <div class="menus">{"Help"}</div>
+          </>
+        )}
       </div>
 
       <div class="rightbar">
@@ -49,9 +73,7 @@ const Menubar = () => {
             class="bluetooth"
           />
         </div>
-        <div class="menu-ico">
-          <i class="fas fa-battery-half"></i>
-        </div>
+
         <div class="menu-ico">
           <img src={wifiSignal} width="30" height="30" alt="" class="wifi" />
         </div>

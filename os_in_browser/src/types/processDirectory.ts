@@ -12,18 +12,29 @@ export type ProcessesContextValue = [
     deleteProcess: (id: string) => void;
     changeProcessDimension: (id: string, dimension: Dimension) => void;
     enlarge: (id: string) => void;
+    changeActive: (id: string) => void;
   }
 ];
 
 export interface ProcessState {
-  processName?: string;
-  process?: JSX.Element;
-  id?: string; // UUID
-  dimension?: Dimension;
-  isFullSize?: boolean;
+  processName: string;
+  process: JSX.Element;
+  id: string; // UUID
+  dimension: Dimension;
+  isFullSize: boolean;
   tempDimension?: Dimension;
-  iconPath?: string;
-  active?: boolean;
+  iconPath: string;
+  active: boolean;
+  menus?: Menus[];
+}
+
+export interface Menus {
+  starting: string;
+  menus: Menu[];
+}
+
+export interface Menu {
+  [key: string]: string | Menu;
 }
 
 export interface Dimension {

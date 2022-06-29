@@ -16,6 +16,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
     deleteProcess: () => undefined,
     changeProcessDimension: () => undefined,
     enlarge: () => undefined,
+    changeActive: () => undefined,
   },
 ]);
 
@@ -26,8 +27,12 @@ export const ProcessDirectoryProvider: ParentComponent<{
   const [state, setState] = createStore([] as ProcessState[]);
 
   const addProcess = (id: string) => {
-    const process = processesDirectory.find((process) => (process.id = id));
-    const newProcesses = state.concat([process!]);
+    let process = processesDirectory.find((process) => (process.id = id));
+    let newProcess = {
+      ...process,
+      active: true,
+    } as ProcessState;
+    const newProcesses = state.concat([newProcess!]);
     setState(newProcesses);
   };
   const deleteProcess = (id: string) => {
@@ -103,11 +108,38 @@ export const ProcessDirectoryProvider: ParentComponent<{
     setState(newState);
   };
 
+  const changeActive = (id: string) => {
+    const newState: ProcessState[] = state.map((process: ProcessState) => {
+      if (process.id == id) {
+        return {
+          active: !process.active,
+          iconPath: process.iconPath,
+          tempDimension: process.tempDimension,
+          dimension: process.dimension,
+          id,
+          isFullSize: process.isFullSize,
+          process: process.process,
+          processName: process.processName,
+        } as ProcessState;
+      } else {
+        return process;
+      }
+    });
+
+    setState(newState);
+  };
+
   return (
     <ProcessesContext.Provider
       value={[
         state,
-        { addProcess, deleteProcess, changeProcessDimension, enlarge },
+        {
+          addProcess,
+          deleteProcess,
+          changeProcessDimension,
+          enlarge,
+          changeActive,
+        },
       ]}
     >
       {props.children}

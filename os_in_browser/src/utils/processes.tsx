@@ -17,5 +17,19 @@ export const processesDirectory = [
     isFullSize: false,
     process: <h1>{"Hello"}</h1>,
     processName: "Hellow world",
+    menus: [
+      {
+        starting: "file",
+        menus: [
+          {
+            files: "files",
+            options: {
+              option1: "option1",
+              option2: "option2",
+            },
+          },
+        ],
+      },
+    ],
   },
 ] as ProcessState[];

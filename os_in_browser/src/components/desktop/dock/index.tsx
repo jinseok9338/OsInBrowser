@@ -6,7 +6,7 @@ interface DockProps {
   id: string;
 }
 
-const Dock = ({ id }: DockProps) => {
+const Dock = () => {
   const [state, { addProcess }] = useProcess();
   useMoveDock();
 
