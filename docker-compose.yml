@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+  os_in_browser:
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+
+    volumes:
+      - ./:/usr/src/make_os
+
+    command:
+      - "backend"

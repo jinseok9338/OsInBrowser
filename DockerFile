@@ -1,0 +1,18 @@
+FROM rust:latest as build
+
+
+WORKDIR /usr/src/make_os
+COPY . .
+
+RUN cd os_in_browser &&  npm i
+RUN npm run build
+RUN cargo build --release
+
+FROM gcr.io/distroless/cc-debian10
+
+COPY --from=build /usr/src/make_os/target/release/backend /usr/local/bin/backend
+COPY --from=build /usr/src/make_os/os_in_browser/dist /usr/local/bin/dist
+
+WORKDIR /usr/local/bin
+
+CMD ["backend"]
