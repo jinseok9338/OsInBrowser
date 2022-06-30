@@ -1,6 +1,7 @@
 import { ProcessState } from "../types/processDirectory";
 import { createContext, useContext, ParentComponent } from "solid-js";
 import { createStore } from "solid-js/store";
+import Finder from "../app/Finder";
 
 export const processesDirectory = [
   {
@@ -15,7 +16,7 @@ export const processesDirectory = [
     id: "helloWorld",
     tempDimension: undefined,
     isFullSize: false,
-    process: <h1>{"Hello"}</h1>,
+    process: <Finder />,
     processName: "Hellow world",
     menus: [
       {

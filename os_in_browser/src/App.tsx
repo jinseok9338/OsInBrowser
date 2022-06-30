@@ -9,6 +9,7 @@ import "./style/desktop.scss";
 import "./style/global.scss";
 import "./style/variables.scss";
 import "./style/window.scss";
+import "./style/finder.scss";
 
 const App = () => {
   return (
