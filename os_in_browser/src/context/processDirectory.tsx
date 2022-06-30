@@ -1,5 +1,6 @@
 import { createContext, useContext, ParentComponent } from "solid-js";
 import { createStore } from "solid-js/store";
+import { finderMetaData } from "../app/Finder/metadata";
 import {
   Dimension,
   ProcessesContextValue,
@@ -21,7 +22,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
 ]);
 
 export const ProcessDirectoryProvider: ParentComponent<{}> = (props) => {
-  const [state, setState] = createStore([] as ProcessState[]);
+  const [state, setState] = createStore([finderMetaData] as ProcessState[]);
 
   const addProcess = (id: string) => {
     let process = processesDirectory.find((process) => (process.id = id));

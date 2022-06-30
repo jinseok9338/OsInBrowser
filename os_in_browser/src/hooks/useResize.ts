@@ -10,8 +10,8 @@ const useResize = (
   const [mouseX, setMouseX] = createSignal(0);
   const [mouseY, setMouseY] = createSignal(0);
   const [state, { changeProcessDimension }] = useProcess();
-  const MINIMUM_HEIGHT = 200;
-  const MINIMUM_WIDTH = 200;
+  const MINIMUM_HEIGHT = 500;
+  const MINIMUM_WIDTH = 500;
   const { heigth, left, top, width } = dimension;
 
   const onMouseDown = (e: MouseEvent) => {
