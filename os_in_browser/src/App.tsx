@@ -3,6 +3,7 @@ import {
   ProcessDirectoryProvider,
   useProcess,
 } from "./context/processDirectory";
+import { FileSystemProvider } from "./context/windowFileSystem";
 import Main from "./main";
 import "./style/desktop.scss";
 import "./style/global.scss";
@@ -11,9 +12,11 @@ import "./style/window.scss";
 
 const App = () => {
   return (
-    <ProcessDirectoryProvider>
-      <Main />
-    </ProcessDirectoryProvider>
+    <FileSystemProvider>
+      <ProcessDirectoryProvider>
+        <Main />
+      </ProcessDirectoryProvider>
+    </FileSystemProvider>
   );
 };
 

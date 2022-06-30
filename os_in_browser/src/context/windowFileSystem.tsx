@@ -1,4 +1,12 @@
-import { createSignal, createEffect, onMount, Accessor } from "solid-js";
+import {
+  createSignal,
+  createEffect,
+  onMount,
+  Accessor,
+  createContext,
+  ParentComponent,
+  useContext,
+} from "solid-js";
 import * as BrowserFS from "browserfs";
 import { FSModule } from "browserfs/dist/node/core/FS";
 
@@ -6,7 +14,11 @@ type FileSystemContextState = {
   fs: Accessor<FSModule | null>;
 };
 
-const fileSystemcontext = (): FileSystemContextState => {
+const FileSystemContext = createContext<FileSystemContextState>(
+  {} as FileSystemContextState
+);
+
+export const FileSystemProvider: ParentComponent = (props) => {
   const [fs, setFs] = createSignal<FSModule | null>(null);
 
   onMount(() => {
@@ -23,7 +35,11 @@ const fileSystemcontext = (): FileSystemContextState => {
   });
   // on load  install the BrowserFS
 
-  return { fs };
+  return (
+    <FileSystemContext.Provider value={{ fs }}>
+      {props.children}
+    </FileSystemContext.Provider>
+  );
 };
 
-export default fileSystemcontext;
+export const useFileSystem = () => useContext(FileSystemContext);

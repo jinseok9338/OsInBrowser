@@ -20,10 +20,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
   },
 ]);
 
-export const ProcessDirectoryProvider: ParentComponent<{
-  color?: string;
-  title?: string;
-}> = (props) => {
+export const ProcessDirectoryProvider: ParentComponent<{}> = (props) => {
   const [state, setState] = createStore([] as ProcessState[]);
 
   const addProcess = (id: string) => {
