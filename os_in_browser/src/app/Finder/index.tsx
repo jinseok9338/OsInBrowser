@@ -79,7 +79,9 @@ const Finder = () => {
           id="main-box"
           ref={(el) =>
             el.addEventListener("click", (e) => {
-              deselectAll(e);
+              if (!(e.target! as HTMLElement).classList.contains("img")) {
+                deselectAll(e);
+              }
             })
           }
         >
@@ -90,10 +92,11 @@ const Finder = () => {
                   class="align-center"
                   id={item.toString()}
                   onclick={(e) => {
+                    e.stopPropagation();
                     setFocus(item.toString(), e);
                   }}
                 >
-                  <img src={air} alt="" />
+                  <img class="img" src={air} alt="" />
                   {item}
                 </div>
               </div>

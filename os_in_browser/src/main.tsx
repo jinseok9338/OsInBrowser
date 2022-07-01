@@ -1,13 +1,16 @@
-import { For } from "solid-js";
+import { For, onMount } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
+import OnClickDragBox from "./utils/onClickDrag";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
+
   return (
     <Desktop>
+      <OnClickDragBox />
       <For each={state}>
         {(process, _i) => (
           <WindowComponent

@@ -42,7 +42,6 @@ export const finderFunction = () => {
   };
 
   const deselectAll = (e: MouseEvent) => {
-    e.stopPropagation();
     setSelected([]);
   };
 

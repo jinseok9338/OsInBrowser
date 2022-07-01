@@ -36,7 +36,7 @@ const useResize = (
     }
 
     let classList = (ref as HTMLDivElement).classList;
-    console.log("mouseMove");
+
     if (classList.contains("right-top")) {
       const newWidth = width + (e.pageX - mouseX());
       const newHeight = heigth - (e.pageY - mouseY());
@@ -50,7 +50,6 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-      console.log("right-top");
     }
 
     if (classList.contains("right")) {
@@ -65,12 +64,11 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-      console.log("right");
     }
 
     if (classList.contains("right-bottom")) {
       e.preventDefault();
-      console.log("right-bottom");
+
       const newWidth = width + (e.pageX - mouseX());
       const newHeight = heigth + (e.pageY - mouseY());
 
@@ -97,7 +95,6 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-      console.log("top");
     }
 
     if (classList.contains("left-top")) {
@@ -113,12 +110,9 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-
-      console.log("left-top");
     }
 
     if (classList.contains("left-bottom")) {
-      console.log("left-bottom");
       const newWidth = width - (e.pageX - mouseX());
       const newHeight = heigth + (e.pageY - mouseY());
 
@@ -145,7 +139,6 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-      console.log("left");
     }
 
     if (classList.contains("bottom")) {
@@ -160,14 +153,12 @@ const useResize = (
         } as Dimension;
         changeProcessDimension(id, newDimension);
       }
-
-      console.log("bottom");
     }
   };
 
   const onMouseUp = (e: MouseEvent) => {
     e.preventDefault();
-    console.log("MouseUp");
+
     window.removeEventListener("mousemove", onMouseMove);
   };
 

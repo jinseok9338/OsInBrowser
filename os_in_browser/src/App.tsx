@@ -10,6 +10,7 @@ import "./style/global.scss";
 import "./style/variables.scss";
 import "./style/window.scss";
 import "./style/finder.scss";
+import "./style/onClickDragBox.scss";
 
 const App = () => {
   return (
