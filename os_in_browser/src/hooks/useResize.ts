@@ -12,7 +12,7 @@ const useResize = (
   const [state, { changeProcessDimension }] = useProcess();
   const MINIMUM_HEIGHT = 500;
   const MINIMUM_WIDTH = 500;
-  const { heigth, left, top, width } = dimension;
+  const { height, left, top, width } = dimension;
 
   const onMouseDown = (e: MouseEvent) => {
     e.stopPropagation();
@@ -39,11 +39,11 @@ const useResize = (
 
     if (classList.contains("right-top")) {
       const newWidth = width + (e.pageX - mouseX());
-      const newHeight = heigth - (e.pageY - mouseY());
+      const newHeight = height - (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT && newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width: newWidth,
           top: top + (e.pageY - mouseY()),
           left,
@@ -57,7 +57,7 @@ const useResize = (
 
       if (newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth,
+          height,
           width: newWidth,
           top,
           left,
@@ -70,11 +70,11 @@ const useResize = (
       e.preventDefault();
 
       const newWidth = width + (e.pageX - mouseX());
-      const newHeight = heigth + (e.pageY - mouseY());
+      const newHeight = height + (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT && newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width: newWidth,
           top,
           left,
@@ -84,11 +84,11 @@ const useResize = (
     }
 
     if (classList.contains("top")) {
-      const newHeight = heigth - (e.pageY - mouseY());
+      const newHeight = height - (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width,
           top: top + (e.pageY - mouseY()),
           left,
@@ -99,11 +99,11 @@ const useResize = (
 
     if (classList.contains("left-top")) {
       const newWidth = width - (e.pageX - mouseX());
-      const newHeight = heigth - (e.pageY - mouseY());
+      const newHeight = height - (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT && newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width: newWidth,
           top: top + (e.pageY - mouseY()),
           left: left + (e.pageX - mouseX()),
@@ -114,11 +114,11 @@ const useResize = (
 
     if (classList.contains("left-bottom")) {
       const newWidth = width - (e.pageX - mouseX());
-      const newHeight = heigth + (e.pageY - mouseY());
+      const newHeight = height + (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT && newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width: newWidth,
           top,
           left: left + (e.pageX - mouseX()),
@@ -132,7 +132,7 @@ const useResize = (
 
       if (newWidth > MINIMUM_WIDTH) {
         const newDimension = {
-          heigth,
+          height,
           width: newWidth,
           top,
           left: left + (e.pageX - mouseX()),
@@ -142,11 +142,11 @@ const useResize = (
     }
 
     if (classList.contains("bottom")) {
-      const newHeight = heigth + (e.pageY - mouseY());
+      const newHeight = height + (e.pageY - mouseY());
 
       if (newHeight > MINIMUM_HEIGHT) {
         const newDimension = {
-          heigth: newHeight,
+          height: newHeight,
           width,
           top,
           left,

@@ -2,15 +2,17 @@ import { For, onMount } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
-import OnClickDragBox from "./utils/onClickDrag";
+import OnClickDragBox from "./components/onClickDrag";
+import useMakeBox from "./hooks/useMakeBox";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
+  const { height, left, top, width } = useMakeBox();
 
   return (
     <Desktop>
-      <OnClickDragBox />
+      <OnClickDragBox height={height} left={left} top={top} width={width} />
       <For each={state}>
         {(process, _i) => (
           <WindowComponent

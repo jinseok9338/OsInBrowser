@@ -11,7 +11,7 @@ const useDrag = (
   let originalLeft = dimension.left;
   let originalTop = dimension.top;
   let originalWidth = dimension.width;
-  let originalHeight = dimension.heigth;
+  let originalHeight = dimension.height;
   const MINIMUM_TOP = 30;
 
   const onMouseMove = (e: MouseEvent) => {
@@ -22,7 +22,7 @@ const useDrag = (
 
     if (newLeft > 0 && newTop > MINIMUM_TOP) {
       changeProcessDimension(id, {
-        heigth: originalHeight,
+        height: originalHeight,
         width: originalWidth,
         top: newTop,
         left: newLeft,
@@ -30,7 +30,7 @@ const useDrag = (
     }
     if (newLeft <= 0 && newTop > MINIMUM_TOP) {
       changeProcessDimension(id, {
-        heigth: originalHeight,
+        height: originalHeight,
         width: originalWidth,
         top: newTop,
         left: 0,
@@ -39,7 +39,7 @@ const useDrag = (
 
     if (newLeft > 0 && newTop <= MINIMUM_TOP) {
       changeProcessDimension(id, {
-        heigth: originalHeight,
+        height: originalHeight,
         width: originalWidth,
         top: MINIMUM_TOP,
         left: newLeft,
@@ -48,7 +48,7 @@ const useDrag = (
 
     if (newLeft <= 0 && newTop <= MINIMUM_TOP) {
       changeProcessDimension(id, {
-        heigth: originalHeight,
+        height: originalHeight,
         width: originalWidth,
         top: MINIMUM_TOP,
         left: 0,

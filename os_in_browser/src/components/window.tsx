@@ -26,7 +26,7 @@ const WindowComponent = ({
   return (
     <div
       class="window_container"
-      style={`left:${dimension.left}px; top:${dimension.top}px; width:${dimension.width}px; height:${dimension.heigth}px`}
+      style={`left:${dimension.left}px; top:${dimension.top}px; width:${dimension.width}px; height:${dimension.height}px`}
     >
       <Resizers id={id} dimension={dimension} />
       <div class="row" onMouseDown={onMouseDown}>

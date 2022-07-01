@@ -1,9 +1,9 @@
-import { createSignal, JSX, onMount } from "solid-js";
+import { createSignal, onMount } from "solid-js";
 import { Dimension } from "../types/processDirectory";
 
-const OnClickDragBox = () => {
+const useMakeBox = () => {
   const [dimension, SetDimension] = createSignal<Dimension>({
-    heigth: 0,
+    height: 0,
     width: 0,
     top: 0,
     left: 0,
@@ -26,13 +26,22 @@ const OnClickDragBox = () => {
     const mouseY = e.pageY;
     setMouseX(mouseX);
     setMouseY(mouseY);
+
+    SetDimension(
+      (prev) =>
+        ({
+          ...prev,
+          top: mouseY,
+          left: mouseX,
+        } as Dimension)
+    );
     console.log("mouseDownF");
   };
 
   const makeBox = (e: MouseEvent) => {
     // set Dimension
     const newWidth = width + (e.pageX - mouseX());
-    const newHeight = heigth - (e.pageY - mouseY());
+    const newHeight = height - (e.pageY - mouseY());
 
     SetDimension(
       (prev) =>
@@ -52,23 +61,13 @@ const OnClickDragBox = () => {
     });
   };
 
-  const { heigth, width, top, left } = dimension();
+  const { height, width, top, left } = dimension();
 
   onMount(() => {
     window.addEventListener("mousedown", onmousedown);
   });
 
-  return (
-    <div
-      class="onClickDragBox"
-      style={`
-height:${heigth}px;
-width:${width}px;
-top:${top}px;
-left:${left}px;
-`}
-    />
-  );
+  return { height, width, top, left };
 };
 
-export default OnClickDragBox;
+export default useMakeBox;

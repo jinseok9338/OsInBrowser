@@ -20,7 +20,7 @@ export const finderMetaData = {
   active: false,
   iconPath: "",
   dimension: {
-    heigth: 500,
+    height: 500,
     left: 0,
     top: 100,
     width: 500,

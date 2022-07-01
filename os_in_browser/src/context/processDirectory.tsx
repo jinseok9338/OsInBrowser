@@ -65,7 +65,7 @@ export const ProcessDirectoryProvider: ParentComponent<{}> = (props) => {
           return {
             active: process.active,
             dimension: {
-              heigth: window.innerHeight,
+              height: window.innerHeight,
               width: window.innerWidth,
               left: 0,
               top: 0,

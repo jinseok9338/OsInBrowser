@@ -41,5 +41,5 @@ export interface Dimension {
   left: number;
   top: number;
   width: number;
-  heigth: number;
+  height: number;
 }
