@@ -31,6 +31,7 @@
   grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(6rem, 1fr));
   column-gap: 0.5rem;
+  z-index: -1;
   //background-color: orange;
 }
 
@@ -45,6 +46,7 @@
   width: 3.75rem;
   margin-right: 3.438rem;
   margin-bottom: 0.75rem;
+  z-index: 10;
 }
 
 .align-center:focus {

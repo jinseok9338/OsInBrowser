@@ -10,7 +10,8 @@ import documents from "./images/menu/documents.png";
 import laptop from "./images/menu/laptop.png";
 
 import air from "./images/apps/air.png";
-import { For } from "solid-js";
+import { createEffect, createSignal, For, onMount, Ref } from "solid-js";
+import { finderFunction } from "./finderFunction";
 // import camera from "./images/apps/recents/camera.svg";
 // import notes from "./images/apps/recents/notes.png";
 // import office from "./images/apps/recents/office.svg";
@@ -18,14 +19,7 @@ import { For } from "solid-js";
 // import window from "./images/apps/recents/window.png";
 
 const Finder = () => {
-  const setFocus = (id: string) => {
-    let icon = document.getElementById(id) as HTMLElement;
-    if (!icon.style.boxShadow) {
-      icon.style.boxShadow = "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
-    } else {
-      icon.style.boxShadow = "";
-    } // I need to deselect the icon ...
-  };
+  const { setFocus, deselectAll } = finderFunction();
 
   return (
     <>
@@ -80,14 +74,24 @@ const Finder = () => {
             </div>
           </div>
         </div>
-        <div class="box-main" id="main-box">
-          <For each={[1, 2, 3, 4, 5, 6, 7]} fallback={<div>Loading...</div>}>
+        <div
+          class="box-main"
+          id="main-box"
+          ref={(el) =>
+            el.addEventListener("click", (e) => {
+              deselectAll(e);
+            })
+          }
+        >
+          <For each={[1, 2, 3, 4, 5, 6, 7]}>
             {(item, index) => (
               <div id="sidebar-airdrop" class="app-layout hide">
                 <div
                   class="align-center"
                   id={item.toString()}
-                  onclick={() => setFocus(item.toString())}
+                  onclick={(e) => {
+                    setFocus(item.toString(), e);
+                  }}
                 >
                   <img src={air} alt="" />
                   {item}
