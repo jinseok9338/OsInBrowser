@@ -15,6 +15,8 @@ import { finderFunction } from "./finderFunction";
 import { FileEntry } from "./fileEntry";
 import SideBar from "./sidebar";
 import FinderMain from "./finderMain";
+import { useFileSystem } from "../../context/windowFileSystem";
+import { getShortCut } from "../../utils/filesFunction";
 // import camera from "./images/apps/recents/camera.svg";
 // import notes from "./images/apps/recents/notes.png";
 // import office from "./images/apps/recents/office.svg";
@@ -26,6 +28,9 @@ interface FinderProps {
 
 
 const Finder = () => {
+
+
+  
 
   
 

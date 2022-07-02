@@ -9,16 +9,17 @@ interface FileInfo {
 }
 
 const useFileInfo = (path: string): FileInfo => {
-  const { fileSystem } = useFileSystem();
+  const { fs } = useFileSystem();
   const [icon, setIcon] = createSignal("");
   const [pid, setPid] = createSignal("");
 
   createEffect(() => {
-    if (fileSystem) {
+    if (fs) {
+      console.log(fs)
       const extension = path.split(".").pop();
       if (extension === ".url") {
         // Do shortCut stuff
-        getShortCut(path, fileSystem).then(({ URL, IconFile }) => {
+        getShortCut(path, fs!).then(({ URL, IconFile }) => {
           setIcon(IconFile);
           setPid(URL);
         });
@@ -30,7 +31,7 @@ const useFileInfo = (path: string): FileInfo => {
       }
     }
   });
-  return {
+return {
     icon: icon(),
     pid: pid(),
   };

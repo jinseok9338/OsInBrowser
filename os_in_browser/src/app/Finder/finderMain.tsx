@@ -1,9 +1,15 @@
+import { basename } from "path";
 import { For } from "solid-js";
+import { useFiles } from "../../hooks/useFiles";
 import { FileEntry } from "./fileEntry";
 import { finderFunction } from "./finderFunction";
 import air from "./images/apps/air.png";
 
-const FinderMain =() =>{
+interface FinderMainProps {
+  directory?:string
+}
+
+const FinderMain =({directory}:FinderMainProps) =>{
     const { setFocus, deselectAll } = finderFunction();
     return (
         <div
@@ -16,13 +22,13 @@ const FinderMain =() =>{
             }
           })
         }
-      >
-        <For each={[{name:"file",
-                    path:air}]}>
-          {(item, index) => (
-         <FileEntry name={item.name} path={item.path}/>
-          )}
+        >
+        <For each={[{name:"file",path:air}]}>
+                {(item, index) => (
+                <FileEntry name={item.name} path={item.path}/>
+                )}
         </For>
+        
       </div>
     )
 }
