@@ -10,7 +10,6 @@ interface WindowComponentProps {
   dimension: Dimension;
   process: JSX.Element;
   id: string;
-  changeProcessDimension: (id: string, dimension: Dimension) => void;
 }
 
 const WindowComponent = ({
@@ -18,11 +17,12 @@ const WindowComponent = ({
   processName,
   dimension,
   id,
-  changeProcessDimension,
-}: WindowComponentProps) => {
-  const { onMouseDown } = useDrag(changeProcessDimension, id, dimension);
-  const [state, { deleteProcess, enlarge }] = useProcess();
 
+}: WindowComponentProps) => {
+  const [state, { deleteProcess, enlarge,changeProcessDimension }] = useProcess();
+  const { onMouseDown } = useDrag(changeProcessDimension, id, dimension);
+
+  
   return (
     <div
       class="window_container"
@@ -40,7 +40,7 @@ const WindowComponent = ({
           <span
             class="row-dot"
             style="background:#5AC05A;"
-            onclick={(e: MouseEvent) => {
+            onclick={() => {
               enlarge(id);
             }}
           ></span>

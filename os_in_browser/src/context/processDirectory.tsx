@@ -6,7 +6,7 @@ import {
   ProcessesContextValue,
   ProcessState,
 } from "../types/processDirectory";
-import { processesDirectory } from "../utils/processes";
+import { processesDirectory, ProcessExists } from "../utils/processes";
 
 const defaultState = [] as ProcessState[];
 
@@ -25,7 +25,10 @@ export const ProcessDirectoryProvider: ParentComponent<{}> = (props) => {
   const [state, setState] = createStore([finderMetaData] as ProcessState[]);
 
   const addProcess = (id: string) => {
-    let process = processesDirectory.find((process) => (process.id = id));
+    if(ProcessExists(state,id)){
+      return;
+    }
+    let process = processesDirectory.find((process) => (process.id == id));
     let newProcess = {
       ...process,
       active: true,

@@ -12,97 +12,42 @@ import laptop from "./images/menu/laptop.png";
 import air from "./images/apps/air.png";
 import { createEffect, createSignal, For, onMount, Ref } from "solid-js";
 import { finderFunction } from "./finderFunction";
+import { FileEntry } from "./fileEntry";
+import SideBar from "./sidebar";
+import FinderMain from "./finderMain";
 // import camera from "./images/apps/recents/camera.svg";
 // import notes from "./images/apps/recents/notes.png";
 // import office from "./images/apps/recents/office.svg";
 // import settings from "./images/apps/recents/settings.png";
 // import window from "./images/apps/recents/window.png";
+interface FinderProps {
+  directory: string
+}
+
 
 const Finder = () => {
-  const { setFocus, deselectAll } = finderFunction();
+
+  
 
   return (
     <>
       <div class="box-body">
-        <div class="box-sidebar ">
-          <div class="sidebar-background">
-            <div class="sidebar-items" style={"margin-top:1rem;"}>
-              <div class="item-category">Favourites</div>
-              <div class="item-selected">
-                <img src={airdrop} alt="" />
-                <span>AirDrop</span>
-              </div>
-              <div class="item-selected">
-                <img src={recents} alt="" />
-                <span>Recents</span>
-              </div>
-              <div class="item-selected">
-                <img src={apps} alt="" />
-                <span>Applications</span>
-              </div>
-              <div class="item-selected">
-                <img src={folder} alt="" />
-                <span>Google Drive</span>
-              </div>
-              <div class="item-selected">
-                <img src={desktop} alt="" />
-                <span>Desktop</span>
-              </div>
-              <div class="item-selected">
-                <img src={documents} alt="" />
-                <span>Documents</span>
-              </div>
-              <div class="item-selected">
-                <img src={download} alt="" />
-                <span>Downloads</span>
-              </div>
-              <div class="item-selected">
-                <img src={pictures} alt="" />
-                <span>Pictures</span>
-              </div>
-              <div class="item-category">iCloud</div>
-              <div class="item-selected">
-                <img src={icloud} alt="" />
-                <span>iCloud Drive</span>
-              </div>
-              <div class="item-category">Locations</div>
-              <div class="item-selected">
-                <img src={laptop} alt="" />
-                <span>Your MacBook</span>
-              </div>
-              <div class="item-category">Tags</div>
-            </div>
-          </div>
-        </div>
-        <div
-          class="box-main"
-          id="main-box"
-          ref={(el) =>
-            el.addEventListener("click", (e) => {
-              if (!(e.target! as HTMLElement).classList.contains("img")) {
-                deselectAll(e);
-              }
-            })
-          }
-        >
-          <For each={[1, 2, 3, 4, 5, 6, 7]}>
-            {(item, index) => (
-              <div id="sidebar-airdrop" class="app-layout hide">
-                <div
-                  class="align-center"
-                  id={item.toString()}
-                  onclick={(e) => {
-                    e.stopPropagation();
-                    setFocus(item.toString(), e);
-                  }}
-                >
-                  <img class="img" src={air} alt="" />
-                  {item}
-                </div>
-              </div>
-            )}
-          </For>
-          {/*  <div id="sidebar-recents" class="app-layout hide">
+        <SideBar/>
+        <FinderMain/>
+      </div>
+      <div class="box-footer"></div>
+    </>
+  );
+};
+
+export default Finder;
+
+
+
+
+
+
+      {/*  <div id="sidebar-recents" class="app-layout hide">
             <div class="align-center">
               <img src="images/apps/recents/camera.svg" alt="" />
               Camera
@@ -253,11 +198,3 @@ const Finder = () => {
               Network
             </div>
           </div> */}
-        </div>
-      </div>
-      <div class="box-footer"></div>
-    </>
-  );
-};
-
-export default Finder;

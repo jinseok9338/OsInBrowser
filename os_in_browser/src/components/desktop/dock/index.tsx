@@ -19,7 +19,7 @@ const Dock = () => {
             class="ico"
             src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png"
             alt=""
-            onclick={() => addProcess("helloWorld")}
+            onclick={() => addProcess("finder")}
           />
         </li>
         <li class="li-2">

@@ -10,16 +10,16 @@ const Main = () => {
     useProcess();
   const { height, left, top, width } = useMakeBox();
 
+
   return (
     <Desktop>
-      <OnClickDragBox height={height} left={left} top={top} width={width} />
+      {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
       <For each={state}>
         {(process, _i) => (
           <WindowComponent
             process={process.process}
             processName={process.processName!}
             dimension={process.dimension!}
-            changeProcessDimension={changeProcessDimension}
             id={process.id!}
           />
         )}
