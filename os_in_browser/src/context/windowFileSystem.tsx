@@ -11,7 +11,7 @@ import * as BrowserFS from "browserfs";
 import { FSModule } from "browserfs/dist/node/core/FS";
 
 type FileSystemContextState = {
-  fs: Accessor<FSModule | null>;
+  fileSystem: FSModule | null;
 };
 
 const FileSystemContext = createContext<FileSystemContextState>(
@@ -34,9 +34,9 @@ export const FileSystemProvider: ParentComponent = (props) => {
     );
   });
   // on load  install the BrowserFS
-
+  const fileSystem = fs();
   return (
-    <FileSystemContext.Provider value={{ fs }}>
+    <FileSystemContext.Provider value={{ fileSystem }}>
       {props.children}
     </FileSystemContext.Provider>
   );
