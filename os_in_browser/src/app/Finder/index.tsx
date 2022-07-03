@@ -1,22 +1,11 @@
-import airdrop from "./images/menu/airdrop.png";
-import recents from "./images/menu/recents.png";
-import apps from "./images/menu/apps.png";
-import folder from "./images/menu/folder.png";
-import desktop from "./images/menu/desktop.png";
-import download from "./images/menu/download.png";
-import pictures from "./images/menu/pictures.png";
-import icloud from "./images/menu/icloud.png";
-import documents from "./images/menu/documents.png";
-import laptop from "./images/menu/laptop.png";
-
-import air from "./images/apps/air.png";
-import { createEffect, createSignal, For, onMount, Ref } from "solid-js";
-import { finderFunction } from "./finderFunction";
-import { FileEntry } from "./fileEntry";
 import SideBar from "./sidebar";
 import FinderMain from "./finderMain";
 import { useFileSystem } from "../../context/windowFileSystem";
-import { getShortCut } from "../../utils/filesFunction";
+
+import {
+  FileDirectoryProvider,
+  useFileDirectory,
+} from "../../context/FileDirectoryContext";
 // import camera from "./images/apps/recents/camera.svg";
 // import notes from "./images/apps/recents/notes.png";
 // import office from "./images/apps/recents/office.svg";
@@ -28,11 +17,14 @@ interface FinderProps {
 
 const Finder = () => {
   const { fs } = useFileSystem();
-
+  const [{ currentDirectory }, { ChangeDirectory }] = useFileDirectory();
   return (
     <>
       <div class="box-body">
-        <SideBar />
+        <SideBar
+          ChangeDirectory={ChangeDirectory}
+          currentDirectory={currentDirectory}
+        />
         <FinderMain fs={fs!} />
       </div>
       <div class="box-footer"></div>

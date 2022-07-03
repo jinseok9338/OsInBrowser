@@ -11,12 +11,15 @@ import "./style/variables.scss";
 import "./style/window.scss";
 import "./style/finder.scss";
 import "./style/onClickDragBox.scss";
+import { FileDirectoryProvider } from "./context/FileDirectoryContext";
 
 const App = () => {
   return (
     <FileSystemProvider>
       <ProcessDirectoryProvider>
-        <Main />
+        <FileDirectoryProvider>
+          <Main />
+        </FileDirectoryProvider>
       </ProcessDirectoryProvider>
     </FileSystemProvider>
   );
