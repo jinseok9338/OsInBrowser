@@ -20,7 +20,6 @@ const useMoveDock = () => {
       let next2 = index + 2;
 
       if (previous == -1) {
-        console.log("first element");
         elem.style.transform = "scale(1.5)  translateY(-10px)";
         icons[next].style.transform = "scale(1.2) translateY(-6px)";
         icons[next2].style.transform = "scale(1.1)";
@@ -35,7 +34,6 @@ const useMoveDock = () => {
         elem.style.transform = "scale(1.5)  translateY(-10px)";
         icons[previous].style.transform = "scale(1.2) translateY(-6px)";
         icons[previous1].style.transform = "scale(1.1)";
-        console.log("last element");
       } else if (next == icons.length - 1) {
         // one before the last
         elem.style.transform = "scale(1.5)  translateY(-10px)";

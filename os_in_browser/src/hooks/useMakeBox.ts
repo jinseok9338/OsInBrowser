@@ -35,7 +35,6 @@ const useMakeBox = () => {
           left: mouseX,
         } as Dimension)
     );
-    console.log("mouseDownF");
   };
 
   const makeBox = (e: MouseEvent) => {
@@ -55,7 +54,7 @@ const useMakeBox = () => {
 
   const onMouseUp = (e: MouseEvent) => {
     e.preventDefault();
-    console.log("MouseUp");
+
     window.removeEventListener("mousemove", () => {
       makeBox(e);
     });

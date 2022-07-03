@@ -10,8 +10,7 @@ const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
   const { height, left, top, width } = useMakeBox();
-  const {fs} = useFileSystem();
-  
+
   return (
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}

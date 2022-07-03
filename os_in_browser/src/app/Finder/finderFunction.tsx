@@ -34,10 +34,8 @@ export const finderFunction = () => {
   const toggleSelect = (id: string) => {
     if (!selected().includes(id)) {
       setSelected((prev) => prev.concat([id]));
-      console.log("conacat");
     } else {
       setSelected((prev) => prev.filter((itemId) => itemId != id));
-      console.log("filter");
     }
   };
 

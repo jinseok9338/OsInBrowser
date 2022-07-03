@@ -16,7 +16,7 @@ const useResize = (
 
   const onMouseDown = (e: MouseEvent) => {
     e.stopPropagation();
-    console.log("MouseDown");
+
     e.preventDefault();
     window.removeEventListener("mouseup", onMouseUp);
     window.addEventListener("mousemove", onMouseMove);
@@ -31,7 +31,6 @@ const useResize = (
   const onMouseMove = (e: MouseEvent) => {
     e.preventDefault();
     if (!ref) {
-      console.log("ref is not defined yet");
       return;
     }
 

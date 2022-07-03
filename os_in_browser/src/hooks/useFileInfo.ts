@@ -15,7 +15,6 @@ const useFileInfo = (path: string): FileInfo => {
 
   createEffect(() => {
     if (fs) {
-      console.log(fs)
       const extension = path.split(".").pop();
       if (extension === ".url") {
         // Do shortCut stuff
@@ -31,7 +30,7 @@ const useFileInfo = (path: string): FileInfo => {
       }
     }
   });
-return {
+  return {
     icon: icon(),
     pid: pid(),
   };
