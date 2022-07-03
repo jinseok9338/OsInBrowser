@@ -22,13 +22,13 @@ const ProcessesContext = createContext<ProcessesContextValue>([
 ]);
 
 export const ProcessDirectoryProvider: ParentComponent<{}> = (props) => {
-  const [state, setState] = createStore([finderMetaData] as ProcessState[]);
+  const [state, setState] = createStore([] as ProcessState[]);
 
   const addProcess = (id: string) => {
-    if(ProcessExists(state,id)){
+    if (ProcessExists(state, id)) {
       return;
     }
-    let process = processesDirectory.find((process) => (process.id == id));
+    let process = processesDirectory.find((process) => process.id == id);
     let newProcess = {
       ...process,
       active: true,

@@ -15,31 +15,30 @@ type FileSystemContextState = {
   fs: FSModule | null;
 };
 
+const installBFS = () => {
+  BrowserFS.install(window);
+  BrowserFS.configure(
+    {
+      fs: "LocalStorage",
+    },
+    (e) => {
+      if (e) {
+        throw e;
+      }
+      console.log("installed");
+    }
+  );
+
+  let fs = BrowserFS.BFSRequire("fs");
+  return fs;
+};
+
 const FileSystemContext = createContext<FileSystemContextState>({
-  fs: null,
+  fs: installBFS(),
 } as FileSystemContextState);
 
 export const FileSystemProvider: ParentComponent<{}> = (props) => {
-  const [fs, setFs] = createSignal<FSModule | null>(null);
-
-  createEffect(() => {
-    BrowserFS.install(window);
-    BrowserFS.configure(
-      {
-        fs: "LocalStorage",
-      },
-      (e) => {
-        if (e) {
-          throw e;
-        }
-        let fs = BrowserFS.BFSRequire("fs");
-        setFs(fs);
-      }
-    );
-    console.log("installed");
-    return setFs;
-  });
-  // on load  install the BrowserFS
+  const [fs, setFs] = createSignal<FSModule | null>(installBFS());
 
   return (
     <FileSystemContext.Provider value={{ fs: fs() }}>

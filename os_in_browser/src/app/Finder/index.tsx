@@ -23,22 +23,17 @@ import { getShortCut } from "../../utils/filesFunction";
 // import settings from "./images/apps/recents/settings.png";
 // import window from "./images/apps/recents/window.png";
 interface FinderProps {
-  directory: string
+  directory: string;
 }
 
-
 const Finder = () => {
-
-
-  
-
-  
+  const { fs } = useFileSystem();
 
   return (
     <>
       <div class="box-body">
-        <SideBar/>
-        <FinderMain/>
+        <SideBar />
+        <FinderMain fs={fs!} />
       </div>
       <div class="box-footer"></div>
     </>
@@ -47,12 +42,8 @@ const Finder = () => {
 
 export default Finder;
 
-
-
-
-
-
-      {/*  <div id="sidebar-recents" class="app-layout hide">
+{
+  /*  <div id="sidebar-recents" class="app-layout hide">
             <div class="align-center">
               <img src="images/apps/recents/camera.svg" alt="" />
               Camera
@@ -202,4 +193,5 @@ export default Finder;
               <img src="images/globe.png" alt="" />
               Network
             </div>
-          </div> */}
+          </div> */
+}

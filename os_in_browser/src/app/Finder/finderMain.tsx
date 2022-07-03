@@ -1,5 +1,6 @@
+import { FSModule } from "browserfs/dist/node/core/FS";
 import { basename } from "path";
-import { For, onMount } from "solid-js";
+import { createEffect, createSignal, For, onMount } from "solid-js";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { useFiles } from "../../hooks/useFiles";
 import { FileEntry } from "./fileEntry";
@@ -8,13 +9,26 @@ import air from "./images/apps/air.png";
 
 interface FinderMainProps {
   directory?: string;
+  fs: FSModule;
 }
 
-const FinderMain = ({ directory }: FinderMainProps) => {
+const FinderMain = ({ directory, fs }: FinderMainProps) => {
   const { setFocus, deselectAll } = finderFunction();
-  const { fs } = useFileSystem();
-
+  const [fileSystem, setFileSystem] = createSignal<FSModule | null>(null);
   console.log(fs);
+
+  const makeFile = () => {
+    fs.writeFile(
+      "/test.txt",
+      "Cool, I can do this in the browser!",
+      function (err) {
+        fs.readFile("/test.txt", function (err, contents) {
+          console.log(contents!.toString());
+        });
+      }
+    );
+  };
+
   return (
     <div
       class="box-main"
@@ -27,7 +41,7 @@ const FinderMain = ({ directory }: FinderMainProps) => {
         })
       }
     >
-      {fs && <span>{fs.toString()}</span>}
+      <button onClick={makeFile}></button>
       <For each={[{ name: "file", path: air }]}>
         {(item, index) => <FileEntry name={item.name} path={item.path} />}
       </For>
