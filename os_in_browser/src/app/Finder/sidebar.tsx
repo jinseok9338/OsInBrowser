@@ -33,8 +33,8 @@ interface SideBarProps {
   ChangeDirectory: (directory: string) => void;
 }
 
-const SideBar = ({ currentDirectory, ChangeDirectory }: SideBarProps) => {
-  console.log(currentDirectory);
+const SideBar = () => {
+  const [state, { ChangeDirectory }] = useFileDirectory();
   const onclick = (directory: string) => {
     ChangeDirectory(directory);
   };
@@ -54,7 +54,7 @@ const SideBar = ({ currentDirectory, ChangeDirectory }: SideBarProps) => {
             />
             <span
               style={`font-weight:${
-                currentDirectory == directory ? "700" : "normal"
+                state.currentDirectory == directory ? "700" : "normal"
               };`}
             >
               {title}

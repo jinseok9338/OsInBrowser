@@ -17,14 +17,11 @@ interface FinderProps {
 
 const Finder = () => {
   const { fs } = useFileSystem();
-  const [{ currentDirectory }, { ChangeDirectory }] = useFileDirectory();
+
   return (
     <>
       <div class="box-body">
-        <SideBar
-          ChangeDirectory={ChangeDirectory}
-          currentDirectory={currentDirectory}
-        />
+        <SideBar />
         <FinderMain fs={fs!} />
       </div>
       <div class="box-footer"></div>
