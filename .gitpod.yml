@@ -4,4 +4,4 @@
 
 tasks:
   - init: install dependency
-    command: cd os_in_browser && npm i
+  - command: cd os_in_browser && npm i

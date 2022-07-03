@@ -14,16 +14,22 @@ interface FinderMainProps {
 
 const FinderMain = ({ directory, fs }: FinderMainProps) => {
   const { setFocus, deselectAll } = finderFunction();
-  const [fileSystem, setFileSystem] = createSignal<FSModule | null>(null);
+  const [files, setFiles] = createSignal(
+    [] as { name: string; path: string }[]
+  );
   console.log(fs);
 
   const makeFile = () => {
     fs.writeFile(
-      "/test.txt",
+      `/test.txt`,
       "Cool, I can do this in the browser!",
       function (err) {
-        fs.readFile("/test.txt", function (err, contents) {
-          console.log(contents!.toString());
+        fs.readdir("/", function (_err, contents) {
+          let files = contents?.map((value) => ({
+            name: value,
+            path: air,
+          }));
+          setFiles(files!);
         });
       }
     );
@@ -42,7 +48,7 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
       }
     >
       <button onClick={makeFile}></button>
-      <For each={[{ name: "file", path: air }]}>
+      <For each={files()}>
         {(item, index) => <FileEntry name={item.name} path={item.path} />}
       </For>
     </div>
