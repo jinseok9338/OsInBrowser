@@ -3,25 +3,21 @@ import blueTooth from "./icons/bluetooth.png";
 import wifiSignal from "./icons/wifi-signal.png";
 import search from "./icons/search.png";
 import microphone from "./icons/microphone.png";
-import { createEffect, createSignal, onCleanup } from "solid-js";
-import { useProcess } from "../../../context/processDirectory";
+import { createSignal, onCleanup } from "solid-js";
+
 import { ProcessState } from "../../../types/processDirectory";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
   const [process, setProcess] = createSignal({} as ProcessState);
-  const [state, {}] = useProcess();
 
-  //Refactor the set time out effect
-  createEffect((prev) => {
-    setTimeout(() => {
-      let now = new Date(Date.now());
+  const interval = setInterval(() => {
+    let now = new Date(Date.now());
 
-      let dateStringNow = now.toLocaleString();
-      setTime(dateStringNow);
-    }, 1000);
-    return time();
-  });
+    let dateStringNow = now.toLocaleString();
+    setTime(dateStringNow);
+  }, 1000);
+  onCleanup(() => clearInterval(interval));
 
   return (
     <div class="menu-bar">

@@ -17,11 +17,9 @@ const FileSystemContext = createContext<FileSystemContextState>({
   fs: installBFS(),
 } as FileSystemContextState);
 
-export const FileSystemProvider: ParentComponent<{}> = (props) => {
-  const [fs, setFs] = createSignal<FSModule | null>(installBFS());
-
+export const FileSystemProvider: ParentComponent = (props) => {
   return (
-    <FileSystemContext.Provider value={{ fs: fs() }}>
+    <FileSystemContext.Provider value={FileSystemContext.defaultValue}>
       {props.children}
     </FileSystemContext.Provider>
   );

@@ -9,7 +9,15 @@ import icloud from "./images/menu/icloud.png";
 import documents from "./images/menu/documents.png";
 import laptop from "./images/menu/laptop.png";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
-import { For } from "solid-js";
+import {
+  createEffect,
+  createMemo,
+  createSignal,
+  For,
+  getOwner,
+  onCleanup,
+  runWithOwner,
+} from "solid-js";
 
 interface Favorite {
   src: string;
@@ -34,27 +42,21 @@ interface SideBarProps {
 }
 
 const SideBar = () => {
-  const [state, { ChangeDirectory }] = useFileDirectory();
-  const onclick = (directory: string) => {
-    ChangeDirectory(directory);
-  };
+  const [currentDirectory, { ChangeDirectory }] = useFileDirectory();
 
   const Favorites = () => (
     <>
       <div class="item-category">Favourites</div>
       <For each={favoriteArray}>
         {({ directory, src, title }) => (
-          <div class="item-selected" id={directory}>
-            <img
-              src={src}
-              alt=""
-              onClick={(e) => {
-                onclick(directory);
-              }}
-            />
+          <div class="item-selected" onClick={() => ChangeDirectory(directory)}>
+            <img src={src} alt="" />
             <span
+              id={directory}
               style={`font-weight:${
-                state.currentDirectory == directory ? "700" : "normal"
+                currentDirectory.currentDirectory == directory
+                  ? "700"
+                  : "normal"
               };`}
             >
               {title}

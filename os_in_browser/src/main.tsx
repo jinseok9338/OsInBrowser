@@ -9,7 +9,6 @@ import { useFileSystem } from "./context/windowFileSystem";
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
-  const { height, left, top, width } = useMakeBox();
 
   return (
     <Desktop>

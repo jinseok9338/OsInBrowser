@@ -18,21 +18,16 @@ const FileDirectoryContext = createContext<FileDirectoryContextValue>([
 ]);
 
 export const FileDirectoryProvider: ParentComponent = (props) => {
-  const [currentDirectory, setCurrentDirectory] = createStore({
+  const [state, setState] = createStore({
     currentDirectory: "/home/desktop",
   });
 
   const ChangeDirectory = (directory: string) => {
-    setCurrentDirectory((prev) => {
-      console.log(prev.currentDirectory);
-      return { ...prev, currentDirectory: directory };
-    });
+    setState({ currentDirectory: directory });
   };
 
   return (
-    <FileDirectoryContext.Provider
-      value={[currentDirectory, { ChangeDirectory }]}
-    >
+    <FileDirectoryContext.Provider value={[state, { ChangeDirectory }]}>
       {props.children}
     </FileDirectoryContext.Provider>
   );

@@ -19,13 +19,13 @@ const Finder = () => {
   const { fs } = useFileSystem();
 
   return (
-    <>
+    <FileDirectoryProvider>
       <div class="box-body">
         <SideBar />
         <FinderMain fs={fs!} />
       </div>
       <div class="box-footer"></div>
-    </>
+    </FileDirectoryProvider>
   );
 };
 
