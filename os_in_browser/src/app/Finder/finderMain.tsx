@@ -1,6 +1,7 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 import { basename } from "path";
 import { createEffect, createSignal, For, onMount } from "solid-js";
+import { useFileDirectory } from "../../context/FileDirectoryContext";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { useFiles } from "../../hooks/useFiles";
 import { FileEntry } from "./fileEntry";
@@ -13,26 +14,36 @@ interface FinderMainProps {
 }
 
 const FinderMain = ({ directory, fs }: FinderMainProps) => {
+  const [currentDirectory, { ChangeDirectory }] = useFileDirectory();
+
   const { setFocus, deselectAll } = finderFunction();
   const [files, setFiles] = createSignal(
     [] as { name: string; path: string }[]
   );
-  console.log(fs);
 
-  const makeFile = () => {
-    fs.writeFile(
-      `/test.txt`,
-      "Cool, I can do this in the browser!",
-      function (err) {
-        fs.readdir("/", function (_err, contents) {
-          let files = contents?.map((value) => ({
-            name: value,
-            path: air,
-          }));
-          setFiles(files!);
-        });
-      }
-    );
+  createEffect(() => {
+    let cd = currentDirectory.currentDirectory;
+    fs.readdir(cd, function (_err, contents) {
+      let files = contents?.map((value) => ({
+        name: value,
+        path: air,
+      }));
+      setFiles(files!);
+    });
+    return cd;
+  });
+
+  const makeFile = (e: MouseEvent) => {
+    let cd = currentDirectory.currentDirectory;
+    fs.writeFile(`${cd}/test.txt`, () => {
+      fs.readdir(cd, function (_err, contents) {
+        let files = contents?.map((value) => ({
+          name: value,
+          path: air,
+        }));
+        setFiles(files!);
+      });
+    });
   };
 
   return (
