@@ -11,7 +11,7 @@ export const finderFunction = () => {
   createEffect((prev) => {
     for (let i = 0; i < icons.length; i++) {
       if (selected().includes(icons.item(i)!.id)) {
-        (icons[i] as HTMLElement).style.boxShadow =
+        (icons.item(i) as HTMLElement).style.boxShadow =
           "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
       } else {
         (icons.item(i) as HTMLElement)!.style.boxShadow = "";

@@ -1,4 +1,4 @@
-import { createEffect, For, onMount } from "solid-js";
+import { For } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";

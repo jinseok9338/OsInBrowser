@@ -12,6 +12,7 @@ const Menubar = () => {
   const [process, setProcess] = createSignal({} as ProcessState);
   const [state, {}] = useProcess();
 
+  //Refactor the set time out effect
   createEffect((prev) => {
     setTimeout(() => {
       let now = new Date(Date.now());
@@ -20,13 +21,6 @@ const Menubar = () => {
       setTime(dateStringNow);
     }, 1000);
     return time();
-  });
-
-  createEffect(() => {
-    const process = state.find((process) => process.active == true);
-    if (process) {
-      setProcess(process);
-    }
   });
 
   return (

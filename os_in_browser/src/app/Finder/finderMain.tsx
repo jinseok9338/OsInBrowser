@@ -1,6 +1,6 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 import { basename } from "path";
-import { createEffect, createSignal, For, onMount } from "solid-js";
+import { createSignal, For, onMount } from "solid-js";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { useFiles } from "../../hooks/useFiles";
 import { FileEntry } from "./fileEntry";
