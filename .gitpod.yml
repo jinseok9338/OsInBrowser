@@ -3,5 +3,4 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
-  - init: install dependency
-  - command: cd os_in_browser && npm i
+  - init: cd os_in_browser && npm i
