@@ -21,3 +21,5 @@ export const IMAGE_FILE_EXTENSIONS = [
   ".webp",
   ".xbm",
 ];
+
+export const TEXT_FORMAT = ["txt", "utxt", "utf8", "text"];

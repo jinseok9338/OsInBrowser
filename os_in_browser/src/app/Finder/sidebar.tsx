@@ -26,7 +26,7 @@ interface Favorite {
 }
 
 const favoriteArray: Favorite[] = [
-  { src: airdrop, title: "AirDrop", directory: "/home" },
+  { src: airdrop, title: "Home", directory: "/home" },
   { src: recents, title: "Recents", directory: "/recents" },
   { src: apps, title: "Apps", directory: "/home/apps" },
   { src: folder, title: "Google Drive", directory: "/home/folder" },

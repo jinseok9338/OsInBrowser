@@ -6,6 +6,7 @@ import { useFileSystem } from "../../context/windowFileSystem";
 import { useFiles } from "../../hooks/useFiles";
 import { FileEntry } from "./fileEntry";
 import { finderFunction } from "./finderFunction";
+import { getExtension, setIcon } from "./finderFunction/setIcon";
 import air from "./images/apps/air.png";
 
 interface FinderMainProps {
@@ -26,7 +27,7 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
     fs.readdir(cd, function (_err, contents) {
       let files = contents?.map((value) => ({
         name: value,
-        path: air,
+        path: setIcon(value),
       }));
       setFiles(files!);
     });
@@ -39,7 +40,7 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
       fs.readdir(cd, function (_err, contents) {
         let files = contents?.map((value) => ({
           name: value,
-          path: air,
+          path: setIcon(value),
         }));
         setFiles(files!);
       });
@@ -58,7 +59,6 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
         })
       }
     >
-      <button onClick={makeFile}></button>
       <For each={files()}>
         {(item, index) => <FileEntry name={item.name} path={item.path} />}
       </For>
