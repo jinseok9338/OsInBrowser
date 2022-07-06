@@ -37,4 +37,6 @@ steps:
       ]
 images:
   - gcr.io/linux-practice-349511/OsInBrowser
+options:
+  logging: CLOUD_LOGGING_ONLY
 # [END cloudbuild_run_example_builddeploy]
