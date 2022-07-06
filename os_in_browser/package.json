@@ -5,9 +5,9 @@
   "scripts": {
     "start": "vite",
     "dev": "vite",
-    "build": "APP_ENV=production vite build && vite preview",
-    "serve": "vite preview",
-    "watch": "nodemon --watch 'src/**/*' -e ts,tsx,scss --exec npm run build"
+    "build": "vite build",
+    "serve": "vite build && vite preview",
+    "watch": "nodemon --watch 'src/**/*' -e ts,tsx,scss --exec npm run serve"
   },
   "license": "MIT",
   "devDependencies": {
