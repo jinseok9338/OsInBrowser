@@ -16,10 +16,10 @@
 steps:
   # Build the container image
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "gcr.io/linux-practice-349511/OsInBrowser", "."]
+    args: ["build", "-t", "gcr.io/linux-practice-349511/osinbrowser", "."]
   # Push the container image to Container Registry
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "gcr.io/linux-practice-349511/OsInBrowser"]
+    args: ["push", "gcr.io/linux-practice-349511/osinbrowser"]
   # Deploy container image to Cloud Run
   - name: "gcr.io/cloud-builders/gcloud"
     args:
@@ -28,7 +28,7 @@ steps:
         "deploy",
         "OsInBrowser",
         "--image",
-        "gcr.io/linux-practice-349511/OsInBrowser",
+        "gcr.io/linux-practice-349511/osinbrowser",
         "--region",
         "asia-northeast3",
         "--platform",
@@ -36,7 +36,7 @@ steps:
         "--allow-unauthenticated",
       ]
 images:
-  - gcr.io/linux-practice-349511/OsInBrowser
+  - gcr.io/linux-practice-349511/osinbrowser
 options:
   logging: CLOUD_LOGGING_ONLY
 # [END cloudbuild_run_example_builddeploy]
