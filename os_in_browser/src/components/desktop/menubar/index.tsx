@@ -40,7 +40,14 @@ const Menubar = () => {
           ))
         ) : (
           <>
-            <div class="menus">{"File"}</div>
+            <div class="menus">
+              <span>{"File"}</span>
+              <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+              </div>
+            </div>
             <div class="menus">{"Edit"}</div>
             <div class="menus">{"View"}</div>
             <div class="menus">{"Go"}</div>

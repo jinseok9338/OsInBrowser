@@ -9,7 +9,7 @@
 .box-sidebar {
   background-color: #dbdbdb;
   opacity: 0.95;
-  width: 40%;
+  width: 160px;
   border-right: 1px solid #c1c1c1;
   border-left: 1px solid #c1c1c1;
   white-space: nowrap;
@@ -22,7 +22,7 @@
 }
 
 .box-main {
-  width: 100%;
+  width: calc(100% - 160px);
   background-color: white;
   border-right: 1px solid #c1c1c1;
   overflow-y: hidden;
