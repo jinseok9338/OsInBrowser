@@ -1,8 +1,8 @@
 import { IMAGE_FILE_EXTENSIONS, TEXT_FORMAT } from "../../../utils/constants";
-import folder from "../images/apps/folder.png";
-import pics from "../images/apps/pics.png";
-import xcode from "../images/apps/xcode.png";
-import textEdit from "../images/apps/textedit.png";
+import folder from "../../../assets/images/apps/folder.png";
+import pics from "../../../assets/images/apps/pics.png";
+import xcode from "../../../assets/images/apps/xcode.png";
+import textEdit from "../../../assets/images/apps/textedit.png";
 
 export const getExtension = (directory: string) => {
   return /[.]/.exec(directory) ? /[^.]+$/.exec(directory) : undefined;
