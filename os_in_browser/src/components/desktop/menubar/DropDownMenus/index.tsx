@@ -91,7 +91,7 @@ const Dropdown = ({
         {title}
       </button>
       {isOpen() && (
-        <div class={`menustyle menu${position} ${menuClassName}`}>
+        <div class={`menu-style menu-${position} ${menuClassName}`}>
           <ul>{children}</ul>
         </div>
       )}

@@ -23,7 +23,13 @@
   flex-direction: column;
 }
 
-.active {
+.item-active {
   background-color: #eef3ff;
   color: #2c5de5 !important;
+}
+
+.item-disabled {
+  background-color: #ebecf0;
+  color: #7a869a;
+  cursor: not-allowed;
 }

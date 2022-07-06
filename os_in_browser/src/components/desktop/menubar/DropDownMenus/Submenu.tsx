@@ -10,7 +10,7 @@ const Submenu = ({
   className,
   ...props
 }: Submenu) => (
-  <div class={`submenu menu${position} ${className}`} {...props}>
+  <div class={`submenu submenu-${position} ${className}`} {...props}>
     <ul>{children}</ul>
   </div>
 );

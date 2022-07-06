@@ -3,7 +3,7 @@ interface Dividerprops {
 }
 
 const Divider = ({ size = "sm", ...props }: Dividerprops) => (
-  <li role="separator" class={`divider ${size}`} {...props} />
+  <li role="separator" class={`divider divider-${size}`} {...props} />
 );
 
 export default Divider;
