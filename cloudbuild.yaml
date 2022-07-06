@@ -39,4 +39,5 @@ images:
   - gcr.io/linux-practice-349511/osinbrowser
 options:
   logging: CLOUD_LOGGING_ONLY
+timeout: 2400s
 # [END cloudbuild_run_example_builddeploy]
