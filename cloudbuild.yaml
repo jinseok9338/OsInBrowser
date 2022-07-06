@@ -26,7 +26,7 @@ steps:
       [
         "run",
         "deploy",
-        "myservice",
+        "OsInBrowser",
         "--image",
         "gcr.io/linux-practice-349511/OsInBrowser",
         "--region",
