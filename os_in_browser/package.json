@@ -29,6 +29,7 @@
   "dependencies": {
     "browserfs": "github:jvilk/BrowserFS",
     "ini": "^2.0.0",
+    "livereload": "^0.9.3",
     "solid-js": "^1.4.2"
   }
 }

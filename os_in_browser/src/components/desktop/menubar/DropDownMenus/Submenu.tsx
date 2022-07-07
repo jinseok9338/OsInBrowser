@@ -1,13 +1,15 @@
+import { JSX } from "solid-js/jsx-runtime";
+
 interface Submenu {
-  children: ChildNode;
-  position: "left" | "right" | "bottom" | "left-top" | "right-top";
-  className: string;
+  children?: JSX.Element;
+  position?: "left" | "right" | "bottom" | "left-top" | "right-top";
+  className?: string;
 }
 
 const Submenu = ({
   children,
-  position = "left",
-  className,
+  position = "right",
+  className = "",
   ...props
 }: Submenu) => (
   <div class={`submenu submenu-${position} ${className}`} {...props}>
