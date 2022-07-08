@@ -1,4 +1,4 @@
-import { onMount } from "solid-js";
+import { onMount, createEffect } from "solid-js";
 import { useProcess } from "../../../context/processDirectory";
 import useMoveDock from "./dockFunction";
 
@@ -10,6 +10,8 @@ const Dock = () => {
   const [state, { addProcess }] = useProcess();
   useMoveDock();
 
+  let dot = document.createElement("div").setAttribute("class", "dot");
+
   return (
     <div class="dock">
       <div class="dock-container">
@@ -19,7 +21,9 @@ const Dock = () => {
             class="ico"
             src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png"
             alt=""
-            onclick={() => addProcess("finder")}
+            onclick={() => {
+              addProcess("finder");
+            }}
           />
         </li>
         <li class="li-2">
