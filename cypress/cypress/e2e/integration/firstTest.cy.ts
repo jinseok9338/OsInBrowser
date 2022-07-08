@@ -2,11 +2,11 @@
 
 context("Assertions", () => {
   beforeEach(() => {
-    cy.visit("https://example.cypress.io/commands/assertions");
+    cy.visit("/");
   });
 
   describe("My First Test", () => {
-    it("Does not do much!", () => {
+    it("it searches the button", () => {
       expect(true).to.equal(true);
     });
   });

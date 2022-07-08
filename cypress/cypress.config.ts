@@ -6,5 +6,7 @@ export default defineConfig({
   e2e: {
     // e2e options here
     supportFile: false,
+
+    baseUrl: "http://localhost:4173",
   },
 });
