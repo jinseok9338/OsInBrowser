@@ -6,7 +6,7 @@ import microphone from "./icons/microphone.png";
 import { createSignal, onCleanup } from "solid-js";
 
 import { ProcessState } from "../../../types/processDirectory";
-import { OpenProgrammatically } from "./DropDownMenus/example";
+import { OpenProgrammatically } from "../../DropDownMenus/example";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
