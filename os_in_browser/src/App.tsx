@@ -13,6 +13,9 @@ import "./style/desktop/menubar/dropdownMenu/dropdown.scss";
 import "./style/desktop/menubar/dropdownMenu/item.scss";
 import "./style/desktop/menubar/dropdownMenu/submenu.scss";
 
+//customMenu
+import "./style/customMenu/customMenu.scss";
+
 const App = () => {
   return (
     <FileSystemProvider>

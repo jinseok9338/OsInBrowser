@@ -5,14 +5,21 @@ import { useProcess } from "./context/processDirectory";
 import OnClickDragBox from "./components/onClickDrag";
 import useMakeBox from "./hooks/useMakeBox";
 import { useFileSystem } from "./context/windowFileSystem";
+import useRightClickMenu from "./hooks/useRightClickMenu";
+import { OpenProgrammatically } from "./components/DropDownMenus/example";
+import CustomMenu from "./components/CustomMenu";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
+  const { open, position } = useRightClickMenu();
 
   return (
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
+
+      <CustomMenu open={open} position={position} />
+
       <For each={state}>
         {(process, _i) => (
           <WindowComponent

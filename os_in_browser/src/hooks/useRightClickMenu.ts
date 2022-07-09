@@ -1,19 +1,33 @@
-import { onCleanup, onMount } from "solid-js";
-
+import { onCleanup, onMount, createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
 const useRightClickMenu = () => {
-  const leftMouseEvent = (e: MouseEvent) => {
-    if (e.button === 2) {
-      //make modal at that position.
-      const menus = [];
-      addModal(menus);
-    }
+  const [open, setOpen] = createSignal(false);
+  const [position, setPosition] = createStore({
+    left: 0,
+    top: 0,
+  });
+
+  const rightMouseEvent = (e: MouseEvent) => {
+    e.preventDefault();
+    setPosition({
+      left: e.pageX,
+      top: e.pageY,
+    });
+    setOpen(true);
+
+    //make modal at that position.
   };
 
   onMount(() => {
-    window.addEventListener("click", leftMouseEvent);
+    window.addEventListener("contextmenu", rightMouseEvent);
 
-    onCleanup(() => window.removeEventListener("click", leftMouseEvent));
+    onCleanup(() => window.removeEventListener("contextmenu", rightMouseEvent));
   });
+
+  return {
+    open,
+    position,
+  };
 };
 
 export default useRightClickMenu;

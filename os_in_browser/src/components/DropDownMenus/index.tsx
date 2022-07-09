@@ -49,24 +49,24 @@ const Dropdown = ({
     }
   };
 
-  const setOpenToFalse = (e: MouseEvent) => {
-    try {
-      if (
-        (e.target as HTMLDivElement).getElementsByClassName("dropdown")
-          .length != 0
-      ) {
-        setOpen(false);
-      }
-    } catch (e) {
-      console.log(e);
-      return;
-    }
-  };
+  // const setOpenToFalse = (e: MouseEvent) => {
+  //   try {
+  //     if (
+  //       (e.target as HTMLDivElement).getElementsByClassName("dropdown")
+  //         .length != 0
+  //     ) {
+  //       setOpen(false);
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //     return;
+  //   }
+  // };
 
-  onMount(() => {
-    document.removeEventListener("mousedown", handleClick);
-    window.addEventListener("click", setOpenToFalse);
-  });
+  // onMount(() => {
+  //   document.removeEventListener("mousedown", handleClick);
+  //   window.addEventListener("click", setOpenToFalse);
+  // });
 
   //This will be provided if the hover is false
   const handleButtonOnClick = (e: MouseEvent) => {
