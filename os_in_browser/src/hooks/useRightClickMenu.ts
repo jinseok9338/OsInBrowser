@@ -7,6 +7,17 @@ const useRightClickMenu = () => {
     top: 0,
   });
 
+  interface customMenu {
+    title: string;
+    iconPath: string;
+  }
+
+  const [menus, setMenus] = createStore<customMenu[]>([]);
+
+  const defaultMenu: customMenu[] = [
+    { iconPath: "fa fa-file", title: "createFile" },
+  ];
+
   const rightMouseEvent = (e: MouseEvent) => {
     e.preventDefault();
     setPosition({
@@ -14,19 +25,31 @@ const useRightClickMenu = () => {
       top: e.pageY,
     });
     setOpen(true);
+    setMenus(defaultMenu);
 
     //make modal at that position.
   };
 
+  const leftMouseEvent = (e: MouseEvent) => {
+    e.preventDefault();
+    if (e.button === 0) {
+      setOpen(false);
+    }
+  };
+
   onMount(() => {
     window.addEventListener("contextmenu", rightMouseEvent);
-
-    onCleanup(() => window.removeEventListener("contextmenu", rightMouseEvent));
+    window.addEventListener("click", leftMouseEvent);
+    onCleanup(() => {
+      window.removeEventListener("contextmenu", leftMouseEvent);
+      window.removeEventListener("contextmenu", rightMouseEvent);
+    });
   });
 
   return {
     open,
     position,
+    menus,
   };
 };
 

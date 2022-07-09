@@ -1,4 +1,5 @@
 import { Accessor, For } from "solid-js";
+import CustomMenuItem from "./customMenuItem";
 
 interface CustomMenuProps {
   open: Accessor<boolean>;
@@ -6,19 +7,24 @@ interface CustomMenuProps {
     left: number;
     top: number;
   };
+  menus: {
+    title: string;
+    iconPath: string;
+  }[];
 }
-const List = [1, 2, 3, 4, 5, 67];
 
-const CustomMenu = ({ open, position }: CustomMenuProps) => {
+const CustomMenu = ({ open, position, menus }: CustomMenuProps) => {
   return (
     <div
       class="customMenu"
       style={` top: ${position.top}px;
           left: ${position.left}px;
-          display:${open() ? "block" : "none"}`}
+          display:${open() ? "flex" : "none"}`}
     >
-      <For each={List} fallback={<div>Loading...</div>}>
-        {(item) => <div>{item}</div>}
+      <For each={menus} fallback={<div>Loading...</div>}>
+        {(menu) => (
+          <CustomMenuItem title={menu.title} iconPath={menu.iconPath} />
+        )}
       </For>
     </div>
   );

@@ -1,4 +1,4 @@
-import { For } from "solid-js";
+import { For, onMount, createEffect, createSignal } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
@@ -8,18 +8,29 @@ import { useFileSystem } from "./context/windowFileSystem";
 import useRightClickMenu from "./hooks/useRightClickMenu";
 import { OpenProgrammatically } from "./components/DropDownMenus/example";
 import CustomMenu from "./components/CustomMenu";
+import { createStore } from "solid-js/store";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
-  const { open, position } = useRightClickMenu();
+  const { open, position, menus } = useRightClickMenu();
+  const { fs } = useFileSystem();
+  const [files, setFiles] = createSignal<string[]>();
+
+  createEffect(() => {
+    let cd = "/home/desktop";
+    fs!.readdir(cd, function (_err, contents) {
+      setFiles(contents!);
+    });
+    return cd;
+  });
 
   return (
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
 
-      <CustomMenu open={open} position={position} />
-
+      <CustomMenu open={open} position={position} menus={menus} />
+      <For each={files()}>{(file) => <div>{file}</div>}</For>
       <For each={state}>
         {(process, _i) => (
           <WindowComponent
