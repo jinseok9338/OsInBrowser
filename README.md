@@ -24,6 +24,8 @@ This is the first (and very crude) version of the operating system running in br
 
   - window resizes from all the edges and corners (implemented without any library)
 
+  - draggable window without any library
+
   - first version of finder App (without any functionality)
 
   <img title="a title" alt="Alt text" src="./ReleaseNote/capture.gif">
