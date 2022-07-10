@@ -6,6 +6,7 @@ import microphone from "./icons/microphone.png";
 import { createSignal, onCleanup } from "solid-js";
 
 import { ProcessState } from "../../../types/processDirectory";
+import { OpenProgrammatically } from "../../DropDownMenus/example";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
@@ -40,7 +41,9 @@ const Menubar = () => {
           ))
         ) : (
           <>
-            <div class="menus">{"File"}</div>
+            <div class="menus">
+              <OpenProgrammatically />
+            </div>
             <div class="menus">{"Edit"}</div>
             <div class="menus">{"View"}</div>
             <div class="menus">{"Go"}</div>

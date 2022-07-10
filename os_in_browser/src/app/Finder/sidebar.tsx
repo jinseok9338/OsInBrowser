@@ -1,23 +1,15 @@
-import airdrop from "./images/menu/airdrop.png";
-import recents from "./images/menu/recents.png";
-import apps from "./images/menu/apps.png";
-import folder from "./images/menu/folder.png";
-import desktop from "./images/menu/desktop.png";
-import download from "./images/menu/download.png";
-import pictures from "./images/menu/pictures.png";
-import icloud from "./images/menu/icloud.png";
-import documents from "./images/menu/documents.png";
-import laptop from "./images/menu/laptop.png";
+import airdrop from "../../assets/images/menu/airdrop.png";
+import recents from "../../assets/images/menu/recents.png";
+import apps from "../../assets/images/menu/apps.png";
+import folder from "../../assets/images/menu/folder.png";
+import desktop from "../../assets/images/menu/desktop.png";
+import download from "../../assets/images/menu/download.png";
+import pictures from "../../assets/images/menu/pictures.png";
+import icloud from "../../assets/images/menu/icloud.png";
+import documents from "../../assets/images/menu/documents.png";
+import laptop from "../../assets/images/menu/laptop.png";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
-import {
-  createEffect,
-  createMemo,
-  createSignal,
-  For,
-  getOwner,
-  onCleanup,
-  runWithOwner,
-} from "solid-js";
+import { For } from "solid-js";
 
 interface Favorite {
   src: string;

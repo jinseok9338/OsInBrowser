@@ -1,17 +1,20 @@
-import { createSignal, onCleanup } from "solid-js";
-import {
-  ProcessDirectoryProvider,
-  useProcess,
-} from "./context/processDirectory";
+import { ProcessDirectoryProvider } from "./context/processDirectory";
 import { FileSystemProvider } from "./context/windowFileSystem";
 import Main from "./main";
-import "./style/desktop.scss";
+import "./style/desktop/desktop.scss";
 import "./style/global.scss";
 import "./style/variables.scss";
 import "./style/window.scss";
 import "./style/finder.scss";
-import "./style/onClickDragBox.scss";
-import { FileDirectoryProvider } from "./context/FileDirectoryContext";
+
+//Divider css
+import "./style/desktop/menubar/dropdownMenu/divider.scss";
+import "./style/desktop/menubar/dropdownMenu/dropdown.scss";
+import "./style/desktop/menubar/dropdownMenu/item.scss";
+import "./style/desktop/menubar/dropdownMenu/submenu.scss";
+
+//customMenu
+import "./style/customMenu/customMenu.scss";
 
 const App = () => {
   return (

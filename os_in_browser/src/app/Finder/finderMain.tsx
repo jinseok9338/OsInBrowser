@@ -1,13 +1,11 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
-import { basename } from "path";
-import { createEffect, createSignal, For, onMount } from "solid-js";
+
+import { createEffect, createSignal, For } from "solid-js";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
-import { useFileSystem } from "../../context/windowFileSystem";
-import { useFiles } from "../../hooks/useFiles";
+
 import { FileEntry } from "./fileEntry";
 import { finderFunction } from "./finderFunction";
-import { getExtension, setIcon } from "./finderFunction/setIcon";
-import air from "./images/apps/air.png";
+import { setIcon } from "./finderFunction/setIcon";
 
 interface FinderMainProps {
   directory?: string;
