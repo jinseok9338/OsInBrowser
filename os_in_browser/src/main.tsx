@@ -19,10 +19,30 @@ const Main = () => {
 
   createEffect(() => {
     let cd = "/home/desktop";
+    let Files = files();
     fs!.readdir(cd, function (_err, contents) {
       setFiles(contents!);
     });
-    return cd;
+    return Files;
+  });
+
+  const makeTxtFile = () => {
+    fs!.writeFile("/home/desktop/new.txt", (e: Error) => {
+      if (e) {
+        throw e;
+      }
+      console.log("text file created");
+      fs!.readdir("/home/desktop", (e, contents) => {
+        if (e) {
+          throw e;
+        }
+        setFiles(contents);
+      });
+    });
+  };
+
+  onMount(() => {
+    makeTxtFile();
   });
 
   return (

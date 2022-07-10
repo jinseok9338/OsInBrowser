@@ -12,7 +12,7 @@ export const setIcon = (directory: string) => {
   let iconName = getExtension(directory)?.toString();
   if (iconName == undefined) {
     // get the folder icon since it's folder
-    return folder;
+    return "https://w7.pngwing.com/pngs/153/567/png-transparent-macbook-pro-macos-apple-samples-blue-angle-electronics-thumbnail.png";
   }
   if (IMAGE_FILE_EXTENSIONS.includes(iconName)) {
     return pics;
