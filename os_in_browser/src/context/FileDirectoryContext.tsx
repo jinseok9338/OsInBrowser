@@ -6,9 +6,11 @@ import {
   Accessor,
   createEffect,
   onCleanup,
+  onMount,
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { setIcon } from "../app/Finder/finderFunction/setIcon";
+import { DIRECTORY_LIST } from "../utils/constants";
 import { useFileSystem } from "./windowFileSystem";
 
 type FileDirectoryContextValue = [
@@ -20,7 +22,7 @@ type FileDirectoryContextValue = [
   }
 ];
 
-interface fileType {
+export interface fileType {
   name: string;
   path: string;
 }
@@ -49,10 +51,7 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
       path: setIcon(value),
     }));
 
-    onCleanup(() => {
-      setCurrentFiles({ currentFiles: files });
-      console.log(currentFiles);
-    });
+    setCurrentFiles({ currentFiles: files });
   });
 
   const ChangeDirectory = (directory: string) => {

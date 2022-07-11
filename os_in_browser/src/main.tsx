@@ -12,48 +12,65 @@ import CustomMenu from "./components/CustomMenu";
 import { createStore } from "solid-js/store";
 import { DIRECTORY_LIST } from "./utils/constants";
 import Finder from "./app/Finder";
-import { useFileDirectory } from "./context/FileDirectoryContext";
+import { fileType, useFileDirectory } from "./context/FileDirectoryContext";
+import { setIcon } from "./app/Finder/finderFunction/setIcon";
+import { FileEntry } from "./app/Finder/fileEntry";
+import { FileEntryForDesktop } from "./components/FileEntry";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
     useProcess();
-  const { open, position, menus } = useRightClickMenu();
-  const { fs } = useFileSystem();
-  const [files, setFiles] = createSignal<string[]>([]);
 
-  // omMount create files directory
+  const { fs } = useFileSystem();
+  const [files, setFiles] = createSignal<fileType[]>([] as fileType[]);
+
+  // omMount load desktop files
   onMount(() => {
-    DIRECTORY_LIST.forEach((dir) => {
-      try {
-        fs?.mkdirSync(dir);
-        console.log(dir, " created");
-      } catch (e) {
-        // the dir already exists
-        console.log(e);
-        return;
-      }
-    });
+    const cd = "/home/desktop";
+    const cFiles = fs?.readdirSync(cd);
+
+    const cFilesWithIcon = cFiles?.map((value) => ({
+      name: value,
+      path: setIcon(value),
+    }));
+
+    console.log(cFilesWithIcon);
+    setFiles(cFilesWithIcon!);
   });
+
+  const { open, position, menus, createFile } = useRightClickMenu(setFiles);
 
   // load the directory files whenever the files changed... How do I implement this
   // we need better context that can hold the files and share among components
-  createEffect(() => {
-    let cd = "/home/desktop";
+  // createEffect(() => {
+  //   let cd = "/home/desktop";
 
-    let filesFromDir = fs!.readdirSync(cd);
+  //   let filesFromDir = fs!.readdirSync(cd);
 
-    onCleanup(() => {
-      setFiles(filesFromDir);
-      console.log(files());
-    });
-  });
+  //   onCleanup(() => {
+  //     setFiles(filesFromDir);
+  //     console.log(files());
+  //   });
+  // });
 
   return (
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
 
-      <CustomMenu open={open} position={position} menus={menus} />
-      <For each={files()}>{(file) => <div>{file}</div>}</For>
+      <CustomMenu
+        open={open}
+        position={position}
+        menus={menus}
+        onClick={createFile}
+      />
+      <For each={files()}>
+        {(file) => (
+          <FileEntryForDesktop
+            name={file.name}
+            path={file.path}
+          ></FileEntryForDesktop>
+        )}
+      </For>
 
       <For each={state}>
         {(process, _i) => (

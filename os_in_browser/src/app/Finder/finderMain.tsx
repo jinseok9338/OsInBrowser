@@ -49,7 +49,7 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
         })
       }
     >
-      <For each={files()}>
+      <For each={currentFiles.currentFiles}>
         {(item, index) => <FileEntry name={item.name} path={item.path} />}
       </For>
     </div>

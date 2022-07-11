@@ -1,20 +1,29 @@
-import { createEffect, createSignal } from "solid-js";
+import { createEffect, createSignal, onMount } from "solid-js";
 
 export const finderFunction = () => {
   const [selected, setSelected] = createSignal<string[]>([]); // this will store the number of icons that can be focused
+  const [Icons, setIcons] = createSignal<HTMLCollection | undefined>(undefined);
 
   // 1. when nothing selected  (selected.length == 0 and moreAvailable)
   // 2. when an icon is selected and you want to focos something else  ( selected.lrength != 0 )
   // 3. when you want to deselect icons (focus.lrength != 0)
-  let icons: HTMLCollection = document.getElementsByClassName("align-center");
+
+  onMount(() => {
+    let FinderBox = document.getElementById("main-box");
+    let icons = FinderBox?.getElementsByClassName("align-center");
+    console.log(icons);
+    setIcons(icons);
+  });
 
   createEffect((prev) => {
-    for (let i = 0; i < icons.length; i++) {
-      if (selected().includes(icons.item(i)!.id)) {
-        (icons.item(i) as HTMLElement).style.boxShadow =
-          "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
-      } else {
-        (icons.item(i) as HTMLElement)!.style.boxShadow = "";
+    if (Icons()) {
+      for (let i = 0; i < Icons()!.length; i++) {
+        if (selected().includes(Icons()!.item(i)!.id)) {
+          (Icons()!.item(i) as HTMLElement).style.boxShadow =
+            "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
+        } else {
+          (Icons()!.item(i) as HTMLElement)!.style.boxShadow = "";
+        }
       }
     }
 

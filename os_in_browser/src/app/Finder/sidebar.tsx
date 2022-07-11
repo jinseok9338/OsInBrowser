@@ -34,7 +34,11 @@ interface SideBarProps {
 }
 
 const SideBar = () => {
-  const [currentDirectory, { ChangeDirectory }] = useFileDirectory();
+  const [
+    currentDirectory,
+    currentFiles,
+    { ChangeDirectory, ChangeCurrentFiles },
+  ] = useFileDirectory();
 
   const Favorites = () => (
     <>

@@ -15,12 +15,15 @@ import "./style/desktop/menubar/dropdownMenu/submenu.scss";
 
 //customMenu
 import "./style/customMenu/customMenu.scss";
+import { FileDirectoryProvider } from "./context/FileDirectoryContext";
 
 const App = () => {
   return (
     <FileSystemProvider>
       <ProcessDirectoryProvider>
-        <Main />
+        <FileDirectoryProvider>
+          <Main />
+        </FileDirectoryProvider>
       </ProcessDirectoryProvider>
     </FileSystemProvider>
   );

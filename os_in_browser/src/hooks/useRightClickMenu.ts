@@ -1,16 +1,23 @@
-import { onCleanup, onMount, createSignal } from "solid-js";
+import { fstat } from "fs";
+import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
-const useRightClickMenu = () => {
+import { setIcon } from "../app/Finder/finderFunction/setIcon";
+import { fileType } from "../context/FileDirectoryContext";
+import { useFileSystem } from "../context/windowFileSystem";
+
+interface customMenu {
+  title: string;
+  iconPath: string;
+}
+
+const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
   const [open, setOpen] = createSignal(false);
   const [position, setPosition] = createStore({
     left: 0,
     top: 0,
   });
 
-  interface customMenu {
-    title: string;
-    iconPath: string;
-  }
+  const { fs } = useFileSystem();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
@@ -46,10 +53,23 @@ const useRightClickMenu = () => {
     });
   });
 
+  //createDummy Text File
+  // but this doesn't affect the lifeCycle... Darn it ... what to do ??
+  const createFile = () => {
+    fs?.writeFileSync("/home/desktop/test.txt", "this is the test");
+    const filesString = fs?.readdirSync("/home/desktop");
+    const files = filesString?.map((value) => ({
+      name: value,
+      path: setIcon(value),
+    }));
+    setFiles(files!);
+  };
+
   return {
     open,
     position,
     menus,
+    createFile,
   };
 };
 

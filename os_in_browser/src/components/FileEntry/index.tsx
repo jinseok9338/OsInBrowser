@@ -1,13 +1,10 @@
-import { finderFunction } from "./finderFunction";
-
 interface FileEntryProps {
   name: string;
   path: string;
 }
 
-export const FileEntry = ({ name, path }: FileEntryProps) => {
+export const FileEntryForDesktop = ({ name, path }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
-  const { setFocus, deselectAll } = finderFunction();
 
   return (
     <div class="app-layout hide">
@@ -16,7 +13,6 @@ export const FileEntry = ({ name, path }: FileEntryProps) => {
         id={name}
         onclick={(e) => {
           e.stopPropagation();
-          setFocus(name, e);
         }}
       >
         <img class="img" src={path} alt={path} />
