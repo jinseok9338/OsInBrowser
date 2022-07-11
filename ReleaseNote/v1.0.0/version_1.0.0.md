@@ -32,19 +32,21 @@ This is the first (and very crude) version of the operating system running in br
 
 - features that will be added in version 1.1.0 (rolled out by July 25th)
 
-  - add create file functionality
+  - show file icon in grid area
 
-  - select and deselect the file
+  - add create file functionality []
 
-  - when hover it the icon show the file info
+  - select and deselect the file []
 
-  - delete file functionality
+  - when hover it the icon show the file info []
 
-  - show icons according to the file extension
+  - delete file functionality []
 
-  - move the files in grid area
+  - show icons according to the file extension []
 
-  - full blown Finder App
+  - move the files in grid area []
+
+  - full blown Finder App []
 
 - Bugs to fix
 

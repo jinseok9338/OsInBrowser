@@ -13,24 +13,16 @@ interface FinderMainProps {
 }
 
 const FinderMain = ({ directory, fs }: FinderMainProps) => {
-  const [currentDirectory, { ChangeDirectory }] = useFileDirectory();
+  const [
+    currentDirectory,
+    currentFiles,
+    { ChangeDirectory, ChangeCurrentFiles },
+  ] = useFileDirectory();
 
   const { setFocus, deselectAll } = finderFunction();
   const [files, setFiles] = createSignal(
     [] as { name: string; path: string }[]
   );
-
-  createEffect(() => {
-    let cd = currentDirectory.currentDirectory;
-    fs.readdir(cd, function (_err, contents) {
-      let files = contents?.map((value) => ({
-        name: value,
-        path: setIcon(value),
-      }));
-      setFiles(files!);
-    });
-    return cd;
-  });
 
   const makeFile = (e: MouseEvent) => {
     let cd = currentDirectory.currentDirectory;
