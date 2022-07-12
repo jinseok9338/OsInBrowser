@@ -63,14 +63,14 @@ const Main = () => {
         menus={menus}
         onClick={createFile}
       />
-      <For each={files()}>
+      {/* <For each={files()}>
         {(file) => (
           <FileEntryForDesktop
             name={file.name}
             path={file.path}
           ></FileEntryForDesktop>
         )}
-      </For>
+      </For> */}
 
       <For each={state}>
         {(process, _i) => (

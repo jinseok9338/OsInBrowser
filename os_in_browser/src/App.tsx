@@ -21,9 +21,7 @@ const App = () => {
   return (
     <FileSystemProvider>
       <ProcessDirectoryProvider>
-        <FileDirectoryProvider>
-          <Main />
-        </FileDirectoryProvider>
+        <Main />
       </ProcessDirectoryProvider>
     </FileSystemProvider>
   );

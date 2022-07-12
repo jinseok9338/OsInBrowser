@@ -48,7 +48,7 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
     window.addEventListener("contextmenu", rightMouseEvent);
     window.addEventListener("click", leftMouseEvent);
     onCleanup(() => {
-      window.removeEventListener("contextmenu", leftMouseEvent);
+      window.removeEventListener("click", leftMouseEvent);
       window.removeEventListener("contextmenu", rightMouseEvent);
     });
   });

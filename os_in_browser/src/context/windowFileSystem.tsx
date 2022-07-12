@@ -20,6 +20,7 @@ const FileSystemContext = createContext<FileSystemContextState>({
 } as FileSystemContextState);
 
 export const FileSystemProvider: ParentComponent = (props) => {
+  
   onMount(() => {
     DIRECTORY_LIST.forEach((dir) => {
       try {

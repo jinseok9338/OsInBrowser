@@ -44,14 +44,19 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
   });
 
   createEffect(() => {
-    let cd = currentDirectory;
-    const filesString = fs!.readdirSync(cd.currentDirectory);
-    let files = filesString.map((value) => ({
-      name: value,
-      path: setIcon(value),
-    }));
+    try {
+      let cd = currentDirectory;
+      const filesString = fs!.readdirSync(cd.currentDirectory);
+      let files = filesString.map((value) => ({
+        name: value,
+        path: setIcon(value),
+      }));
 
-    setCurrentFiles({ currentFiles: files });
+      setCurrentFiles({ currentFiles: files });
+      return currentDirectory;
+    } catch (e) {
+      return currentFiles;
+    }
   });
 
   const ChangeDirectory = (directory: string) => {

@@ -1,20 +1,18 @@
-import { finderFunction } from "./finderFunction";
-
 interface FileEntryProps {
   name: string;
   path: string;
+  setFocus: (name: string, e: MouseEvent) => void;
 }
 
-export const FileEntry = ({ name, path }: FileEntryProps) => {
+export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
-  const { setFocus, deselectAll } = finderFunction();
 
   return (
     <div class="app-layout hide">
       <div
         class="align-center"
         id={name}
-        onclick={(e) => {
+        onClick={(e) => {
           e.stopPropagation();
           setFocus(name, e);
         }}

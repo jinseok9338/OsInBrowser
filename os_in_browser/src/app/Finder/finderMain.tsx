@@ -1,11 +1,10 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import { createEffect, createSignal, For } from "solid-js";
+import { For } from "solid-js";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
 
 import { FileEntry } from "./fileEntry";
-import { finderFunction } from "./finderFunction";
-import { setIcon } from "./finderFunction/setIcon";
+import { finderFunction } from "./finderFunction/finderFunction";
 
 interface FinderMainProps {
   directory?: string;
@@ -19,38 +18,22 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
     { ChangeDirectory, ChangeCurrentFiles },
   ] = useFileDirectory();
 
-  const { setFocus, deselectAll } = finderFunction();
-  const [files, setFiles] = createSignal(
-    [] as { name: string; path: string }[]
-  );
-
-  const makeFile = (e: MouseEvent) => {
-    let cd = currentDirectory.currentDirectory;
-    fs.writeFile(`${cd}/test.txt`, () => {
-      fs.readdir(cd, function (_err, contents) {
-        let files = contents?.map((value) => ({
-          name: value,
-          path: setIcon(value),
-        }));
-        setFiles(files!);
-      });
-    });
-  };
+  const { deselectAll, setFocus } = finderFunction();
 
   return (
     <div
       class="box-main"
       id="main-box"
-      ref={(el) =>
-        el.addEventListener("click", (e) => {
-          if (!(e.target! as HTMLElement).classList.contains("img")) {
-            deselectAll(e);
-          }
-        })
-      }
+      onClick={(e) => {
+        if (!(e.target! as HTMLElement).classList.contains("align-center")) {
+          deselectAll();
+        }
+      }}
     >
       <For each={currentFiles.currentFiles}>
-        {(item, index) => <FileEntry name={item.name} path={item.path} />}
+        {(item, index) => (
+          <FileEntry name={item.name} path={item.path} setFocus={setFocus} />
+        )}
       </For>
     </div>
   );
