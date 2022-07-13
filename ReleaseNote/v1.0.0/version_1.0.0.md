@@ -32,11 +32,11 @@ This is the first (and very crude) version of the operating system running in br
 
 - features that will be added in version 1.1.0 (rolled out by July 25th)
 
-  - show file icon in grid area
+  - show file icon in grid area [Done]
 
   - add create file functionality []
 
-  - select and deselect the file []
+  - select and deselect the file [Done]
 
   - when hover it the icon show the file info []
 

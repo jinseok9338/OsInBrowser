@@ -10,7 +10,7 @@ export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
 
   return (
-    <div class="app-layout hide">
+    <div class="app-layout">
       <div
         class="align-center-finder"
         id={name}
