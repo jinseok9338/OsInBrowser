@@ -41,9 +41,7 @@ const Menubar = () => {
           ))
         ) : (
           <>
-            <div class="menus">
-              <OpenProgrammatically />
-            </div>
+            <div class="menus">{/* <OpenProgrammatically /> */}</div>
             <div class="menus">{"Edit"}</div>
             <div class="menus">{"View"}</div>
             <div class="menus">{"Go"}</div>

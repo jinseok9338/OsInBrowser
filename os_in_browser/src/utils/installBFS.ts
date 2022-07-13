@@ -16,7 +16,7 @@ export const installBFS = () => {
       if (e) {
         throw e;
       }
-      console.log("installed");
+      console.log("BFS installed");
     }
   );
 

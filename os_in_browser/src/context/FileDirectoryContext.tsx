@@ -43,9 +43,10 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
     currentFiles: [] as fileType[],
   });
 
-  createEffect(() => {
+  createEffect((prev) => {
     try {
       let cd = currentDirectory;
+
       const filesString = fs!.readdirSync(cd.currentDirectory);
       let files = filesString.map((value) => ({
         name: value,
@@ -53,10 +54,7 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
       }));
 
       setCurrentFiles({ currentFiles: files });
-      return currentDirectory;
-    } catch (e) {
-      return currentFiles;
-    }
+    } catch (e) {}
   });
 
   const ChangeDirectory = (directory: string) => {

@@ -1,20 +1,16 @@
 import {
-  createSignal,
   createContext,
   ParentComponent,
   useContext,
-  Accessor,
   createEffect,
   onCleanup,
-  onMount,
-  createMemo,
+  createSignal,
+  Accessor,
 } from "solid-js";
 import { createStore } from "solid-js/store";
-import { setIcon } from "../app/Finder/finderFunction/setIcon";
-import { DIRECTORY_LIST } from "../utils/constants";
-import { useFileSystem } from "./windowFileSystem";
 
 type FilesSelectedContextValue = [
+  Accessor<string[]>,
   { setFocus: (id: string, e: MouseEvent) => void; deselectAll: () => void }
 ];
 
@@ -24,29 +20,27 @@ export interface fileType {
 }
 
 const FilesSelectedContext = createContext<FilesSelectedContextValue>([
+  () => [],
   { setFocus: () => undefined, deselectAll: () => undefined },
 ]);
 
 export const FilesSelectedProvider: ParentComponent = (props) => {
-  const [filesSelected, setFilesSelected] = createStore([] as string[]); // this will store the number of icons that can be focused
+  const [filesSelected, setFilesSelected] = createSignal<string[]>([]); // this will store the number of icons that can be focused
 
   let icons = document.getElementsByClassName("align-center");
 
-  const FileSelected = createMemo(() => {
-    console.log(filesSelected);
+  createEffect(() => {
+    let files = filesSelected();
     for (let i = 0; i < icons!.length; i++) {
-      if (filesSelected.includes(icons!.item(i)!.id)) {
+      if (files.includes(icons!.item(i)!.id)) {
         (icons!.item(i) as HTMLElement).style.boxShadow =
           "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
       } else {
         (icons!.item(i) as HTMLElement)!.style.boxShadow = "";
       }
     }
-  });
 
-  createEffect(() => {
-    console.log(filesSelected);
-    FileSelected();
+    return filesSelected;
   });
 
   const setFocus = (id: string, e: MouseEvent) => {
@@ -56,11 +50,10 @@ export const FilesSelectedProvider: ParentComponent = (props) => {
     } else {
       toggleSelect(id);
     }
-    // when ctrl toggle select
   };
 
   const toggleSelect = (id: string) => {
-    if (!filesSelected.includes(id)) {
+    if (!filesSelected().includes(id)) {
       setFilesSelected((prev) => {
         const newlist = [id, ...prev];
         return newlist;
@@ -82,7 +75,9 @@ export const FilesSelectedProvider: ParentComponent = (props) => {
   };
 
   return (
-    <FilesSelectedContext.Provider value={[{ setFocus, deselectAll }]}>
+    <FilesSelectedContext.Provider
+      value={[filesSelected, { setFocus, deselectAll }]}
+    >
       {props.children}
     </FilesSelectedContext.Provider>
   );

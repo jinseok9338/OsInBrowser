@@ -17,7 +17,7 @@ const Finder = () => {
       <FilesSelectedProvider>
         <div class="box-body">
           <SideBar />
-          <FinderMain fs={fs!} />
+          <FinderMain />
         </div>
         <div class="box-footer"></div>
       </FilesSelectedProvider>

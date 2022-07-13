@@ -1,9 +1,9 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import { For } from "solid-js";
+import { For, createSignal } from "solid-js";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
 import { useFilesSelected } from "../../context/FilesSelectedContext";
-
+import { createStore } from "solid-js/store";
 import { FileEntry } from "./fileEntry";
 
 interface FinderMainProps {
@@ -11,14 +11,14 @@ interface FinderMainProps {
   fs: FSModule;
 }
 
-const FinderMain = ({ directory, fs }: FinderMainProps) => {
+const FinderMain = () => {
   const [
     currentDirectory,
     currentFiles,
     { ChangeDirectory, ChangeCurrentFiles },
   ] = useFileDirectory();
 
-  const [{ deselectAll }] = useFilesSelected();
+  const [filesSelected, functions] = useFilesSelected();
 
   return (
     <div
@@ -26,8 +26,7 @@ const FinderMain = ({ directory, fs }: FinderMainProps) => {
       id="main-box"
       onClick={(e) => {
         if ((e.target! as HTMLElement).classList.contains("box-main")) {
-          console.log((e.target! as HTMLElement).classList);
-          deselectAll();
+          functions.deselectAll();
         }
       }}
     >
