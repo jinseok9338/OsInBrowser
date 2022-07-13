@@ -15,8 +15,6 @@ const useResize = (
   const { height, left, top, width } = dimension;
 
   const onMouseDown = (e: MouseEvent) => {
-    e.stopPropagation();
-
     e.preventDefault();
     window.removeEventListener("mouseup", onMouseUp);
     window.addEventListener("mousemove", onMouseMove);

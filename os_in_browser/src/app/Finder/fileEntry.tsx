@@ -1,11 +1,13 @@
+import { useFilesSelected } from "../../context/FilesSelectedContext";
+
 interface FileEntryProps {
   name: string;
   path: string;
-  setFocus: (name: string, e: MouseEvent) => void;
 }
 
-export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
+export const FileEntry = ({ name, path }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
+  const [{ setFocus }] = useFilesSelected();
 
   return (
     <div class="app-layout hide">
@@ -13,12 +15,11 @@ export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
         class="align-center"
         id={name}
         onClick={(e) => {
-          e.stopPropagation();
           setFocus(name, e);
         }}
       >
-        <img class="img" src={path} alt={path} />
-        {name}
+        <img src={path} alt={path} />
+        <span>{name}</span>
       </div>
     </div>
   );

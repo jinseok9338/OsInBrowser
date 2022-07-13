@@ -34,24 +34,10 @@ const Main = () => {
       path: setIcon(value),
     }));
 
-    console.log(cFilesWithIcon);
     setFiles(cFilesWithIcon!);
   });
 
   const { open, position, menus, createFile } = useRightClickMenu(setFiles);
-
-  // load the directory files whenever the files changed... How do I implement this
-  // we need better context that can hold the files and share among components
-  // createEffect(() => {
-  //   let cd = "/home/desktop";
-
-  //   let filesFromDir = fs!.readdirSync(cd);
-
-  //   onCleanup(() => {
-  //     setFiles(filesFromDir);
-  //     console.log(files());
-  //   });
-  // });
 
   return (
     <Desktop>
@@ -63,14 +49,14 @@ const Main = () => {
         menus={menus}
         onClick={createFile}
       />
-      {/* <For each={files()}>
+      <For each={files()}>
         {(file) => (
           <FileEntryForDesktop
             name={file.name}
             path={file.path}
           ></FileEntryForDesktop>
         )}
-      </For> */}
+      </For>
 
       <For each={state}>
         {(process, _i) => (

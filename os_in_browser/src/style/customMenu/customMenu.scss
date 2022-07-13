@@ -2,7 +2,7 @@
   width: 200px;
   height: fit-content;
   position: absolute;
-  z-index: 3;
+  z-index: 10;
   transition: display 1s cubic-bezier(0.075, 0.82, 0.165, 1);
   background-color: #dbdbdb;
   opacity: 0.95;
@@ -20,7 +20,6 @@
   box-shadow: 6px 7px 9px -2px #000000;
   margin-top: 1px;
   display: flex;
-  z-index: 1;
 }
 
 .customMenuItem:hover {

@@ -1,6 +1,10 @@
-import { onMount } from "solid-js";
+import { onMount, createSignal } from "solid-js";
 
 const Weather = () => {
+  const [weatherIcon, setWeatherIcon] = createSignal("");
+  const [temperature, setTemperature] = createSignal("");
+  const [description, setDescription] = createSignal("");
+
   onMount(() => {
     fetch("http://ip-api.com/json/")
       .then((res) => res.json())

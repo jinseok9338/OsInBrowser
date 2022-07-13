@@ -8,13 +8,7 @@ export const FileEntryForDesktop = ({ name, path }: FileEntryProps) => {
 
   return (
     <div class="app-layout hide">
-      <div
-        class="align-center"
-        id={name}
-        onclick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+      <div class="align-center" id={name} onclick={(e) => {}}>
         <img class="img" src={path} alt={path} />
         {name}
       </div>
