@@ -3,19 +3,19 @@ import { createEffect, onCleanup, Accessor } from "solid-js";
 interface FileEntryProps {
   name: string;
   path: string;
+  setFocus: (name: string, e: MouseEvent) => void;
 }
 
-export const FileEntry = ({ name, path }: FileEntryProps) => {
+export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
-  const [filesSelected, functions] = useFilesSelected();
 
   return (
     <div class="app-layout hide">
       <div
-        class="align-center"
+        class="align-center-finder"
         id={name}
         onClick={(e) => {
-          functions.setFocus(name, e);
+          setFocus(name, e);
         }}
       >
         <img src={path} alt={path} />

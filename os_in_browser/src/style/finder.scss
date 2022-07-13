@@ -41,7 +41,17 @@
   width: 100%;
 }
 
-.align-center {
+.align-center-finder {
+  text-align: center;
+  width: 3.75rem;
+  margin-right: 3.438rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.align-center-desktop {
   text-align: center;
   width: 3.75rem;
   margin-right: 3.438rem;

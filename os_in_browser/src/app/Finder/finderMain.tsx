@@ -1,10 +1,10 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import { For, createSignal } from "solid-js";
+import { For } from "solid-js";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
-import { useFilesSelected } from "../../context/FilesSelectedContext";
-import { createStore } from "solid-js/store";
+
 import { FileEntry } from "./fileEntry";
+import useSelectFile from "../../hooks/useSelectFile";
 
 interface FinderMainProps {
   directory?: string;
@@ -18,7 +18,7 @@ const FinderMain = () => {
     { ChangeDirectory, ChangeCurrentFiles },
   ] = useFileDirectory();
 
-  const [filesSelected, functions] = useFilesSelected();
+  const { deselectAll, setFocus } = useSelectFile("align-center-finder");
 
   return (
     <div
@@ -26,12 +26,14 @@ const FinderMain = () => {
       id="main-box"
       onClick={(e) => {
         if ((e.target! as HTMLElement).classList.contains("box-main")) {
-          functions.deselectAll();
+          deselectAll();
         }
       }}
     >
       <For each={currentFiles.currentFiles}>
-        {(item, index) => <FileEntry name={item.name} path={item.path} />}
+        {(item, index) => (
+          <FileEntry name={item.name} path={item.path} setFocus={setFocus} />
+        )}
       </For>
     </div>
   );

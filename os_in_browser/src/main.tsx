@@ -16,6 +16,7 @@ import { fileType, useFileDirectory } from "./context/FileDirectoryContext";
 import { setIcon } from "./app/Finder/finderFunction/setIcon";
 import { FileEntry } from "./app/Finder/fileEntry";
 import { FileEntryForDesktop } from "./components/FileEntry";
+import useSelectFile from "./hooks/useSelectFile";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
@@ -38,6 +39,14 @@ const Main = () => {
   });
 
   const { open, position, menus, createFile } = useRightClickMenu(setFiles);
+  const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
+
+  onMount(() => {
+    window.addEventListener("click", deselectAll);
+    onCleanup(() => {
+      window.removeEventListener("click", deselectAll);
+    });
+  });
 
   return (
     <Desktop>
@@ -49,14 +58,15 @@ const Main = () => {
         menus={menus}
         onClick={createFile}
       />
-      {/*<For each={files()}>
+      <For each={files()}>
         {(file) => (
           <FileEntryForDesktop
             name={file.name}
             path={file.path}
+            setFocus={setFocus}
           ></FileEntryForDesktop>
         )}
-      </For>*/}
+      </For>
 
       <For each={state}>
         {(process, _i) => (
