@@ -1,22 +1,19 @@
-import { For, onMount, createEffect, createSignal } from "solid-js";
+import { For, onMount, createSignal } from "solid-js";
 import { onCleanup } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
 import { useProcess } from "./context/processDirectory";
-import OnClickDragBox from "./components/onClickDrag";
-import useMakeBox from "./hooks/useMakeBox";
+
 import { useFileSystem } from "./context/windowFileSystem";
 import useRightClickMenu from "./hooks/useRightClickMenu";
-import { OpenProgrammatically } from "./components/DropDownMenus/example";
 import CustomMenu from "./components/CustomMenu";
-import { createStore } from "solid-js/store";
-import { DIRECTORY_LIST } from "./utils/constants";
-import Finder from "./app/Finder";
-import { fileType, useFileDirectory } from "./context/FileDirectoryContext";
+
+import { fileType } from "./context/FileDirectoryContext";
 import { setIcon } from "./app/Finder/finderFunction/setIcon";
-import { FileEntry } from "./app/Finder/fileEntry";
+
 import { FileEntryForDesktop } from "./components/FileEntry";
 import useSelectFile from "./hooks/useSelectFile";
+import { v4 as uuidv4 } from "uuid";
 
 const Main = () => {
   const [state, { addProcess, deleteProcess, changeProcessDimension }] =
@@ -33,6 +30,7 @@ const Main = () => {
     const cFilesWithIcon = cFiles?.map((value) => ({
       name: value,
       path: setIcon(value),
+      id: uuidv4(),
     }));
 
     setFiles(cFilesWithIcon!);
@@ -63,6 +61,7 @@ const Main = () => {
           <FileEntryForDesktop
             name={file.name}
             path={file.path}
+            id={file.id}
             setFocus={setFocus}
           ></FileEntryForDesktop>
         )}

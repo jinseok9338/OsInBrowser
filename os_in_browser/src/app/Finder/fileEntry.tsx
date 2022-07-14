@@ -4,9 +4,10 @@ interface FileEntryProps {
   name: string;
   path: string;
   setFocus: (name: string, e: MouseEvent) => void;
+  id: string;
 }
 
-export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
+export const FileEntry = ({ name, path, setFocus, id }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
 
   return (
@@ -15,7 +16,7 @@ export const FileEntry = ({ name, path, setFocus }: FileEntryProps) => {
         class="align-center-finder"
         id={name}
         onClick={(e) => {
-          setFocus(name, e);
+          setFocus(id, e);
         }}
       >
         <img src={path} alt={path} />

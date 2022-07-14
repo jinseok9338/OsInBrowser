@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "browserfs": "github:jvilk/BrowserFS",
-    "ini": "^2.0.0"
+    "ini": "^2.0.0",
+    "uuid": "^8.3.2"
   }
 }

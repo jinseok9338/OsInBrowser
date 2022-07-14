@@ -39,12 +39,33 @@
 .app-layout {
   font-size: 0.8rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fileInfo {
+  position: absolute;
+  visibility: hidden;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  background-color: #ffffff;
+  width: fit-content;
+  height: fit-content;
+  min-width: 50px;
+  min-height: 10px;
+  max-width: 200px;
+}
+
+.fileName {
+  border: none;
+  background-color: transparent;
+  color: black;
 }
 
 .align-center-finder {
   text-align: center;
   width: 3.75rem;
-  margin-right: 3.438rem;
+
   margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;
@@ -54,7 +75,7 @@
 .align-center-desktop {
   text-align: center;
   width: 3.75rem;
-  margin-right: 3.438rem;
+
   margin-bottom: 0.75rem;
   display: flex;
   flex-direction: column;

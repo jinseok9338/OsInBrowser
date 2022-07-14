@@ -9,6 +9,7 @@ import {
   onMount,
 } from "solid-js";
 import { createStore } from "solid-js/store";
+import { v4 as uuidv4 } from "uuid";
 import { setIcon } from "../app/Finder/finderFunction/setIcon";
 import { DIRECTORY_LIST } from "../utils/constants";
 import { useFileSystem } from "./windowFileSystem";
@@ -25,6 +26,7 @@ type FileDirectoryContextValue = [
 export interface fileType {
   name: string;
   path: string;
+  id: string;
 }
 
 const FileDirectoryContext = createContext<FileDirectoryContextValue>([
@@ -51,9 +53,11 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
       let files = filesString.map((value) => ({
         name: value,
         path: setIcon(value),
+        id: uuidv4(),
       }));
 
       setCurrentFiles({ currentFiles: files });
+      return currentFiles;
     } catch (e) {}
   });
 
