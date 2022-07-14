@@ -8,7 +8,7 @@
 
 1. add create file functionality []
 
-1. change the file name []
+1. change the file name [] - input was made now move onto the functionality
 
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 

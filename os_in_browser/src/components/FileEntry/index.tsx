@@ -20,13 +20,23 @@ export const FileEntryForDesktop = ({
   const [inputDisabled, setInputDisabled] = createSignal(true);
   const [fileName, setFileName] = createSignal(name);
 
+  const onKeyDown = (e: KeyboardEvent) => {
+    console.log(e.key);
+    if (e.key == "Enter") {
+      setInputDisabled(true);
+      // set the file name to fileName ... tomorrow...
+    }
+  };
+
   onMount(() => {
     window.addEventListener("click", () => {
       setInputDisabled(true);
+      // set the file name to fileName
     });
     onCleanup(() => {
       window.removeEventListener("click", () => {
         setInputDisabled(true);
+        // set the file name to fileName
       });
     });
   });
@@ -79,6 +89,7 @@ export const FileEntryForDesktop = ({
             value={fileName()}
             type="text"
             onChange={(e) => setFileName(e.currentTarget.value)}
+            onKeyDown={(e) => onKeyDown(e)}
             ref={() => {
               addEventListener(
                 "click",
@@ -87,7 +98,6 @@ export const FileEntryForDesktop = ({
                 },
                 true
               );
-              // add onblur or on press Enter...
             }}
           />
         </div>
