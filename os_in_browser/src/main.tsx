@@ -11,7 +11,7 @@ import CustomMenu from "./components/CustomMenu";
 import { fileType } from "./context/FileDirectoryContext";
 import { setIcon } from "./app/Finder/finderFunction/setIcon";
 
-import { FileEntryForDesktop } from "./components/FileEntry";
+import FileEntry from "./components/FileEntry";
 import useSelectFile from "./hooks/useSelectFile";
 import { v4 as uuidv4 } from "uuid";
 
@@ -24,6 +24,7 @@ const Main = () => {
 
   // omMount load desktop files
   onMount(() => {
+    window.addEventListener("click", deselectAll);
     const cd = "/home/desktop";
     const cFiles = fs?.readdirSync(cd);
 
@@ -41,13 +42,6 @@ const Main = () => {
   const { open, position, menus } = useRightClickMenu(setFiles);
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
 
-  onMount(() => {
-    window.addEventListener("click", deselectAll);
-    onCleanup(() => {
-      window.removeEventListener("click", deselectAll);
-    });
-  });
-
   return (
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
@@ -56,7 +50,7 @@ const Main = () => {
       <CustomMenu open={open} position={position} menus={menus} />
       <For each={files()}>
         {(file) => (
-          <FileEntryForDesktop
+          <FileEntry
             className={"align-center-desktop"}
             name={file.name}
             iconPath={file.iconPath}
@@ -64,7 +58,7 @@ const Main = () => {
             setFocus={setFocus}
             filePath={file.filePath}
             dir={file.dir}
-          ></FileEntryForDesktop>
+          ></FileEntry>
         )}
       </For>
 

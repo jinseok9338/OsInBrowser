@@ -21,3 +21,5 @@
    1. fix the create File function where it doesn't have file id [Done]
    1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
    1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird []
+   1. icon should be rendered when the file name changes []
+   1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...

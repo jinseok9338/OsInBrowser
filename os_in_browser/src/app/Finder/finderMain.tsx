@@ -3,12 +3,11 @@ import { FSModule } from "browserfs/dist/node/core/FS";
 import { For, createEffect, createMemo, createSignal, onMount } from "solid-js";
 import { fileType, useFileDirectory } from "../../context/FileDirectoryContext";
 
-import { FileEntry } from "./fileEntry";
 import useSelectFile from "../../hooks/useSelectFile";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { setIcon } from "./finderFunction/setIcon";
 import { FileType } from "browserfs/dist/node/core/node_fs_stats";
-import { FileEntryForDesktop } from "../../components/FileEntry";
+import FileEntry from "../../components/FileEntry";
 
 interface FinderMainProps {
   directory?: string;
@@ -38,7 +37,7 @@ const FinderMain = () => {
     >
       <For each={currentFiles.currentFiles}>
         {(item, index) => (
-          <FileEntryForDesktop
+          <FileEntry
             name={item.name}
             className="align-center-finder"
             dir={item.dir}
