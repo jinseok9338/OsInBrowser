@@ -25,8 +25,10 @@ type FileDirectoryContextValue = [
 
 export interface fileType {
   name: string;
-  path: string;
+  iconPath: string;
   id: string;
+  filePath: string;
+  dir: string;
 }
 
 const FileDirectoryContext = createContext<FileDirectoryContextValue>([
@@ -50,11 +52,16 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
       let cd = currentDirectory;
 
       const filesString = fs!.readdirSync(cd.currentDirectory);
-      let files = filesString.map((value) => ({
-        name: value,
-        path: setIcon(value),
-        id: uuidv4(),
-      }));
+      let files = filesString.map(
+        (value) =>
+          ({
+            name: value,
+            iconPath: setIcon(value),
+            id: uuidv4(),
+            filePath: `${cd.currentDirectory}/${value}`,
+            dir: cd.currentDirectory,
+          } as fileType)
+      );
 
       setCurrentFiles({ currentFiles: files });
       return currentFiles;

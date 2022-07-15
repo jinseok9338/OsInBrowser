@@ -5,9 +5,10 @@ interface FileInfoProps {
   top: Accessor<number>;
   left: Accessor<number>;
   id: string;
+  filePath: string;
 }
 
-const FileInfo = ({ name, top, left, id }: FileInfoProps) => {
+const FileInfo = ({ name, top, left, id, filePath }: FileInfoProps) => {
   return (
     <div
       class="fileInfo"
@@ -20,6 +21,13 @@ const FileInfo = ({ name, top, left, id }: FileInfoProps) => {
         }}
       >
         {name}
+      </span>
+      <span
+        style={{
+          margin: "2px 5px 2px 5px ",
+        }}
+      >
+        {filePath}
       </span>
     </div>
   );

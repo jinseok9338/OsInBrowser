@@ -4,6 +4,7 @@ import { createStore } from "solid-js/store";
 import { setIcon } from "../app/Finder/finderFunction/setIcon";
 import { fileType } from "../context/FileDirectoryContext";
 import { useFileSystem } from "../context/windowFileSystem";
+import { v4 as uuidv4 } from "uuid";
 
 interface customMenu {
   title: string;
@@ -61,7 +62,10 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
     const filesString = fs?.readdirSync("/home/desktop");
     const files = filesString?.map((value) => ({
       name: value,
-      path: setIcon(value),
+      iconPath: setIcon(value),
+      id: uuidv4(),
+      filePath: "/home/desktop/test.txt", // this is hard coded let's fix it later ...
+      dir: "/home/desktop",
     }));
     setFiles(files!);
   };

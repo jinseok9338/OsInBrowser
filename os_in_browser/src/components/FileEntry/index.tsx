@@ -1,17 +1,22 @@
 import FileInfo from "./FileInfo";
 import { createSignal, onMount, onCleanup } from "solid-js";
+import { useFileSystem } from "../../context/windowFileSystem";
 
 interface FileEntryProps {
   name: string;
-  path: string;
+  iconPath: string;
+  filePath: string;
   setFocus: (name: string, e: MouseEvent) => void;
   id: string; // uuid
+  dir: string;
 }
 
 export const FileEntryForDesktop = ({
   name,
-  path,
+  iconPath,
+  filePath,
   id,
+  dir,
   setFocus,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
@@ -19,24 +24,31 @@ export const FileEntryForDesktop = ({
   const [top, setTop] = createSignal(0);
   const [inputDisabled, setInputDisabled] = createSignal(true);
   const [fileName, setFileName] = createSignal(name);
+  const { fs } = useFileSystem();
 
   const onKeyDown = (e: KeyboardEvent) => {
     console.log(e.key);
     if (e.key == "Enter") {
       setInputDisabled(true);
-      // set the file name to fileName ... tomorrow...
+      ChangeFileName();
     }
+  };
+
+  const ChangeFileName = () => {
+    let newPath = `${dir}/${fileName()}`; //todo
+    fs?.renameSync(filePath, newPath);
+    console.log("successfully change the file name");
   };
 
   onMount(() => {
     window.addEventListener("click", () => {
       setInputDisabled(true);
-      // set the file name to fileName
+      ChangeFileName();
     });
     onCleanup(() => {
       window.removeEventListener("click", () => {
         setInputDisabled(true);
-        // set the file name to fileName
+        ChangeFileName();
       });
     });
   });
@@ -72,7 +84,13 @@ export const FileEntryForDesktop = ({
           fileInfoElement!.style.transitionDelay = "0s";
         }}
       >
-        <FileInfo name={name} top={top} left={left} id={id} />
+        <FileInfo
+          name={name}
+          top={top}
+          left={left}
+          id={id}
+          filePath={filePath}
+        />
         <div
           class="align-center-desktop"
           id={id}
@@ -81,7 +99,7 @@ export const FileEntryForDesktop = ({
             setFocus(id, e);
           }}
         >
-          <img class="img" src={path} alt={path} />
+          <img class="img" src={iconPath} alt={name} />
           <input
             class="fileName"
             disabled={inputDisabled()}

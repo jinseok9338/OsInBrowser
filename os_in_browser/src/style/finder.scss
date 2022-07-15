@@ -54,6 +54,8 @@
   min-width: 50px;
   min-height: 10px;
   max-width: 200px;
+  display: flex;
+  flex-direction: column;
 }
 
 .fileName {

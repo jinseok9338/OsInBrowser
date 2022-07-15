@@ -8,7 +8,7 @@
 
 1. add create file functionality []
 
-1. change the file name [] - input was made now move onto the functionality
+1. change the file name [Done] - input was made now move onto the functionality
 
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 
@@ -17,4 +17,5 @@
    1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
    1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
    1. fix the bug whene desktop environment is shared [Done]
-   1. reactivity problem in finder app when the file is created []
+   1. reactivity problem in finder app when the file is created [] -> this is important!!!
+   1. fix the create File function where it doesn't have file id [Done]

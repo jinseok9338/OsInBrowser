@@ -29,8 +29,10 @@ const Main = () => {
 
     const cFilesWithIcon = cFiles?.map((value) => ({
       name: value,
-      path: setIcon(value),
+      iconPath: setIcon(value),
       id: uuidv4(),
+      filePath: `${cd}/${value}`,
+      dir: cd,
     }));
 
     setFiles(cFilesWithIcon!);
@@ -60,9 +62,11 @@ const Main = () => {
         {(file) => (
           <FileEntryForDesktop
             name={file.name}
-            path={file.path}
+            iconPath={file.iconPath}
             id={file.id}
             setFocus={setFocus}
+            filePath={file.filePath}
+            dir={file.dir}
           ></FileEntryForDesktop>
         )}
       </For>
