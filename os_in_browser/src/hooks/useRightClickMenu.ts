@@ -5,10 +5,13 @@ import { setIcon } from "../app/Finder/finderFunction/setIcon";
 import { fileType } from "../context/FileDirectoryContext";
 import { useFileSystem } from "../context/windowFileSystem";
 import { v4 as uuidv4 } from "uuid";
+import { createTextFile } from "../utils/rightClickFunctions";
 
 interface customMenu {
   title: string;
   iconPath: string;
+  onClick: (e: MouseEvent) => void;
+  props: any; // this is for onclick Argument
 }
 
 const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
@@ -17,13 +20,31 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
     left: 0,
     top: 0,
   });
+  const [context, setContext] = createSignal("");
 
   const { fs } = useFileSystem();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
   const defaultMenu: customMenu[] = [
-    { iconPath: "fa fa-file", title: "createFile" },
+    {
+      iconPath: "fa fa-file",
+      title: "create Text File",
+      onClick: (e: MouseEvent) => createTextFile(e, setFiles, context()),
+      props: {},
+    },
+    {
+      iconPath: "fa fa-folder-open",
+      title: "create Folder",
+      onClick: () => alert("create Folder"),
+      props: {},
+    },
+    {
+      iconPath: "fa fa-cogs",
+      title: "settings",
+      onClick: () => alert("setting Opened"),
+      props: {},
+    },
   ];
 
   const rightMouseEvent = (e: MouseEvent) => {
@@ -34,6 +55,10 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
     });
     setOpen(true);
     setMenus(defaultMenu);
+    let tmpcontext = (e.target as HTMLElement).id
+      ? (e.target as HTMLElement).id
+      : "/home/desktop";
+    setContext(tmpcontext);
 
     //make modal at that position.
   };
@@ -57,24 +82,11 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
 
   //createDummy Text File
   // but this doesn't affect the lifeCycle... Darn it ... what to do ??
-  const createFile = () => {
-    fs?.writeFileSync("/home/desktop/test.txt", "this is the test");
-    const filesString = fs?.readdirSync("/home/desktop");
-    const files = filesString?.map((value) => ({
-      name: value,
-      iconPath: setIcon(value),
-      id: uuidv4(),
-      filePath: "/home/desktop/test.txt", // this is hard coded let's fix it later ...
-      dir: "/home/desktop",
-    }));
-    setFiles(files!);
-  };
 
   return {
     open,
     position,
     menus,
-    createFile,
   };
 };
 

@@ -9,6 +9,7 @@ interface FileEntryProps {
   setFocus: (name: string, e: MouseEvent) => void;
   id: string; // uuid
   dir: string;
+  className: string;
 }
 
 export const FileEntryForDesktop = ({
@@ -18,6 +19,7 @@ export const FileEntryForDesktop = ({
   id,
   dir,
   setFocus,
+  className,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -25,6 +27,7 @@ export const FileEntryForDesktop = ({
   const [inputDisabled, setInputDisabled] = createSignal(true);
   const [fileName, setFileName] = createSignal(name);
   const { fs } = useFileSystem();
+  const [FilePath, setFilePath] = createSignal(filePath);
 
   const onKeyDown = (e: KeyboardEvent) => {
     console.log(e.key);
@@ -36,22 +39,10 @@ export const FileEntryForDesktop = ({
 
   const ChangeFileName = () => {
     let newPath = `${dir}/${fileName()}`; //todo
-    fs?.renameSync(filePath, newPath);
+    fs?.renameSync(FilePath(), newPath);
+    setFilePath(newPath);
     console.log("successfully change the file name");
   };
-
-  onMount(() => {
-    window.addEventListener("click", () => {
-      setInputDisabled(true);
-      ChangeFileName();
-    });
-    onCleanup(() => {
-      window.removeEventListener("click", () => {
-        setInputDisabled(true);
-        ChangeFileName();
-      });
-    });
-  });
 
   const inputAvaliable = (e: MouseEvent, id: string) => {
     let divElement = document.getElementById(`${id}`);
@@ -83,6 +74,9 @@ export const FileEntryForDesktop = ({
           fileInfoElement!.style.visibility = "hidden";
           fileInfoElement!.style.transitionDelay = "0s";
         }}
+        onBlur={() => {
+          ChangeFileName();
+        }}
       >
         <FileInfo
           name={name}
@@ -92,7 +86,7 @@ export const FileEntryForDesktop = ({
           filePath={filePath}
         />
         <div
-          class="align-center-desktop"
+          class={className}
           id={id}
           onclick={(e) => {
             e.stopPropagation();

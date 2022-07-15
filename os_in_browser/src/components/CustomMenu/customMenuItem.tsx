@@ -1,14 +1,15 @@
 import { Menu } from "../../types/processDirectory";
+import { Accessor } from "solid-js";
 
 interface customMenuItemProps {
   iconPath?: string;
   title: string;
-  onClick: () => void;
+  onClick: (...args: any) => void;
 }
 
 const CustomMenuItem = ({ iconPath, title, onClick }: customMenuItemProps) => {
   return (
-    <div class="customMenuItem" onClick={() => onClick()}>
+    <div class="customMenuItem" onClick={(e) => onClick(e)}>
       <div class="customMenuIcon">
         <i class={iconPath} aria-hidden="true"></i>
       </div>

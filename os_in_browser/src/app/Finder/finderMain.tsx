@@ -8,6 +8,7 @@ import useSelectFile from "../../hooks/useSelectFile";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { setIcon } from "./finderFunction/setIcon";
 import { FileType } from "browserfs/dist/node/core/node_fs_stats";
+import { FileEntryForDesktop } from "../../components/FileEntry";
 
 interface FinderMainProps {
   directory?: string;
@@ -28,7 +29,7 @@ const FinderMain = () => {
   return (
     <div
       class="box-main"
-      id="main-box"
+      id={currentDirectory.currentDirectory}
       onClick={(e) => {
         if ((e.target! as HTMLElement).classList.contains("box-main")) {
           deselectAll();
@@ -37,7 +38,15 @@ const FinderMain = () => {
     >
       <For each={currentFiles.currentFiles}>
         {(item, index) => (
-          <FileEntry name={item.name} path={item.path} setFocus={setFocus} />
+          <FileEntryForDesktop
+            name={item.name}
+            className="align-center-finder"
+            dir={item.dir}
+            filePath={item.filePath}
+            setFocus={setFocus}
+            iconPath={item.iconPath}
+            id={item.id}
+          />
         )}
       </For>
     </div>

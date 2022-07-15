@@ -38,7 +38,7 @@ const Main = () => {
     setFiles(cFilesWithIcon!);
   });
 
-  const { open, position, menus, createFile } = useRightClickMenu(setFiles);
+  const { open, position, menus } = useRightClickMenu(setFiles);
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
 
   onMount(() => {
@@ -52,15 +52,12 @@ const Main = () => {
     <Desktop>
       {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
 
-      <CustomMenu
-        open={open}
-        position={position}
-        menus={menus}
-        onClick={createFile}
-      />
+      {/* context is the current file path where mouse is positioned  */}
+      <CustomMenu open={open} position={position} menus={menus} />
       <For each={files()}>
         {(file) => (
           <FileEntryForDesktop
+            className={"align-center-desktop"}
             name={file.name}
             iconPath={file.iconPath}
             id={file.id}

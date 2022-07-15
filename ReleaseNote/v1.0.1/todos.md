@@ -6,7 +6,7 @@
 
 1. show the file info when on hover [Done]
 
-1. add create file functionality []
+1. add create file functionality [Partially Done]
 
 1. change the file name [Done] - input was made now move onto the functionality
 
@@ -19,3 +19,5 @@
    1. fix the bug whene desktop environment is shared [Done]
    1. reactivity problem in finder app when the file is created [] -> this is important!!!
    1. fix the create File function where it doesn't have file id [Done]
+   1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
+   1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird []

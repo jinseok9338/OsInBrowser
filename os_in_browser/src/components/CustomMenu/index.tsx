@@ -10,11 +10,11 @@ interface CustomMenuProps {
   menus: {
     title: string;
     iconPath: string;
+    onClick: (...args: any) => void;
   }[];
-  onClick: () => void;
 }
 
-const CustomMenu = ({ open, position, menus, onClick }: CustomMenuProps) => {
+const CustomMenu = ({ open, position, menus }: CustomMenuProps) => {
   return (
     <div
       class="customMenu"
@@ -27,7 +27,7 @@ const CustomMenu = ({ open, position, menus, onClick }: CustomMenuProps) => {
           <CustomMenuItem
             title={menu.title}
             iconPath={menu.iconPath}
-            onClick={onClick}
+            onClick={menu.onClick}
           />
         )}
       </For>
