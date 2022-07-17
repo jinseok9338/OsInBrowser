@@ -9,6 +9,8 @@
 1. add create file functionality [Partially Done]
 
 1. change the file name [Done] - input was made now move onto the functionality
+1. make custom Menu with switch statement []
+1. have the icon focused when right clicked []
 
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 

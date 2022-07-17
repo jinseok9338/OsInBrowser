@@ -86,6 +86,19 @@ const useRightClickMenu = (
         setContext(context);
         return;
 
+      //with directory
+      case /^((\/[^.\/]*)*)(\/[^.\/]*)$/.test(target):
+        let exec = /^((\/[^.\/]*)*)(\/[^.\/]*)$/.exec(target);
+
+        setPosition({
+          left: e.pageX,
+          top: e.pageY,
+        });
+        setOpen(true);
+        setMenus(defaultMenu);
+        setContext(exec![1]);
+        return;
+
       default:
         return;
     }
