@@ -1,3 +1,5 @@
+import { customMenu } from "../hooks/useRightClickMenu";
+
 export const TIFF_IMAGE_FORMATS = [".cr2", ".dng", ".nef", ".tif", ".tiff"];
 
 export const IMAGE_FILE_EXTENSIONS = [
@@ -32,3 +34,28 @@ export const DIRECTORY_LIST = [
   "/home/documents",
   "/home/folder",
 ];
+
+type MenuCollection = { [key: string]: customMenu[] };
+
+export const menusCollection: MenuCollection = {
+  fileMenu: [
+    {
+      iconPath: "fa fa-file",
+      title: "delete File",
+      onClick: () => alert("create Folder"),
+      props: {},
+    },
+    {
+      iconPath: "fa fa-folder-open",
+      title: "rename FIle",
+      onClick: () => alert("create Folder"),
+      props: {},
+    },
+    {
+      iconPath: "fa fa-cogs",
+      title: "settings",
+      onClick: () => alert("setting Opened"),
+      props: {},
+    },
+  ],
+};

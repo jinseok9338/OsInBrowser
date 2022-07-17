@@ -61,6 +61,7 @@ export const FileEntry = ({
   return (
     <div
       class="app-layout"
+      id={filePath}
       onmouseenter={(e) => {
         setLeft(e.offsetX);
         setTop(e.offsetY);
@@ -88,7 +89,7 @@ export const FileEntry = ({
           setFocus(id, e);
         }}
       >
-        <img class="img" src={iconPath} alt={name} />
+        <img class="img" src={iconPath} alt={name} id={filePath} />
         <input
           class="fileName"
           disabled={inputDisabled()}

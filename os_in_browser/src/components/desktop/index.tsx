@@ -11,7 +11,7 @@ const Desktop = ({ children }: DesktopProps) => {
   return (
     <>
       <Menubar />
-      <div class="mainDesktop">
+      <div class="mainDesktop" id="mainDesktop">
         {children}
         <Dock />
       </div>

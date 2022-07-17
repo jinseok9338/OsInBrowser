@@ -1,4 +1,4 @@
-import { For, onMount, createSignal } from "solid-js";
+import { For, onMount, createSignal, createEffect } from "solid-js";
 import { onCleanup } from "solid-js";
 import Desktop from "./components/desktop";
 import WindowComponent from "./components/window";
@@ -23,7 +23,7 @@ const Main = () => {
   const [files, setFiles] = createSignal<fileType[]>([] as fileType[]);
 
   // omMount load desktop files
-  onMount(() => {
+  createEffect(() => {
     window.addEventListener("click", deselectAll);
     const cd = "/home/desktop";
     const cFiles = fs?.readdirSync(cd);
@@ -39,7 +39,10 @@ const Main = () => {
     setFiles(cFilesWithIcon!);
   });
 
+  // the setFile Menu passed in the use Right Click Menu is causing the issue
+  // that updates the desktop rendering ... what to do ...
   const { open, position, menus } = useRightClickMenu(setFiles);
+
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
 
   return (

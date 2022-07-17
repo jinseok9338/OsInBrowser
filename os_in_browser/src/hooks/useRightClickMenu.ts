@@ -6,15 +6,19 @@ import { fileType } from "../context/FileDirectoryContext";
 import { useFileSystem } from "../context/windowFileSystem";
 import { v4 as uuidv4 } from "uuid";
 import { createTextFile } from "../utils/rightClickFunctions";
+import { menusCollection } from "../utils/constants";
 
-interface customMenu {
+export interface customMenu {
   title: string;
   iconPath: string;
   onClick: (e: MouseEvent) => void;
   props: any; // this is for onclick Argument
 }
 
-const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
+const useRightClickMenu = (
+  setFiles: Setter<fileType[]>,
+  customMenus?: customMenu[]
+) => {
   const [open, setOpen] = createSignal(false);
   const [position, setPosition] = createStore({
     left: 0,
@@ -48,19 +52,43 @@ const useRightClickMenu = (setFiles: Setter<fileType[]>) => {
   ];
 
   const rightMouseEvent = (e: MouseEvent) => {
+    const target = (e.target as HTMLElement).id;
+    console.log(target);
     e.preventDefault();
-    setPosition({
-      left: e.pageX,
-      top: e.pageY,
-    });
-    setOpen(true);
-    setMenus(defaultMenu);
-    let tmpcontext = (e.target as HTMLElement).id
-      ? (e.target as HTMLElement).id
-      : "/home/desktop";
-    setContext(tmpcontext);
 
-    //make modal at that position.
+    switch (true) {
+      case new RegExp("mainDesktop").test(target):
+        setPosition({
+          left: e.pageX,
+          top: e.pageY,
+        });
+        setOpen(true);
+        setMenus(defaultMenu);
+        let tmpcontext =
+          (e.target as HTMLElement).id === "mainDesktop"
+            ? "/home/desktop"
+            : (e.target as HTMLElement).id;
+        setContext(tmpcontext);
+        return;
+
+      //with file
+      case /^(\/.*)(\/.*\.\w+)$/.test(target):
+        let match = /^(\/.*)(\/.*\.\w+)$/.exec(target);
+        let context = match![1];
+        let fileName = match![2];
+        setPosition({
+          left: e.pageX,
+          top: e.pageY,
+        });
+        setOpen(true);
+        setMenus(menusCollection.fileMenu);
+
+        setContext(context);
+        return;
+
+      default:
+        return;
+    }
   };
 
   const leftMouseEvent = (e: MouseEvent) => {
