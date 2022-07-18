@@ -1,6 +1,3 @@
-import { Menu } from "../../types/processDirectory";
-import { Accessor } from "solid-js";
-
 interface customMenuItemProps {
   iconPath?: string;
   title: string;

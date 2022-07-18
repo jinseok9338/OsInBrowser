@@ -1,19 +1,12 @@
-import { fstat } from "fs";
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
-import { setIcon } from "../app/Finder/finderFunction/setIcon";
+
 import { fileType } from "../context/FileDirectoryContext";
 import { useFileSystem } from "../context/windowFileSystem";
-import { v4 as uuidv4 } from "uuid";
-import { createTextFile } from "../utils/rightClickFunctions";
-import { menusCollection } from "../utils/constants";
 
-export interface customMenu {
-  title: string;
-  iconPath: string;
-  onClick: (e: MouseEvent) => void;
-  props: any; // this is for onclick Argument
-}
+import { createTextFile } from "../app/Desktop/components/CustomMenu/rightClickFunctions";
+import { menusCollection } from "../utils/constants";
+import { customMenu } from "../types/customMenu";
 
 const useRightClickMenu = (
   setFiles: Setter<fileType[]>,
@@ -97,6 +90,17 @@ const useRightClickMenu = (
         setOpen(true);
         setMenus(defaultMenu);
         setContext(exec![1]);
+        return;
+
+      // with dock menu
+      case new RegExp("dock-icon").test(target):
+        setPosition({
+          left: e.pageX,
+          top: e.pageY,
+        });
+        setOpen(true);
+        setMenus(defaultMenu);
+
         return;
 
       default:

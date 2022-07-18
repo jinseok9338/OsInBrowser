@@ -1,25 +1,16 @@
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import { For, createEffect, createMemo, createSignal, onMount } from "solid-js";
-import { fileType, useFileDirectory } from "../../context/FileDirectoryContext";
+import { For } from "solid-js";
+import { useFileDirectory } from "../../context/FileDirectoryContext";
 
 import useSelectFile from "../../hooks/useSelectFile";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { setIcon } from "./finderFunction/setIcon";
 import { FileType } from "browserfs/dist/node/core/node_fs_stats";
-import FileEntry from "../../components/FileEntry";
-
-interface FinderMainProps {
-  directory?: string;
-  fs: FSModule;
-}
+import FileEntry from "../../sharedComponents/FileEntry";
 
 const FinderMain = () => {
-  const [
-    currentDirectory,
-    currentFiles,
-    { ChangeDirectory, ChangeCurrentFiles },
-  ] = useFileDirectory();
+  const [currentDirectory, currentFiles, {}] = useFileDirectory();
 
   const { deselectAll, setFocus } = useSelectFile("align-center-finder");
 

@@ -1,5 +1,4 @@
-import { onMount, createEffect } from "solid-js";
-import { useProcess } from "../../../context/processDirectory";
+import { useProcess } from "../../../../context/processDirectory";
 import useMoveDock from "./dockFunction";
 
 interface DockProps {
@@ -10,8 +9,6 @@ const Dock = () => {
   const [state, { addProcess }] = useProcess();
   useMoveDock();
 
-  let dot = document.createElement("div").setAttribute("class", "dot");
-
   return (
     <div class="dock">
       <div class="dock-container">
@@ -21,6 +18,7 @@ const Dock = () => {
             class="ico"
             src="https://uploads-ssl.webflow.com/5f7081c044fb7b3321ac260e/5f70853981255cc36b3a37af_finder.png"
             alt=""
+            id="dock-icon"
             onclick={() => {
               addProcess("finder");
             }}

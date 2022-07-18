@@ -1,6 +1,5 @@
 import SideBar from "./sidebar";
 import FinderMain from "./finderMain";
-import { useFileSystem } from "../../context/windowFileSystem";
 
 import { FileDirectoryProvider } from "../../context/FileDirectoryContext";
 

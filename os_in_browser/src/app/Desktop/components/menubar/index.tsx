@@ -4,9 +4,7 @@ import wifiSignal from "./icons/wifi-signal.png";
 import search from "./icons/search.png";
 import microphone from "./icons/microphone.png";
 import { createSignal, onCleanup } from "solid-js";
-
-import { ProcessState } from "../../../types/processDirectory";
-import { OpenProgrammatically } from "../../DropDownMenus/example";
+import { ProcessState } from "../../../../types/processDirectory";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());

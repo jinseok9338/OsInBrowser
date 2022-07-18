@@ -10,12 +10,7 @@ import documents from "../../assets/images/menu/documents.png";
 import laptop from "../../assets/images/menu/laptop.png";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
 import { For } from "solid-js";
-
-interface Favorite {
-  src: string;
-  title: string;
-  directory: string;
-}
+import { Favorite } from "../../types/finderSideBar";
 
 const favoriteArray: Favorite[] = [
   { src: airdrop, title: "Home", directory: "/home" },
@@ -28,17 +23,9 @@ const favoriteArray: Favorite[] = [
   { src: pictures, title: "Pictures", directory: "/home/pictures" },
 ];
 
-interface SideBarProps {
-  currentDirectory: string;
-  ChangeDirectory: (directory: string) => void;
-}
-
 const SideBar = () => {
-  const [
-    currentDirectory,
-    currentFiles,
-    { ChangeDirectory, ChangeCurrentFiles },
-  ] = useFileDirectory();
+  const [currentDirectory, _currentFiles, { ChangeDirectory }] =
+    useFileDirectory();
 
   const Favorites = () => (
     <>

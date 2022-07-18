@@ -1,5 +1,5 @@
 import { IMAGE_FILE_EXTENSIONS, TEXT_FORMAT } from "../../../utils/constants";
-import folder from "../../../assets/images/apps/folder.png";
+import _folder from "../../../assets/images/apps/folder.png";
 import pics from "../../../assets/images/apps/pics.png";
 import xcode from "../../../assets/images/apps/xcode.png";
 import textEdit from "../../../assets/images/apps/textedit.png";

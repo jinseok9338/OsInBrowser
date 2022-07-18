@@ -1,9 +1,9 @@
 import { JSX } from "solid-js/jsx-runtime";
+import { useProcess } from "../../../../context/processDirectory";
+import useDrag from "../../../../hooks/useDrag";
+import { Dimension } from "../../../../types/processDirectory";
 
-import { Dimension } from "../types/processDirectory";
-import useDrag from "../hooks/useDrag";
 import Resizers from "./resizer";
-import { useProcess } from "../context/processDirectory";
 
 interface WindowComponentProps {
   processName: string;
@@ -17,12 +17,11 @@ const WindowComponent = ({
   processName,
   dimension,
   id,
-
 }: WindowComponentProps) => {
-  const [state, { deleteProcess, enlarge,changeProcessDimension }] = useProcess();
+  const [state, { deleteProcess, enlarge, changeProcessDimension }] =
+    useProcess();
   const { onMouseDown } = useDrag(changeProcessDimension, id, dimension);
 
-  
   return (
     <div
       class="window_container"

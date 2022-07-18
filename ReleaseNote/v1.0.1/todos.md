@@ -12,6 +12,8 @@
 1. make custom Menu with switch statement []
 1. have the icon focused when right clicked []
 
+1. refactor the code First ... I think it is the right thing to do first ....
+
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 
 1. Bugs

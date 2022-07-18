@@ -1,6 +1,3 @@
-import { createSignal, JSX, onMount } from "solid-js";
-import { Dimension } from "../types/processDirectory";
-
 interface OnClickDragBoxProps {
   height: number;
   width: number;

@@ -1,4 +1,4 @@
-import { customMenu } from "../hooks/useRightClickMenu";
+import { customMenu } from "../types/customMenu";
 
 export const TIFF_IMAGE_FORMATS = [".cr2", ".dng", ".nef", ".tif", ".tiff"];
 
