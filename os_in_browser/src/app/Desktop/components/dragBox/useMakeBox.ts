@@ -1,5 +1,5 @@
 import { createSignal, onMount } from "solid-js";
-import { Dimension } from "../types/processDirectory";
+import { Dimension } from "../../../../types/processDirectory";
 
 const useMakeBox = () => {
   const [dimension, SetDimension] = createSignal<Dimension>({

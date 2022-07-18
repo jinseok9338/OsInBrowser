@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { Dimension } from "../types/processDirectory";
+import { Dimension } from "../../../../types/processDirectory";
 
 const useDrag = (
   changeProcessDimension: (id: string, dimension: Dimension) => void,

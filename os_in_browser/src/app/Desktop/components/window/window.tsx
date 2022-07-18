@@ -1,6 +1,6 @@
 import { JSX } from "solid-js/jsx-runtime";
 import { useProcess } from "../../../../context/processDirectory";
-import useDrag from "../../../../hooks/useDrag";
+import useDrag from "./useDrag";
 import { Dimension } from "../../../../types/processDirectory";
 
 import Resizers from "./resizer";

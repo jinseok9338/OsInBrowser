@@ -1,12 +1,12 @@
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
 
-import { fileType } from "../context/FileDirectoryContext";
-import { useFileSystem } from "../context/windowFileSystem";
+import { fileType } from "../../../../context/FileDirectoryContext";
+import { useFileSystem } from "../../../../context/windowFileSystem";
 
-import { createTextFile } from "../app/Desktop/components/CustomMenu/rightClickFunctions";
-import { menusCollection } from "../utils/constants";
-import { customMenu } from "../types/customMenu";
+import { createTextFile } from "./rightClickFunctions";
+import { menusCollection } from "../../../../utils/constants";
+import { customMenu } from "../../../../types/customMenu";
 
 const useRightClickMenu = (
   setFiles: Setter<fileType[]>,

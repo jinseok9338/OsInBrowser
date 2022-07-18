@@ -1,7 +1,8 @@
 import { createSignal, onMount } from "solid-js";
-import useResize from "../../../../hooks/useResize";
+
 import { Dimension } from "../../../../types/processDirectory";
 import { refType, ResizerFunctions } from "../../../../types/resizes";
+import useResize from "./useResize";
 
 interface resizerProps {
   id: string;

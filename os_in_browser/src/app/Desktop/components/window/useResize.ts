@@ -1,6 +1,6 @@
 import { createSignal } from "solid-js";
-import { useProcess } from "../context/processDirectory";
-import { Dimension } from "../types/processDirectory";
+import { useProcess } from "../../../../context/processDirectory";
+import { Dimension } from "../../../../types/processDirectory";
 
 const useResize = (
   id: string,

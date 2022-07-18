@@ -1,12 +1,9 @@
-import { FSModule } from "browserfs/dist/node/core/FS";
-
 import { For } from "solid-js";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
 
-import useSelectFile from "../../hooks/useSelectFile";
+import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import { useFileSystem } from "../../context/windowFileSystem";
-import { setIcon } from "./finderFunction/setIcon";
-import { FileType } from "browserfs/dist/node/core/node_fs_stats";
+
 import FileEntry from "../../sharedComponents/FileEntry";
 
 const FinderMain = () => {

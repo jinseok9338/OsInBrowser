@@ -1,7 +1,7 @@
 import { setIcon } from "../../../Finder/finderFunction/setIcon";
 import { fileType } from "../../../../context/FileDirectoryContext";
 import { useFileSystem } from "../../../../context/windowFileSystem";
-import useFileInfo from "../../../../hooks/useFileInfo";
+
 import { Setter } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 

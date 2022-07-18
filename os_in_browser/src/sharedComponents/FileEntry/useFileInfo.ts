@@ -1,7 +1,10 @@
 import { createEffect, createSignal } from "solid-js";
-import { useFileSystem } from "../context/windowFileSystem";
-import { IMAGE_FILE_EXTENSIONS } from "../utils/constants";
-import { getProcessByFileExtension, getShortCut } from "../utils/filesFunction";
+import { useFileSystem } from "../../context/windowFileSystem";
+import { IMAGE_FILE_EXTENSIONS } from "../../utils/constants";
+import {
+  getProcessByFileExtension,
+  getShortCut,
+} from "../../utils/filesFunction";
 
 interface FileInfo {
   icon: string;

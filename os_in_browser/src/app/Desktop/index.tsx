@@ -3,14 +3,14 @@ import { For, createSignal, createEffect } from "solid-js";
 import { useProcess } from "../../context/processDirectory";
 
 import { useFileSystem } from "../../context/windowFileSystem";
-import useRightClickMenu from "../../hooks/useRightClickMenu";
+import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
 import CustomMenu from "./components/CustomMenu";
 
 import { fileType } from "../../context/FileDirectoryContext";
 import { setIcon } from "../Finder/finderFunction/setIcon";
 
 import FileEntry from "../../sharedComponents/FileEntry";
-import useSelectFile from "../../hooks/useSelectFile";
+import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import { v4 as uuidv4 } from "uuid";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
