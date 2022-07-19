@@ -9,7 +9,7 @@ module.exports = {
   extends: ["eslint:recommended", "plugin:solid/typescript", "airbnb-base"],
   rules: {
     quotes: "double",
-    "@typescript/no-unused-vars": "off",
+    "@typescript/no-unused-vars": "warn",
     "unused-imports/no-unused-imports": "warn",
     "unused-imports/no-unused-vars": [
       "warn",

@@ -41,7 +41,7 @@ const Main = () => {
 
   // the setFile Menu passed in the use Right Click Menu is causing the issue
   // that updates the desktop rendering ... what to do ...
-  const { open, position, menus } = useRightClickMenu(setFiles);
+  const { open, position, menus } = useRightClickMenu(setFiles, "MainDesktop");
 
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
 

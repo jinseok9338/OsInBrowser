@@ -1,4 +1,4 @@
-import { createSignal, onMount, Accessor, createEffect } from "solid-js";
+import { Accessor } from "solid-js";
 
 interface FileInfoProps {
   name: string;

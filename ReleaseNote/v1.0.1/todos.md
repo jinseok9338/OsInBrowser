@@ -9,14 +9,21 @@
 1. add create file functionality [Partially Done]
 
 1. change the file name [Done] - input was made now move onto the functionality
+
 1. make custom Menu with switch statement []
+
 1. have the icon focused when right clicked []
 
-1. refactor the code First ... I think it is the right thing to do first ....
+1. refactor the code First ... I think it is the right thing to do first .... [Done]
+
+1. make icon extension more vastly []
+
+1. make image preview []
 
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 
 1. Bugs
+
    1. fix the bug where you can't select the icon when first rendered[Done]
    1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
    1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
@@ -27,3 +34,5 @@
    1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird []
    1. icon should be rendered when the file name changes []
    1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
+
+   1. change the display none from visibility hidden so that it can take less space
