@@ -6,7 +6,9 @@ import {
   ProcessesContextValue,
   ProcessState,
 } from "../types/processDirectory";
-import { processesDirectory, ProcessExists } from "../utils/processes";
+import { ProcessExists } from "../utils/processes";
+
+//import file system from parent context
 
 const defaultState = [] as ProcessState[];
 
@@ -20,6 +22,8 @@ const ProcessesContext = createContext<ProcessesContextValue>([
     changeActive: () => undefined,
   },
 ]);
+
+export const processesDirectory = [finderMetaData("dummy")] as ProcessState[];
 
 export const ProcessDirectoryProvider: ParentComponent = (props) => {
   const [state, setState] = createStore([] as ProcessState[]);

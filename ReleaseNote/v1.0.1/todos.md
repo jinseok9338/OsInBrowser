@@ -18,7 +18,13 @@
 
 1. make icon extension more vastly []
 
+1. integrating filesystem and file direcotry context into one context and share among apps []
+   .. this is the top priority
 1. make image preview []
+
+1. minimize the window []
+
+1. more fleshed out box shadow []
 
 // I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
 
@@ -35,4 +41,4 @@
    1. icon should be rendered when the file name changes []
    1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
 
-   1. change the display none from visibility hidden so that it can take less space
+   1. change the display none from visibility hidden so that it can take less space [Doesn't work]

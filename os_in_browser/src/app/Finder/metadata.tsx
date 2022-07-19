@@ -16,19 +16,22 @@ const menus: Menus[] = [
   },
 ];
 
-export const finderMetaData = {
-  active: false,
-  iconPath: "",
-  dimension: {
-    height: 500,
-    left: 0,
-    top: 100,
-    width: 500,
-  },
-  id: "finder",
-  tempDimension: undefined,
-  isFullSize: false,
-  process: <Finder />,
-  processName: "finder",
-  menus: menus,
+export const finderMetaData = (props: any) => {
+  return {
+    active: false,
+    iconPath: "",
+    dimension: {
+      height: 500,
+      left: 0,
+      top: 100,
+      width: 500,
+    },
+    id: "finder",
+    tempDimension: undefined,
+    isFullSize: false,
+    process: <Finder />,
+    processName: "finder",
+    menus: menus,
+    props: props,
+  };
 };
