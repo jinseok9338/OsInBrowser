@@ -33,12 +33,9 @@ export const fsFunction = () => {
    * @returns FileName in string
    */
   const renameFile = (oldFilePath: string, newFilePath: string) => {
-    if (!fs?.existsSync(oldFilePath)) {
-      fs?.renameSync(oldFilePath, newFilePath);
-      return newFilePath;
-    } else {
-      return newFilePath;
-    }
+    fs?.renameSync(oldFilePath, newFilePath);
+
+    return newFilePath;
   };
 
   /**

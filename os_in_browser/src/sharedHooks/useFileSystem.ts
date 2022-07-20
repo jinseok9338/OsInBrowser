@@ -53,10 +53,6 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
   const changeFileName = (oldPath: string, newPath: string) => {
     let filePath = renameFile(oldPath, newPath);
 
-    if (filePath == oldPath) {
-      return false;
-    }
-
     const files = readdirSync(currentDirectory()).map(
       (file) =>
         ({
@@ -68,7 +64,7 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
         } as fileType)
     );
     setCurrentFiles(files);
-    return true;
+
     // we need to index the files that are created so we can select them in order
   };
 
@@ -111,6 +107,8 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
     makeFile,
   };
 };
+
+export const mainFileSystem = useFileSystemhook();
 
 export default useFileSystemhook;
 

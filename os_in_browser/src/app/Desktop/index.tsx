@@ -15,11 +15,10 @@ import { v4 as uuidv4 } from "uuid";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
 import WindowComponent from "./components/window/window";
-import useFileSystemhook from "../../sharedHooks/useFileSystem";
+import { mainFileSystem } from "../../sharedHooks/useFileSystem";
 
 const Main = () => {
   const [state, {}] = useProcess();
-  const mainFileSystem = useFileSystemhook();
 
   // omMount load desktop files
   createEffect(() => {

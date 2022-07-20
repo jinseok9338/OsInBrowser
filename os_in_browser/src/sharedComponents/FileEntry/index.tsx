@@ -10,7 +10,7 @@ interface FileEntryProps {
   id: string; // uuid
   dir: string;
   className: string;
-  ChangeFileName: (oldPath: string, newPath: string) => boolean;
+  ChangeFileName: (oldPath: string, newPath: string) => void;
 }
 
 export const FileEntry = ({
@@ -36,14 +36,11 @@ export const FileEntry = ({
     if (e.key == "Enter") {
       setInputDisabled(true);
       let newPath = `${dir}/${fileName()}`;
-      let res = ChangeFileName(FilePath(), newPath);
 
-      if (res) {
-        setFilePath(newPath);
-        console.log("successfully change the file name");
-      } else {
-        setFileName((prev) => prev);
-      }
+      ChangeFileName(FilePath(), newPath);
+
+      setFilePath(newPath);
+      console.log("successfully change the file name");
     }
   };
 
@@ -106,14 +103,11 @@ export const FileEntry = ({
           onKeyDown={(e) => onKeyDown(e)}
           onBlur={() => {
             let newPath = `${dir}/${fileName()}`;
-            let res = ChangeFileName(FilePath(), newPath);
 
-            if (res) {
-              setFilePath(newPath);
-              console.log("successfully change the file name on blur");
-            } else {
-              setFileName((prev) => prev);
-            }
+            ChangeFileName(FilePath(), newPath);
+
+            setFilePath(newPath);
+            console.log("successfully change the file name");
           }}
           ref={() => {
             addEventListener(
