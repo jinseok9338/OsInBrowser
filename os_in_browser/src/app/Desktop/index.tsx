@@ -15,33 +15,23 @@ import { v4 as uuidv4 } from "uuid";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
 import WindowComponent from "./components/window/window";
+import useFileSystemhook from "../../sharedHooks/useFileSystem";
 
 const Main = () => {
   const [state, {}] = useProcess();
-
-  const { fs } = useFileSystem();
-  const [files, setFiles] = createSignal<fileType[]>([] as fileType[]);
+  const mainFileSystem = useFileSystemhook();
 
   // omMount load desktop files
   createEffect(() => {
     window.addEventListener("click", deselectAll);
-    const cd = "/home/desktop";
-    const cFiles = fs?.readdirSync(cd);
-
-    const cFilesWithIcon = cFiles?.map((value) => ({
-      name: value,
-      iconPath: setIcon(value),
-      id: uuidv4(),
-      filePath: `${cd}/${value}`,
-      dir: cd,
-    }));
-
-    setFiles(cFilesWithIcon!);
   });
 
   // the setFile Menu passed in the use Right Click Menu is causing the issue
   // that updates the desktop rendering ... what to do ...
-  const { open, position, menus } = useRightClickMenu(setFiles, "MainDesktop");
+  const { open, position, menus } = useRightClickMenu(
+    mainFileSystem.setCurrentFiles,
+    "MainDesktop"
+  );
 
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
 
@@ -53,7 +43,7 @@ const Main = () => {
 
         {/* context is the current file path where mouse is positioned  */}
         <CustomMenu open={open} position={position} menus={menus} />
-        <For each={files()}>
+        <For each={mainFileSystem.currentFiles}>
           {(file) => (
             <FileEntry
               className={"align-center-desktop"}
