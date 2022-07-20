@@ -45,13 +45,18 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
   });
 
   /**
-   * It takes two strings, oldPath and newPath, and returns void but set the new files into files signal
-   * @param {string} oldPath - The path of the file you want to rename.
-   * @param {string} newPath - The new path of the file.
-   * set the new files into files signal
+   * It takes two strings, renames a file, and returns a boolean
+   * @param {string} oldPath - the path of the file you want to rename
+   * @param {string} newPath - the new name of the file
+   * @returns The return value is a boolean.
    */
   const changeFileName = (oldPath: string, newPath: string) => {
-    renameFile(oldPath, newPath);
+    let filePath = renameFile(oldPath, newPath);
+
+    if (filePath == oldPath) {
+      return false;
+    }
+
     const files = readdirSync(currentDirectory()).map(
       (file) =>
         ({
@@ -63,6 +68,8 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
         } as fileType)
     );
     setCurrentFiles(files);
+    return true;
+    // we need to index the files that are created so we can select them in order
   };
 
   /**

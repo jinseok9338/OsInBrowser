@@ -33,11 +33,9 @@ export const fsFunction = () => {
    * @returns FileName in string
    */
   const renameFile = (oldFilePath: string, newFilePath: string) => {
-    fs?.renameSync(oldFilePath, newFilePath);
-    let newFile = readFileSync(newFilePath);
-    if (newFile.length == 0) {
-      console.log("the file is not upated properly");
-      return oldFilePath;
+    if (!fs?.existsSync(oldFilePath)) {
+      fs?.renameSync(oldFilePath, newFilePath);
+      return newFilePath;
     } else {
       return newFilePath;
     }

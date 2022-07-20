@@ -53,6 +53,7 @@ const Main = () => {
               setFocus={setFocus}
               filePath={file.filePath}
               dir={file.dir}
+              ChangeFileName={mainFileSystem.changeFileName}
             ></FileEntry>
           )}
         </For>

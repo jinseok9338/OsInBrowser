@@ -10,6 +10,7 @@ interface FileEntryProps {
   id: string; // uuid
   dir: string;
   className: string;
+  ChangeFileName: (oldPath: string, newPath: string) => boolean;
 }
 
 export const FileEntry = ({
@@ -20,6 +21,7 @@ export const FileEntry = ({
   dir,
   setFocus,
   className,
+  ChangeFileName,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -33,15 +35,16 @@ export const FileEntry = ({
     console.log(e.key);
     if (e.key == "Enter") {
       setInputDisabled(true);
-      ChangeFileName();
-    }
-  };
+      let newPath = `${dir}/${fileName()}`;
+      let res = ChangeFileName(FilePath(), newPath);
 
-  const ChangeFileName = () => {
-    let newPath = `${dir}/${fileName()}`; //todo
-    fs?.renameSync(FilePath(), newPath);
-    setFilePath(newPath);
-    console.log("successfully change the file name");
+      if (res) {
+        setFilePath(newPath);
+        console.log("successfully change the file name");
+      } else {
+        setFileName((prev) => prev);
+      }
+    }
   };
 
   const inputAvaliable = (e: MouseEvent, id: string) => {
@@ -76,11 +79,14 @@ export const FileEntry = ({
         fileInfoElement!.style.visibility = "hidden";
         fileInfoElement!.style.transitionDelay = "0s";
       }}
-      onBlur={() => {
-        ChangeFileName();
-      }}
     >
-      <FileInfo name={name} top={top} left={left} id={id} filePath={filePath} />
+      <FileInfo
+        name={name}
+        top={top}
+        left={left}
+        id={id}
+        filePath={FilePath()}
+      />
       <div
         class={className}
         id={id}
@@ -98,6 +104,17 @@ export const FileEntry = ({
           type="text"
           onChange={(e) => setFileName(e.currentTarget.value)}
           onKeyDown={(e) => onKeyDown(e)}
+          onBlur={() => {
+            let newPath = `${dir}/${fileName()}`;
+            let res = ChangeFileName(FilePath(), newPath);
+
+            if (res) {
+              setFilePath(newPath);
+              console.log("successfully change the file name on blur");
+            } else {
+              setFileName((prev) => prev);
+            }
+          }}
           ref={() => {
             addEventListener(
               "click",
