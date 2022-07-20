@@ -12,7 +12,7 @@ import { fsFunction } from "../utils/fsFunction";
 
 import { createStore } from "solid-js/store";
 import { fileType } from "../context/FileDirectoryContext";
-import { setIcon } from "../app/Finder/finderFunction/setIcon";
+import { setFileTyle, setIcon } from "../utils/setIcon";
 
 const useFileSystemhook = (currentdir = "/home/desktop") => {
   //fisrt import fs object
@@ -58,6 +58,7 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
         ({
           name: file,
           iconPath: setIcon(file),
+          fileType: setFileTyle(file),
           id: uuidv4(),
           filePath: `${currentDirectory()}/${file}`,
           dir: currentDirectory(),

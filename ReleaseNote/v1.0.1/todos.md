@@ -42,3 +42,7 @@
    1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
 
    1. change the display none from visibility hidden so that it can take less space [Doesn't work]
+
+   1. bug fixed can;t change the file name to same name [Done]
+   1. add file type in file type []
+   1. add hooks to finder index [ ]

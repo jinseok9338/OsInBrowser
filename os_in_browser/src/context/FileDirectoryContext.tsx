@@ -10,7 +10,7 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { v4 as uuidv4 } from "uuid";
-import { setIcon } from "../app/Finder/finderFunction/setIcon";
+import { setIcon } from "../utils/setIcon";
 import { DIRECTORY_LIST } from "../utils/constants";
 import { useFileSystem } from "./windowFileSystem";
 

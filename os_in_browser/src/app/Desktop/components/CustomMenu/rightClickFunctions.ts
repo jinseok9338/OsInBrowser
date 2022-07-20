@@ -1,4 +1,4 @@
-import { setIcon } from "../../../Finder/finderFunction/setIcon";
+import { setIcon } from "../../../../utils/setIcon";
 import { fileType } from "../../../../context/FileDirectoryContext";
 import { useFileSystem } from "../../../../context/windowFileSystem";
 

@@ -7,7 +7,7 @@ import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
 import CustomMenu from "./components/CustomMenu";
 
 import { fileType } from "../../context/FileDirectoryContext";
-import { setIcon } from "../Finder/finderFunction/setIcon";
+import { setIcon } from "../../utils/setIcon";
 
 import FileEntry from "../../sharedComponents/FileEntry";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
