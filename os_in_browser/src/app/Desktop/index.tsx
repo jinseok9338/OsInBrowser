@@ -53,6 +53,7 @@ const Main = () => {
               filePath={file.filePath}
               dir={file.dir}
               ChangeFileName={mainFileSystem.changeFileName}
+              readDir={mainFileSystem.readdirSync}
             ></FileEntry>
           )}
         </For>

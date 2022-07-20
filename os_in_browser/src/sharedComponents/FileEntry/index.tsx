@@ -11,6 +11,7 @@ interface FileEntryProps {
   dir: string;
   className: string;
   ChangeFileName: (oldPath: string, newPath: string) => void;
+  readDir: (currentDirectory: string) => string[];
 }
 
 export const FileEntry = ({
@@ -22,6 +23,7 @@ export const FileEntry = ({
   setFocus,
   className,
   ChangeFileName,
+  readDir,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -36,6 +38,10 @@ export const FileEntry = ({
     if (e.key == "Enter") {
       setInputDisabled(true);
       let newPath = `${dir}/${fileName()}`;
+      if (readDir(dir).includes(fileName())) {
+        setFileName(name);
+        return;
+      }
 
       ChangeFileName(FilePath(), newPath);
 
@@ -78,7 +84,7 @@ export const FileEntry = ({
       }}
     >
       <FileInfo
-        name={name}
+        name={fileName()}
         top={top}
         left={left}
         id={id}

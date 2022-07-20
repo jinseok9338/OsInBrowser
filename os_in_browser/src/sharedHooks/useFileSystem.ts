@@ -105,6 +105,7 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
     readFile,
     setCurrentDirectory,
     makeFile,
+    readdirSync,
   };
 };
 
