@@ -5,10 +5,13 @@ import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import { useFileSystem } from "../../context/windowFileSystem";
 
 import FileEntry from "../../sharedComponents/FileEntry";
+import { useFileSystemHookType } from "../../types/fileSystemType";
 
-const FinderMain = () => {
-  const [currentDirectory, currentFiles, {}] = useFileDirectory();
+interface FinderMainProps {
+  fileSystem: useFileSystemHookType;
+}
 
+const FinderMain = ({ fileSystem }: FinderMainProps) => {
   const { deselectAll, setFocus } = useSelectFile("align-center-finder");
 
   const { fs } = useFileSystem();
@@ -16,14 +19,14 @@ const FinderMain = () => {
   return (
     <div
       class="box-main"
-      id={currentDirectory.currentDirectory}
+      id={fileSystem.currentDirectory()}
       onClick={(e) => {
         if ((e.target! as HTMLElement).classList.contains("box-main")) {
           deselectAll();
         }
       }}
     >
-      <For each={currentFiles.currentFiles}>
+      <For each={fileSystem.currentFiles}>
         {(item, index) => (
           <FileEntry
             name={item.name}
@@ -33,6 +36,8 @@ const FinderMain = () => {
             setFocus={setFocus}
             iconPath={item.iconPath}
             id={item.id}
+            ChangeFileName={fileSystem.changeFileName}
+            readDir={fileSystem.readdirSync}
           />
         )}
       </For>

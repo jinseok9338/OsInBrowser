@@ -1,12 +1,5 @@
 import { useFileSystem } from "../context/windowFileSystem";
-import {
-  createSignal,
-  createContext,
-  ParentComponent,
-  createEffect,
-  useContext,
-  onMount,
-} from "solid-js";
+import { createSignal, createEffect } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 import { fsFunction } from "../utils/fsFunction";
 

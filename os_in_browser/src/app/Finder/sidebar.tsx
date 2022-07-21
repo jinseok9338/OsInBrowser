@@ -9,8 +9,9 @@ import icloud from "../../assets/images/menu/icloud.png";
 import documents from "../../assets/images/menu/documents.png";
 import laptop from "../../assets/images/menu/laptop.png";
 import { useFileDirectory } from "../../context/FileDirectoryContext";
-import { For } from "solid-js";
+import { For, Setter, Accessor } from "solid-js";
 import { Favorite } from "../../types/finderSideBar";
+import { useFileSystemHookType } from "../../types/fileSystemType";
 
 const favoriteArray: Favorite[] = [
   { src: airdrop, title: "Home", directory: "/home" },
@@ -23,24 +24,29 @@ const favoriteArray: Favorite[] = [
   { src: pictures, title: "Pictures", directory: "/home/pictures" },
 ];
 
-const SideBar = () => {
-  const [currentDirectory, _currentFiles, { ChangeDirectory }] =
-    useFileDirectory();
+interface SideBarProps {
+  fileSystem: useFileSystemHookType;
+  setCd: Setter<string>;
+  cd: Accessor<string>;
+}
 
+const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
   const Favorites = () => (
     <>
       <div class="item-category">Favourites</div>
       <For each={favoriteArray}>
         {({ directory, src, title }) => (
-          <div class="item-selected" onClick={() => ChangeDirectory(directory)}>
+          <div
+            class="item-selected"
+            onClick={() => {
+              fileSystem.setCurrentDirectory(directory);
+              setCd(directory);
+            }}
+          >
             <img src={src} alt="" />
             <span
               id={directory}
-              style={`font-weight:${
-                currentDirectory.currentDirectory == directory
-                  ? "700"
-                  : "normal"
-              };`}
+              style={`font-weight:${cd() == directory ? "700" : "normal"};`}
             >
               {title}
             </span>
