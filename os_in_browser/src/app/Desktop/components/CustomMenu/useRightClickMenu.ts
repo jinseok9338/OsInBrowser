@@ -1,13 +1,14 @@
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
 
-import { fileType } from "../../../../context/FileDirectoryContext";
 import { useFileSystem } from "../../../../context/windowFileSystem";
 
 import { createTextFile } from "./rightClickFunctions";
-import { menusCollection } from "../../../../utils/constants";
+import { iconCustomMenu } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
+import { fileType } from "../../../../types/fileSystemType";
 
+// need some work to do ...
 const useRightClickMenu = (
   setFiles: Setter<fileType[]>,
   id: string,
@@ -74,7 +75,7 @@ const useRightClickMenu = (
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(menusCollection.fileMenu);
+        setMenus(iconCustomMenu().fileMenu);
 
         setContext(context);
         return;
@@ -90,7 +91,7 @@ const useRightClickMenu = (
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(menusCollection.fileMenu);
+        setMenus(iconCustomMenu().finemenu);
 
         setContext(context);
         return;

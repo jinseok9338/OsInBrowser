@@ -13,13 +13,13 @@ const Finder = () => {
   const fileSytem = useFileSystemhook(cd());
 
   return (
-    <FileDirectoryProvider>
+    <>
       <div class="box-body">
         <SideBar fileSystem={fileSytem} setCd={setCd} cd={cd} />
         <FinderMain fileSystem={fileSytem} />
       </div>
       <div class="box-footer"></div>
-    </FileDirectoryProvider>
+    </>
   );
 };
 

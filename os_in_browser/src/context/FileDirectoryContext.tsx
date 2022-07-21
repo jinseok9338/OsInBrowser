@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { setIcon } from "../utils/setIcon";
 import { DIRECTORY_LIST } from "../utils/constants";
 import { useFileSystem } from "./windowFileSystem";
+import { fileType } from "../types/fileSystemType";
 
 type FileDirectoryContextValue = [
   currentDirectory: { currentDirectory: string },
@@ -22,14 +23,6 @@ type FileDirectoryContextValue = [
     ChangeCurrentFiles: (files: fileType[]) => void;
   }
 ];
-
-export interface fileType {
-  name: string;
-  iconPath: string;
-  id: string;
-  filePath: string;
-  dir: string;
-}
 
 const FileDirectoryContext = createContext<FileDirectoryContextValue>([
   { currentDirectory: "" },

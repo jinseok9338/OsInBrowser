@@ -53,10 +53,22 @@ export const fsFunction = () => {
     }
   };
 
+  const deletefile = (filePath: string) => {
+    try {
+      fs?.unlinkSync(filePath);
+      console.log(`successfully deleted ${filePath}`);
+      return true;
+    } catch (e) {
+      console.log(e);
+      return false;
+    }
+  };
+
   return {
     readdirSync,
     readFileSync,
     renameFile,
     makefile,
+    deletefile,
   };
 };

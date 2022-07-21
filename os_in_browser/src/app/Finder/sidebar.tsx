@@ -8,7 +8,7 @@ import pictures from "../../assets/images/menu/pictures.png";
 import icloud from "../../assets/images/menu/icloud.png";
 import documents from "../../assets/images/menu/documents.png";
 import laptop from "../../assets/images/menu/laptop.png";
-import { useFileDirectory } from "../../context/FileDirectoryContext";
+
 import { For, Setter, Accessor } from "solid-js";
 import { Favorite } from "../../types/finderSideBar";
 import { useFileSystemHookType } from "../../types/fileSystemType";

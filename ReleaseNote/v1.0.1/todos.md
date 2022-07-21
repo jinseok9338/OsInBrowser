@@ -37,12 +37,13 @@
    1. reactivity problem in finder app when the file is created [] -> this is important!!!
    1. fix the create File function where it doesn't have file id [Done]
    1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
-   1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird []
-   1. icon should be rendered when the file name changes []
+   1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird [Done]
+   1. we need a way to connect the mainDesktop and finder Desktop dir... How...
+   1. icon should be rendered when the file name changes [Done]
    1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
 
    1. change the display none from visibility hidden so that it can take less space [Doesn't work]
 
-   1. bug fixed can;t change the file name to same name [Done]
+   1. bug fixed can't change the file name to same name [Done]
    1. add file type in file type []
-   1. add hooks to finder index [ ]
+   1. add hooks to finder index []

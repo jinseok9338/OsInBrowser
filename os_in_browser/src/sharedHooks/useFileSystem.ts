@@ -4,13 +4,18 @@ import { v4 as uuidv4 } from "uuid";
 import { fsFunction } from "../utils/fsFunction";
 
 import { createStore } from "solid-js/store";
-import { fileType } from "../context/FileDirectoryContext";
-import { setFileTyle, setIcon } from "../utils/setIcon";
 
-const useFileSystemhook = (currentdir = "/home/desktop") => {
+import { setFileTyle, setIcon } from "../utils/setIcon";
+import { fileType, useFileSystemHookType } from "../types/fileSystemType";
+
+// Need a better naming ...
+const useFileSystemhook = (
+  currentdir = "/home/desktop"
+): useFileSystemHookType => {
   //fisrt import fs object
   const { fs } = useFileSystem();
-  const { readFileSync, readdirSync, renameFile, makefile } = fsFunction();
+  const { readFileSync, readdirSync, renameFile, makefile, deletefile } =
+    fsFunction();
 
   //initialize the files and directory ... but do I need one??
   const [currentDirectory, setCurrentDirectory] = createSignal(currentdir);
@@ -91,6 +96,30 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
     setCurrentFiles(files);
   };
 
+  /**
+   * It deletes a file and then updates the current files in the state
+   * @param {string} filePath - The path of the file to be deleted
+   * @returns the current directory.
+   */
+  const deleteFile = (filePath: string) => {
+    let res = deletefile(filePath);
+    if (res) {
+      const files = readdirSync(currentDirectory()).map(
+        (file) =>
+          ({
+            name: file,
+            iconPath: setIcon(file),
+            id: uuidv4(),
+            filePath: `${currentDirectory()}/${file}`,
+            dir: currentDirectory(),
+          } as fileType)
+      );
+      setCurrentFiles(files);
+    } else {
+      return;
+    }
+  };
+
   return {
     currentFiles,
     setCurrentFiles,
@@ -100,6 +129,7 @@ const useFileSystemhook = (currentdir = "/home/desktop") => {
     setCurrentDirectory,
     makeFile,
     readdirSync,
+    deleteFile,
   };
 };
 

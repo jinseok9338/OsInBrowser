@@ -37,22 +37,17 @@ export const DIRECTORY_LIST = [
 
 type MenuCollection = { [key: string]: customMenu[] };
 
-export const menusCollection: MenuCollection = {
+export const iconCustomMenu = (...args: any): MenuCollection => ({
   fileMenu: [
     {
       iconPath: "fa fa-file",
       title: "delete File",
-      onClick: () => alert("create Folder"),
-    },
-    {
-      iconPath: "fa fa-folder-open",
-      title: "rename FIle",
-      onClick: () => alert("create Folder"),
+      onClick: args["delete File"],
     },
     {
       iconPath: "fa fa-cogs",
       title: "settings",
-      onClick: () => alert("setting Opened"),
+      onClick: args["settings"],
     },
   ],
-};
+});
