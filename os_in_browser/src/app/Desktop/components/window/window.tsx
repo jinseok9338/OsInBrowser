@@ -18,14 +18,21 @@ const WindowComponent = ({
   dimension,
   id,
 }: WindowComponentProps) => {
-  const [state, { deleteProcess, enlarge, changeProcessDimension }] =
+  const [state, { deleteProcess, enlarge, changeProcessDimension, shrink }] =
     useProcess();
   const { onMouseDown } = useDrag(changeProcessDimension, id, dimension);
 
+  const currentProcess = state.find((process) => process.id == id);
   return (
     <div
       class="window_container"
-      style={`left:${dimension.left}px; top:${dimension.top}px; width:${dimension.width}px; height:${dimension.height}px`}
+      id={id}
+      style={`left:${dimension.left}px;
+       top:${dimension.top}px;
+        width:${dimension.width}px;
+         height:${dimension.height}px;
+         ${currentProcess?.isShrunk ? "display:none;" : "display:block;"}
+      `}
     >
       <Resizers id={id} dimension={dimension} />
       <div class="row" onMouseDown={onMouseDown}>
@@ -35,7 +42,13 @@ const WindowComponent = ({
             style="background:#ED594A;"
             onclick={() => deleteProcess(id)}
           ></span>
-          <span class="row-dot" style="background:#FDD800;"></span>
+          <span
+            class="row-dot"
+            style="background:#FDD800;"
+            onClick={() => {
+              shrink(id);
+            }}
+          ></span>
           <span
             class="row-dot"
             style="background:#5AC05A;"

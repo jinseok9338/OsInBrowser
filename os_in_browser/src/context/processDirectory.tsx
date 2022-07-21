@@ -96,52 +96,17 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
   };
 
   const shrink = (id: string) => {
-    const process = state.find((process) => process.id == id);
-    if (process?.isFullSize) {
-      const newState = state.map((process) => {
-        if (process.id == id) {
-          return {
-            active: process.active,
-            dimension: process.tempDimension, // use the temp dimension to get back to the original dimension
-            iconPath: process.iconPath,
-            id,
-            isFullSize: process.isFullSize,
-            process: process.process,
-            processName: process.processName,
-            tempDimension: undefined,
-            isShrunk: !process.isShrunk,
-          } as ProcessState;
-        } else {
-          return process;
-        }
-      });
-      setState(newState);
-    } else {
-      // if the window is original size
-      const newState = state.map((process) => {
-        if (process.id == id) {
-          return {
-            active: process.active,
-            dimension: {
-              height: 0,
-              width: 0,
-              left: 0,
-              top: 0,
-            } as Dimension, // use the temp dimension to get back to the original dimension
-            iconPath: process.iconPath,
-            id,
-            isFullSize: process.isFullSize,
-            process: process.process,
-            processName: process.processName,
-            tempDimension: process.dimension,
-            isShrunk: !process.isShrunk,
-          } as ProcessState;
-        } else {
-          return process;
-        }
-      });
-      setState(newState);
-    }
+    const newState = state.map((process) => {
+      if (process.id == id) {
+        return {
+          ...process,
+          isShrunk: !process.isShrunk,
+        } as ProcessState;
+      } else {
+        return process;
+      }
+    });
+    setState(newState);
   };
 
   const changeProcessDimension = (id: string, dimension: Dimension) => {
