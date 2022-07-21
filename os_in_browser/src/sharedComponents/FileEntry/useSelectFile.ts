@@ -11,7 +11,8 @@ const useSelectFile = (className: string) => {
     for (let i = 0; i < icons!.length; i++) {
       if (files.includes(icons!.item(i)!.id)) {
         (icons!.item(i) as HTMLElement).style.boxShadow =
-          "inset 0 0 0 2em rgba(70, 70, 197, 0.151)";
+          /* Adding a blue border around the icon. */
+          "inset 0 0 0 2em rgba(70, 70, 197, 0.451), 0 0 0 2px rgba(70, 70, 197, 0.651)";
       } else {
         (icons!.item(i) as HTMLElement)!.style.boxShadow = "";
       }

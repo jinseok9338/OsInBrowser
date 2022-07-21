@@ -18,15 +18,19 @@
 
 1. make icon extension more vastly []
 
-1. integrating filesystem and file direcotry context into one context and share among apps []
+1. make the icon movable from one folder to another []
+
+1. copy and paste []
+
+1. integrating filesystem and file direcotry context into one context and share among apps [Done] - made a hook for it
    .. this is the top priority
 1. make image preview []
 
 1. minimize the window []
 
-1. more fleshed out box shadow []
+1. with the current task on the menubar []
 
-// I didn't need to put selected Files in context .. I will refactor it and make it into a hook rather than a context
+1. more fleshed out box shadow [Done]
 
 1. Bugs
 
@@ -46,4 +50,4 @@
 
    1. bug fixed can't change the file name to same name [Done]
    1. add file type in file type []
-   1. add hooks to finder index []
+   1. add hooks to finder index to index the files []

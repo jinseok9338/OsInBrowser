@@ -32,6 +32,6 @@ export const finderMetaData = (props: any) => {
     process: <Finder />,
     processName: "finder",
     menus: menus,
-    props: props,
+    isShrunk: false,
   };
 };

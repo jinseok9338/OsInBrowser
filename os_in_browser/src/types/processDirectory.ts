@@ -13,6 +13,7 @@ export type ProcessesContextValue = [
     changeProcessDimension: (id: string, dimension: Dimension) => void;
     enlarge: (id: string) => void;
     changeActive: (id: string) => void;
+    shrink: (id: string) => void;
   }
 ];
 
@@ -26,6 +27,7 @@ export interface ProcessState {
   iconPath: string;
   active: boolean;
   menus?: Menus[];
+  isShrunk: boolean;
 }
 
 export interface Menus {

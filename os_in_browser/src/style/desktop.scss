@@ -43,18 +43,35 @@
     width: auto;
     height: 100%;
     margin-left: 20px;
+    overflow-x: scroll;
 
     .apple-logo {
       transform: scale(1);
+      margin-right: 10px;
     }
     .menus {
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
-      margin-left: 20px;
+      justify-content: flex-start;
+      width: 100px;
+      max-width: 100px;
       color: rgba(255, 255, 255, 0.95);
       font-size: 14px;
+    }
+
+    .taskIcon {
+      height: 30px;
+      width: 30px;
+      display: felx;
+      justify-content: center;
+      align-items: center;
+      margin-right: 0.7rem;
+    }
+
+    .taskIconImg {
+      height: 100%;
+      width: 100%;
     }
 
     .dropdown-content {

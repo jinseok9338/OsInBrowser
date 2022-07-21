@@ -5,10 +5,13 @@ import search from "./icons/search.png";
 import microphone from "./icons/microphone.png";
 import { createSignal, onCleanup } from "solid-js";
 import { ProcessState } from "../../../../types/processDirectory";
+import { useProcess } from "../../../../context/processDirectory";
+import { For } from "solid-js";
+import Tasks from "./tasks";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
-  const [process, setProcess] = createSignal({} as ProcessState);
+  const [state, { shrink }] = useProcess();
 
   const interval = setInterval(() => {
     let now = new Date(Date.now());
@@ -28,25 +31,16 @@ const Menubar = () => {
           height="20"
           alt=""
         />
-        <div class="menus">
-          {Object.keys(process()).length != 0
-            ? process().processName
-            : "Finder"}
-        </div>
-        {Object.keys(process()).length != 0 ? (
-          process().menus?.map((menu) => (
-            <div class="menus">{menu.starting}</div>
-          ))
-        ) : (
-          <>
-            <div class="menus">{/* <OpenProgrammatically /> */}</div>
-            <div class="menus">{"Edit"}</div>
-            <div class="menus">{"View"}</div>
-            <div class="menus">{"Go"}</div>
-            <div class="menus">{"Window"}</div>
-            <div class="menus">{"Help"}</div>
-          </>
-        )}
+        <For each={state}>
+          {(process, index) => (
+            <Tasks
+              id={process.id}
+              shrink={shrink}
+              processName={process.processName}
+              iconPath={process.iconPath}
+            />
+          )}
+        </For>
       </div>
 
       <div class="rightbar">
