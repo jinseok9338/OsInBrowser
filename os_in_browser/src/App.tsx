@@ -6,6 +6,7 @@ import "./style/global.scss";
 import "./style/variables.scss";
 import "./style/window.scss";
 import "./style/finder.scss";
+import "./style/loader.scss";
 
 //Divider css
 import "./style/desktop/menubar/dropdownMenu/divider.scss";
