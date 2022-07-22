@@ -58,12 +58,16 @@
   flex-direction: column;
   z-index: 10;
 }
+.iconImg {
+  pointer-events: none;
+}
 
 .fileName {
   border: none;
   background-color: transparent;
   color: black;
   text-align: center;
+  resize: none;
 }
 
 .align-center-finder {

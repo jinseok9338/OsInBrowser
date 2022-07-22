@@ -101,13 +101,12 @@ export const FileEntry = ({
           setFocus(id, e);
         }}
       >
-        <img class="img" src={iconPath} alt={name} id={filePath} />
-        <input
+        <img class="iconImg" src={iconPath} alt={name} id={filePath} />
+        <textarea
           class="fileName"
           disabled={inputDisabled()}
           id={`fileInput ${id}`}
           value={fileName()}
-          type="text"
           onChange={(e) => setFileName(e.currentTarget.value)}
           onKeyDown={(e) => onKeyDown(e)}
           onBlur={() => {
