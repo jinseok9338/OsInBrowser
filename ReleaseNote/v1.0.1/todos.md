@@ -46,7 +46,7 @@
 
 1. more fleshed out box shadow [Done]
 
-1. add more file type to file drop config []
+1. add more file type to file drop config [Done]
 
 1. Bugs
 
@@ -58,7 +58,7 @@
 
    1. fix the bug whene desktop environment is shared [Done]
 
-   1. reactivity problem in finder app when the file is created [Done] -> this is important!!!
+   1. reactivity problem in finder app when the file is created [Done] -> this is important!!! [Done]
 
    1. fix the create File function where it doesn't have file id [Done]
 
