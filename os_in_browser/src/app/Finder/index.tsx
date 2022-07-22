@@ -12,13 +12,23 @@ const Finder = () => {
 
   const fileSytem = useFileSystemhook(cd());
 
+  const finderDirectory = (cd: string) => {
+    //remove the first /
+    let temp = cd.substring(1, cd.length);
+    //replace "/" with " > "
+    let result = temp.replaceAll("/", " 🡆 ");
+    return result;
+  };
+
   return (
     <>
       <div class="box-body">
         <SideBar fileSystem={fileSytem} setCd={setCd} cd={cd} />
         <FinderMain fileSystem={fileSytem} />
       </div>
-      <div class="box-footer"></div>
+      <div class="box-footer" style={{ "padding-left": "1rem" }}>
+        <span style={{ "font-size": "0.8rem" }}>{finderDirectory(cd())}</span>
+      </div>
     </>
   );
 };

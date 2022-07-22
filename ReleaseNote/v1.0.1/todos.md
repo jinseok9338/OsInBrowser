@@ -12,7 +12,7 @@
 
 1. make custom Menu with switch statement []
 
-1. have the icon focused when right clicked []
+1. have the icon focused when right clicked [] ... not implementing this
 
 1. refactor the code First ... I think it is the right thing to do first .... [Done]
 
@@ -24,11 +24,17 @@
 
 1. integrating filesystem and file direcotry context into one context and share among apps [Done] - made a hook for it
    .. this is the top priority
-1. make image preview []
+1. make image preview [] ... should I? maybe later ...
 
-1. minimize the window []
+1. minimize the window [Done]
 
-1. with the current task on the menubar []
+1. with the current task on the menubar [Done]
+
+1. add file type in file type []
+
+1. add hooks to finder index to index the files []
+
+1. file directory in the footer of the finder [Done]
 
 1. more fleshed out box shadow [Done]
 
@@ -49,5 +55,3 @@
    1. change the display none from visibility hidden so that it can take less space [Doesn't work]
 
    1. bug fixed can't change the file name to same name [Done]
-   1. add file type in file type []
-   1. add hooks to finder index to index the files []

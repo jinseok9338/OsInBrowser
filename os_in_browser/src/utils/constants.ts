@@ -28,7 +28,7 @@ export const TEXT_FORMAT = ["txt", "utxt", "utf8", "text"];
 
 export const DIRECTORY_LIST = [
   "/home/desktop",
-  "/home/downlaods",
+  "/home/download",
   "/home/apps",
   "/home/pictures",
   "/home/documents",

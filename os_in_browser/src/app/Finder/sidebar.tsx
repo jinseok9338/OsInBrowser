@@ -20,7 +20,7 @@ const favoriteArray: Favorite[] = [
   { src: folder, title: "Google Drive", directory: "/home/folder" },
   { src: desktop, title: "Desktop", directory: "/home/desktop" },
   { src: documents, title: "Documents", directory: "/home/documents" },
-  { src: download, title: "Download", directory: "/home/downlaods" },
+  { src: download, title: "Download", directory: "/home/download" },
   { src: pictures, title: "Pictures", directory: "/home/pictures" },
 ];
 
