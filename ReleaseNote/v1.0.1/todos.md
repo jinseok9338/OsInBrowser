@@ -26,6 +26,8 @@
    .. this is the top priority
 1. make image preview [] ... should I? maybe later ...
 
+1. drag and drop from the external desktop environment [] https://codesandbox.io/s/github/dineshselvantdm/drag-drop-file-upload-react-hooks?file=/src/file-uploader.js:944-955
+
 1. minimize the window [Done]
 
 1. with the current task on the menubar [Done]
