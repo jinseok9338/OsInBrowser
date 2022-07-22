@@ -16,9 +16,9 @@
 
 1. refactor the code First ... I think it is the right thing to do first .... [Done]
 
-1. make icon extension more vastly []
+1. make icon extension more vastly []... later when I need it ...
 
-1. make the icon movable from one folder to another []
+1. make the icon movable from one folder to another [] this is the last feature
 
 1. copy and paste []
 
@@ -30,7 +30,7 @@
 
 1. with the current task on the menubar [Done]
 
-1. add file type in file type []
+1. add file type in file type [Done]
 
 1. add hooks to finder index to index the files []
 

@@ -1,10 +1,11 @@
-import { setIcon } from "../../../../utils/setIcon";
-
 import { useFileSystem } from "../../../../context/windowFileSystem";
 
 import { Setter } from "solid-js";
 import { v4 as uuidv4 } from "uuid";
 import { fileType } from "../../../../types/fileSystemType";
+import { fsFunction } from "../../../../utils/fsFunction";
+
+const { getFileType, setIcon } = fsFunction();
 
 export const createTextFile = (
   e: MouseEvent,
@@ -25,12 +26,16 @@ export const createTextFile = (
 
   fs?.writeFileSync(fileName, "");
   const filesString = fs?.readdirSync(cd);
-  const files = filesString?.map((value) => ({
-    name: value,
-    iconPath: setIcon(value),
-    id: uuidv4(),
-    filePath: fileName, // this is hard coded let's fix it later ...
-    dir: cd,
-  }));
+  const files = filesString?.map(
+    (value) =>
+      ({
+        name: value,
+        filetype: getFileType(value),
+        iconPath: setIcon(getFileType(value)),
+        id: uuidv4(),
+        filePath: fileName, // this is hard coded let's fix it later ...
+        dir: cd,
+      } as fileType)
+  );
   setFiles(files!);
 };

@@ -12,6 +12,7 @@ interface FileEntryProps {
   className: string;
   ChangeFileName: (oldPath: string, newPath: string) => void;
   readDir: (currentDirectory: string) => string[];
+  filetype: string;
 }
 
 export const FileEntry = ({
@@ -24,6 +25,7 @@ export const FileEntry = ({
   className,
   ChangeFileName,
   readDir,
+  filetype,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -89,6 +91,7 @@ export const FileEntry = ({
         left={left}
         id={id}
         filePath={FilePath()}
+        filetype={filetype}
       />
       <div
         class={className}

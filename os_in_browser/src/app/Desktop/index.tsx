@@ -6,9 +6,6 @@ import { useFileSystem } from "../../context/windowFileSystem";
 import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
 import CustomMenu from "./components/CustomMenu";
 
-import { fileType } from "../../context/FileDirectoryContext";
-import { setIcon } from "../../utils/setIcon";
-
 import FileEntry from "../../sharedComponents/FileEntry";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import { v4 as uuidv4 } from "uuid";
@@ -45,6 +42,7 @@ const Main = () => {
         <For each={mainFileSystem.currentFiles}>
           {(file) => (
             <FileEntry
+              filetype={file.filetype}
               className={"align-center-desktop"}
               name={file.name}
               iconPath={file.iconPath}

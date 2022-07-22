@@ -18,5 +18,5 @@ export interface fileType {
   id: string;
   filePath: string;
   dir: string;
-  fileType: string;
+  filetype: string;
 }

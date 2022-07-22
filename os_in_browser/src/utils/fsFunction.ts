@@ -1,4 +1,9 @@
 import { useFileSystem } from "../context/windowFileSystem";
+import { IMAGE_FILE_EXTENSIONS, TEXT_FORMAT } from "./constants";
+import folder from "../assets/images/apps/folder.png";
+import picture from "../assets/images/apps/picture.png";
+import unknown from "../assets/images/apps/unknown.png";
+import textEdit from "../assets/images/apps/textedit.png";
 
 export const fsFunction = () => {
   const { fs } = useFileSystem();
@@ -64,11 +69,49 @@ export const fsFunction = () => {
     }
   };
 
+  const getExtension = (directory: string) => {
+    return /[.]/.exec(directory) ? /[^.]+$/.exec(directory) : undefined;
+  };
+
+  const getFileType = (directory: string) => {
+    let iconName = getExtension(directory)?.toString();
+    // need to check if undefined is a directory or not
+    if (iconName == undefined) {
+      // get the folder icon since it's folder
+      return "folder";
+    }
+    if (IMAGE_FILE_EXTENSIONS.includes(iconName)) {
+      return "image";
+    }
+    if (TEXT_FORMAT.includes(iconName)) {
+      return "text";
+    }
+
+    //this is unoknown type
+    return "unknown";
+  };
+
+  const setIcon = (filetype: string) => {
+    switch (filetype) {
+      case "folder":
+        return folder;
+      case "image":
+        return picture;
+      case "text":
+        return textEdit;
+      default:
+        return unknown;
+    }
+  };
+
   return {
     readdirSync,
     readFileSync,
     renameFile,
     makefile,
     deletefile,
+
+    setIcon,
+    getFileType,
   };
 };

@@ -5,7 +5,6 @@ import { fsFunction } from "../utils/fsFunction";
 
 import { createStore } from "solid-js/store";
 
-import { setFileTyle, setIcon } from "../utils/setIcon";
 import { fileType, useFileSystemHookType } from "../types/fileSystemType";
 
 // Need a better naming ...
@@ -14,8 +13,15 @@ const useFileSystemhook = (
 ): useFileSystemHookType => {
   //fisrt import fs object
   const { fs } = useFileSystem();
-  const { readFileSync, readdirSync, renameFile, makefile, deletefile } =
-    fsFunction();
+  const {
+    readFileSync,
+    readdirSync,
+    renameFile,
+    makefile,
+    deletefile,
+    getFileType,
+    setIcon,
+  } = fsFunction();
 
   //initialize the files and directory ... but do I need one??
   const [currentDirectory, setCurrentDirectory] = createSignal(currentdir);
@@ -31,10 +37,11 @@ const useFileSystemhook = (
         (file) =>
           ({
             name: file,
-            iconPath: setIcon(file),
+            iconPath: setIcon(getFileType(file)),
             id: uuidv4(),
             filePath: `${cd}/${file}`,
             dir: cd,
+            filetype: getFileType(file),
           } as fileType)
       );
       setCurrentFiles(cFiles);
@@ -55,8 +62,8 @@ const useFileSystemhook = (
       (file) =>
         ({
           name: file,
-          iconPath: setIcon(file),
-          fileType: setFileTyle(file),
+          iconPath: setIcon(getFileType(file)),
+          filetype: getFileType(file),
           id: uuidv4(),
           filePath: `${currentDirectory()}/${file}`,
           dir: currentDirectory(),
@@ -87,7 +94,8 @@ const useFileSystemhook = (
       (file) =>
         ({
           name: file,
-          iconPath: setIcon(file),
+          iconPath: setIcon(getFileType(file)),
+          filetype: getFileType(file),
           id: uuidv4(),
           filePath: `${currentDirectory()}/${file}`,
           dir: currentDirectory(),
@@ -108,7 +116,8 @@ const useFileSystemhook = (
         (file) =>
           ({
             name: file,
-            iconPath: setIcon(file),
+            iconPath: setIcon(getFileType(file)),
+            filetype: getFileType(file),
             id: uuidv4(),
             filePath: `${currentDirectory()}/${file}`,
             dir: currentDirectory(),
