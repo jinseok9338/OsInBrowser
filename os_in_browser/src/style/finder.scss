@@ -50,11 +50,10 @@
   visibility: hidden;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   background-color: #ffffff;
-  width: fit-content;
+  width: max-content;
   height: fit-content;
   min-width: 50px;
   min-height: 10px;
-  max-width: 200px;
   display: flex;
   flex-direction: column;
   z-index: 10;

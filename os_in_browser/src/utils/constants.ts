@@ -59,7 +59,9 @@ export interface configType {
 }
 
 export const config = {
-  allowedFileFormats: ["image/jpeg", "image/jpg", "image/png"],
+  allowedFileFormats: IMAGE_FILE_EXTENSIONS.map(
+    (file) => `image/${file}`
+  ).concat(["text/plain"]), // add more file type
   fileSizeMBLimit: 20,
   filesLimit: 1,
 };

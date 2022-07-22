@@ -28,6 +28,7 @@ const FileInfo = ({
           margin: "2px 5px 2px 5px ",
         }}
       >
+        {"file name: "}
         {name}
       </span>
       <span
@@ -35,6 +36,7 @@ const FileInfo = ({
           margin: "2px 5px 2px 5px ",
         }}
       >
+        {"file path: "}
         {filePath}
       </span>
       <span
@@ -42,7 +44,9 @@ const FileInfo = ({
           margin: "2px 5px 2px 5px ",
         }}
       >
+        {"file type: "}
         {filetype}
+        {" type"}
       </span>
     </div>
   );

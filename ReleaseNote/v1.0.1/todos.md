@@ -40,6 +40,8 @@
 
 1. more fleshed out box shadow [Done]
 
+1. add more file type to file drop config []
+
 1. Bugs
 
    1. fix the bug where you can't select the icon when first rendered[Done]

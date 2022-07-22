@@ -38,7 +38,12 @@ const Main = () => {
     <>
       <Menubar />
       <Loader currentState={loaderState()} />
-      <FileUploader setLoaderState={setLoaderState} loaderState={loaderState}>
+      {/* wrap the mainDesktop with the FileUploader */}
+      <FileUploader
+        setLoaderState={setLoaderState}
+        loaderState={loaderState}
+        makeFile={mainFileSystem.makeFile}
+      >
         <div class="mainDesktop" id="mainDesktop">
           {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
 

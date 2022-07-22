@@ -7,7 +7,7 @@ const Loader = ({ currentState }: LoaderProps) => {
     <div
       class="loaderContainer"
       style={{
-        display: `${currentState == "SUCCESS" ? "none" : "flex"}`,
+        display: `${currentState == "INIT" ? "none" : "flex"}`,
       }}
     >
       <svg

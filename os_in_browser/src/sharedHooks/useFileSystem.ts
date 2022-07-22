@@ -89,7 +89,7 @@ const useFileSystemhook = (
    * @param {any} data - the data you want to write to the file
    */
   const makeFile = (filePath: string, data: any) => {
-    makefile(currentDirectory(), filePath, data);
+    makefile(filePath, data);
     const files = readdirSync(currentDirectory()).map(
       (file) =>
         ({
@@ -97,7 +97,7 @@ const useFileSystemhook = (
           iconPath: setIcon(getFileType(file)),
           filetype: getFileType(file),
           id: uuidv4(),
-          filePath: `${currentDirectory()}/${file}`,
+          filePath: filePath,
           dir: currentDirectory(),
         } as fileType)
     );

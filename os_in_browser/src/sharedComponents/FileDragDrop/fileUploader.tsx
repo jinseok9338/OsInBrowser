@@ -12,32 +12,21 @@ interface FileUploaderProps {
   setLoaderState: Setter<string>;
   loaderState: Accessor<string>;
   children: JSX.Element;
+
+  makeFile: (filePath: string, data: any) => void;
 }
 
 const FileUploader = ({
   setLoaderState,
   loaderState,
+  makeFile,
   children,
 }: FileUploaderProps) => {
-  const processDrop = (files: Blob[]) => {
-    //Simulate async request for file upload
-    // this is where the file upload logic goes
-
-    setTimeout(() => {
-      setLoaderState(FILE_UPLOADER_STATE.PROCESSING);
-    }, 10000);
-    setTimeout(() => {
-      setLoaderState(FILE_UPLOADER_STATE.SUCCESS);
-    }, 10000);
-  };
-
   return (
     <>
-      {loaderState() === FILE_UPLOADER_STATE.INIT && (
-        <DragAndDrop processDrop={processDrop} config={config}>
-          {children}
-        </DragAndDrop>
-      )}
+      <DragAndDrop makeFile={makeFile} config={config}>
+        {children}
+      </DragAndDrop>
     </>
   );
 };

@@ -45,11 +45,10 @@ export const fsFunction = () => {
 
   /**
    * It creates a file at the given path with the given data
-   * @param {string} cd - the current directory
    * @param {string} filePath - the path to the file you want to create
    * @param [data] - the data to be written to the file
    */
-  const makefile = (cd: string, filePath: string, data: any = "") => {
+  const makefile = (filePath: string, data: any = "") => {
     try {
       fs?.writeFileSync(filePath, data);
     } catch (e) {
