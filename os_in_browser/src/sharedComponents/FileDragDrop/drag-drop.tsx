@@ -1,9 +1,16 @@
 import get from "lodash/get";
 import { fileValidator, preventBrowserDefaults } from "./drag-drop-util";
-import { createSignal } from "solid-js";
+import { createSignal, JSX } from "solid-js";
+import { configType } from "./fileUploader";
 
-const DragAndDrop = ({ processDrop, children, config }: any) => {
-  let [dragOverlay, setDragOverlay] = createSignal(false);
+interface DragAndDropProps {
+  processDrop: (files: Blob[]) => void;
+  config: configType;
+  children: JSX.Element;
+}
+
+const DragAndDrop = ({ processDrop, config, children }: DragAndDropProps) => {
+  const [dragOverlay, setDragOverlay] = createSignal(false);
   const [data, setData] = createSignal("");
   const [error, setError] = createSignal("");
   const [dragCounter, setDragCounter] = createSignal(0);
@@ -51,9 +58,11 @@ const DragAndDrop = ({ processDrop, children, config }: any) => {
   };
 
   const dragOverlayClass = dragOverlay() ? "overlay" : "";
+
   return (
     <div>
-      {error && <p class="error">{error}</p>}
+      {error() && <p class="error">{error()}</p>}
+      {data() && <p class="error">{data()}</p>}
       <div
         class={`drag-container ${dragOverlayClass}`}
         onDragEnter={handleDragIn}
@@ -61,11 +70,7 @@ const DragAndDrop = ({ processDrop, children, config }: any) => {
         onDragOver={handleDrag}
         onDrop={handleDrop}
       >
-        {data && <img alt="" src={data()} />}
         {children}
-        <div class="button-wrapper">
-          {data() && <button onClick={() => setData("")}>Remove</button>}
-        </div>
       </div>
     </div>
   );

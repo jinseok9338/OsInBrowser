@@ -51,3 +51,22 @@ export const iconCustomMenu = (...args: any): MenuCollection => ({
     },
   ],
 });
+
+export interface configType {
+  allowedFileFormats: string[];
+  fileSizeMBLimit: number;
+  filesLimit: number;
+}
+
+export const config = {
+  allowedFileFormats: ["image/jpeg", "image/jpg", "image/png"],
+  fileSizeMBLimit: 20,
+  filesLimit: 1,
+};
+
+export const FILE_UPLOADER_STATE = {
+  INIT: "INIT",
+  PROCESSING: "PROCESSING",
+  SUCCESS: "SUCCESS",
+  FAILURE: "FAILURE",
+};
