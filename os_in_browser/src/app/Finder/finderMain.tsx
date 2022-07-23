@@ -16,6 +16,7 @@ const FinderMain = ({ fileSystem }: FinderMainProps) => {
       id={fileSystem.currentDirectory()}
       onClick={(e) => {
         if ((e.target! as HTMLElement).classList.contains("box-main")) {
+          console.log((e.target! as HTMLElement).classList);
           deselectAll();
         }
       }}

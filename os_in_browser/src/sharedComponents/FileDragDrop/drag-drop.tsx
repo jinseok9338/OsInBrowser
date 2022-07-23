@@ -41,7 +41,7 @@ const DragAndDrop = ({
     let fileData = fileReader(files);
     let fileName = files[0].name as string;
     console.log(cd(), className);
-    makeFile(`${cd()}/${fileName}`, fileData); // this needs to change to the current directory
+    makeFile(`${cd()}/${fileName}`, fileData);
   };
 
   return (

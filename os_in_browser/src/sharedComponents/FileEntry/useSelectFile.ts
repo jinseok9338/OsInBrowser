@@ -10,11 +10,12 @@ const useSelectFile = (className: string) => {
     let files = filesSelected();
     for (let i = 0; i < icons!.length; i++) {
       if (files.includes(icons!.item(i)!.id)) {
-        (icons!.item(i) as HTMLElement).style.boxShadow =
-          /* Adding a blue border around the icon. */
-          "inset 0 0 0 2em rgba(70, 70, 197, 0.451), 0 0 0 2px rgba(70, 70, 197, 0.651)";
+        (icons!.item(i) as HTMLElement).style.backgroundColor =
+          "rgb(102, 153, 255, 0.6)";
+        (icons!.item(i) as HTMLElement).style.border = "2px solid #006100";
       } else {
-        (icons!.item(i) as HTMLElement)!.style.boxShadow = "";
+        (icons!.item(i) as HTMLElement).style.backgroundColor = "";
+        (icons!.item(i) as HTMLElement).style.border = "";
       }
     }
 

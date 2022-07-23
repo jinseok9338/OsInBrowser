@@ -33,17 +33,19 @@ const useFileSystemhook = (
     const cd = currentDirectory();
     if (cd != prev) {
       setCurrentDirectory(cd);
-      let cFiles = readdirSync(cd).map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            id: uuidv4(),
-            filePath: `${cd}/${file}`,
-            dir: cd,
-            filetype: getFileType(file),
-          } as fileType)
-      );
+      let cFiles = readdirSync(cd)
+        .sort()
+        .map(
+          (file) =>
+            ({
+              name: file,
+              iconPath: setIcon(getFileType(file)),
+              id: uuidv4(),
+              filePath: `${cd}/${file}`,
+              dir: cd,
+              filetype: getFileType(file),
+            } as fileType)
+        );
       setCurrentFiles(cFiles);
     }
     return cd;
@@ -58,17 +60,19 @@ const useFileSystemhook = (
   const changeFileName = (oldPath: string, newPath: string) => {
     let filePath = renameFile(oldPath, newPath);
 
-    const files = readdirSync(currentDirectory()).map(
-      (file) =>
-        ({
-          name: file,
-          iconPath: setIcon(getFileType(file)),
-          filetype: getFileType(file),
-          id: uuidv4(),
-          filePath: `${currentDirectory()}/${file}`,
-          dir: currentDirectory(),
-        } as fileType)
-    );
+    const files = readdirSync(currentDirectory())
+      .sort()
+      .map(
+        (file) =>
+          ({
+            name: file,
+            iconPath: setIcon(getFileType(file)),
+            filetype: getFileType(file),
+            id: uuidv4(),
+            filePath: `${currentDirectory()}/${file}`,
+            dir: currentDirectory(),
+          } as fileType)
+      );
     setCurrentFiles(files);
 
     // we need to index the files that are created so we can select them in order
@@ -90,17 +94,19 @@ const useFileSystemhook = (
    */
   const makeFile = (filePath: string, data: any) => {
     makefile(filePath, data);
-    const files = readdirSync(currentDirectory()).map(
-      (file) =>
-        ({
-          name: file,
-          iconPath: setIcon(getFileType(file)),
-          filetype: getFileType(file),
-          id: uuidv4(),
-          filePath: filePath,
-          dir: currentDirectory(),
-        } as fileType)
-    );
+    const files = readdirSync(currentDirectory())
+      .sort()
+      .map(
+        (file) =>
+          ({
+            name: file,
+            iconPath: setIcon(getFileType(file)),
+            filetype: getFileType(file),
+            id: uuidv4(),
+            filePath: filePath,
+            dir: currentDirectory(),
+          } as fileType)
+      );
     setCurrentFiles(files);
   };
 
@@ -112,17 +118,19 @@ const useFileSystemhook = (
   const deleteFile = (filePath: string) => {
     let res = deletefile(filePath);
     if (res) {
-      const files = readdirSync(currentDirectory()).map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            filetype: getFileType(file),
-            id: uuidv4(),
-            filePath: `${currentDirectory()}/${file}`,
-            dir: currentDirectory(),
-          } as fileType)
-      );
+      const files = readdirSync(currentDirectory())
+        .sort()
+        .map(
+          (file) =>
+            ({
+              name: file,
+              iconPath: setIcon(getFileType(file)),
+              filetype: getFileType(file),
+              id: uuidv4(),
+              filePath: `${currentDirectory()}/${file}`,
+              dir: currentDirectory(),
+            } as fileType)
+        );
       setCurrentFiles(files);
     } else {
       return;

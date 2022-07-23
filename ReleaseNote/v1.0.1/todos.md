@@ -18,9 +18,9 @@
 
 1. make icon extension more vastly []... later when I need it ...
 
-1. make the icon movable from one folder to another [] this is the last feature
+1. make the icon movable from one folder to another []
 
-1. copy and paste []
+1. copy and paste [] - this is the last feature
 
 1. delete File - connect to the custom menu []
 

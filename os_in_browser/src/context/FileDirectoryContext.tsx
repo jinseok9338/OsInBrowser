@@ -10,10 +10,11 @@ import {
 } from "solid-js";
 import { createStore } from "solid-js/store";
 import { v4 as uuidv4 } from "uuid";
-import { setIcon } from "../utils/setIcon";
+
 import { DIRECTORY_LIST } from "../utils/constants";
 import { useFileSystem } from "./windowFileSystem";
 import { fileType } from "../types/fileSystemType";
+import { fsFunction } from "../utils/fsFunction";
 
 type FileDirectoryContextValue = [
   currentDirectory: { currentDirectory: string },
@@ -40,19 +41,22 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
     currentFiles: [] as fileType[],
   });
 
+  const { setIcon, getFileType } = fsFunction();
+
   createEffect((prev) => {
     try {
       let cd = currentDirectory;
 
       const filesString = fs!.readdirSync(cd.currentDirectory);
-      let files = filesString.map(
+      let files = filesString.sort().map(
         (value) =>
           ({
             name: value,
-            iconPath: setIcon(value),
+            iconPath: setIcon(getFileType(value)),
             id: uuidv4(),
             filePath: `${cd.currentDirectory}/${value}`,
             dir: cd.currentDirectory,
+            filetype: getFileType(value),
           } as fileType)
       );
 

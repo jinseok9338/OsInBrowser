@@ -56,7 +56,7 @@ export const FileEntry = ({
     let divElement = document.getElementById(`${id}`);
 
     if (
-      divElement?.style.boxShadow != "" &&
+      divElement?.style.border != "" &&
       (e.target as HTMLElement).classList.contains("fileName")
     ) {
       setInputDisabled(false);
@@ -70,6 +70,10 @@ export const FileEntry = ({
     <div
       class="app-layout"
       id={filePath}
+      style={{
+        top: "",
+        left: "",
+      }}
       onmouseenter={(e) => {
         setLeft(e.offsetX);
         setTop(e.offsetY);
@@ -95,10 +99,10 @@ export const FileEntry = ({
       />
       <div
         class={className}
-        id={id}
+        id={filePath}
         onclick={(e) => {
           e.stopPropagation();
-          setFocus(id, e);
+          setFocus(filePath, e);
         }}
       >
         <img class="iconImg" src={iconPath} alt={name} id={filePath} />

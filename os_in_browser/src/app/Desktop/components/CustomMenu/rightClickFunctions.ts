@@ -26,7 +26,7 @@ export const createTextFile = (
 
   fs?.writeFileSync(fileName, "");
   const filesString = fs?.readdirSync(cd);
-  const files = filesString?.map(
+  const files = filesString?.sort().map(
     (value) =>
       ({
         name: value,
