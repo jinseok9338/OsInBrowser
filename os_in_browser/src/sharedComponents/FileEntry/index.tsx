@@ -13,6 +13,8 @@ interface FileEntryProps {
   ChangeFileName: (oldPath: string, newPath: string) => void;
   readDir: (currentDirectory: string) => string[];
   filetype: string;
+  changeCD?: () => void;
+  // this should be hard because when the finder is not open you should open finder and change the cd
 }
 
 export const FileEntry = ({
@@ -26,6 +28,7 @@ export const FileEntry = ({
   ChangeFileName,
   readDir,
   filetype,
+  changeCD,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -67,6 +70,7 @@ export const FileEntry = ({
   return (
     <div
       class="app-layout"
+      onDblClick={() => console.log("open finder")}
       id={FilePath()}
       style={{
         top: "",

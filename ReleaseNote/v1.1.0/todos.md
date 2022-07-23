@@ -48,6 +48,8 @@
 
 1. add more file type to file drop config [Done]
 
+1. open folder on double click [] .. today I am doing this... final one before 1.1.0
+
 1. Bugs
 
    1. fix the bug where you can't select the icon when first rendered[Done]
