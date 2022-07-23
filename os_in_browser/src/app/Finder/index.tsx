@@ -1,12 +1,9 @@
 import SideBar from "./sidebar";
 import FinderMain from "./finderMain";
-import { createSignal, createEffect } from "solid-js";
-import { createStore } from "solid-js/store";
-
-import { FileDirectoryProvider } from "../../context/FileDirectoryContext";
+import { createSignal } from "solid-js";
 import useFileSystemhook from "../../sharedHooks/useFileSystem";
-
-import { useFileSystemHookType } from "../../types/fileSystemType";
+import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
+import { config } from "../../utils/constants";
 const Finder = () => {
   const [cd, setCd] = createSignal("/home/desktop");
 
@@ -24,7 +21,14 @@ const Finder = () => {
     <>
       <div class="box-body">
         <SideBar fileSystem={fileSytem} setCd={setCd} cd={cd} />
-        <FinderMain fileSystem={fileSytem} />
+        <DragAndDrop
+          makeFile={fileSytem.makeFile}
+          className={"finder"}
+          cd={cd}
+          config={config}
+        >
+          <FinderMain fileSystem={fileSytem} />
+        </DragAndDrop>
       </div>
       <div class="box-footer" style={{ "padding-left": "1rem" }}>
         <span style={{ "font-size": "0.8rem" }}>{finderDirectory(cd())}</span>

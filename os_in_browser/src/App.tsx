@@ -7,6 +7,7 @@ import "./style/variables.scss";
 import "./style/window.scss";
 import "./style/finder.scss";
 import "./style/loader.scss";
+import "./style/dragDrop.scss";
 
 //Divider css
 import "./style/desktop/menubar/dropdownMenu/divider.scss";

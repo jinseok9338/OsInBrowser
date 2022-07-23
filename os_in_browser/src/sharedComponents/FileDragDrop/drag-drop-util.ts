@@ -1,5 +1,5 @@
-import { configType } from "./fileUploader";
-
+import get from "lodash/get";
+import { configType } from "../../utils/constants";
 // need to figure out the type of the files and config
 export const fileValidator = (files: Blob[], config: configType) => {
   const { allowedFileFormats, fileSizeMBLimit, filesLimit } = config;
@@ -31,4 +31,23 @@ export const fileValidator = (files: Blob[], config: configType) => {
 export const preventBrowserDefaults = (e: Event) => {
   e.preventDefault();
   e.stopPropagation();
+};
+
+export const handleDrag = (e: Event) => {
+  preventBrowserDefaults(e);
+};
+export const handleDragIn = (e: Event) => {
+  preventBrowserDefaults(e);
+};
+export const handleDragOut = (e: Event) => {
+  preventBrowserDefaults(e);
+};
+
+export const fileReader = (files: FileList) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(files[0]);
+  reader.onload = (loadEvt) => {
+    return Buffer.from(loadEvt.target!.result! as string);
+  };
+  return Buffer.from("");
 };

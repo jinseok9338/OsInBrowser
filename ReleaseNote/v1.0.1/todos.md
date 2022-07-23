@@ -8,8 +8,6 @@
 
 1. add create file functionality [Done]
 
-1. delete File - connect to the custom menu []
-
 1. change the file name [Done] - input was made now move onto the functionality
 
 1. make custom Menu with switch statement [] ... later when I need it
@@ -24,9 +22,11 @@
 
 1. copy and paste []
 
+1. delete File - connect to the custom menu []
+
 1. make a function to import file from desktop environment to the main Desktop [Done]
 
-1. make a way to import file from desktop to the finder []
+1. make a way to import file from desktop to the finder [Done] it only supports img and text
 
 1. integrating filesystem and file direcotry context into one context and share among apps [Done] - made a hook for it
    .. this is the top priority

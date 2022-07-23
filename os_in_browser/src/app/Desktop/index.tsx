@@ -2,7 +2,6 @@ import { For, createSignal, createEffect } from "solid-js";
 
 import { useProcess } from "../../context/processDirectory";
 
-import { useFileSystem } from "../../context/windowFileSystem";
 import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
 import CustomMenu from "./components/CustomMenu";
 
@@ -13,21 +12,19 @@ import Menubar from "./components/menubar";
 import Dock from "./components/dock";
 import WindowComponent from "./components/window/window";
 import { mainFileSystem } from "../../sharedHooks/useFileSystem";
-import { FILE_UPLOADER_STATE } from "../../utils/constants";
-import Loader from "./components/Loader";
-import FileUploader from "../../sharedComponents/FileDragDrop/fileUploader";
+import { config, FILE_UPLOADER_STATE } from "../../utils/constants";
+
+import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 
 const Main = () => {
   const [state, {}] = useProcess();
   //this sets the loading state
-  const [loaderState, setLoaderState] = createSignal<
-    "INIT" | "PROCESSING" | "SUCCESS" | "FAILURE" | string
-  >(FILE_UPLOADER_STATE.INIT);
 
   const { open, position, menus } = useRightClickMenu(
     mainFileSystem.setCurrentFiles,
     "MainDesktop"
   );
+  const [cd, setCd] = createSignal("/home/desktop");
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
   // omMount load desktop files
   createEffect(() => {
@@ -37,16 +34,15 @@ const Main = () => {
   return (
     <>
       <Menubar />
-      <Loader currentState={loaderState()} />
+
       {/* wrap the mainDesktop with the FileUploader */}
-      <FileUploader
-        setLoaderState={setLoaderState}
-        loaderState={loaderState}
+      <DragAndDrop
         makeFile={mainFileSystem.makeFile}
+        cd={cd}
+        className={"deskMain"}
+        config={config}
       >
         <div class="mainDesktop" id="mainDesktop">
-          {/* <OnClickDragBox height={height} left={left} top={top} width={width} /> */}
-
           {/* context is the current file path where mouse is positioned  */}
           <CustomMenu open={open} position={position} menus={menus} />
           <For each={mainFileSystem.currentFiles}>
@@ -78,7 +74,7 @@ const Main = () => {
           </For>
           <Dock />
         </div>
-      </FileUploader>
+      </DragAndDrop>
     </>
   );
 };
