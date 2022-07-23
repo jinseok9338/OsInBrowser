@@ -37,7 +37,7 @@ export const DIRECTORY_LIST = [
 
 type MenuCollection = { [key: string]: customMenu[] };
 
-export const iconCustomMenu = (...args: any): MenuCollection => ({
+export const CustomMenuOnIcon = (...args: any): MenuCollection => ({
   fileMenu: [
     {
       iconPath: "fa fa-file",

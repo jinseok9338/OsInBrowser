@@ -4,11 +4,10 @@ import { createStore } from "solid-js/store";
 import { useFileSystem } from "../../../../context/windowFileSystem";
 
 import { createTextFile } from "./rightClickFunctions";
-import { iconCustomMenu } from "../../../../utils/constants";
+import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
 import { fileType } from "../../../../types/fileSystemType";
 
-// need some work to do ...
 const useRightClickMenu = (
   setFiles: Setter<fileType[]>,
   id: string,
@@ -20,8 +19,6 @@ const useRightClickMenu = (
     top: 0,
   });
   const [context, setContext] = createSignal("");
-
-  const { fs } = useFileSystem();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
@@ -50,7 +47,7 @@ const useRightClickMenu = (
 
     switch (true) {
       // Main desktop
-      case new RegExp("mainDesktop").test(target) && id === "MainDesktop": {
+      case new RegExp("mainDesktop").test(target): {
         setPosition({
           left: e.pageX,
           top: e.pageY,
@@ -66,7 +63,7 @@ const useRightClickMenu = (
       }
 
       //with file in desktop
-      case /^(\/.*)(\/.*\.\w+)$/.test(target) && id === "MainDesktop": {
+      case /^(\/.*)(\/.*\.\w+)$/.test(target): {
         let match = /^(\/.*)(\/.*\.\w+)$/.exec(target);
         let context = match![1];
         let fileName = match![2];
@@ -75,31 +72,15 @@ const useRightClickMenu = (
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(iconCustomMenu().fileMenu);
-
-        setContext(context);
-        return;
-      }
-
-      //with file in finder
-      case /^(\/.*)(\/.*\.\w+)$/.test(target) && id === "Finder": {
-        let match = /^(\/.*)(\/.*\.\w+)$/.exec(target);
-        let context = match![1];
-        let fileName = match![2];
-        setPosition({
-          left: e.pageX,
-          top: e.pageY,
-        });
-        setOpen(true);
-        setMenus(iconCustomMenu().finemenu);
+        setMenus(CustomMenuOnIcon().fileMenu);
 
         setContext(context);
         return;
       }
 
       //with directory in finder
-      case /^((\/[^.\/]*)*)(\/[^.\/]*)$/.test(target) && id === "Finder": {
-        let match = /^((\/[^.\/]*)*)(\/[^.\/]*)$/.exec(target);
+      case /^(.+\/)[^.]+$/.test(target): {
+        let match = /^(.+\/)[^.]+$/.exec(target);
 
         setPosition({
           left: e.pageX,
@@ -107,18 +88,18 @@ const useRightClickMenu = (
         });
         setOpen(true);
         setMenus(defaultMenu);
-        setContext(match![1]);
+        setContext(match![0]);
         return;
       }
 
       // with dock menu
-      case new RegExp("dock-icon").test(target) && id === "MainDesktop": {
+      case new RegExp("dock-icon").test(target): {
         setPosition({
           left: e.pageX,
           top: e.pageY,
         });
-        setOpen(true);
-        setMenus(defaultMenu);
+        // setOpen(true);
+        // setMenus(defaultMenu);
 
         return;
       }
@@ -157,9 +138,3 @@ const useRightClickMenu = (
 };
 
 export default useRightClickMenu;
-
-// dock-icon - dock-icon
-// file in finder -
-// file in main Desktop -
-// directory in finder -
-// directory in mainDesktop - mainDesktop

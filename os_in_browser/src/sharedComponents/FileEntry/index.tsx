@@ -36,7 +36,6 @@ export const FileEntry = ({
   const [FilePath, setFilePath] = createSignal(filePath);
 
   const onKeyDown = (e: KeyboardEvent) => {
-    console.log(e.key);
     if (e.key == "Enter") {
       setInputDisabled(true);
       let newPath = `${dir}/${fileName()}`;
@@ -48,7 +47,6 @@ export const FileEntry = ({
       ChangeFileName(FilePath(), newPath);
 
       setFilePath(newPath);
-      console.log("successfully change the file name");
     }
   };
 
@@ -69,7 +67,7 @@ export const FileEntry = ({
   return (
     <div
       class="app-layout"
-      id={filePath}
+      id={FilePath()}
       style={{
         top: "",
         left: "",
@@ -99,13 +97,13 @@ export const FileEntry = ({
       />
       <div
         class={className}
-        id={filePath}
+        id={FilePath()}
         onclick={(e) => {
           e.stopPropagation();
-          setFocus(filePath, e);
+          setFocus(FilePath(), e);
         }}
       >
-        <img class="iconImg" src={iconPath} alt={name} id={filePath} />
+        <img class="iconImg" src={iconPath} alt={name} id={FilePath()} />
         <textarea
           class="fileName"
           disabled={inputDisabled()}
@@ -119,7 +117,6 @@ export const FileEntry = ({
             ChangeFileName(FilePath(), newPath);
 
             setFilePath(newPath);
-            console.log("successfully change the file name");
           }}
           ref={() => {
             addEventListener(

@@ -37,10 +37,10 @@ const DragAndDrop = ({
       }
       return false;
     }
-    console.log(files);
+
     let fileData = fileReader(files);
     let fileName = files[0].name as string;
-    console.log(cd(), className);
+
     makeFile(`${cd()}/${fileName}`, fileData);
   };
 
