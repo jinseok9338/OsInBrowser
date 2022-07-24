@@ -50,6 +50,8 @@
 
 1. open folder on double click [] .. today I am doing this... final one before 1.1.0
 
+1. move the finder out of process and embed the finder inside the desktop
+
 1. Bugs
 
    1. fix the bug where you can't select the icon when first rendered[Done]
@@ -81,3 +83,7 @@
    1. make icon img not draggable by default [Done]
 
    1. make background and border around icon when set not the box-shadow []
+
+1. later...
+   1. //https://www.youtube.com/watch?v=qAuL2t82Y8A&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=9 make file system in indexedDB ... if necessary
+   1. put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal

@@ -23,3 +23,5 @@ export const installBFS = () => {
   let fs = BrowserFS.BFSRequire("fs");
   return fs;
 };
+
+//https://www.youtube.com/watch?v=qAuL2t82Y8A&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=9

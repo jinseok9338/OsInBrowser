@@ -12,7 +12,7 @@ const Finder = () => {
   const finderDirectory = (cd: string) => {
     //remove the first /
     let temp = cd.substring(1, cd.length);
-    //replace "/" with " > "
+    //replace "/" with " 🡆 "
     let result = temp.replaceAll("/", " 🡆 ");
     return result;
   };
