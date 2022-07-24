@@ -6,7 +6,7 @@
     "start": "vite",
     "dev": "vite",
     "build": "vite build",
-    "serve": "cd src/public && node ../../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd ../.. && vite build && vite preview",
+    "serve": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../src/public.json && cd ../ && vite build && vite preview",
     "watch": "nodemon --watch 'src/**/*' -e ts,tsx,scss --exec npm run serve"
   },
   "license": "MIT",

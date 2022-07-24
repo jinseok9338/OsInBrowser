@@ -48,8 +48,8 @@ export const FileDirectoryProvider: ParentComponent = (props) => {
     try {
       let cd = currentDirectory;
 
-      const filesString = fs!.readdirSync(cd.currentDirectory);
-      let files = filesString.sort().map(
+      const filesString = fs()?.readdirSync(cd.currentDirectory);
+      let files = filesString!.sort().map(
         (value) =>
           ({
             name: value,

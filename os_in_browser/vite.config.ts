@@ -6,6 +6,11 @@ import solidPlugin from "vite-plugin-solid";
  */
 const config: import("vite").UserConfig = {
   plugins: [solidPlugin()],
+  base: "./",
+  build: {
+    outDir: "dist",
+  },
+  publicDir: "public",
 };
 
 export default config;

@@ -5,4 +5,4 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: cd os_in_browser && npm i && cd src/public && node ../../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd ../..
+  - init: cd os_in_browser && npm i
