@@ -15,6 +15,8 @@ import { mainFileSystem } from "../../sharedHooks/useFileSystem";
 import { config, FILE_UPLOADER_STATE } from "../../utils/constants";
 
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
+import DesktopFiles from "./desktopFIles";
+import StateLoader from "./stateLoader";
 
 const Main = () => {
   const [state, {}] = useProcess();
@@ -45,33 +47,8 @@ const Main = () => {
         <div class="mainDesktop" id="mainDesktop">
           {/* context is the current file path where mouse is positioned  */}
           <CustomMenu open={open} position={position} menus={menus} />
-          <For each={mainFileSystem.currentFiles}>
-            {(file) => (
-              <FileEntry
-                filetype={file.filetype}
-                className={"align-center-desktop"}
-                name={file.name}
-                iconPath={file.iconPath}
-                id={file.id}
-                setFocus={setFocus}
-                filePath={file.filePath}
-                dir={file.dir}
-                ChangeFileName={mainFileSystem.changeFileName}
-                readDir={mainFileSystem.readdirSync}
-              ></FileEntry>
-            )}
-          </For>
-
-          <For each={state}>
-            {(process, _i) => (
-              <WindowComponent
-                process={process.process}
-                processName={process.processName!}
-                dimension={process.dimension!}
-                id={process.id!}
-              />
-            )}
-          </For>
+          <DesktopFiles setFocus={setFocus} />
+          <StateLoader state={state} />
           <Dock />
         </div>
       </DragAndDrop>
