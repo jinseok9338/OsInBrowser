@@ -1,19 +1,12 @@
-import { For, createSignal, createEffect } from "solid-js";
-
+import { createSignal, createEffect } from "solid-js";
 import { useProcess } from "../../context/processDirectory";
-
 import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
 import CustomMenu from "./components/CustomMenu";
-
-import FileEntry from "../../sharedComponents/FileEntry";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
-import { v4 as uuidv4 } from "uuid";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
-import WindowComponent from "./components/window/window";
 import { mainFileSystem } from "../../sharedHooks/useFileSystem";
-import { config, FILE_UPLOADER_STATE } from "../../utils/constants";
-
+import { config } from "../../utils/constants";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";

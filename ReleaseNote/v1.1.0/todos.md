@@ -22,6 +22,8 @@
 
 1. copy and paste [] - this is the last feature
 
+1. needs a file context.. back to the where it was ... but it will be worth it .. I [] this is far too important
+
 1. delete File - connect to the custom menu []
 
 1. make a function to import file from desktop environment to the main Desktop [Done]

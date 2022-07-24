@@ -25,6 +25,7 @@ type FileDirectoryContextValue = [
   }
 ];
 
+// we need a way to parse the list into object ...
 const FileDirectoryContext = createContext<FileDirectoryContextValue>([
   { currentDirectory: "" },
   { currentFiles: [] as fileType[] },

@@ -59,7 +59,7 @@ const WindowComponent = ({
         </div>
 
         <div class="column row-middle">
-          <span>{processName != undefined ? processName : ""}</span>
+          <span>{processName ? processName : ""}</span>
         </div>
       </div>
       <div class="content">{process}</div>
