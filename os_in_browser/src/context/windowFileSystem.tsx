@@ -20,13 +20,13 @@ const FileSystemContext = createContext<FileSystemContextState>({
 } as FileSystemContextState);
 
 export const FileSystemProvider: ParentComponent = (props) => {
-  
   onMount(() => {
     DIRECTORY_LIST.forEach((dir) => {
       try {
-        FileSystemContext.defaultValue.fs?.mkdirSync(dir);
+        console.log(FileSystemContext.defaultValue.fs?.readdirSync("/home"));
       } catch (e) {
         // the dir already exists
+        console.log(e);
 
         return;
       }

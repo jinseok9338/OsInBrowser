@@ -1,24 +1,33 @@
 import BrowserFS from "browserfs";
+import { FileSystemConfiguration } from "browserfs";
+import Index from "../public.json";
 
-const BFSOption = {
-  "/recents": { fs: "InMemory" },
-  "/home": { fs: "LocalStorage" },
+const FileSystemConfig: FileSystemConfiguration = {
+  fs: "OverlayFS",
+  options: {
+    readable: {
+      fs: "XmlHttpRequest",
+      options: {
+        index: Index,
+      },
+    },
+    writable: {
+      fs: "IndexedDB",
+      options: {
+        storeName: "browser-fs",
+      },
+    },
+  },
 };
 
 export const installBFS = () => {
   BrowserFS.install(window);
-  BrowserFS.configure(
-    {
-      fs: "MountableFileSystem",
-      options: BFSOption,
-    },
-    (e) => {
-      if (e) {
-        throw e;
-      }
-      console.log("BFS installed");
+  BrowserFS.configure(FileSystemConfig, (e) => {
+    if (e) {
+      throw e;
     }
-  );
+    console.log("BFS installed");
+  });
 
   let fs = BrowserFS.BFSRequire("fs");
   return fs;

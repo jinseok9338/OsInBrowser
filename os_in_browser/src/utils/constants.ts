@@ -27,12 +27,12 @@ export const IMAGE_FILE_EXTENSIONS = [
 export const TEXT_FORMAT = ["txt", "utxt", "utf8", "text"];
 
 export const DIRECTORY_LIST = [
-  "/home/desktop",
-  "/home/download",
-  "/home/apps",
-  "/home/pictures",
-  "/home/documents",
-  "/home/folder",
+  "/desktop",
+  "/download",
+  "/apps",
+  "/pictures",
+  "/documents",
+  "/folder",
 ];
 
 type MenuCollection = { [key: string]: customMenu[] };
