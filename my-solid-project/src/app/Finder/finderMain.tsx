@@ -1,10 +1,10 @@
 import { For } from "solid-js";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import FileEntry from "../../sharedComponents/FileEntry";
-import { useFileSystemHookType } from "../../types/fileSystemType";
+import { FilesContextValue } from "../../context/FilesContext";
 
 interface FinderMainProps {
-  fileSystem: useFileSystemHookType;
+  fileSystem: FilesContextValue;
 }
 
 const FinderMain = ({ fileSystem }: FinderMainProps) => {
@@ -20,7 +20,13 @@ const FinderMain = ({ fileSystem }: FinderMainProps) => {
         }
       }}
     >
-      <For each={fileSystem.currentFiles}>
+      <For
+        each={
+          fileSystem.currentDirectory() == "/home/desktop"
+            ? fileSystem.desktopFiles
+            : fileSystem.currentFiles
+        }
+      >
         {(item, index) => (
           <FileEntry
             filetype={item.filetype}
