@@ -28,7 +28,7 @@ This is the first (and very crude) version of the operating system running in br
 
   - first version of finder App (without any functionality)
 
-  <img draggable="false" title="a title" alt="Alt text" src="./ReleaseNote/v1.0.0/capture.gif">
+ <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.0.0/capture.gif">
 
 - features that will be added in version 1.1.0 (rolled out by July 25th)
 

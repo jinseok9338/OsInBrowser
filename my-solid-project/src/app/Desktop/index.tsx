@@ -10,11 +10,12 @@ import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
 import useFileSystemhook from "../../sharedHooks/useFileSystem";
+import { useFiles } from "../../context/FilesContext";
 
 const Main = () => {
   const [state, {}] = useProcess();
   //this sets the loading state
-  const mainFileSystem = useFileSystemhook();
+  const mainFileSystem = useFiles();
 
   const { open, position, menus } = useRightClickMenu(
     mainFileSystem.setCurrentFiles,

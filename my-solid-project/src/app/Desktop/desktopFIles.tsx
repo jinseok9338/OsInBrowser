@@ -1,14 +1,14 @@
 import { For } from "solid-js";
+import { FilesContextValue } from "../../context/FilesContext";
 import FileEntry from "../../sharedComponents/FileEntry";
-import { useFileSystemHookType } from "../../types/fileSystemType";
 
 interface DesktopFilesProps {
   setFocus: (id: string, e: MouseEvent) => void;
-  mainFileSystem: useFileSystemHookType;
+  mainFileSystem: FilesContextValue;
 }
 
 const DesktopFiles = ({ setFocus, mainFileSystem }: DesktopFilesProps) => (
-  <For each={mainFileSystem.currentFiles}>
+  <For each={mainFileSystem.desktopFiles}>
     {(file) => (
       <FileEntry
         filetype={file.filetype}

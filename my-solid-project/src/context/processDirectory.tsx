@@ -27,9 +27,10 @@ const ProcessesContext = createContext<ProcessesContextValue>([
 
 export const ProcessDirectoryProvider: ParentComponent = (props) => {
   const [state, setState] = createStore([] as ProcessState[]);
-  const { desktopFiles } = useFiles();
 
-  const processesDirectory = [finderMetaData(desktopFiles)] as ProcessState[];
+  const FilesContext = useFiles();
+
+  const processesDirectory = [finderMetaData(FilesContext)] as ProcessState[];
   const addProcess = (id: string) => {
     if (ProcessExists(state, id)) {
       return;

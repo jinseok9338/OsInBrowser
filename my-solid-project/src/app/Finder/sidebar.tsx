@@ -26,11 +26,9 @@ const favoriteArray: Favorite[] = [
 
 interface SideBarProps {
   fileSystem: useFileSystemHookType;
-  setCd: Setter<string>;
-  cd: Accessor<string>;
 }
 
-const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
+const SideBar = ({ fileSystem }: SideBarProps) => {
   const Favorites = () => (
     <>
       <div class="item-category">Favourites</div>
@@ -40,13 +38,14 @@ const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
             class="item-selected"
             onClick={() => {
               fileSystem.setCurrentDirectory(directory);
-              setCd(directory);
             }}
           >
-            <img draggable="false" src={src} alt="" />
+            <img draggable={false} src={src} alt="" />
             <span
               id={directory}
-              style={`font-weight:${cd() == directory ? "700" : "normal"};`}
+              style={`font-weight:${
+                fileSystem.currentDirectory() == directory ? "700" : "normal"
+              };`}
             >
               {title}
             </span>
@@ -63,12 +62,12 @@ const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
           <Favorites />
           <div class="item-category">iCloud</div>
           <div class="item-selected">
-            <img draggable="false" src={icloud} alt="" />
+            <img draggable={false} src={icloud} alt="" />
             <span>iCloud Drive</span>
           </div>
           <div class="item-category">Locations</div>
           <div class="item-selected">
-            <img draggable="false" src={laptop} alt="" />
+            <img draggable={false} src={laptop} alt="" />
             <span>Your MacBook</span>
           </div>
           <div class="item-category">Tags</div>

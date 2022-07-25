@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { fileType } from "../types/fileSystemType";
 import { fsFunction } from "../utils/fsFunction";
 
-type FilesContextValue = {
+export type FilesContextValue = {
   currentFiles: fileType[];
   setCurrentFiles: SetStoreFunction<fileType[]>;
   currentDirectory: Accessor<string>;

@@ -29,7 +29,7 @@ export const finderMetaData = (props: any) => {
     id: "finder",
     tempDimension: undefined,
     isFullSize: false,
-    process: <Finder />, // needs file context ...
+    process: <Finder FilesContext={props} />, // needs file context ...
     processName: "finder",
     menus: menus,
     isShrunk: false,

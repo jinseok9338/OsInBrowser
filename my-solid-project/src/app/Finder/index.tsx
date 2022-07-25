@@ -4,11 +4,13 @@ import { createSignal } from "solid-js";
 import useFileSystemhook from "../../sharedHooks/useFileSystem";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import { config } from "../../utils/constants";
-const Finder = () => {
-  const [cd, setCd] = createSignal("/home/desktop");
+import { FilesContextValue } from "../../context/FilesContext";
 
-  const fileSytem = useFileSystemhook(cd());
+interface FinderProps {
+  FilesContext: FilesContextValue;
+}
 
+const Finder = ({ FilesContext }: FinderProps) => {
   const finderDirectory = (cd: string) => {
     //remove the first /
     let temp = cd.substring(1, cd.length);
@@ -20,18 +22,20 @@ const Finder = () => {
   return (
     <>
       <div class="box-body">
-        <SideBar fileSystem={fileSytem} setCd={setCd} cd={cd} />
+        <SideBar fileSystem={FilesContext} />
         <DragAndDrop
-          makeFile={fileSytem.makeFile}
+          makeFile={FilesContext.makeFile}
           className={"finder"}
-          cd={cd}
           config={config}
+          cd={FilesContext.currentDirectory}
         >
-          <FinderMain fileSystem={fileSytem} />
+          <FinderMain fileSystem={FilesContext} />
         </DragAndDrop>
       </div>
       <div class="box-footer" style={{ "padding-left": "1rem" }}>
-        <span style={{ "font-size": "0.8rem" }}>{finderDirectory(cd())}</span>
+        <span style={{ "font-size": "0.8rem" }}>
+          {finderDirectory(FilesContext.currentDirectory())}
+        </span>
       </div>
     </>
   );
