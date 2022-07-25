@@ -17,7 +17,7 @@ export const createTextFile = (
   let cd = context;
   let fileNumber = 0;
   let fileName = `${cd}/text${fileNumber == 0 ? "" : fileNumber}.txt`;
-  const fileExists = (fileName: string) => fs?.existsSync(fileName);
+  const fileExists = (fileName: string) => fs?.exists(fileName);
 
   while (fileExists(fileName)) {
     fileNumber++;
@@ -25,6 +25,7 @@ export const createTextFile = (
   }
 
   fs?.writeFileSync(fileName, "");
+
   const filesString = fs?.readdirSync(cd);
   const files = filesString?.sort().map(
     (value) =>

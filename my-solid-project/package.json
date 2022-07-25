@@ -9,14 +9,16 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^18.6.1",
+    "@types/uuid": "^8.3.4",
     "sass": "^1.53.0",
     "typescript": "^4.7.4",
     "vite": "^3.0.0",
     "vite-plugin-solid": "^2.3.0"
   },
   "dependencies": {
-    "solid-js": "^1.4.7",
     "browserfs": "github:jvilk/BrowserFS",
+    "solid-js": "^1.4.7",
     "uuid": "^8.3.2"
   }
 }

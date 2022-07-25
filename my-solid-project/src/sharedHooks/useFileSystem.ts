@@ -150,8 +150,6 @@ const useFileSystemhook = (
   };
 };
 
-export const mainFileSystem = useFileSystemhook();
-
 export default useFileSystemhook;
 
 // make two use File System object one for the desktop main and one for the finder

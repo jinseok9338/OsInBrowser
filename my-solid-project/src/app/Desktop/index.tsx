@@ -5,15 +5,18 @@ import CustomMenu from "./components/CustomMenu";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
-import { mainFileSystem } from "../../sharedHooks/useFileSystem";
+
 import { config } from "../../utils/constants";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
+import { useFileDirectory } from "../../context/FileDirectoryContext";
+import useFileSystemhook from "../../sharedHooks/useFileSystem";
 
 const Main = () => {
   const [state, {}] = useProcess();
   //this sets the loading state
+  const mainFileSystem = useFileSystemhook();
 
   const { open, position, menus } = useRightClickMenu(
     mainFileSystem.setCurrentFiles,
@@ -40,7 +43,7 @@ const Main = () => {
         <div class="mainDesktop" id="mainDesktop">
           {/* context is the current file path where mouse is positioned  */}
           <CustomMenu open={open} position={position} menus={menus} />
-          <DesktopFiles setFocus={setFocus} />
+          <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
           <StateLoader state={state} />
           <Dock />
         </div>

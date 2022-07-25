@@ -9,60 +9,52 @@ import {
 
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import Index from "../public.json";
-import { installBFS } from "../utils/installBFS";
-import { DIRECTORY_LIST } from "../utils/constants";
-import BrowserFS, { FileSystemConfiguration } from "browserfs";
+import Index from "../../public.json";
+import * as BrowserFS from "browserfs";
+import { FileSystemConfiguration } from "browserfs";
 
 type FileSystemContextState = {
-  fs: Accessor<FSModule | null>;
+  fs: FSModule | null;
 };
 
-const FileSystemContext = createContext<FileSystemContextState>({
-  fs: null,
-} as unknown as FileSystemContextState);
-
 const FileSystemConfig: FileSystemConfiguration = {
-  fs: "MountableFileSystem",
+  fs: "OverlayFS",
   options: {
-    "/": {
-      fs: "OverlayFS",
+    readable: {
+      fs: "HTTPRequest",
       options: {
-        readable: {
-          fs: "HTTPRequest",
-          options: Index,
-        },
-        writable: {
-          fs: "IndexedDB",
-          options: {
-            storeName: "fsStore",
-          },
-        },
+        index: Index,
       },
+    },
+    writable: {
+      fs: "LocalStorage",
     },
   },
 };
 
-export const FileSystemProvider: ParentComponent = (props) => {
-  const [fs, setFs] = createSignal<FSModule | null>(null);
-  onMount(() => {
-    BrowserFS.install(window);
-    BrowserFS.configure(FileSystemConfig, (e) => {
-      if (e) {
-        throw e;
-      }
-      console.log("BFS installed");
-    });
-
-    let fs = BrowserFS.BFSRequire("fs");
-    if (!fs) {
-      setFs(null);
+const installBFS = () => {
+  BrowserFS.install(window);
+  BrowserFS.configure(FileSystemConfig, (e) => {
+    if (e) {
+      throw e;
     }
-    setFs(fs);
+    console.log("BFS installed");
   });
 
+  let fs = BrowserFS.BFSRequire("fs");
+  if (!fs) {
+    return null;
+  }
+  return fs;
+};
+
+const FileSystemContext = createContext<FileSystemContextState>({
+  fs: installBFS(),
+} as FileSystemContextState);
+
+export const FileSystemProvider: ParentComponent = (props) => {
   return (
-    <FileSystemContext.Provider value={{ fs }}>
+    <FileSystemContext.Provider value={FileSystemContext.defaultValue}>
       {props.children}
     </FileSystemContext.Provider>
   );
