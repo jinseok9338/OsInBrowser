@@ -8,6 +8,7 @@ import { createStore } from "solid-js/store";
 import { fileType, useFileSystemHookType } from "../types/fileSystemType";
 
 // Need a better naming ...
+
 const useFileSystemhook = (
   currentdir = "/home/desktop"
 ): useFileSystemHookType => {
@@ -74,8 +75,6 @@ const useFileSystemhook = (
           } as fileType)
       );
     setCurrentFiles(files);
-
-    // we need to index the files that are created so we can select them in order
   };
 
   /**

@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "indexFIle": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd .."
+    "index": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd .."
   },
   "license": "MIT",
   "devDependencies": {

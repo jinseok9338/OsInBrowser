@@ -28,7 +28,7 @@ This is the first (and very crude) version of the operating system running in br
 
   - draggable window without any library
 
-  <img title="a title" alt="Alt text" src="./capture.gif">
+  <img draggable="false" title="a title" alt="Alt text" src="./capture.gif">
 
 - features that will be added in version 1.1.0 (rolled out by July 25th)
 

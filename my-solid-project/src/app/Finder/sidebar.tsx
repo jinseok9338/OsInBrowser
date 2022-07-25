@@ -43,7 +43,7 @@ const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
               setCd(directory);
             }}
           >
-            <img src={src} alt="" />
+            <img draggable="false" src={src} alt="" />
             <span
               id={directory}
               style={`font-weight:${cd() == directory ? "700" : "normal"};`}
@@ -63,12 +63,12 @@ const SideBar = ({ fileSystem, setCd, cd }: SideBarProps) => {
           <Favorites />
           <div class="item-category">iCloud</div>
           <div class="item-selected">
-            <img src={icloud} alt="" />
+            <img draggable="false" src={icloud} alt="" />
             <span>iCloud Drive</span>
           </div>
           <div class="item-category">Locations</div>
           <div class="item-selected">
-            <img src={laptop} alt="" />
+            <img draggable="false" src={laptop} alt="" />
             <span>Your MacBook</span>
           </div>
           <div class="item-category">Tags</div>

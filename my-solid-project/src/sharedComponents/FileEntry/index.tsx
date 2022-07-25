@@ -107,7 +107,13 @@ export const FileEntry = ({
           setFocus(FilePath(), e);
         }}
       >
-        <img class="iconImg" src={iconPath} alt={name} id={FilePath()} />
+        <img
+          draggable="false"
+          class="iconImg"
+          src={iconPath}
+          alt={name}
+          id={FilePath()}
+        />
         <textarea
           class="fileName"
           disabled={inputDisabled()}

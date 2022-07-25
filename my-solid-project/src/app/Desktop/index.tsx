@@ -5,12 +5,10 @@ import CustomMenu from "./components/CustomMenu";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
-
 import { config } from "../../utils/constants";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
-import { useFileDirectory } from "../../context/FileDirectoryContext";
 import useFileSystemhook from "../../sharedHooks/useFileSystem";
 
 const Main = () => {

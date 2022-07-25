@@ -17,13 +17,16 @@ import "./style/desktop/menubar/dropdownMenu/submenu.scss";
 
 //customMenu
 import "./style/customMenu.scss";
+import { FilesProvider } from "./context/FilesContext";
 
 const App = () => {
   return (
     <FileSystemProvider>
-      <ProcessDirectoryProvider>
-        <Main />
-      </ProcessDirectoryProvider>
+      <FilesProvider>
+        <ProcessDirectoryProvider>
+          <Main />
+        </ProcessDirectoryProvider>
+      </FilesProvider>
     </FileSystemProvider>
   );
 };

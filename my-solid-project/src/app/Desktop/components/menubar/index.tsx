@@ -25,6 +25,7 @@ const Menubar = () => {
     <div class="menu-bar">
       <div class="leftbar">
         <img
+          draggable="false"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1010px-Apple_logo_white.svg.png"
           class="apple-logo"
           width="18"
@@ -45,10 +46,18 @@ const Menubar = () => {
 
       <div class="rightbar">
         <div class="menu-ico">
-          <img src={highVolume} width="30" height="30" alt="" class="vol" />
+          <img
+            draggable="false"
+            src={highVolume}
+            width="30"
+            height="30"
+            alt=""
+            class="vol"
+          />
         </div>
         <div class="menu-ico">
           <img
+            draggable="false"
             src={blueTooth}
             width="30"
             height="30"
@@ -58,13 +67,28 @@ const Menubar = () => {
         </div>
 
         <div class="menu-ico">
-          <img src={wifiSignal} width="30" height="30" alt="" class="wifi" />
-        </div>
-        <div class="menu-ico">
-          <img src={search} width="30" height="30" alt="" class="search" />
+          <img
+            draggable="false"
+            src={wifiSignal}
+            width="30"
+            height="30"
+            alt=""
+            class="wifi"
+          />
         </div>
         <div class="menu-ico">
           <img
+            draggable="false"
+            src={search}
+            width="30"
+            height="30"
+            alt=""
+            class="search"
+          />
+        </div>
+        <div class="menu-ico">
+          <img
+            draggable="false"
             src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png"
             width="30"
             height="30"
@@ -74,6 +98,7 @@ const Menubar = () => {
         </div>
         <div class="menu-ico">
           <img
+            draggable="false"
             src={microphone}
             width="30"
             height="30"
