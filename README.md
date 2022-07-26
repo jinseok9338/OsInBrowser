@@ -2,6 +2,8 @@
 
 This is the first (and very crude) version of the operating system running in browser. It's not full blown operating system, but rather a show case of what browser and javascript ecosystem is cabable of.
 
+live version - https://osinbrowser-mddjix57ia-du.a.run.app
+
 ---
 
 ## Version 1.1.0
