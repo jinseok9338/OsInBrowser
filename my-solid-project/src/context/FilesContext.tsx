@@ -12,6 +12,7 @@ import { createStore, SetStoreFunction } from "solid-js/store";
 import { v4 as uuidv4 } from "uuid";
 import { fileType } from "../types/fileSystemType";
 import { fsFunction } from "../utils/fsFunction";
+import path, { dirname } from "path";
 
 export type FilesContextValue = {
   currentFiles: fileType[];
@@ -99,12 +100,32 @@ export const FilesProvider: ParentComponent = (props) => {
     setDesktopFiles(cFiles);
   });
 
-  const ifDeskTopSetDesktopFiles = (files: fileType[]) => {
-    if (currentDirectory() == "/home/desktop") {
+  /**
+   * "If the current directory is the desktop, set the desktop files to the files passed in."
+   *
+   * The function is called in the `useEffect` hook below
+   * @param {string} cd - current directory
+   * @param {fileType[]} files - fileType[]
+   */
+  const ifDeskTopSetDesktopFiles = (cd: string, files: fileType[]) => {
+    if (cd == "/home/desktop") {
       setDesktopFiles(files);
     }
   };
 
+  /**
+   * It takes a directory path as an argument, reads the files in that directory, sorts them
+   * alphabetically, and returns an array of objects with the file name, icon path, file type, id, file
+   * path, and directory path
+   * @param {string} cd - current directory
+   * @returns An array of objects that have the following properties:
+   *   name: string
+   *   iconPath: string
+   *   filetype: string
+   *   id: string
+   *   filePath: string
+   *   dir: string
+   */
   const setFiles = (cd: string) => {
     const files = readdirSync(cd)
       .sort()
@@ -133,7 +154,7 @@ export const FilesProvider: ParentComponent = (props) => {
 
     const files = setFiles(currentDirectory());
     setCurrentFiles(files);
-    ifDeskTopSetDesktopFiles(files);
+    ifDeskTopSetDesktopFiles(currentDirectory(), files);
   };
 
   /**
@@ -152,9 +173,14 @@ export const FilesProvider: ParentComponent = (props) => {
    */
   const makeFile = (filePath: string, data: any) => {
     makefile(filePath, data);
-    const files = setFiles(currentDirectory());
+    // the current direcotory is missing... that's why it never worked...
+
+    const dirName = filePath.substring(0, filePath.lastIndexOf("/")); // this needs to come from the filePath
+
+    const files = setFiles(dirName);
+    console.log(dirName, files);
     setCurrentFiles(files);
-    ifDeskTopSetDesktopFiles(files);
+    ifDeskTopSetDesktopFiles(dirName, files);
   };
 
   /**
@@ -167,7 +193,7 @@ export const FilesProvider: ParentComponent = (props) => {
     if (res) {
       const files = setFiles(currentDirectory());
       setCurrentFiles(files);
-      ifDeskTopSetDesktopFiles(files);
+      ifDeskTopSetDesktopFiles(currentDirectory(), files);
     } else {
       return;
     }

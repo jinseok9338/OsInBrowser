@@ -17,10 +17,7 @@ const Main = () => {
   //this sets the loading state
   const mainFileSystem = useFiles();
 
-  const { open, position, menus } = useRightClickMenu(
-    mainFileSystem.setCurrentFiles,
-    "MainDesktop"
-  );
+  const { open, position, menus } = useRightClickMenu();
   const [cd, setCd] = createSignal("/home/desktop");
   const { deselectAll, setFocus } = useSelectFile("align-center-desktop");
   // omMount load desktop files

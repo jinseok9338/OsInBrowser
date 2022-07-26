@@ -7,18 +7,16 @@ import { createTextFile } from "./rightClickFunctions";
 import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
 import { fileType } from "../../../../types/fileSystemType";
+import { useFiles } from "../../../../context/FilesContext";
 
-const useRightClickMenu = (
-  setFiles: Setter<fileType[]>,
-  id: string,
-  customMenus?: customMenu[]
-) => {
+const useRightClickMenu = () => {
   const [open, setOpen] = createSignal(false);
   const [position, setPosition] = createStore({
     left: 0,
     top: 0,
   });
   const [context, setContext] = createSignal("");
+  const { makeFile } = useFiles();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
@@ -26,7 +24,7 @@ const useRightClickMenu = (
     {
       iconPath: "fa fa-file",
       title: "create Text File",
-      onClick: (e: MouseEvent) => createTextFile(e, setFiles, context()),
+      onClick: (e: MouseEvent) => createTextFile(e, context(), makeFile),
     },
     {
       iconPath: "fa fa-folder-open",

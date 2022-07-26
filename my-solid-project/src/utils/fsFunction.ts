@@ -51,6 +51,7 @@ export const fsFunction = () => {
   const makefile = (filePath: string, data: any = "") => {
     try {
       fs?.writeFileSync(filePath, data);
+      console.log("files created");
     } catch (e) {
       console.log(e);
       throw `failed to create ${filePath}`;
