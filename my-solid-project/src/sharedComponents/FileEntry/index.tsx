@@ -1,6 +1,7 @@
 import FileInfo from "./FileInfo";
 import { createSignal, onMount, onCleanup } from "solid-js";
 import { useFileSystem } from "../../context/windowFileSystem";
+import useOpenFile from "./useOpenFile";
 
 interface FileEntryProps {
   name: string;
@@ -13,7 +14,8 @@ interface FileEntryProps {
   ChangeFileName: (oldPath: string, newPath: string) => void;
   readDir: (currentDirectory: string) => string[];
   filetype: string;
-  changeCD?: () => void;
+  changeDirectory?: () => void;
+  readFile: (filePath: string) => string;
   // this should be hard because when the finder is not open you should open finder and change the cd
 }
 
@@ -28,7 +30,8 @@ export const FileEntry = ({
   ChangeFileName,
   readDir,
   filetype,
-  changeCD,
+  changeDirectory,
+  readFile,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -70,7 +73,19 @@ export const FileEntry = ({
   return (
     <div
       class="app-layout"
-      onDblClick={() => console.log("open finder")}
+      onDblClick={() => {
+        if (filetype == "folder") {
+          alert(
+            "change Directory if the finder is not open open the finder first"
+          );
+          return;
+        }
+        var enc = new TextDecoder();
+        let str = readFile(FilePath());
+        console.log(enc.decode(str as unknown as BufferSource));
+
+        // need to work on open file with actual apps.. so later
+      }}
       id={FilePath()}
       style={{
         top: "",
@@ -108,7 +123,7 @@ export const FileEntry = ({
         }}
       >
         <img
-          draggable="false"
+          draggable={false}
           class="iconImg"
           src={iconPath}
           alt={name}

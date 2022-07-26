@@ -1,6 +1,5 @@
 import get from "lodash/get";
 import {
-  fileReader,
   fileValidator,
   handleDrag,
   handleDragIn,
@@ -38,10 +37,14 @@ const DragAndDrop = ({
       return false;
     }
 
-    let fileData = fileReader(files);
-    let fileName = files[0].name as string;
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
 
-    makeFile(`${cd()}/${fileName}`, fileData);
+    reader.onload = (loadEvt) => {
+      let fileName = files[0].name as string;
+      let fileData = loadEvt.target!.result! as ArrayBuffer;
+      makeFile(`${cd()}/${fileName}`, fileData);
+    };
   };
 
   return (

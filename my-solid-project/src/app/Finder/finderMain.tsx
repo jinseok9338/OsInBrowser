@@ -29,6 +29,7 @@ const FinderMain = ({ fileSystem }: FinderMainProps) => {
       >
         {(item, index) => (
           <FileEntry
+            readFile={fileSystem.readFile}
             filetype={item.filetype}
             name={item.name}
             className="align-center-finder"

@@ -42,12 +42,3 @@ export const handleDragIn = (e: Event) => {
 export const handleDragOut = (e: Event) => {
   preventBrowserDefaults(e);
 };
-
-export const fileReader = (files: FileList) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(files[0]);
-  reader.onload = (loadEvt) => {
-    return Buffer.from(loadEvt.target!.result! as string);
-  };
-  return Buffer.from("");
-};

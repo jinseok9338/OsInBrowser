@@ -19,7 +19,7 @@ export type FilesContextValue = {
   setCurrentFiles: SetStoreFunction<fileType[]>;
   currentDirectory: Accessor<string>;
   changeFileName: (oldPath: string, newPath: string) => void;
-  readFile: (filePath: string) => Buffer;
+  readFile: (filePath: string) => string;
   setCurrentDirectory: Setter<string>;
   makeFile: (filePath: string, data: any) => void;
   readdirSync: (cd: string) => string[];
@@ -195,8 +195,6 @@ export const FilesProvider: ParentComponent = (props) => {
       const files = setFiles(dirName);
       setCurrentFiles(files);
       ifDeskTopSetDesktopFiles(dirName, files);
-    } else {
-      return;
     }
   };
 

@@ -28,8 +28,8 @@ export const fsFunction = () => {
    * @returns Buffer
    */
   const readFileSync = (filePath: string) => {
-    let fileContent = fs?.readFileSync(filePath);
-    return !fileContent ? Buffer.from("") : fileContent;
+    let fileContent = fs?.readFileSync(filePath) as unknown as string;
+    return !fileContent ? "" : fileContent;
   };
 
   /*
@@ -80,10 +80,10 @@ export const fsFunction = () => {
       // get the folder icon since it's folder
       return "folder";
     }
-    if (IMAGE_FILE_EXTENSIONS.includes(iconName)) {
+    if (IMAGE_FILE_EXTENSIONS.includes(iconName.toLowerCase())) {
       return "image";
     }
-    if (TEXT_FORMAT.includes(iconName)) {
+    if (TEXT_FORMAT.includes(iconName.toLowerCase())) {
       return "text";
     }
 

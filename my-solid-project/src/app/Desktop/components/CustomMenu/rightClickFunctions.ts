@@ -1,13 +1,5 @@
 import { useFileSystem } from "../../../../context/windowFileSystem";
 
-import { Setter } from "solid-js";
-import { v4 as uuidv4 } from "uuid";
-import { fileType } from "../../../../types/fileSystemType";
-import { fsFunction } from "../../../../utils/fsFunction";
-import { useFiles } from "../../../../context/FilesContext";
-
-const { getFileType, setIcon } = fsFunction();
-
 export const createTextFile = (
   e: MouseEvent,
   context: string,

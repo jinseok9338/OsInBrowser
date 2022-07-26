@@ -19,7 +19,7 @@ export const IMAGE_FILE_EXTENSIONS = [
   "pjp",
   "pjpeg",
   "png",
-  "PNG",
+
   "svg",
   "webp",
   "xbm",
@@ -38,12 +38,12 @@ export const DIRECTORY_LIST = [
 
 type MenuCollection = { [key: string]: customMenu[] };
 
-export const CustomMenuOnIcon = (...args: any): MenuCollection => ({
-  fileMenu: [
+export const CustomMenuOnIcon = (args: any): MenuCollection => ({
+  menu: [
     {
       iconPath: "fa fa-file",
       title: "delete File",
-      onClick: args["delete File"],
+      onClick: args["deleteFile"],
     },
     {
       iconPath: "fa fa-cogs",

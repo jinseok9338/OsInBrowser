@@ -22,16 +22,80 @@ This is the first (and very crude) version of the operating system running in br
 
   newly added in 1.1.0
 
-- Apperance
+- Features
 
-  - MacOs Like theme (backgroud, dock and navber above)
+  - file directory and files context and share it among desktop environment and finder(ex: the app that is created in the desktop and deleted in the finder happen at the same time)
 
-  - window resizes from all the edges and corners (implemented without any library)
+  &nbsp;
 
-  - first version of finder App (without any functionality)
+   <img draggable={false} title="a title" alt="Alt text" src="./happensync.gif">
 
-  - draggable window without any library
+  &nbsp;
 
-- features that will be added in version 1.1.0 ()
+  - select and deselect files
 
-- Bugs to fix
+  &nbsp;
+
+  <img draggable={false} title="a title" alt="Alt text" src="./selectandeselect.gif">
+
+  - create a empty text File and delete the files (demonstrated above)
+
+  &nbsp;
+
+  - change the file name
+
+  <img draggable={false} title="a title" alt="Alt text" src="./changeName.gif">
+
+&nbsp;
+
+- import files from external desktop with drag and drop
+
+- minimize the window and grow back
+
+- add file type in file type
+
+- show file directory in the footer of the finder
+
+- open file or folder on double click -- can get the raw data of the file
+
+- ton of bugs fixed (shown below)
+
+  1. fix the bug where you can't select the icon when first rendered[Done]
+
+  1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
+
+  1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
+
+  1. fix the bug whene desktop environment is shared [Done]
+
+  1. reactivity problem in finder app when the file is created [Done] -> this is important!!! [Done]
+
+  1. fix the create File function where it doesn't have file id [Done]
+
+  1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
+
+  1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird [Done]
+
+  1. we need a way to connect the mainDesktop and finder Desktop dir... How...
+
+  1. icon should be rendered when the file name changes [Done]
+
+  1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
+
+  1. change the display none from visibility hidden so that it can take less space [Doesn't work]
+
+  1. bug fixed can't change the file name to same name [Done]
+
+  1. make icon img not draggable by default [Done]
+
+  1. make background and border around icon when set not the box-shadow [Done]
+
+- features that will be added in the 1.2.0
+
+  1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
+
+  1.  make image preview
+
+  1.  make the icon movable from one folder to another
+
+  1.  copy and paste

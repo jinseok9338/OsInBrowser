@@ -11,6 +11,7 @@ const DesktopFiles = ({ setFocus, mainFileSystem }: DesktopFilesProps) => (
   <For each={mainFileSystem.desktopFiles}>
     {(file) => (
       <FileEntry
+        readFile={mainFileSystem.readFile}
         filetype={file.filetype}
         className={"align-center-desktop"}
         name={file.name}

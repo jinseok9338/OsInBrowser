@@ -1,12 +1,10 @@
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
 
-import { useFileSystem } from "../../../../context/windowFileSystem";
-
 import { createTextFile } from "./rightClickFunctions";
 import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
-import { fileType } from "../../../../types/fileSystemType";
+
 import { useFiles } from "../../../../context/FilesContext";
 
 const useRightClickMenu = () => {
@@ -16,7 +14,7 @@ const useRightClickMenu = () => {
     top: 0,
   });
   const [context, setContext] = createSignal("");
-  const { makeFile } = useFiles();
+  const { makeFile, deleteFile } = useFiles();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
@@ -63,14 +61,21 @@ const useRightClickMenu = () => {
       //with file in desktop
       case /^(\/.*)(\/.*\.\w+)$/.test(target): {
         let match = /^(\/.*)(\/.*\.\w+)$/.exec(target);
-        let context = match![1];
+        let context = match![1].substring(0, match![1].length);
         let fileName = match![2];
         setPosition({
           left: e.pageX,
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(CustomMenuOnIcon().fileMenu);
+        setMenus(
+          CustomMenuOnIcon({
+            deleteFile: () => {
+              deleteFile(`${context}${fileName}`);
+              console.log("File deleted");
+            },
+          }).menu
+        );
 
         setContext(context);
         return;
