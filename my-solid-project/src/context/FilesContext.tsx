@@ -151,10 +151,10 @@ export const FilesProvider: ParentComponent = (props) => {
    */
   const changeFileName = (oldPath: string, newPath: string) => {
     let filePath = renameFile(oldPath, newPath);
-
-    const files = setFiles(currentDirectory());
+    const dirName = filePath.substring(0, filePath.lastIndexOf("/"));
+    const files = setFiles(dirName);
     setCurrentFiles(files);
-    ifDeskTopSetDesktopFiles(currentDirectory(), files);
+    ifDeskTopSetDesktopFiles(dirName, files);
   };
 
   /**
@@ -191,9 +191,10 @@ export const FilesProvider: ParentComponent = (props) => {
   const deleteFile = (filePath: string) => {
     let res = deletefile(filePath);
     if (res) {
-      const files = setFiles(currentDirectory());
+      const dirName = filePath.substring(0, filePath.lastIndexOf("/"));
+      const files = setFiles(dirName);
       setCurrentFiles(files);
-      ifDeskTopSetDesktopFiles(currentDirectory(), files);
+      ifDeskTopSetDesktopFiles(dirName, files);
     } else {
       return;
     }

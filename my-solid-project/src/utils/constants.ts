@@ -19,6 +19,7 @@ export const IMAGE_FILE_EXTENSIONS = [
   "pjp",
   "pjpeg",
   "png",
+  "PNG",
   "svg",
   "webp",
   "xbm",
