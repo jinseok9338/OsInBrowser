@@ -1,0 +1,35 @@
+.item {
+  position: relative;
+  font-size: 14px;
+  line-height: 1.4;
+  padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  transition: all 160ms ease-out;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  color: #172b4d;
+}
+
+.item:hover {
+  background-color: #eef3ff;
+  color: #2c5de5;
+}
+
+.item:hover > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-active {
+  background-color: #eef3ff;
+  color: #2c5de5 !important;
+}
+
+.item-disabled {
+  background-color: #ebecf0;
+  color: #7a869a;
+  cursor: not-allowed;
+}

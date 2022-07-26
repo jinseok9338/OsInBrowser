@@ -29,8 +29,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 # Check cargo is visible
 RUN cargo --help
 
-RUN cd os_in_browser &&  npm i 
-RUN cd os_in_browser && npm run build 
+RUN cd my-solid-project &&  npm i 
+RUN cd my-solid-project && npm run build 
 RUN cargo build --release
 
 ENV SENTRY_DISABLED=true
@@ -41,7 +41,7 @@ EXPOSE 3000
 FROM gcr.io/distroless/cc-debian10
 
 COPY --from=build /usr/src/OsInBrowser/target/release/backend /usr/local/bin/backend
-COPY --from=build /usr/src/OsInBrowser/os_in_browser/dist /usr/local/bin/dist
+COPY --from=build /usr/src/OsInBrowser/my-solid-project/dist /usr/local/bin/dist
 
 WORKDIR /usr/local/bin
 

@@ -28,23 +28,25 @@ This is the first (and very crude) version of the operating system running in br
 
   - draggable window without any library
 
-  <img title="a title" alt="Alt text" src="./capture.gif">
+ <img draggable={false} title="a title" alt="Alt text" src="./capture.gif">
 
 - features that will be added in version 1.1.0 (rolled out by July 25th)
 
-  - show file icon in grid area
+  - show file icon in grid area [Done]
 
   - add create file functionality []
 
-  - select and deselect the file []
+  - select and deselect the file [Done]
 
-  - when hover it the icon show the file info []
+  - when hover it the icon show the file info [Done]
 
   - delete file functionality []
 
-  - show icons according to the file extension []
+  - show icons according to the file extension [...Partially Done]
 
   - move the files in grid area []
+
+  - change the file name with click []
 
   - full blown Finder App []
 
@@ -52,4 +54,4 @@ This is the first (and very crude) version of the operating system running in br
 
   - Resizer issue where if either axis's length is less than the minimal value the resizing stops. I want the other axis still resizes even thought one axis goes below the minimal value
 
-  - Browser FS is still a bit iffy and I can't seem to get it work the way I like
+  - Browser FS is still a bit iffy and I can't seem to get it work the way I like [Done]

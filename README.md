@@ -4,7 +4,7 @@ This is the first (and very crude) version of the operating system running in br
 
 ---
 
-## Version 1.0.0
+## Version 1.1.0
 
 - Tech used in this project
 
@@ -18,36 +18,84 @@ This is the first (and very crude) version of the operating system running in br
 
   - Google Cloud Run [GoogleCloudRun](https://cloud.google.com/run/?utm_source=google&utm_medium=cpc&utm_campaign=japac-AU-all-en-dr-bkws-all-pkws-trial-e-dr-1009882&utm_content=text-ad-none-none-DEV_c-CRE_602771386312-ADGP_Hybrid%20%7C%20BKWS%20-%20EXA%20%7C%20Txt%20~%20Compute%20~%20Cloud%20Run_cloud%20run-general%20-%20Products-44225-KWID_43700071610100400-kwd-678836618089&userloc_1030705-network_g&utm_term=KW_google%20cloud%20run&gclid=Cj0KCQjw8amWBhCYARIsADqZJoVVuxT5lj5q3Y_SG_mtYwxMbgLusms9bR9y1VyTornm11jShsjESCwaAp6aEALw_wcB&gclsrc=aw.ds) - Used to build CI/ CD pipe easily. I could have used GCP from ground up, but I love the simplicity of Google Cloud Run
 
-- Apperance
+  ***
 
-  - MacOs Like theme (backgroud, dock and navber above)
+  newly added in 1.1.0
 
-  - window resizes from all the edges and corners (implemented without any library)
+- Features
 
-  - draggable window without any library
+  - file directory and files context and share it among desktop environment and finder(ex: the app that is created in the desktop and deleted in the finder happen at the same time)
 
-  - first version of finder App (without any functionality)
+  &nbsp;
 
-  <img title="a title" alt="Alt text" src="./ReleaseNote/capture.gif">
+   <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/happensync.gif">
 
-- features that will be added in version 1.1.0 (rolled out by July 25th)
+  &nbsp;
 
-  - add create file functionality
+  - select and deselect files
 
-  - select and deselect the file
+  &nbsp;
 
-  - when hover it the icon show the file info
+  <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/selectandeselect.gif">
 
-  - delete file functionality
+  - create a empty text File and delete the files (demonstrated above)
 
-  - show icons according to the file extension
+  &nbsp;
 
-  - move the files in grid area
+  - change the file name
 
-  - full blown Finder App
+  <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/changeName.gif">
 
-- Bugs to fix
+&nbsp;
 
-  - Resizer issue where if either axis's length is less than the minimal value the resizing stops. I want the other axis still resizes even thought one axis goes below the minimal value
+- import files from external desktop with drag and drop
 
-  - Browser FS is still a bit iffy and I can't seem to get it work the way I like
+- minimize the window and grow back
+
+- add file type in file type
+
+- show file directory in the footer of the finder
+
+- open file or folder on double click -- can get the raw data of the file
+
+- ton of bugs fixed (shown below)
+
+  1. fix the bug where you can't select the icon when first rendered[Done]
+
+  1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
+
+  1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
+
+  1. fix the bug whene desktop environment is shared [Done]
+
+  1. reactivity problem in finder app when the file is created [Done] -> this is important!!! [Done]
+
+  1. fix the create File function where it doesn't have file id [Done]
+
+  1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
+
+  1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird [Done]
+
+  1. we need a way to connect the mainDesktop and finder Desktop dir... How...
+
+  1. icon should be rendered when the file name changes [Done]
+
+  1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
+
+  1. change the display none from visibility hidden so that it can take less space [Doesn't work]
+
+  1. bug fixed can't change the file name to same name [Done]
+
+  1. make icon img not draggable by default [Done]
+
+  1. make background and border around icon when set not the box-shadow [Done]
+
+- features that will be added in the 1.2.0
+
+  1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
+
+  1.  make image preview
+
+  1.  make the icon movable from one folder to another
+
+  1.  copy and paste

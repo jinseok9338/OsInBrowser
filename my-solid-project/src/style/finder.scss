@@ -1,0 +1,175 @@
+.box-body {
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  border: none;
+  border-radius: 5px;
+}
+
+.box-sidebar {
+  background-color: #dbdbdb;
+  opacity: 0.95;
+  width: 160px;
+  border-right: 1px solid #c1c1c1;
+  border-left: 1px solid #c1c1c1;
+  white-space: nowrap;
+  /* overflow-y: scroll; */
+}
+
+.sidebar-background {
+  background-color: #dbdbdb;
+  opacity: 0.95;
+}
+
+.box-main {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-right: 1px solid #c1c1c1;
+  overflow-y: hidden;
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(6rem, 1fr));
+  column-gap: 0.5rem;
+
+  //background-color: orange;
+}
+
+/* ************category content in Finder******** */
+.app-layout {
+  font-size: 0.8rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.fileInfo {
+  position: absolute;
+  visibility: hidden;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  background-color: #ffffff;
+  width: max-content;
+  height: fit-content;
+  min-width: 50px;
+  min-height: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+}
+.iconImg {
+  pointer-events: none;
+}
+
+.fileName {
+  border: none;
+  background-color: transparent;
+  color: black;
+  text-align: center;
+  resize: none;
+  height: 20px;
+}
+
+.align-center-finder {
+  text-align: center;
+  width: 3.75rem;
+
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.align-center-desktop {
+  text-align: center;
+  width: 3.75rem;
+
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.align-center:focus {
+  box-shadow: inset 0 0 0 2em rgba(70, 70, 197, 0.151);
+}
+
+.app-layout img {
+  width: 3.75rem;
+}
+
+.item-category {
+  font-size: 0.8rem;
+  letter-spacing: -1px;
+  font-weight: 700;
+  color: #8f8e8e;
+  margin-left: 0.2rem;
+}
+
+.item-selected {
+  display: flex;
+  align-items: center;
+  padding-left: 0.5rem;
+  height: 2rem;
+  width: calc(100% - 0.5rem);
+
+  letter-spacing: -1px;
+  img {
+    margin-right: 0.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+}
+
+.item-selected:hover {
+  background-color: #dbdbdb;
+  opacity: 30%;
+}
+
+#sidebar-airdrop {
+  display: block;
+}
+
+#sidebar-recents {
+  display: none;
+}
+
+#sidebar-applications {
+  display: none;
+  flex-wrap: wrap;
+}
+
+#sidebar-google-drive {
+  display: none;
+}
+
+#sidebar-desktop {
+  display: none;
+}
+
+#sidebar-documents {
+  display: none;
+}
+
+#sidebar-pictures {
+  display: none;
+}
+
+#sidebar-your-macbook-pro {
+  display: none;
+}
+
+.box-footer {
+  min-height: 1.563rem;
+  background: rgb(228, 228, 228);
+  background: linear-gradient(
+    180deg,
+    rgba(228, 228, 228, 1) 0%,
+    rgba(208, 208, 208, 1) 100%
+  );
+  border: 1px solid #c1c1c1;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
