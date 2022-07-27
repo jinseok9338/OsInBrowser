@@ -57,7 +57,15 @@ export const FileEntry = ({
   };
 
   const inputAvaliable = (e: MouseEvent, id: string) => {
-    let divElement = document.getElementById(`${id}`);
+    let iconsList = document.getElementsByClassName(className);
+    let divElement;
+
+    for (let i = 0; i < iconsList.length; i++) {
+      // you have to make sure that there is only one icon
+      if (iconsList.item(i)!.id == id) {
+        divElement = iconsList.item(i) as HTMLElement;
+      }
+    }
 
     if (
       divElement?.style.border != "" &&
@@ -147,7 +155,7 @@ export const FileEntry = ({
             addEventListener(
               "click",
               (e) => {
-                inputAvaliable(e, id);
+                inputAvaliable(e, FilePath());
               },
               true
             );

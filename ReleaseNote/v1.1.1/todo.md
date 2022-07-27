@@ -6,8 +6,7 @@
 
     2. when hovering the desktop file in finder the hover effect is shown outside the finder container other files are not a problem [Done]
 
-    3. diable the input focus on file Entry when not selected []
-    // I messed up bad since I used id on icon which doesn't exist.. Shit.. I will do it tomorrow...부탁해 내일의 나
+    3. diable the input focus on file Entry when not selected [Done]
 
 ### Design Change
 
