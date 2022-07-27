@@ -7,7 +7,7 @@
     2. when hovering the desktop file in finder the hover effect is shown outside the finder container other files are not a problem [Done]
 
     3. diable the input focus on file Entry when not selected []
-    // I messed up bad since I used id on icon which doesn't exist.. Shit..
+    // I messed up bad since I used id on icon which doesn't exist.. Shit.. I will do it tomorrow...부탁해 내일의 나
 
 ### Design Change
 
@@ -17,10 +17,10 @@
 
     3. change the dock icon [Done]
 
+    4. change the logo [Done]
+
 ### New Feature or changes
 
     1. make weather report section on menu bar [Done]
-
-    2. hide the key in .env file []
 
     3. change the clock format to 24hour base on click [Done]
