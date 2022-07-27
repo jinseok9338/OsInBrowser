@@ -12,7 +12,8 @@ const useSelectFile = (className: string) => {
       if (files.includes(icons!.item(i)!.id)) {
         (icons!.item(i) as HTMLElement).style.backgroundColor =
           "rgb(102, 153, 255, 0.6)";
-        (icons!.item(i) as HTMLElement).style.border = "2px solid #006100";
+        (icons!.item(i) as HTMLElement).style.border =
+          "2px solid rgb(102, 153, 255, 0.55)";
       } else {
         (icons!.item(i) as HTMLElement).style.backgroundColor = "";
         (icons!.item(i) as HTMLElement).style.border = "";
