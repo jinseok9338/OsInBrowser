@@ -7,6 +7,7 @@ interface FileInfoProps {
   id: string;
   filePath: string;
   filetype: string;
+  className: string;
 }
 
 const FileInfo = ({
@@ -16,11 +17,12 @@ const FileInfo = ({
   id,
   filePath,
   filetype,
+  className,
 }: FileInfoProps) => {
   return (
     <div
       class="fileInfo"
-      id={`fileInfo ${id}`}
+      id={`fileInfo ${id} ${className}`}
       style={`top:${top()}px; left:${left()}px;`}
     >
       <span

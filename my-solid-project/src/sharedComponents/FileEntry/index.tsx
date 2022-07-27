@@ -87,21 +87,20 @@ export const FileEntry = ({
         // need to work on open file with actual apps.. so later
       }}
       id={FilePath()}
-      style={{
-        top: "",
-        left: "",
-      }}
       onmouseenter={(e) => {
         setLeft(e.offsetX);
         setTop(e.offsetY);
-        // the absolte position was the problemo...
-        // I might be able to tweak some number but I am okay with what I have
-        let fileInfoElement = document.getElementById(`fileInfo ${id}`);
+
+        let fileInfoElement = document.getElementById(
+          `fileInfo ${id} ${className}`
+        );
         fileInfoElement!.style.visibility = "visible";
         fileInfoElement!.style.transitionDelay = "1.5s";
       }}
       onMouseLeave={() => {
-        let fileInfoElement = document.getElementById(`fileInfo ${id}`);
+        let fileInfoElement = document.getElementById(
+          `fileInfo ${id} ${className}`
+        );
         fileInfoElement!.style.visibility = "hidden";
         fileInfoElement!.style.transitionDelay = "0s";
       }}
@@ -110,6 +109,7 @@ export const FileEntry = ({
         name={fileName()}
         top={top}
         left={left}
+        className={className}
         id={id}
         filePath={FilePath()}
         filetype={filetype}
