@@ -9,18 +9,10 @@ import { useProcess } from "../../../../context/processDirectory";
 import { For } from "solid-js";
 import Tasks from "./tasks";
 import Weather from "./weather";
+import Time from "./time";
 
 const Menubar = () => {
-  const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
   const [state, { shrink }] = useProcess();
-
-  const interval = setInterval(() => {
-    let now = new Date(Date.now());
-
-    let dateStringNow = now.toLocaleString();
-    setTime(dateStringNow);
-  }, 1000);
-  onCleanup(() => clearInterval(interval));
 
   return (
     <div class="menu-bar">
@@ -47,7 +39,7 @@ const Menubar = () => {
 
       <div class="rightbar">
         <Weather />
-        <div class="menu-time">{time}</div>
+        <Time />
       </div>
     </div>
   );
