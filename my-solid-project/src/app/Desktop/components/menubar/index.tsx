@@ -8,6 +8,7 @@ import { ProcessState } from "../../../../types/processDirectory";
 import { useProcess } from "../../../../context/processDirectory";
 import { For } from "solid-js";
 import Tasks from "./tasks";
+import Weather from "./weather";
 
 const Menubar = () => {
   const [time, setTime] = createSignal(new Date(Date.now()).toLocaleString());
@@ -45,68 +46,7 @@ const Menubar = () => {
       </div>
 
       <div class="rightbar">
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src={highVolume}
-            width="30"
-            height="30"
-            alt=""
-            class="vol"
-          />
-        </div>
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src={blueTooth}
-            width="30"
-            height="30"
-            alt=""
-            class="bluetooth"
-          />
-        </div>
-
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src={wifiSignal}
-            width="30"
-            height="30"
-            alt=""
-            class="wifi"
-          />
-        </div>
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src={search}
-            width="30"
-            height="30"
-            alt=""
-            class="search"
-          />
-        </div>
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png"
-            width="30"
-            height="30"
-            alt=""
-            class="control-center"
-          />
-        </div>
-        <div class="menu-ico">
-          <img
-            draggable={false}
-            src={microphone}
-            width="30"
-            height="30"
-            alt=""
-            class="microphone"
-          />
-        </div>
-
+        <Weather />
         <div class="menu-time">{time}</div>
       </div>
     </div>
@@ -114,3 +54,69 @@ const Menubar = () => {
 };
 
 export default Menubar;
+
+const menu = () => (
+  <>
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src={highVolume}
+        width="30"
+        height="30"
+        alt=""
+        class="vol"
+      />
+    </div>
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src={blueTooth}
+        width="30"
+        height="30"
+        alt=""
+        class="bluetooth"
+      />
+    </div>
+
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src={wifiSignal}
+        width="30"
+        height="30"
+        alt=""
+        class="wifi"
+      />
+    </div>
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src={search}
+        width="30"
+        height="30"
+        alt=""
+        class="search"
+      />
+    </div>
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png"
+        width="30"
+        height="30"
+        alt=""
+        class="control-center"
+      />
+    </div>
+    <div class="menu-ico">
+      <img
+        draggable={false}
+        src={microphone}
+        width="30"
+        height="30"
+        alt=""
+        class="microphone"
+      />
+    </div>
+  </>
+);

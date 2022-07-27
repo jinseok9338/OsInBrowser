@@ -179,7 +179,13 @@ export const FilesProvider: ParentComponent = (props) => {
 
     const files = setFiles(dirName);
     console.log(dirName, files);
+    //if the make file happens in the desktop the current file should not be afftected
+    if (dirName == "/home/desktop") {
+      ifDeskTopSetDesktopFiles(dirName, files);
+      return;
+    }
     setCurrentFiles(files);
+    // only desktop files should be affected
     ifDeskTopSetDesktopFiles(dirName, files);
   };
 

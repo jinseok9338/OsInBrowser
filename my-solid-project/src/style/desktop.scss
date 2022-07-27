@@ -49,6 +49,7 @@
       transform: scale(1);
       margin-right: 10px;
     }
+
     .menus {
       height: 100%;
       display: flex;
@@ -101,8 +102,27 @@
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 400px;
+    width: fit-content;
     margin-right: 20px;
+
+    .weather-container {
+      display: flex;
+      height: 30px;
+      width: fit-content;
+      align-items: center;
+      justify-content: space-between;
+
+      .weather-image {
+        height: 100%;
+        margin-right: 5px;
+      }
+
+      .weather-text {
+        color: #fff;
+        font-weight: 100;
+        font-size: small;
+      }
+    }
 
     .vol {
       transform: scale(0.6);
@@ -126,11 +146,13 @@
 
     .menu-time {
       height: 100%;
-      width: 200px;
+      width: fit-content;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #fff;
+      font-size: small;
+      padding-left: 1rem;
     }
 
     .menu-ico {
