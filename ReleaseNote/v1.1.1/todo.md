@@ -8,6 +8,8 @@
 
     3. diable the input focus on file Entry when not selected [Done]
 
+    4. set the custom menu on home directory in finder []
+
 ### Design Change
 
     1. when focused change the focus backgrouund and make the flex more modern looking [Done] https://css-tricks.com/having-a-little-fun-with-custom-focus-styles/
@@ -17,6 +19,8 @@
     3. change the dock icon [Done]
 
     4. change the logo [Done]
+
+    5. better customMenu style [] https://codepen.io/Danny-Dasilva/pen/wvGaMxE
 
 ### New Feature or changes
 

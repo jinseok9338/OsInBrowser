@@ -11,6 +11,7 @@ import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
 import useFileSystemhook from "../../sharedHooks/useFileSystem";
 import { useFiles } from "../../context/FilesContext";
+import CustomMenuExample from "./components/CustomMenu/customMenu";
 
 const Main = () => {
   const [state, {}] = useProcess();
@@ -38,7 +39,7 @@ const Main = () => {
       >
         <div class="mainDesktop" id="mainDesktop">
           {/* context is the current file path where mouse is positioned  */}
-          <CustomMenu open={open} position={position} menus={menus} />
+          <CustomMenuExample open={open} position={position} menus={menus} />
           <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
           <StateLoader state={state} />
           <Dock />
