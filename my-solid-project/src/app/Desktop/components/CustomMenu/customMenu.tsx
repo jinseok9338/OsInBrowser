@@ -16,13 +16,13 @@ interface CustomMenuProps {
 const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
   return (
     <div
-      class="menu"
+      class="customMenu"
       style={` top: ${position.top}px;
     left: ${position.left}px;
     display:${open() ? "flex" : "none"}`}
     >
-      <ul class="menu-list">
-        <li class="menu-item context-buttons">
+      {/* <ul class="customMenu-list">
+        <li class="customMenu-item context-buttons">
           <button class="context-button">
             <svg viewBox="0 0 16 16">
               <path d="M16,7H3.8l5.6-5.6L8,0L0,8l8,8l1.4-1.4L3.8,9H16V7z"></path>
@@ -47,10 +47,11 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
             </svg>
           </button>
         </li>
-      </ul>
-      <ul class="menu-list">
-        <li class="menu-item">
-          <button class="menu-button">
+      </ul> */}
+
+      <ul class="customMenu-list">
+        <li class="customMenu-item">
+          <button class="customMenu-button">
             <svg
               viewBox="0 0 24 24"
               width="24"
@@ -72,8 +73,8 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
           </button>
         </li>
 
-        <li class="menu-item">
-          <button class="menu-button">
+        <li class="customMenu-item">
+          <button class="customMenu-button">
             <svg
               viewBox="0 0 24 24"
               width="24"
@@ -95,9 +96,9 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
           </button>
         </li>
       </ul>
-      <ul class="menu-list">
-        <li class="menu-item">
-          <button class="menu-button">
+      <ul class="customMenu-list">
+        <li class="customMenu-item">
+          <button class="customMenu-button">
             <svg></svg>
 
             <span>Select All</span>
@@ -105,17 +106,17 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
           </button>
         </li>
       </ul>
-      <ul class="menu-list">
-        <li class="menu-item">
-          <button class="menu-button">
+      <ul class="customMenu-list">
+        <li class="customMenu-item">
+          <button class="customMenu-button">
             <svg></svg>
 
             <span>View source</span>
             <span>CTRL+U</span>
           </button>
         </li>
-        <li class="menu-item">
-          <button class="menu-button">
+        <li class="customMenu-item">
+          <button class="customMenu-button">
             <svg
               viewBox="0 0 24 24"
               width="24"

@@ -3,8 +3,7 @@ import blueTooth from "./icons/bluetooth.png";
 import wifiSignal from "./icons/wifi-signal.png";
 import search from "./icons/search.png";
 import microphone from "./icons/microphone.png";
-import { createSignal, onCleanup } from "solid-js";
-import { ProcessState } from "../../../../types/processDirectory";
+
 import { useProcess } from "../../../../context/processDirectory";
 import { For } from "solid-js";
 import Tasks from "./tasks";
@@ -19,7 +18,7 @@ const Menubar = () => {
       <div class="leftbar">
         <img
           draggable={false}
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Apple_logo_white.svg/1010px-Apple_logo_white.svg.png"
+          src="https://t1.daumcdn.net/cfile/tistory/997DA3425B5093EB14"
           class="apple-logo"
           width="18"
           height="20"
