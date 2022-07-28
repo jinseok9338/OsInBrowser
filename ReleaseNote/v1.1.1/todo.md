@@ -22,6 +22,8 @@
 
     5. better customMenu style [] https://codepen.io/Danny-Dasilva/pen/wvGaMxE
 
+    6. need better file type icons []
+
 ### New Feature or changes
 
     1. make weather report section on menu bar [Done]
