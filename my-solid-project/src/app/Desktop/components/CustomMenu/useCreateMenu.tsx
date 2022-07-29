@@ -9,13 +9,12 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
         {
           icon: (
             //create text file icon
-
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
-              stroke="currentColor"
-              stroke-width="2"
+              stroke="#898c94"
+              stroke-width="2.5"
               stroke-linecap="round"
               stroke-linejoin="round"
               class="feather feather-file"
@@ -30,8 +29,14 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
         },
         {
           icon: (
-            <svg viewBox="0 0 64 58.67">
-              <title>Asset 62</title>
+            <svg
+              viewBox="0 0 64 58.67"
+              fill="#898c94"
+              stroke="#898c94"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
               <g id="Layer_2" data-name="Layer 2">
                 <g id="Layer_1-2" data-name="Layer 1">
                   <path
@@ -52,11 +57,11 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
         {
           icon: (
             <svg
-              version="1.1"
-              id="Icons"
-              xmlns="http://www.w3.org/2000/svg"
-              x="0px"
-              y="0px"
+              fill="none"
+              stroke="#898c94"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
               viewBox="0 0 32 32"
             >
               <path
