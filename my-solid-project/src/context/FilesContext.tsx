@@ -25,6 +25,7 @@ export type FilesContextValue = {
   readdirSync: (cd: string) => string[];
   deleteFile: (filePath: string) => void;
   desktopFiles: fileType[];
+  makeDir: (cd: string) => void;
 };
 
 // we need a way to parse the list into object ...
@@ -39,6 +40,7 @@ const FilesContext = createContext<FilesContextValue>({
   readdirSync: () => (() => undefined) as any,
   deleteFile: () => (() => undefined) as any,
   desktopFiles: [],
+  makeDir: () => undefined,
 });
 
 export const FilesProvider: ParentComponent = (props) => {
@@ -50,6 +52,8 @@ export const FilesProvider: ParentComponent = (props) => {
     deletefile,
     getFileType,
     setIcon,
+    makedir,
+    exists,
   } = fsFunction();
 
   //initialize the files and directory ... but do I need one??
@@ -204,10 +208,34 @@ export const FilesProvider: ParentComponent = (props) => {
     }
   };
 
+  const makeDir = (cd: string) => {
+    let folderNumber = 0;
+    let folderName = `${cd}/NewFolder${folderNumber == 0 ? "" : folderNumber}`;
+
+    while (exists(folderName)) {
+      folderNumber++;
+      folderName = `${cd}/NewFolder${folderNumber == 0 ? "" : folderNumber}`;
+    }
+
+    makedir(folderName);
+
+    // set the file
+    const files = setFiles(cd);
+
+    if (cd == "/home/desktop") {
+      ifDeskTopSetDesktopFiles(cd, files);
+      return;
+    }
+
+    setCurrentFiles(files);
+    ifDeskTopSetDesktopFiles(cd, files);
+  };
+
   return (
     <FilesContext.Provider
       value={{
         currentFiles,
+        makeDir,
         setCurrentFiles,
         currentDirectory,
         changeFileName,

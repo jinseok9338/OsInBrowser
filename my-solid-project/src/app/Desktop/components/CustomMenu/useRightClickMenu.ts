@@ -1,10 +1,7 @@
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
-
 import { createTextFile } from "./rightClickFunctions";
-import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
-
 import { useFiles } from "../../../../context/FilesContext";
 import useCreateMenu from "./useCreateMenu";
 
@@ -15,7 +12,7 @@ const useRightClickMenu = () => {
     top: 0,
   });
   const [context, setContext] = createSignal("");
-  const { makeFile, deleteFile } = useFiles();
+  const { makeFile, deleteFile, makeDir } = useFiles();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
 
@@ -40,11 +37,38 @@ const useRightClickMenu = () => {
         setMenus(
           useCreateMenu("defaultMenu", {
             createTextFile: createTextFile,
-            args: [context(), makeFile],
+            createTextFileArgs: [context(), makeFile],
+            makeDir: makeDir,
+            makeDirArgs: [context()],
           })
         );
 
         return;
+      }
+
+      case new RegExp("/home").test(target): {
+        {
+          setPosition({
+            left: e.pageX,
+            top: e.pageY,
+          });
+          setOpen(true);
+          let tmpcontext =
+            (e.target as HTMLElement).id === "mainDesktop"
+              ? "/home/desktop"
+              : (e.target as HTMLElement).id;
+          setContext(tmpcontext);
+          setMenus(
+            useCreateMenu("defaultMenu", {
+              createTextFile: createTextFile,
+              createTextFileArgs: [context(), makeFile],
+              makeDir: makeDir,
+              makeDirArgs: [context()],
+            })
+          );
+
+          return;
+        }
       }
 
       //with file in desktop
@@ -82,7 +106,9 @@ const useRightClickMenu = () => {
         setMenus(
           useCreateMenu("defaultMenu", {
             createTextFile: createTextFile,
-            args: [context(), makeFile],
+            createTextFileArgs: [context(), makeFile],
+            makeDir: makeDir,
+            makeDirArgs: [context()],
           })
         );
 

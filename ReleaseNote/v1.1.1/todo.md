@@ -1,4 +1,4 @@
-# Fix bugs and design - by Aug 1st
+# Fix bugs and design - by Aug 1st Version 1.1.1
 
 ### Bugs
 
@@ -8,7 +8,7 @@
 
     3. diable the input focus on file Entry when not selected [Done]
 
-    4. set the custom menu on home directory in finder []
+    4. set the custom menu on home directory in finder [Done]
 
 ### Design Change
 
@@ -20,12 +20,14 @@
 
     4. change the logo [Done]
 
-    5. better customMenu style [] https://codepen.io/Danny-Dasilva/pen/wvGaMxE
+    5. better customMenu style [Done] https://codepen.io/Danny-Dasilva/pen/wvGaMxE ... this is a good referernce
 
-    6. need better file type icons []
+    6. need better file type icons [Done]
 
-### New Feature or changes
+### New Feature or changes in Version 1.1.1
 
     1. make weather report section on menu bar [Done]
 
     3. change the clock format to 24hour base on click [Done]
+
+    2. Add create Folder functionality [Done]

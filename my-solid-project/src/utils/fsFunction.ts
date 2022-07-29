@@ -104,13 +104,32 @@ export const fsFunction = () => {
     }
   };
 
+  /**
+   * It creates a folder in the current directory.
+   * @param {string} folderName - The name of the folder you want to create.
+   */
+  const makedir = (folderName: string) => {
+    fs?.mkdirSync(folderName);
+  };
+
+  /**
+   * It returns true if the file exists, and false if it doesn't
+   * @param {string} path - The path to the file or directory.
+   * @returns A boolean value.
+   */
+  const exists = (path: string) => {
+    const result = fs?.existsSync(path);
+    return result ? true : false;
+  };
+
   return {
+    exists,
     readdirSync,
     readFileSync,
     renameFile,
     makefile,
     deletefile,
-
+    makedir,
     setIcon,
     getFileType,
   };

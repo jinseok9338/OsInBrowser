@@ -23,9 +23,12 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
               <polyline points="13 2 13 9 20 9"></polyline>
             </svg>
           ),
-          title: "create Text File",
+          title: "Create Text File",
           onClick: () =>
-            args["createTextFile"](args["args"][0], args["args"][1]),
+            args["createTextFile"](
+              args["createTextFileArgs"][0],
+              args["createTextFileArgs"][1]
+            ),
         },
         {
           icon: (
@@ -51,8 +54,8 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
               </g>
             </svg>
           ),
-          title: "create Folder",
-          onClick: () => alert("create Folder"),
+          title: "Create Folder",
+          onClick: () => args["makeDir"](args["makeDirArgs"][0]),
         },
         {
           icon: (
@@ -75,7 +78,7 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
               <circle class="st0" cx="16" cy="16" r="3" />
             </svg>
           ),
-          title: "settings",
+          title: "Settings",
           onClick: () => alert("setting Opened"),
         },
       ],
@@ -128,7 +131,7 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
               </g>
             </svg>
           ),
-          title: "delete File",
+          title: "Delete File",
           onClick: args["deleteFile"],
         },
         {
@@ -152,7 +155,7 @@ const useCreateMenu = (menuKind: string, args: any): customMenu[] => {
               <circle class="st0" cx="16" cy="16" r="3" />
             </svg>
           ),
-          title: "settings",
+          title: "Settings",
           onClick: args["settings"],
         },
       ],
