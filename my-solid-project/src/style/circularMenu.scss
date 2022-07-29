@@ -50,7 +50,7 @@ $red: #ff3c4b;
 .btn-app {
   @include circle(2.5em);
   position: absolute;
-
+  cursor: pointer;
   background-color: $blue;
   color: #fff;
   text-align: center;

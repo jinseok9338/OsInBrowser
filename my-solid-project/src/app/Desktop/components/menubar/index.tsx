@@ -36,68 +36,68 @@ const Menubar = () => {
 
 export default Menubar;
 
-const menu = () => (
-  <>
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src={highVolume}
-        width="30"
-        height="30"
-        alt=""
-        class="vol"
-      />
-    </div>
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src={blueTooth}
-        width="30"
-        height="30"
-        alt=""
-        class="bluetooth"
-      />
-    </div>
+// const menu = () => (
+//   <>
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src={highVolume}
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="vol"
+//       />
+//     </div>
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src={blueTooth}
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="bluetooth"
+//       />
+//     </div>
 
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src={wifiSignal}
-        width="30"
-        height="30"
-        alt=""
-        class="wifi"
-      />
-    </div>
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src={search}
-        width="30"
-        height="30"
-        alt=""
-        class="search"
-      />
-    </div>
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png"
-        width="30"
-        height="30"
-        alt=""
-        class="control-center"
-      />
-    </div>
-    <div class="menu-ico">
-      <img
-        draggable={false}
-        src={microphone}
-        width="30"
-        height="30"
-        alt=""
-        class="microphone"
-      />
-    </div>
-  </>
-);
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src={wifiSignal}
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="wifi"
+//       />
+//     </div>
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src={search}
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="search"
+//       />
+//     </div>
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src="https://eshop.macsales.com/blog/wp-content/uploads/2021/03/control-center-icon.png"
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="control-center"
+//       />
+//     </div>
+//     <div class="menu-ico">
+//       <img
+//         draggable={false}
+//         src={microphone}
+//         width="30"
+//         height="30"
+//         alt=""
+//         class="microphone"
+//       />
+//     </div>
+//   </>
+// );

@@ -1,7 +1,9 @@
-import { createSignal } from "solid-js";
+import { createSignal, For } from "solid-js";
+import { useProcess } from "../../../../context/processDirectory";
 
 const CircularMenu = () => {
   const [open, setOpen] = createSignal("");
+  const [state, { shrink }] = useProcess();
 
   return (
     <div class="circularMenu-container">
@@ -35,9 +37,14 @@ const CircularMenu = () => {
       </div>
 
       <div class={`circularMenu-line ${open()}`}>
-        <div class="btn-app">
-          <div class="fa fa-map-marker"></div>
-        </div>
+        <For each={state}>
+          {(process) => (
+            <div class="btn-app" onClick={() => shrink(process.id)}>
+              <div class="fa fa-folder-open-o"></div>
+            </div>
+          )}
+        </For>
+
         {/* <div class="btn-app">
           <div class="fa fa-envelope"></div>
         </div>
