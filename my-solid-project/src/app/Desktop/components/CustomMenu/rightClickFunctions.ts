@@ -1,7 +1,6 @@
 import { useFileSystem } from "../../../../context/windowFileSystem";
 
 export const createTextFile = (
-  e: MouseEvent,
   context: string,
   makeFile: (filePath: string, data: any) => void
 ) => {

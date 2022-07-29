@@ -6,6 +6,7 @@ import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
 
 import { useFiles } from "../../../../context/FilesContext";
+import useCreateMenu from "./useCreateMenu";
 
 const useRightClickMenu = () => {
   const [open, setOpen] = createSignal(false);
@@ -17,24 +18,6 @@ const useRightClickMenu = () => {
   const { makeFile, deleteFile } = useFiles();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
-
-  const defaultMenu: customMenu[] = [
-    {
-      iconPath: "fa fa-file",
-      title: "create Text File",
-      onClick: (e: MouseEvent) => createTextFile(e, context(), makeFile),
-    },
-    {
-      iconPath: "fa fa-folder-open",
-      title: "create Folder",
-      onClick: () => alert("create Folder"),
-    },
-    {
-      iconPath: "fa fa-cogs",
-      title: "settings",
-      onClick: () => alert("setting Opened"),
-    },
-  ];
 
   const rightMouseEvent = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).id;
@@ -49,12 +32,18 @@ const useRightClickMenu = () => {
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(defaultMenu);
         let tmpcontext =
           (e.target as HTMLElement).id === "mainDesktop"
             ? "/home/desktop"
             : (e.target as HTMLElement).id;
         setContext(tmpcontext);
+        setMenus(
+          useCreateMenu("defaultMenu", {
+            createTextFile: createTextFile,
+            args: [context(), makeFile],
+          })
+        );
+
         return;
       }
 
@@ -68,30 +57,35 @@ const useRightClickMenu = () => {
           top: e.pageY,
         });
         setOpen(true);
+        setContext(context);
         setMenus(
-          CustomMenuOnIcon({
+          useCreateMenu("iconMenu", {
             deleteFile: () => {
               deleteFile(`${context}${fileName}`);
               console.log("File deleted");
             },
-          }).menu
+          })
         );
 
-        setContext(context);
         return;
       }
 
       //with directory in finder
       case /^(.+\/)[^.]+$/.test(target): {
         let match = /^(.+\/)[^.]+$/.exec(target);
-
+        setContext(match![0]);
         setPosition({
           left: e.pageX,
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(defaultMenu);
-        setContext(match![0]);
+        setMenus(
+          useCreateMenu("defaultMenu", {
+            createTextFile: createTextFile,
+            args: [context(), makeFile],
+          })
+        );
+
         return;
       }
 

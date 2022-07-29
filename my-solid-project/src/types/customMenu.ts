@@ -1,5 +1,7 @@
+import { JSX } from "solid-js/jsx-runtime";
+
 export interface customMenu {
   title: string;
-  iconPath: string;
-  onClick: any;
+  icon?: JSX.Element;
+  onClick?: any;
 }

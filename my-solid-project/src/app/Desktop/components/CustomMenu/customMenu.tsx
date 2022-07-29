@@ -1,4 +1,4 @@
-import { Accessor } from "solid-js";
+import { Accessor, For, JSX } from "solid-js";
 
 interface CustomMenuProps {
   open: Accessor<boolean>;
@@ -8,7 +8,7 @@ interface CustomMenuProps {
   };
   menus: {
     title: string;
-    iconPath: string;
+    icon: JSX.Element;
     onClick: (...args: any) => void;
   }[];
 }
@@ -21,6 +21,20 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
     left: ${position.left}px;
     display:${open() ? "flex" : "none"}`}
     >
+      <ul class="customMenu-list">
+        <For each={menus} fallback={<div>Loading...</div>}>
+          {(menu) => (
+            <>
+              <li class="customMenu-item" onClick={menu.onClick}>
+                <button class="customMenu-button">
+                  {menu.icon}
+                  <span>{menu.title} </span>
+                </button>
+              </li>
+            </>
+          )}
+        </For>
+      </ul>
       {/* <ul class="customMenu-list">
         <li class="customMenu-item context-buttons">
           <button class="context-button">
@@ -49,10 +63,11 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
         </li>
       </ul> */}
 
-      <ul class="customMenu-list">
+      {/* <ul class="customMenu-list">
         <li class="customMenu-item">
           <button class="customMenu-button">
             <svg
+              // save file icon
               viewBox="0 0 24 24"
               width="24"
               height="24"
@@ -136,7 +151,7 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
             <span>CTRL+SHIFT+I</span>
           </button>
         </li>
-      </ul>
+      </ul> */}
     </div>
   );
 };
