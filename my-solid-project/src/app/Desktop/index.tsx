@@ -1,7 +1,6 @@
 import { createSignal, createEffect } from "solid-js";
 import { useProcess } from "../../context/processDirectory";
 import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
-import CustomMenu from "./components/CustomMenu";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
@@ -9,9 +8,9 @@ import { config } from "../../utils/constants";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
-import useFileSystemhook from "../../sharedHooks/useFileSystem";
+
 import { useFiles } from "../../context/FilesContext";
-import CustomMenuExample from "./components/CustomMenu/customMenu";
+import CustomMenu from "./components/CustomMenu/customMenu";
 
 const Main = () => {
   const [state, {}] = useProcess();
@@ -39,7 +38,7 @@ const Main = () => {
       >
         <div class="mainDesktop" id="mainDesktop">
           {/* context is the current file path where mouse is positioned  */}
-          <CustomMenuExample open={open} position={position} menus={menus} />
+          <CustomMenu open={open} position={position} menus={menus} />
           <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
           <StateLoader state={state} />
           <Dock />

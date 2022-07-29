@@ -8,12 +8,12 @@ interface CustomMenuProps {
   };
   menus: {
     title: string;
-    icon: JSX.Element;
-    onClick: (...args: any) => void;
+    icon?: JSX.Element;
+    onClick?: (...args: any) => void;
   }[];
 }
 
-const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
+const CustomMenu = ({ open, position, menus }: CustomMenuProps) => {
   return (
     <div
       class="customMenu"
@@ -156,4 +156,4 @@ const CustomMenuExample = ({ open, position, menus }: CustomMenuProps) => {
   );
 };
 
-export default CustomMenuExample;
+export default CustomMenu;
