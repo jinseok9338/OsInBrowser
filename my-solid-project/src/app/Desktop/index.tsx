@@ -11,6 +11,7 @@ import StateLoader from "./stateLoader";
 
 import { useFiles } from "../../context/FilesContext";
 import CustomMenu from "./components/CustomMenu/customMenu";
+import CircularMenu from "./components/circularMenu";
 
 const Main = () => {
   const [state, {}] = useProcess();
@@ -41,6 +42,7 @@ const Main = () => {
           <CustomMenu open={open} position={position} menus={menus} />
           <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
           <StateLoader state={state} />
+          <CircularMenu />
           <Dock />
         </div>
       </DragAndDrop>
