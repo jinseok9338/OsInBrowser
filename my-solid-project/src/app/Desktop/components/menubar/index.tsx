@@ -24,16 +24,6 @@ const Menubar = () => {
           height="20"
           alt=""
         />
-        <For each={state}>
-          {(process, index) => (
-            <Tasks
-              id={process.id}
-              shrink={shrink}
-              processName={process.processName}
-              iconPath={process.iconPath}
-            />
-          )}
-        </For>
       </div>
 
       <div class="rightbar">

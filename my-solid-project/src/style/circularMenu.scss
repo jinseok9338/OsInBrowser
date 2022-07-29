@@ -12,16 +12,16 @@ $blue: #4644fd;
 $red: #ff3c4b;
 
 // this is what I use to place the menu thing wherever I want
-.container {
+.circularMenu-container {
   position: fixed;
   bottom: 1em;
   right: 1em;
 }
 
 // this toggles the whole damn thing
-.menu-toggle {
+.circularMenu-toggle {
   @include circle(60px);
-  background-color: $green;
+  background-color: #555b6b;
   box-shadow: 4px 4px 2px 1px rgba(#000, 0.2);
 
   position: absolute;
@@ -66,7 +66,7 @@ $red: #ff3c4b;
 }
 
 // The most-popular apps in a circular thingo
-.menu-round {
+.circularMenu-round {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -98,7 +98,7 @@ $red: #ff3c4b;
 }
 
 // stacked template icons
-.menu-line {
+.circularMenu-line {
   position: absolute;
   z-index: 2;
 

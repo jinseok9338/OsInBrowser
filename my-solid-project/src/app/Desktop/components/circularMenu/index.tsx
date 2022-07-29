@@ -4,9 +4,9 @@ const CircularMenu = () => {
   const [open, setOpen] = createSignal("");
 
   return (
-    <div class="container">
+    <div class="circularMenu-container">
       <div
-        class={`menu-toggle ${open()}`}
+        class={`circularMenu-toggle ${open()}`}
         onClick={() => {
           setOpen((prev) => (prev == "" ? "open" : ""));
         }}
@@ -14,19 +14,27 @@ const CircularMenu = () => {
         <span class="fa fa-home"></span>
       </div>
 
-      <div class={`menu-round ${open()}`}>
-        <div class="btn-app">
-          <div class="fa fa-twitter"></div>
+      <div class={`circularMenu-round ${open()}`}>
+        <div class="btn-app" onClick={() => alert("setting opened")}>
+          <div class="fa fa-cog"></div>
         </div>
-        <div class="btn-app">
-          <div class="fa fa-facebook"></div>
+        <div
+          class="btn-app"
+          onClick={() => window.open("https://www.linkedin.com/in/jinseok9338")}
+        >
+          <div class="fa fa-linkedin-square"></div>
         </div>
-        <div class="btn-app">
-          <div class="fa fa- fa-wikipedia-w"></div>
+        <div
+          class="btn-app"
+          onClick={() =>
+            window.open("https://github.com/jinseok9338/OsInBrowser")
+          }
+        >
+          <div class="fa fa-github"></div>
         </div>
       </div>
 
-      <div class={`menu-line ${open()}`}>
+      <div class={`circularMenu-line ${open()}`}>
         <div class="btn-app">
           <div class="fa fa-map-marker"></div>
         </div>
