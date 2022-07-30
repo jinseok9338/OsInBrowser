@@ -60,10 +60,10 @@ live version - https://osinbrowser-mddjix57ia-du.a.run.app
 
 ### features that will be added in the 1.2.0
 
-1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
+    1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
 
-1.  make image preview
+    2.  make image preview
 
-1.  make the icon movable from one folder to another
+    3.  make the icon movable from one folder to another
 
-1.  copy and paste
+    4.  copy and paste
