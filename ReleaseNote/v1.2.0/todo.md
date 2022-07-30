@@ -16,6 +16,8 @@
 
     4.  copy and paste file []
 
+    5. add Tooltip for the circular menu for showing if the app is hidden or not []
+
 
 
     6. create Setting panel []

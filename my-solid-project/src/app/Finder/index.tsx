@@ -8,9 +8,10 @@ import { FilesContextValue } from "../../context/FilesContext";
 
 interface FinderProps {
   FilesContext: FilesContextValue;
+  openFile: (fileType: string, filePath: string) => void;
 }
 
-const Finder = ({ FilesContext }: FinderProps) => {
+const Finder = ({ FilesContext, openFile }: FinderProps) => {
   const finderDirectory = (cd: string) => {
     //remove the first /
     let temp = cd.substring(1, cd.length);
@@ -29,7 +30,7 @@ const Finder = ({ FilesContext }: FinderProps) => {
           config={config}
           cd={FilesContext.currentDirectory}
         >
-          <FinderMain fileSystem={FilesContext} />
+          <FinderMain fileSystem={FilesContext} openFile={openFile} />
         </DragAndDrop>
       </div>
       <div class="box-footer" style={{ "padding-left": "1rem" }}>

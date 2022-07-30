@@ -31,8 +31,6 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
 
   const FilesContext = useFiles();
 
-  const processesDirectory = [finderMetaData(FilesContext)] as ProcessState[];
-
   const addProcess = (id: string) => {
     if (ProcessExists(state, id)) {
       return;
@@ -169,6 +167,13 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     console.log(enc.decode(str as unknown as BufferSource));
     alert(enc.decode(str as unknown as BufferSource));
   };
+
+  var processesDirectory = [
+    finderMetaData({
+      FilesContext,
+      openFile,
+    }),
+  ] as ProcessState[];
 
   return (
     <ProcessesContext.Provider

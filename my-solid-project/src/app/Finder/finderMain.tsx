@@ -5,9 +5,10 @@ import { FilesContextValue } from "../../context/FilesContext";
 
 interface FinderMainProps {
   fileSystem: FilesContextValue;
+  openFile: (fileType: string, filePath: string) => void;
 }
 
-const FinderMain = ({ fileSystem }: FinderMainProps) => {
+const FinderMain = ({ fileSystem, openFile }: FinderMainProps) => {
   const { deselectAll, setFocus } = useSelectFile("align-center-finder");
 
   return (
@@ -29,6 +30,7 @@ const FinderMain = ({ fileSystem }: FinderMainProps) => {
       >
         {(item, index) => (
           <FileEntry
+            openFile={openFile}
             readFile={fileSystem.readFile}
             filetype={item.filetype}
             name={item.name}
