@@ -14,7 +14,7 @@
 
     1. when focused change the focus backgrouund and make the flex more modern looking [Done] https://css-tricks.com/having-a-little-fun-with-custom-focus-styles/
 
-    2. better task bar ... how to make one. []
+    2. better task bar ... how to make one. [Done] - circular menu
     https://codepen.io/barhatsor/pen/YzwxaQV
     https://codepen.io/simgooder/pen/bVLjgM/ -- this is what I am going with ... tomorrow
 

@@ -60,44 +60,48 @@ live version - https://osinbrowser-mddjix57ia-du.a.run.app
 
 - open file or folder on double click -- can get the raw data of the file
 
-- ton of bugs fixed (shown below)
+# Fix bugs and design - by Aug 1st Version 1.1.1
 
-  1. fix the bug where you can't select the icon when first rendered[Done]
+### Bugs
 
-  1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
+    1. when making the file in the desktop the finder current directory also changes [Done]
 
-  1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
+    2. when hovering the desktop file in finder the hover effect is shown outside the finder container other files are not a problem [Done]
 
-  1. fix the bug whene desktop environment is shared [Done]
+    3. diable the input focus on file Entry when not selected [Done]
 
-  1. reactivity problem in finder app when the file is created [Done] -> this is important!!! [Done]
+    4. set the custom menu on home directory in finder [Done]
 
-  1. fix the create File function where it doesn't have file id [Done]
+### Design Change
 
-  1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
+    1. when focused change the focus backgrouund and make the flex more modern looking [Done] https://css-tricks.com/having-a-little-fun-with-custom-focus-styles/
 
-  1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird [Done]
+    2. better task bar ... how to make one. [Done] - circular menu
+    https://codepen.io/barhatsor/pen/YzwxaQV
+    https://codepen.io/simgooder/pen/bVLjgM/ -- this is what I am going with ... tomorrow
 
-  1. we need a way to connect the mainDesktop and finder Desktop dir... How...
+    3. change the dock icon [Done]
 
-  1. icon should be rendered when the file name changes [Done]
+    4. change the logo [Done]
 
-  1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
+    5. better customMenu style [Done] https://codepen.io/Danny-Dasilva/pen/wvGaMxE ... this is a good referernce
 
-  1. change the display none from visibility hidden so that it can take less space [Doesn't work]
+    6. need better file type icons [Done]
 
-  1. bug fixed can't change the file name to same name [Done]
+### New Feature or changes in Version 1.1.1
 
-  1. make icon img not draggable by default [Done]
+    1. make weather report section on menu bar [Done]
 
-  1. make background and border around icon when set not the box-shadow [Done]
+    3. change the clock format to 24hour base on click [Done]
 
-- features that will be added in the 1.2.0
+    2. Add create Folder functionality [Done]
 
-  1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
+### features that will be added in the 1.2.0
 
-  1.  make image preview
+1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
 
-  1.  make the icon movable from one folder to another
+1.  make image preview
 
-  1.  copy and paste
+1.  make the icon movable from one folder to another
+
+1.  copy and paste
