@@ -40,7 +40,8 @@ const CircularMenu = () => {
         <For each={state}>
           {(process) => (
             <div class="btn-app" onClick={() => shrink(process.id)}>
-              <div class="fa fa-folder-open-o"></div>
+              {/* <div class="fa fa-folder-open-o"></div> */}
+              <img class="app-image" src={process.iconPath} />
             </div>
           )}
         </For>

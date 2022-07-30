@@ -1,5 +1,6 @@
 import Finder from ".";
 import { Menus } from "../../types/processDirectory";
+import finder from "../../assets/images/dock/finder.png";
 
 const menus: Menus[] = [
   {
@@ -19,7 +20,7 @@ const menus: Menus[] = [
 export const finderMetaData = (props: any) => {
   return {
     active: false,
-    iconPath: "",
+    iconPath: finder, // this needs to be fixed
     dimension: {
       height: 500,
       left: 0,
