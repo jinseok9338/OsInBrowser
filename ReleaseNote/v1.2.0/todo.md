@@ -2,6 +2,10 @@
 
 ### Bugs
 
+    1. pass the prop into finderMain for opening the file. [Done]
+
+    2.
+
 ### Design Change
 
     1. change the background setting []
