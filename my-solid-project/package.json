@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "",
   "scripts": {
-    "dev": "vite",
+    "dev": " vite",
     "build": "vite build",
     "serve": "vite preview",
     "index": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd .."

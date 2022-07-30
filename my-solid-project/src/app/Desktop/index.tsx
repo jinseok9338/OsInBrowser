@@ -1,7 +1,6 @@
 import { createSignal, createEffect } from "solid-js";
 import { useProcess } from "../../context/processDirectory";
 import useRightClickMenu from "./components/CustomMenu/useRightClickMenu";
-import CustomMenu from "./components/CustomMenu";
 import useSelectFile from "../../sharedComponents/FileEntry/useSelectFile";
 import Menubar from "./components/menubar";
 import Dock from "./components/dock";
@@ -9,8 +8,10 @@ import { config } from "../../utils/constants";
 import DragAndDrop from "../../sharedComponents/FileDragDrop/drag-drop";
 import DesktopFiles from "./desktopFIles";
 import StateLoader from "./stateLoader";
-import useFileSystemhook from "../../sharedHooks/useFileSystem";
+
 import { useFiles } from "../../context/FilesContext";
+import CustomMenu from "./components/CustomMenu/customMenu";
+import CircularMenu from "./components/circularMenu";
 
 const Main = () => {
   const [state, {}] = useProcess();
@@ -41,6 +42,7 @@ const Main = () => {
           <CustomMenu open={open} position={position} menus={menus} />
           <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
           <StateLoader state={state} />
+          <CircularMenu />
           <Dock />
         </div>
       </DragAndDrop>

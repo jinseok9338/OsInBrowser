@@ -1,4 +1,4 @@
-# Browser Operating System (BOS) version 1.1.0
+# Browser Operating System (BOS) version 1.1.1
 
 This is the first (and very crude) version of the operating system running in browser. It's not full blown operating system, but rather a show case of what browser and javascript ecosystem is cabable of.
 
@@ -6,7 +6,7 @@ live version - https://osinbrowser-mddjix57ia-du.a.run.app
 
 ---
 
-## Version 1.1.0
+## Version 1.1.1
 
 - Tech used in this project
 
@@ -22,82 +22,48 @@ live version - https://osinbrowser-mddjix57ia-du.a.run.app
 
   ***
 
-  newly added in 1.1.0
+# Fix bugs and design - by Aug 1st Version 1.1.1
 
-- Features
+### Bugs
 
-  - file directory and files context and share it among desktop environment and finder(ex: the app that is created in the desktop and deleted in the finder happen at the same time)
+    1. when making the file in the desktop the finder current directory also changes [Done]
 
-  &nbsp;
+    2. when hovering the desktop file in finder the hover effect is shown outside the finder container other files are not a problem [Done]
 
-   <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/happensync.gif">
+    3. diable the input focus on file Entry when not selected [Done]
 
-  &nbsp;
+    4. set the custom menu on home directory in finder [Done]
 
-  - select and deselect files
+### Design Change
 
-  &nbsp;
+    1. when focused change the focus backgrouund and make the flex more modern looking [Done] https://css-tricks.com/having-a-little-fun-with-custom-focus-styles/
 
-  <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/selectandeselect.gif">
+    2. better task bar ... how to make one. [Done] - circular menu
+    https://codepen.io/barhatsor/pen/YzwxaQV
+    https://codepen.io/simgooder/pen/bVLjgM/ -- this is what I am going with ... tomorrow
 
-  - create a empty text File and delete the files (demonstrated above)
+    3. change the dock icon [Done]
 
-  &nbsp;
+    4. change the logo [Done]
 
-  - change the file name
+    5. better customMenu style [Done] https://codepen.io/Danny-Dasilva/pen/wvGaMxE ... this is a good referernce
 
-  <img draggable={false} title="a title" alt="Alt text" src="./ReleaseNote/v1.1.0/changeName.gif">
+    6. need better file type icons [Done]
 
-&nbsp;
+### New Feature or changes in Version 1.1.1
 
-- import files from external desktop with drag and drop
+    1. make weather report section on menu bar [Done]
 
-- minimize the window and grow back
+    3. change the clock format to 24hour base on click [Done]
 
-- add file type in file type
+    2. Add create Folder functionality [Done]
 
-- show file directory in the footer of the finder
+### features that will be added in the 1.2.0
 
-- open file or folder on double click -- can get the raw data of the file
+1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
 
-- ton of bugs fixed (shown below)
+1.  make image preview
 
-  1. fix the bug where you can't select the icon when first rendered[Done]
+1.  make the icon movable from one folder to another
 
-  1. fix the bug where you can't select the icons and deselect icons in Finder[Done]
-
-  1. fix the bug where file Directory is loaded first so that it throws error because it didn't make any dirs yet [Done]
-
-  1. fix the bug whene desktop environment is shared [Done]
-
-  1. reactivity problem in finder app when the file is created [Done] -> this is important!!! [Done]
-
-  1. fix the create File function where it doesn't have file id [Done]
-
-  1. when the input becomes diabled it updates the name even if the name hasn't changed [Done]
-
-  1. when creating files in any directory other than desktop the icons on desktop shows different directory ... weird [Done]
-
-  1. we need a way to connect the mainDesktop and finder Desktop dir... How...
-
-  1. icon should be rendered when the file name changes [Done]
-
-  1. when onhover the icon in finder the file info is displayed far off the icon Tons fo things to fix... [Done] // the absolte position was the problemo...
-
-  1. change the display none from visibility hidden so that it can take less space [Doesn't work]
-
-  1. bug fixed can't change the file name to same name [Done]
-
-  1. make icon img not draggable by default [Done]
-
-  1. make background and border around icon when set not the box-shadow [Done]
-
-- features that will be added in the 1.2.0
-
-  1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal
-
-  1.  make image preview
-
-  1.  make the icon movable from one folder to another
-
-  1.  copy and paste
+1.  copy and paste

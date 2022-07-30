@@ -1,11 +1,9 @@
 import { onCleanup, onMount, createSignal, Setter } from "solid-js";
 import { createStore } from "solid-js/store";
-
 import { createTextFile } from "./rightClickFunctions";
-import { CustomMenuOnIcon } from "../../../../utils/constants";
 import { customMenu } from "../../../../types/customMenu";
-
 import { useFiles } from "../../../../context/FilesContext";
+import useCreateMenu from "./useCreateMenu";
 
 const useRightClickMenu = () => {
   const [open, setOpen] = createSignal(false);
@@ -14,27 +12,9 @@ const useRightClickMenu = () => {
     top: 0,
   });
   const [context, setContext] = createSignal("");
-  const { makeFile, deleteFile } = useFiles();
+  const { makeFile, deleteFile, makeDir } = useFiles();
 
   const [menus, setMenus] = createStore<customMenu[]>([]);
-
-  const defaultMenu: customMenu[] = [
-    {
-      iconPath: "fa fa-file",
-      title: "create Text File",
-      onClick: (e: MouseEvent) => createTextFile(e, context(), makeFile),
-    },
-    {
-      iconPath: "fa fa-folder-open",
-      title: "create Folder",
-      onClick: () => alert("create Folder"),
-    },
-    {
-      iconPath: "fa fa-cogs",
-      title: "settings",
-      onClick: () => alert("setting Opened"),
-    },
-  ];
 
   const rightMouseEvent = (e: MouseEvent) => {
     const target = (e.target as HTMLElement).id;
@@ -49,13 +29,46 @@ const useRightClickMenu = () => {
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(defaultMenu);
         let tmpcontext =
           (e.target as HTMLElement).id === "mainDesktop"
             ? "/home/desktop"
             : (e.target as HTMLElement).id;
         setContext(tmpcontext);
+        setMenus(
+          useCreateMenu("defaultMenu", {
+            createTextFile: createTextFile,
+            createTextFileArgs: [context(), makeFile],
+            makeDir: makeDir,
+            makeDirArgs: [context()],
+          })
+        );
+
         return;
+      }
+
+      case new RegExp("/home").test(target): {
+        {
+          setPosition({
+            left: e.pageX,
+            top: e.pageY,
+          });
+          setOpen(true);
+          let tmpcontext =
+            (e.target as HTMLElement).id === "mainDesktop"
+              ? "/home/desktop"
+              : (e.target as HTMLElement).id;
+          setContext(tmpcontext);
+          setMenus(
+            useCreateMenu("defaultMenu", {
+              createTextFile: createTextFile,
+              createTextFileArgs: [context(), makeFile],
+              makeDir: makeDir,
+              makeDirArgs: [context()],
+            })
+          );
+
+          return;
+        }
       }
 
       //with file in desktop
@@ -68,30 +81,37 @@ const useRightClickMenu = () => {
           top: e.pageY,
         });
         setOpen(true);
+        setContext(context);
         setMenus(
-          CustomMenuOnIcon({
+          useCreateMenu("iconMenu", {
             deleteFile: () => {
               deleteFile(`${context}${fileName}`);
               console.log("File deleted");
             },
-          }).menu
+          })
         );
 
-        setContext(context);
         return;
       }
 
       //with directory in finder
       case /^(.+\/)[^.]+$/.test(target): {
         let match = /^(.+\/)[^.]+$/.exec(target);
-
+        setContext(match![0]);
         setPosition({
           left: e.pageX,
           top: e.pageY,
         });
         setOpen(true);
-        setMenus(defaultMenu);
-        setContext(match![0]);
+        setMenus(
+          useCreateMenu("defaultMenu", {
+            createTextFile: createTextFile,
+            createTextFileArgs: [context(), makeFile],
+            makeDir: makeDir,
+            makeDirArgs: [context()],
+          })
+        );
+
         return;
       }
 

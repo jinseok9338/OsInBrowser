@@ -9,14 +9,11 @@ import "./style/finder.scss";
 import "./style/loader.scss";
 import "./style/dragDrop.scss";
 
-//Divider css
-import "./style/desktop/menubar/dropdownMenu/divider.scss";
-import "./style/desktop/menubar/dropdownMenu/dropdown.scss";
-import "./style/desktop/menubar/dropdownMenu/item.scss";
-import "./style/desktop/menubar/dropdownMenu/submenu.scss";
-
 //customMenu
 import "./style/customMenu.scss";
+
+//circularMenu
+import "./style/circularMenu.scss";
 import { FilesProvider } from "./context/FilesContext";
 
 const App = () => {

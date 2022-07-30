@@ -57,7 +57,15 @@ export const FileEntry = ({
   };
 
   const inputAvaliable = (e: MouseEvent, id: string) => {
-    let divElement = document.getElementById(`${id}`);
+    let iconsList = document.getElementsByClassName(className);
+    let divElement;
+
+    for (let i = 0; i < iconsList.length; i++) {
+      // you have to make sure that there is only one icon
+      if (iconsList.item(i)!.id == id) {
+        divElement = iconsList.item(i) as HTMLElement;
+      }
+    }
 
     if (
       divElement?.style.border != "" &&
@@ -87,21 +95,20 @@ export const FileEntry = ({
         // need to work on open file with actual apps.. so later
       }}
       id={FilePath()}
-      style={{
-        top: "",
-        left: "",
-      }}
       onmouseenter={(e) => {
         setLeft(e.offsetX);
         setTop(e.offsetY);
-        // the absolte position was the problemo...
-        // I might be able to tweak some number but I am okay with what I have
-        let fileInfoElement = document.getElementById(`fileInfo ${id}`);
+
+        let fileInfoElement = document.getElementById(
+          `fileInfo ${id} ${className}`
+        );
         fileInfoElement!.style.visibility = "visible";
         fileInfoElement!.style.transitionDelay = "1.5s";
       }}
       onMouseLeave={() => {
-        let fileInfoElement = document.getElementById(`fileInfo ${id}`);
+        let fileInfoElement = document.getElementById(
+          `fileInfo ${id} ${className}`
+        );
         fileInfoElement!.style.visibility = "hidden";
         fileInfoElement!.style.transitionDelay = "0s";
       }}
@@ -110,6 +117,7 @@ export const FileEntry = ({
         name={fileName()}
         top={top}
         left={left}
+        className={className}
         id={id}
         filePath={FilePath()}
         filetype={filetype}
@@ -147,7 +155,7 @@ export const FileEntry = ({
             addEventListener(
               "click",
               (e) => {
-                inputAvaliable(e, id);
+                inputAvaliable(e, FilePath());
               },
               true
             );

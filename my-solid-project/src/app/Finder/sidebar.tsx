@@ -9,9 +9,10 @@ import icloud from "../../assets/images/menu/icloud.png";
 import documents from "../../assets/images/menu/documents.png";
 import laptop from "../../assets/images/menu/laptop.png";
 
-import { For, Setter, Accessor } from "solid-js";
+import { For } from "solid-js";
 import { Favorite } from "../../types/finderSideBar";
-import { useFileSystemHookType } from "../../types/fileSystemType";
+
+import { FilesContextValue } from "../../context/FilesContext";
 
 const favoriteArray: Favorite[] = [
   { src: airdrop, title: "Home", directory: "/home" },
@@ -25,7 +26,7 @@ const favoriteArray: Favorite[] = [
 ];
 
 interface SideBarProps {
-  fileSystem: useFileSystemHookType;
+  fileSystem: FilesContextValue;
 }
 
 const SideBar = ({ fileSystem }: SideBarProps) => {

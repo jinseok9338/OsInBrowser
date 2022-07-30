@@ -5,4 +5,4 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  - init: cd os_in_browser && npm i
+  - init: cd my-solid-project && npm i
