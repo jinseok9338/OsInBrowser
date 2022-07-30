@@ -1,8 +1,8 @@
-# Fix bugs and design - by Aug 1st Version 1.2.0
+# Fix bugs and design - by Aug 5th Version 1.2.0
 
 ### Bugs
 
-    1. pass the prop into finderMain for opening the file. [Done]
+    1. pass the prop into finderMain for opening the file. [Done] // this is done because I can't pass process context into file context
 
     2.
 
@@ -12,7 +12,7 @@
 
 ### New Feature or changes in Version 1.2.0
 
-    1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal [] now the real project begin
+    1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal []
 
     2.  make image preview []
 

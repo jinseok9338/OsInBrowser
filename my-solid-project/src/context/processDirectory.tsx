@@ -155,11 +155,16 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
 
   const openFile = (fileType: string, filePath: string) => {
     // if the file type is "folder" add finder and change the directory
-    if (fileType === "folder") {
-      console.log("folder");
-      addProcess("finder");
-      FilesContext.setCurrentDirectory(filePath);
-      return;
+    switch (fileType) {
+      case "folder": {
+        // If it is folder open folder
+        console.log("folder");
+        addProcess("finder");
+        FilesContext.setCurrentDirectory(filePath);
+        return;
+      }
+      default:
+        return;
     }
 
     let enc = new TextDecoder();
