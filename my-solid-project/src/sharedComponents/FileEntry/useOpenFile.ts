@@ -1,13 +1,31 @@
+import { Setter } from "solid-js";
 import { useFiles } from "../../context/FilesContext";
+import { useProcess } from "../../context/processDirectory";
+import { useFileSystem } from "../../context/windowFileSystem";
 
-const useOpenFile = (filePath: string) => {
-  const { readFile } = useFiles();
-
+const useOpenFile = (
+  filePath: string,
+  fileType: string,
+  addProcess: (id: string) => void,
+  setCurrentDirectory: Setter<string>,
+  readFile: (filePath: string) => string
+) => {
   const openFile = () => {
-    let buffer = readFile(filePath);
+    let enc = new TextDecoder();
+    let str = readFile(filePath);
+    console.log(enc.decode(str as unknown as BufferSource));
+    alert(enc.decode(str as unknown as BufferSource));
   };
 
-  return { openFile };
+  // check if the file is dir
+  if (fileType === "folder") {
+    console.log("folder");
+    addProcess("finder");
+    setCurrentDirectory(filePath);
+    return;
+  }
+
+  openFile();
 };
 
 export default useOpenFile;

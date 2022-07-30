@@ -22,6 +22,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
     enlarge: () => undefined,
     changeActive: () => undefined,
     shrink: () => undefined,
+    openFile: () => undefined,
   },
 ]);
 
@@ -31,6 +32,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
   const FilesContext = useFiles();
 
   const processesDirectory = [finderMetaData(FilesContext)] as ProcessState[];
+
   const addProcess = (id: string) => {
     if (ProcessExists(state, id)) {
       return;
@@ -153,6 +155,21 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     setState(newState);
   };
 
+  const openFile = (fileType: string, filePath: string) => {
+    // if the file type is "folder" add finder and change the directory
+    if (fileType === "folder") {
+      console.log("folder");
+      addProcess("finder");
+      FilesContext.setCurrentDirectory(filePath);
+      return;
+    }
+
+    let enc = new TextDecoder();
+    let str = FilesContext.readFile(filePath);
+    console.log(enc.decode(str as unknown as BufferSource));
+    alert(enc.decode(str as unknown as BufferSource));
+  };
+
   return (
     <ProcessesContext.Provider
       value={[
@@ -164,6 +181,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
           enlarge,
           changeActive,
           shrink,
+          openFile,
         },
       ]}
     >

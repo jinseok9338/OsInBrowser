@@ -2,6 +2,7 @@ import FileInfo from "./FileInfo";
 import { createSignal, onMount, onCleanup } from "solid-js";
 import { useFileSystem } from "../../context/windowFileSystem";
 import useOpenFile from "./useOpenFile";
+import { FileType } from "browserfs/dist/node/core/node_fs_stats";
 
 interface FileEntryProps {
   name: string;
@@ -16,6 +17,7 @@ interface FileEntryProps {
   filetype: string;
   changeDirectory?: () => void;
   readFile: (filePath: string) => string;
+  openFile: (fileType: string, filePath: string) => void;
   // this should be hard because when the finder is not open you should open finder and change the cd
 }
 
@@ -32,6 +34,7 @@ export const FileEntry = ({
   filetype,
   changeDirectory,
   readFile,
+  openFile,
 }: FileEntryProps) => {
   // const {icon, pid} = useFileInfo(path)
   const [left, setLeft] = createSignal(0);
@@ -82,17 +85,8 @@ export const FileEntry = ({
     <div
       class="app-layout"
       onDblClick={() => {
-        if (filetype == "folder") {
-          alert(
-            "change Directory if the finder is not open open the finder first"
-          );
-          return;
-        }
-        var enc = new TextDecoder();
-        let str = readFile(FilePath());
-        console.log(enc.decode(str as unknown as BufferSource));
-
         // need to work on open file with actual apps.. so later
+        openFile(filetype, FilePath());
       }}
       id={FilePath()}
       onmouseenter={(e) => {
