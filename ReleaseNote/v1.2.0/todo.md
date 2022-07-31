@@ -10,13 +10,15 @@
 
 ### New Feature or changes in Version 1.2.0
 
-    1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal []
+    1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal [] https://www.youtube.com/watch?v=SuvXykToxQ4&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=14
 
     6. Lazy loading... []
 
 ### New Feature or changes in Version 1.2.1
 
     2.  make image preview []
+
+    1.  make error modal []
 
 ### New Feature or changes in Version 1.2.2
 
