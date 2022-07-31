@@ -1,8 +1,6 @@
 import FileInfo from "./FileInfo";
-import { createSignal, onMount, onCleanup } from "solid-js";
+import { createSignal } from "solid-js";
 import { useFileSystem } from "../../context/windowFileSystem";
-import useOpenFile from "./useOpenFile";
-import { FileType } from "browserfs/dist/node/core/node_fs_stats";
 
 interface FileEntryProps {
   name: string;

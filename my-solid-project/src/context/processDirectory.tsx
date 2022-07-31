@@ -164,8 +164,9 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         return;
       }
 
-      case "shortCut": {
+      case "url": {
         // addProcess("id") // in the process and pass in the url of the file
+        // do shortCut stuff
         alert("this is shortCut");
         return;
       }
