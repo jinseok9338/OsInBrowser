@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 import { fileType } from "../types/fileSystemType";
 import { fsFunction } from "../utils/fsFunction";
 import path, { dirname } from "path";
+import { without } from "lodash";
 
 export type FilesContextValue = {
   currentFiles: fileType[];
@@ -54,6 +55,7 @@ export const FilesProvider: ParentComponent = (props) => {
     setIcon,
     makedir,
     exists,
+    makeShortCutData,
   } = fsFunction();
 
   //initialize the files and directory ... but do I need one??
@@ -230,6 +232,22 @@ export const FilesProvider: ParentComponent = (props) => {
     setCurrentFiles(files);
     ifDeskTopSetDesktopFiles(cd, files);
   };
+
+  const createShourtCut = (file: fileType) => {
+    let currentDirectory = file.dir;
+    let i = 0;
+    let urlName = `${path.parse(file.name).name}${i == 0 ? "" : i}.url`;
+
+    while (exists(file.dir + urlName)) {
+      i++;
+      urlName = `${path.parse(file.name).name}${i == 0 ? "" : i}.url`;
+    }
+
+    const data = makeShortCutData(file);
+
+    makeFile(urlName, data);
+  };
+  // I am not creating thr ShortCut... this is too much
 
   return (
     <FilesContext.Provider

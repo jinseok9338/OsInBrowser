@@ -163,8 +163,20 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         FilesContext.setCurrentDirectory(filePath);
         return;
       }
-      default:
+
+      case "shortCut": {
+        // addProcess("id") // in the process and pass in the url of the file
+        alert("this is shortCut");
         return;
+      }
+
+      default: {
+        let enc = new TextDecoder();
+        let str = FilesContext.readFile(filePath);
+        console.log(enc.decode(str as unknown as BufferSource));
+        alert(enc.decode(str as unknown as BufferSource));
+        return;
+      }
     }
 
     let enc = new TextDecoder();

@@ -1,1 +1,1 @@
-{"home":{"test.txt":null},"images":{"linux4.iso":null},"libs":{"v86":{"bios":{"seabios.bin":null,"vgabios.bin":null},"libv86.js":null,"v86.wasm":null}}}
+{"home":{"apps":{},"desktop":{},"documents":{},"download":{},"folder":{},"linux.url":null,"pictures":{},"test.txt":null},"images":{"linux4.iso":null},"libs":{"v86":{"bios":{"seabios.bin":null,"vgabios.bin":null},"libv86.js":null,"v86.wasm":null}},"recents":{}}
