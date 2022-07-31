@@ -15,7 +15,8 @@ interface FileEntryProps {
   filetype: string;
   changeDirectory?: () => void;
   readFile: (filePath: string) => string;
-  openFile: (fileType: string, filePath: string) => void;
+  openFile: (processId: string, filePath: string) => void;
+  processId: string;
   // this should be hard because when the finder is not open you should open finder and change the cd
 }
 
@@ -30,6 +31,7 @@ export const FileEntry = ({
   ChangeFileName,
   readDir,
   filetype,
+  processId,
   changeDirectory,
   readFile,
   openFile,
@@ -84,7 +86,7 @@ export const FileEntry = ({
       class="app-layout"
       onDblClick={() => {
         // need to work on open file with actual apps.. so later
-        openFile(filetype, FilePath());
+        openFile(processId, FilePath());
       }}
       id={FilePath()}
       onmouseenter={(e) => {

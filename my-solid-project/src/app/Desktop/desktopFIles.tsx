@@ -5,7 +5,7 @@ import FileEntry from "../../sharedComponents/FileEntry";
 interface DesktopFilesProps {
   setFocus: (id: string, e: MouseEvent) => void;
   mainFileSystem: FilesContextValue;
-  openFile: (fileType: string, filePath: string) => void;
+  openFile: (processId: string, filePath: string) => void;
 }
 
 const DesktopFiles = ({
@@ -16,6 +16,7 @@ const DesktopFiles = ({
   <For each={mainFileSystem.desktopFiles}>
     {(file) => (
       <FileEntry
+        processId={file.processId}
         openFile={openFile}
         readFile={mainFileSystem.readFile}
         filetype={file.filetype}

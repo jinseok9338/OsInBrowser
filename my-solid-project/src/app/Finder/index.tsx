@@ -8,7 +8,7 @@ import { FilesContextValue } from "../../context/FilesContext";
 
 interface FinderProps {
   FilesContext: FilesContextValue;
-  openFile: (fileType: string, filePath: string) => void;
+  openFile: (processId: string, filePath: string) => void;
 }
 
 const Finder = ({ FilesContext, openFile }: FinderProps) => {

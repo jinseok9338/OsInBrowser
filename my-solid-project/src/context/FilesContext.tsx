@@ -119,12 +119,14 @@ export const FilesProvider: ParentComponent = (props) => {
         let name = file;
         let id = uuidv4();
         let dir = cd;
+        let processId = filetype == "folder" ? "finder" : ""; // need to set the pid
         if (filetype == "url") {
           let res = readShortCut(filePath);
 
           filePath = res.filePath;
           iconPath = res.iconPath;
           name = res.name;
+          processId = res.processId;
         }
         return {
           name,
@@ -133,6 +135,7 @@ export const FilesProvider: ParentComponent = (props) => {
           id,
           filePath,
           dir,
+          processId,
         } as fileType;
       });
     return files;

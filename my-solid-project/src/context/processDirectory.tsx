@@ -153,21 +153,22 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     setState(newState);
   };
 
-  const openFile = (fileType: string, filePath: string) => {
+  const openFile = (processId: string, filePath: string) => {
     // if the file type is "folder" add finder and change the directory
-    switch (fileType) {
-      case "folder": {
+    console.log(processId);
+    switch (processId) {
+      case "finder": {
         // If it is folder open folder
         console.log("folder");
-        addProcess("finder");
+        addProcess(processId);
         FilesContext.setCurrentDirectory(filePath);
         return;
       }
 
-      case "url": {
+      case "V86": {
         // addProcess("id") // in the process and pass in the url of the file
         // do shortCut stuff
-        alert("this is shortCut");
+        alert("this is v86 emulator app");
         return;
       }
 

@@ -5,7 +5,7 @@ import { FilesContextValue } from "../../context/FilesContext";
 
 interface FinderMainProps {
   fileSystem: FilesContextValue;
-  openFile: (fileType: string, filePath: string) => void;
+  openFile: (processId: string, filePath: string) => void;
 }
 
 const FinderMain = ({ fileSystem, openFile }: FinderMainProps) => {
@@ -30,6 +30,7 @@ const FinderMain = ({ fileSystem, openFile }: FinderMainProps) => {
       >
         {(item, index) => (
           <FileEntry
+            processId={item.processId}
             openFile={openFile}
             readFile={fileSystem.readFile}
             filetype={item.filetype}
