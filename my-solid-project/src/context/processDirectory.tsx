@@ -173,7 +173,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
       default: {
         let enc = new TextDecoder();
         let str = FilesContext.readFile(filePath);
-        console.log(enc.decode(str as unknown as BufferSource));
+
         alert(enc.decode(str as unknown as BufferSource));
         return;
       }

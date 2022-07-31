@@ -13,7 +13,7 @@ const useOpenFile = (
   const openFile = () => {
     let enc = new TextDecoder();
     let str = readFile(filePath);
-    console.log(enc.decode(str as unknown as BufferSource));
+
     alert(enc.decode(str as unknown as BufferSource));
   };
 

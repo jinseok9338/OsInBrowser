@@ -16,7 +16,5 @@ export const createTextFile = (
     fileName = `${cd}/text${fileNumber == 0 ? "" : fileNumber}.txt`;
   }
 
-  console.log(cd, fileName);
-
   makeFile(fileName, "");
 };

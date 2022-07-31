@@ -56,6 +56,7 @@ export const FilesProvider: ParentComponent = (props) => {
     makedir,
     exists,
     makeShortCutData,
+    readShortCut,
   } = fsFunction();
 
   //initialize the files and directory ... but do I need one??
@@ -69,19 +70,7 @@ export const FilesProvider: ParentComponent = (props) => {
     const cd = currentDirectory();
     if (cd != prev) {
       setCurrentDirectory(cd);
-      let cFiles = readdirSync(cd)
-        .sort()
-        .map(
-          (file) =>
-            ({
-              name: file,
-              iconPath: setIcon(getFileType(file)),
-              id: uuidv4(),
-              filePath: `${cd}/${file}`,
-              dir: cd,
-              filetype: getFileType(file),
-            } as fileType)
-        );
+      let cFiles = setFiles(cd);
       setCurrentFiles(cFiles);
     }
     return cd;
@@ -90,19 +79,7 @@ export const FilesProvider: ParentComponent = (props) => {
   //OnMount set the desktop files first
   onMount(() => {
     const cd = "/home/desktop";
-    let cFiles = readdirSync(cd)
-      .sort()
-      .map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            id: uuidv4(),
-            filePath: `${cd}/${file}`,
-            dir: cd,
-            filetype: getFileType(file),
-          } as fileType)
-      );
+    let cFiles = setFiles(cd);
     setDesktopFiles(cFiles);
   });
 
@@ -135,17 +112,29 @@ export const FilesProvider: ParentComponent = (props) => {
   const setFiles = (cd: string) => {
     const files = readdirSync(cd)
       .sort()
-      .map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            filetype: getFileType(file),
-            id: uuidv4(),
-            filePath: `${cd}/${file}`,
-            dir: cd,
-          } as fileType)
-      );
+      .map((file) => {
+        let filetype = getFileType(file);
+        let filePath = `${cd}/${file}`;
+        let iconPath = setIcon(getFileType(file));
+        let name = file;
+        let id = uuidv4();
+        let dir = cd;
+        if (filetype == "url") {
+          let res = readShortCut(filePath);
+
+          filePath = res.filePath;
+          iconPath = res.iconPath;
+          name = res.name;
+        }
+        return {
+          name,
+          iconPath,
+          filetype,
+          id,
+          filePath,
+          dir,
+        } as fileType;
+      });
     return files;
   };
 

@@ -141,13 +141,17 @@ export const fsFunction = () => {
     const data = fs?.readFileSync(filePath);
     if (data) {
       //read shortCut data one by one and extract the file info
-      let allrows = (data as unknown as string).split("\n");
-      for (let row in allrows) {
+      let enc = new TextDecoder();
+      let str = enc.decode(data as unknown as BufferSource);
+
+      let allrows = str.split("\n");
+
+      for (let row of allrows) {
         let patterns = /(\s*.*)=(\s*.*)/.exec(row);
         if (patterns) {
           let key = patterns[1].trim();
           let value = patterns[2].trim();
-          result.key = value;
+          result[key] = value;
         }
       }
     }
