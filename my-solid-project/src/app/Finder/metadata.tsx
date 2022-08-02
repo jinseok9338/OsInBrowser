@@ -43,5 +43,6 @@ export const finderMetaData = ({
     processName: "finder",
     menus: menus,
     isShrunk: false,
+    hasWindow: true,
   };
 };

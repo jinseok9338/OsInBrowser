@@ -37,5 +37,6 @@ export const V86MetaData = (url: string) => {
     processName: "V86",
     menus: menus,
     isShrunk: false,
+    hasWindow: false,
   };
 };
