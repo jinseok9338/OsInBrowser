@@ -34,22 +34,21 @@
 //   font-weight: 400;
 // }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-bg-primary: #d0d6df;
-    --color-bg-primary-offset: #f1f3f7;
-    --color-bg-secondary: #fff;
-    --color-text-primary: #3a3c42;
-    --color-text-primary-offset: #898c94;
-    --color-orange: #ff6347;
-    --color-green: #228b22;
-    --color-purple: #9665c4;
-    --color-black: var(--color-text-primary);
-    --color-red: #d92027;
-    --color-black: #000;
-    --internal-light-dark: #f00;
-  }
+#root {
+  --color-bg-primary: #d0d6df;
+  --color-bg-primary-offset: #f1f3f7;
+  --color-bg-secondary: #fff;
+  --color-text-primary: #3a3c42;
+  --color-text-primary-offset: #898c94;
+  --color-orange: #ff6347;
+  --color-green: #228b22;
+  --color-purple: #9665c4;
+  --color-black: var(--color-text-primary);
+  --color-red: #d92027;
+  --color-black: #000;
+  --internal-light-dark: #f00;
 }
+
 [data-theme="light"] {
   --color-bg-primary: #d0d6df;
   --color-bg-primary-offset: #f1f3f7;
@@ -103,8 +102,7 @@ h3 {
   background-color: var(--color-bg-secondary);
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(64, 64, 64, 0.15);
-  top: 10;
-  left: 10;
+
   width: 208px;
 }
 .customMenu.settings {
