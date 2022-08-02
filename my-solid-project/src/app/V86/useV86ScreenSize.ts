@@ -29,6 +29,7 @@ const useV86ScreenSize = (
           ?.getBoundingClientRect() || {};
 
       if (height && width) changeProcessDimension(id, (rows * height, width));
+      // set the dimension to the row and height
     };
 
     emulator!()?.add_listener(SET_SCREEN_GFX, setScreenGfx);

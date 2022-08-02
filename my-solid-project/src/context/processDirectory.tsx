@@ -168,15 +168,16 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
       case "V86": {
         // addProcess("id") // in the process and pass in the url of the file
         // do shortCut stuff
-        alert("this is v86 emulator app");
+        let blob = FilesContext.readFile(filePath);
+
+        alert(URL.createObjectURL(blob));
         return;
       }
 
       default: {
-        let enc = new TextDecoder();
-        let str = FilesContext.readFile(filePath);
+        let blob = FilesContext.readFile(filePath);
 
-        alert(enc.decode(str as unknown as BufferSource));
+        alert(URL.createObjectURL(blob));
         return;
       }
     }

@@ -20,7 +20,7 @@ export type FilesContextValue = {
   setCurrentFiles: SetStoreFunction<fileType[]>;
   currentDirectory: Accessor<string>;
   changeFileName: (oldPath: string, newPath: string) => void;
-  readFile: (filePath: string) => string;
+  readFile: (filePath: string) => Blob;
   setCurrentDirectory: Setter<string>;
   makeFile: (filePath: string, data: any) => void;
   readdirSync: (cd: string) => string[];

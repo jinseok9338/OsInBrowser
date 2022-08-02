@@ -29,8 +29,10 @@ export const fsFunction = () => {
    * @returns Buffer
    */
   const readFileSync = (filePath: string) => {
-    let fileContent = fs?.readFileSync(filePath) as unknown as string;
-    return !fileContent ? "" : fileContent;
+    let fileContent = fs?.readFileSync(filePath);
+    return !fileContent
+      ? new Blob([])
+      : new Blob([new Uint8Array(fileContent)]);
   };
 
   /*
