@@ -1,6 +1,7 @@
 import { createContext, useContext, ParentComponent } from "solid-js";
 import { createStore } from "solid-js/store";
 import { finderMetaData } from "../app/Finder/metadata";
+import { V86MetaData } from "../app/V86/metaData";
 import {
   Dimension,
   ProcessesContextValue,
@@ -31,11 +32,11 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
 
   const FilesContext = useFiles();
 
-  const addProcess = (id: string) => {
+  const addProcess = (id: string, url?: string) => {
     if (ProcessExists(state, id)) {
       return;
     }
-    let process = processesDirectory.find((process) => process.id == id);
+    let process = processesDirectory(url).find((process) => process.id == id);
     let newProcess = {
       ...process,
       active: true,
@@ -169,8 +170,8 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         // addProcess("id") // in the process and pass in the url of the file
         // do shortCut stuff
         let blob = FilesContext.readFile(filePath);
+        addProcess(processId, URL.createObjectURL(blob));
 
-        alert(URL.createObjectURL(blob));
         return;
       }
 
@@ -188,12 +189,14 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     alert(enc.decode(str as unknown as BufferSource));
   };
 
-  var processesDirectory = [
-    finderMetaData({
-      FilesContext,
-      openFile,
-    }),
-  ] as ProcessState[];
+  const processesDirectory = (url?: string) =>
+    [
+      finderMetaData({
+        FilesContext,
+        openFile,
+      }),
+      V86MetaData(url!),
+    ] as ProcessState[];
 
   return (
     <ProcessesContext.Provider

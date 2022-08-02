@@ -5,9 +5,6 @@ import type {
   WindowWithV86Starter,
 } from "./types";
 
-import { extname } from "path";
-import { useFiles } from "../../context/FilesContext";
-import { useProcess } from "../../context/processDirectory";
 import { useFileSystem } from "../../context/windowFileSystem";
 import { createSignal, createMemo, createEffect, onCleanup } from "solid-js";
 import { loadScript, bufferToUrl } from "../../utils/fileFunctions";
@@ -18,22 +15,25 @@ type V86 = {
 };
 
 const useV86 = (url: string, screenContainer: HTMLDivElement) => {
-  const [state] = useProcess();
-  const { readFile } = useFiles();
   const { fs } = useFileSystem();
 
   const [emulator, setEmulator] = createSignal<V86Starter | null>(null);
   const lockMouse = createMemo(() => emulator()?.lock_mouse?.());
 
+  const getExtension = (directory: string) => {
+    return /[.]/.exec(directory) ? /[^.]+$/.exec(directory) : undefined;
+  };
+
   createEffect(() => {
     const Emulaotr = emulator();
     if (!Emulaotr) {
       fs?.readFile(url, (_error, contents = Buffer.from("")) => {
-        const extension = extname(url).toLowerCase();
-        const isISO = extension === ".iso";
+        const extension = getExtension(url)!.toString().toLowerCase();
+        const isISO = extension === "iso";
         loadScript("/libs/v86/libv86.js", () => {
           const { deviceMemory = 8 } = navigator as NavigatorWithMemory;
           const memoryRatio = deviceMemory / 8;
+          console.log("loading was successful");
 
           setEmulator(
             new (window as WindowWithV86Starter).V86Starter({

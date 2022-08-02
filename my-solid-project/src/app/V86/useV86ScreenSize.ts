@@ -7,16 +7,15 @@ const SET_SCREEN_GFX = "screen-set-size-graphical";
 const SET_SCREEN_TXT = "screen-set-size-text";
 
 const useV86ScreenSize = (
-  id: string,
   screenContainer: HTMLDivElement,
-  emulator?: Accessor<V86Starter>
+  emulator?: Accessor<V86Starter | null>
 ): void => {
   const [state, { changeProcessDimension }] = useProcess();
 
   createEffect(() => {
     const Emulator = emulator!();
     const setScreenGfx: SizeCallback = ([width, height]) =>
-      changeProcessDimension(id, {
+      changeProcessDimension("V86", {
         height: height,
         left: 0,
         width: width,
@@ -28,7 +27,13 @@ const useV86ScreenSize = (
           ?.querySelector("span:last-of-type")
           ?.getBoundingClientRect() || {};
 
-      if (height && width) changeProcessDimension(id, (rows * height, width));
+      if (height && width)
+        changeProcessDimension("V86", {
+          height: rows * height,
+          left: 0,
+          width: width,
+          top: 0, // needs to change it
+        });
       // set the dimension to the row and height
     };
 
@@ -41,6 +46,8 @@ const useV86ScreenSize = (
     });
     return Emulator;
   });
+
+  // return {};
 };
 
 export default useV86ScreenSize;
