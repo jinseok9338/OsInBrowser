@@ -14,7 +14,7 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
   const { emulator, lockMouse } = useV86(url, screenRef!);
   const txtStyle = useV86ScreenSize(screenRef!, emulator);
   return (
-    <div ref={screenRef} onClick={lockMouse}>
+    <div ref={screenRef} onClick={() => lockMouse()}>
       <div
         style={{
           whiteSpace: "pre",
@@ -22,7 +22,7 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
           lineHeight: "14px",
         }}
       />
-      <canvas />
+      <canvas style="display: none" />
     </div>
   );
 };

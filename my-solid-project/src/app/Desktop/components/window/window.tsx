@@ -62,7 +62,12 @@ const WindowComponent = ({
           <span>{processName ? processName : ""}</span>
         </div>
       </div>
-      <div class="content">{process}</div>
+      <div
+        class="content"
+        style={`${id == "finder" ? "height: calc(100% - 50px);" : "100%"}`}
+      >
+        {process}
+      </div>
     </div>
   );
 };
