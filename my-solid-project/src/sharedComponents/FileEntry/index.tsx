@@ -14,7 +14,7 @@ interface FileEntryProps {
   readDir: (currentDirectory: string) => string[];
   filetype: string;
   changeDirectory?: () => void;
-  readFile: (filePath: string) => string;
+  readFile: (filePath: string) => Blob;
   openFile: (processId: string, filePath: string) => void;
   processId: string;
   // this should be hard because when the finder is not open you should open finder and change the cd

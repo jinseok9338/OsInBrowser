@@ -170,7 +170,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         // addProcess("id") // in the process and pass in the url of the file
         // do shortCut stuff
         let blob = FilesContext.readFile(filePath);
-        addProcess(processId, URL.createObjectURL(blob));
+        addProcess(processId, filePath);
 
         return;
       }

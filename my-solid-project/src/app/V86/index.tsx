@@ -9,20 +9,18 @@ interface V86Props {
 
 const V86Emulator = ({ url }: V86Props): JSX.Element => {
   console.log(url);
-  let screenRef: HTMLDivElement | undefined = undefined;
+  let screenRef: HTMLDivElement = document.getElementById(
+    "screen_container"
+  ) as HTMLDivElement;
 
   const { emulator, lockMouse } = useV86(url, screenRef!);
+
   const txtStyle = useV86ScreenSize(screenRef!, emulator);
   return (
-    <div ref={screenRef} onClick={() => lockMouse()}>
-      <div
-        style={{
-          whiteSpace: "pre",
-          font: "14px monospace",
-          lineHeight: "14px",
-        }}
-      />
-      <canvas style="display: none" />
+    <div id="screen_container" onClick={lockMouse()}>
+      {/* <div style={txtStyle} /> */}
+      <div style="white-space: pre; font: 14px monospace; line-height: 14px position: relative;"></div>
+      <canvas style={"height:100% !important; width:100% !important"} />
     </div>
   );
 };
