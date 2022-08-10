@@ -15,8 +15,8 @@ const Finder = ({ FilesContext, openFile }: FinderProps) => {
   const finderDirectory = (cd: string) => {
     //remove the first /
     let temp = cd.substring(1, cd.length);
-    //replace "/" with " 🡆 "
-    let result = temp.replaceAll("/", " 🡆 ");
+    //replace "/" with " 🡆 ➡ "
+    let result = temp.replaceAll("/", " ➡ ");
     return result;
   };
 

@@ -25,9 +25,9 @@ const useV86 = (url: string, screenContainer: HTMLDivElement) => {
   };
 
   createEffect(() => {
-    const Emulaotr = emulator();
-    console.log(screenContainer);
-    if (!Emulaotr) {
+    const Emulator = emulator();
+
+    if (!Emulator && screenContainer) {
       fs?.readFile(url, (_error, contents = Buffer.from("")) => {
         const extension = getExtension(url)!.toString().toLowerCase();
 
@@ -51,8 +51,8 @@ const useV86 = (url: string, screenContainer: HTMLDivElement) => {
         });
       });
     }
-    onCleanup(() => Emulaotr?.destroy?.());
-    return [screenContainer, Emulaotr];
+    onCleanup(() => Emulator?.destroy?.());
+    return [screenContainer, Emulator];
   });
 
   return {

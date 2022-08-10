@@ -8,26 +8,17 @@ interface V86Props {
   url: string; // onject to url string
 }
 
+let screenRef: HTMLDivElement;
+
 const V86Emulator = ({ url }: V86Props): JSX.Element => {
-  let screenRef: HTMLDivElement;
-  const [ref, setRef] = createSignal<HTMLDivElement | null>(null);
-
-  createEffect(() => {
-    console.log(ref());
-    if (screenRef) {
-      setRef(screenRef);
-    }
-    return screenRef;
-  });
-
-  const { emulator, lockMouse } = useV86(url, ref()!);
-
-  const txtStyle = useV86ScreenSize(ref()!, emulator);
-
   return (
-    <div ref={ref()!}>
+    <div
+      ref={(el) => {
+        useV86(url, el);
+      }}
+    >
       <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
-      <canvas style="display: none"></canvas>
+      <canvas style="display: block"></canvas>
     </div>
   );
 };
