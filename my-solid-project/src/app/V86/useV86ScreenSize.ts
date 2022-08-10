@@ -48,7 +48,7 @@ const useV86ScreenSize = (
   });
 
   return {
-    font: `$(lineHeight) monospace`,
+    font: `${lineHeight} monospace`,
     lineHeight,
     top: BORDER_OFFSET - 1,
     position: "relative" as "relative",

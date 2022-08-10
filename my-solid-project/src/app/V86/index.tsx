@@ -1,5 +1,6 @@
-import { onMount } from "solid-js";
+import { createEffect, createMemo, createSignal, onMount } from "solid-js";
 import { JSX } from "solid-js/jsx-runtime";
+import { V86Starter } from "./types";
 import useV86 from "./useV86";
 import useV86ScreenSize from "./useV86ScreenSize";
 
@@ -8,19 +9,25 @@ interface V86Props {
 }
 
 const V86Emulator = ({ url }: V86Props): JSX.Element => {
-  console.log(url);
-  let screenRef: HTMLDivElement = document.getElementById(
-    "screen_container"
-  ) as HTMLDivElement;
+  let screenRef: HTMLDivElement;
+  const [ref, setRef] = createSignal<HTMLDivElement | null>(null);
 
-  const { emulator, lockMouse } = useV86(url, screenRef!);
+  createEffect(() => {
+    console.log(ref());
+    if (screenRef) {
+      setRef(screenRef);
+    }
+    return screenRef;
+  });
 
-  const txtStyle = useV86ScreenSize(screenRef!, emulator);
+  const { emulator, lockMouse } = useV86(url, ref()!);
+
+  const txtStyle = useV86ScreenSize(ref()!, emulator);
+
   return (
-    <div id="screen_container" onClick={lockMouse()}>
-      {/* <div style={txtStyle} /> */}
-      <div style="white-space: pre; font: 14px monospace; line-height: 14px position: relative;"></div>
-      <canvas style={"height:100% !important; width:100% !important"} />
+    <div ref={ref()!}>
+      <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+      <canvas style="display: none"></canvas>
     </div>
   );
 };
