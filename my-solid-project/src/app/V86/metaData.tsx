@@ -26,7 +26,7 @@ export const V86MetaData = (url: string) => {
     iconPath: finder,
     dimension: {
       height: 500,
-      left: 0,
+      left: 100,
       top: 100,
       width: 500,
     },

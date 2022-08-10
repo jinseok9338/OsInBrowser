@@ -37,16 +37,17 @@ const useV86 = (url: string, screenContainer: HTMLDivElement) => {
           const { deviceMemory = 8 } = navigator as NavigatorWithMemory;
           const memoryRatio = deviceMemory / 8;
 
-          setEmulator(
-            new (window as WindowWithV86Starter).V86Starter({
-              memory_size: memoryRatio * 1024 * 1024 * 1024,
-              vga_memory_size: memoryRatio * 32 * 1024 * 1024,
-              boot_order: isISO ? BOOT_CD_FD_HD : BOOT_FD_CD_HD,
-              [isISO ? "cdrom" : "fda"]: { url: bufferToUrl(contents) },
-              screen_container: screenContainer,
-              ...v86Config,
-            })
-          );
+          var Emulator = new (window as WindowWithV86Starter).V86Starter({
+            memory_size: memoryRatio * 1024 * 1024 * 1024,
+            vga_memory_size: memoryRatio * 32 * 1024 * 1024,
+            boot_order: isISO ? BOOT_CD_FD_HD : BOOT_FD_CD_HD,
+            [isISO ? "cdrom" : "fda"]: { url: bufferToUrl(contents) },
+            screen_container: screenContainer,
+            ...v86Config,
+          });
+
+          setEmulator(Emulator);
+
           console.log(emulator());
         });
       });
