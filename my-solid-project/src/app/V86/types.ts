@@ -29,12 +29,12 @@ export type V86Config = typeof config & {
 
 type V86Constructor = new (v86Config: V86Config) => V86Starter;
 
-// declare global {
-//   interface Window {
-//     DEBUG?: boolean;
-//     V86Starter: V86Constructor;
-//   }
-// }
+declare global {
+  interface Window {
+    DEBUG?: boolean;
+    V86Starter: V86Constructor;
+  }
+}
 
 export type WindowWithV86Starter = Window &
   typeof globalThis & { V86Starter: V86Constructor };
