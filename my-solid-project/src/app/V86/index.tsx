@@ -10,8 +10,6 @@ interface V86Props {
 }
 
 const V86Emulator = ({ url }: V86Props): JSX.Element => {
-  const [txtStyle, setTxtStyle] = createSignal({});
-  const [LockMouse, setLockMouse] = createSignal(() => {});
   const [state, { changeProcessDimension }] = useProcess();
 
   const process = state.find((process) => process.id == "V86");
