@@ -55,8 +55,6 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
         });
 
         setEmulator(Emulator);
-
-        console.log(emulator());
       });
     }
   }
@@ -65,9 +63,7 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
     <div
       //@ts-ignores
       ref={(el) => initEmulation(el)}
-      onClick={() => {
-        console.log(emulator());
-      }}
+      onClick={() => {}}
       style={{
         "background-color": "black",
       }}
