@@ -1,3 +1,4 @@
+"use strict";
 import { BOOT_CD_FD_HD, BOOT_FD_CD_HD, config as v86Config } from "./config";
 import type {
   NavigatorWithMemory,
