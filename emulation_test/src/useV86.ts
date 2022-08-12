@@ -1,10 +1,8 @@
 "use strict";
 import { BOOT_CD_FD_HD, BOOT_FD_CD_HD, config as v86Config } from "./config";
-import type {
-  NavigatorWithMemory,
-  V86Starter,
-  WindowWithV86Starter,
-} from "./types";
+
+import { V86Starter } from "v86";
+import { v86WASM, seabios, vgabios } from "v86/build/binaries";
 
 import {
   createSignal,
@@ -23,21 +21,24 @@ type V86 = {
 const useV86 = (url: string, screenContainer: HTMLDivElement) => {
   const [emulator, setEmulator] = createSignal<V86Starter | null>(null);
 
-  loadScript("/v86/v86/libv86.js", () => {
-    const { deviceMemory = 8 } = navigator as NavigatorWithMemory;
-    const memoryRatio = deviceMemory / 8;
-
-    var Emulator = new (window as WindowWithV86Starter).V86Starter({
-      memory_size: memoryRatio * 1024 * 1024 * 1024,
-      vga_memory_size: memoryRatio * 32 * 1024 * 1024,
-      boot_order: BOOT_CD_FD_HD,
-      cdrom: { url: "" },
-      screen_container: screenContainer,
-      ...v86Config,
-    });
-
-    setEmulator(Emulator);
-  });
+  createEffect(() => {
+    async function main() {
+      const Emulator = new V86Starter({
+        wasm_fn: async (param: any) =>
+          (await WebAssembly.instantiate(await v86WASM, param)).instance
+            .exports,
+        memory_size: 32 * 1024 * 1024,
+        vga_memory_size: 2 * 1024 * 1024,
+        screen_container: screenContainer,
+        bios: { buffer: await seabios },
+        vga_bios: { buffer: await vgabios },
+        cdrom: { url: url },
+        autostart: true,
+      });
+      setEmulator(Emulator);
+    }
+    main();
+  }, []);
 
   return { emulator };
 };
