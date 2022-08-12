@@ -21,13 +21,12 @@ const getExtension = (directory: string) => {
 };
 
 const V86Emulator = ({ url }: V86Props): JSX.Element => {
-  let emulatorDiv: HTMLDivElement | ((el: HTMLDivElement) => void);
-
   const [emulator, setEmulator] = createSignal<V86Starter | null>(null);
   const { fs } = useFileSystem();
 
   async function initEmulation(
-    emulatorDiv: HTMLDivElement | ((el: HTMLDivElement) => void)
+    emulatorDiv: HTMLDivElement | ((el: HTMLDivElement) => void),
+    url: string
   ) {
     if (!emulator() && emulatorDiv) {
       fs?.readFile(url, async (_error, contents = Buffer.from("")) => {
@@ -61,8 +60,7 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
 
   return (
     <div
-      //@ts-ignores
-      ref={(el) => initEmulation(el)}
+      ref={(el) => initEmulation(el, url)}
       onClick={() => {}}
       style={{
         "background-color": "black",
