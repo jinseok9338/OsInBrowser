@@ -1,28 +1,15 @@
-"use strict";
 import { BOOT_CD_FD_HD, BOOT_FD_CD_HD, config as v86Config } from "./config";
 
 import { V86Starter } from "v86";
 import { v86WASM, seabios, vgabios } from "v86/build/binaries";
 
-import {
-  createSignal,
-  createMemo,
-  createEffect,
-  onCleanup,
-  onMount,
-} from "solid-js";
-import { loadScript } from "./util";
-
-type V86 = {
-  emulator: V86Starter | null;
-  lockMouse: () => void;
-};
+import { createSignal, onMount } from "solid-js";
 
 const useV86 = (url: string, screenContainer: HTMLDivElement) => {
   const [emulator, setEmulator] = createSignal<V86Starter | null>(null);
 
-  createEffect(() => {
-    async function main() {
+  onMount(() => {
+    async function initEmulation() {
       const Emulator = new V86Starter({
         wasm_fn: async (param: any) =>
           (await WebAssembly.instantiate(await v86WASM, param)).instance
@@ -36,9 +23,11 @@ const useV86 = (url: string, screenContainer: HTMLDivElement) => {
         autostart: true,
       });
       setEmulator(Emulator);
+      console.log(emulator());
     }
-    main();
-  }, []);
+
+    initEmulation();
+  });
 
   return { emulator };
 };

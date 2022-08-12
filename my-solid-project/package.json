@@ -21,6 +21,7 @@
   "dependencies": {
     "browserfs": "github:jvilk/BrowserFS",
     "solid-js": "^1.4.7",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "v86": "^0.3.7"
   }
 }
