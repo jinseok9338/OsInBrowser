@@ -1,9 +1,10 @@
-import Finder from ".";
 import { Menus } from "../../types/processDirectory";
 import finder from "../../assets/images/dock/finder.png";
 import { FilesContextValue } from "../../context/FilesContext";
 
-import V86Emulator from ".";
+import { lazy } from "solid-js";
+
+const V86Emulator = lazy(() => import("."));
 
 const menus: Menus[] = [
   {
@@ -23,7 +24,8 @@ const menus: Menus[] = [
 export const V86MetaData = (url: string) => {
   return {
     active: false,
-    iconPath: finder,
+    iconPath:
+      "https://w7.pngwing.com/pngs/772/259/png-transparent-logo-fun-video-games-discord-emulator-gba-icon-game-rectangle-orange.png",
     dimension: {
       height: 500,
       left: 100,

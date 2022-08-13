@@ -194,6 +194,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
       finderMetaData({
         FilesContext,
         openFile,
+        url,
       }),
       V86MetaData(url!),
     ] as ProcessState[];

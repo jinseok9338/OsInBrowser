@@ -15,7 +15,7 @@ interface DockProps {
 }
 
 const Dock = () => {
-  const [state, { addProcess }] = useProcess();
+  const [state, { openFile }] = useProcess();
   useMoveDock();
 
   return (
@@ -30,7 +30,7 @@ const Dock = () => {
             alt=""
             id="dock-icon"
             onclick={() => {
-              addProcess("finder");
+              openFile("finder", "/home/desktop"); //Empty url
             }}
           />
         </li>

@@ -14,7 +14,7 @@ export type ProcessesContextValue = [
     enlarge: (id: string) => void;
     changeActive: (id: string) => void;
     shrink: (id: string) => void;
-    openFile: (fileType: string, filePath: string) => void;
+    openFile: (processId: string, filePath: string) => void;
   }
 ];
 
