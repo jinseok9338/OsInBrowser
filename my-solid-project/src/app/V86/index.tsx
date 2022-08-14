@@ -17,7 +17,7 @@ interface V86Props {
 }
 
 const getExtension = (directory: string) => {
-  return /[.]/.exec(directory) ? /[^.]+$/.exec(directory) : undefined;
+  return /[.]/.exec(directory) ? /[^.]+$/.exec(directory) : "";
 };
 
 const V86Emulator = ({ url }: V86Props): JSX.Element => {

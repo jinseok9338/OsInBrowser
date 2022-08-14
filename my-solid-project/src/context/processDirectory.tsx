@@ -44,6 +44,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     const newProcesses = state.concat([newProcess!]);
     setState(newProcesses);
   };
+
   const deleteProcess = (id: string) => {
     const newState = state.filter((process) => process.id != id);
     setState(newState);
