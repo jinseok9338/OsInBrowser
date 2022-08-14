@@ -62,7 +62,7 @@ const WindowComponent = ({
           <span>{processName ? processName : ""}</span>
         </div>
       </div>
-      {process}
+      {/*@once*/ process}
     </div>
   );
 };

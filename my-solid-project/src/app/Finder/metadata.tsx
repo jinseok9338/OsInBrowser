@@ -43,7 +43,9 @@ export const finderMetaData = ({
     id: "finder",
     tempDimension: undefined,
     isFullSize: false,
-    process: <Finder FilesContext={FilesContext} openFile={openFile} />, // needs file context ...
+    process: (
+      /*@once*/ <Finder FilesContext={FilesContext} openFile={openFile} />
+    ), // needs file context ...
     processName: "finder",
     menus: menus,
     isShrunk: false,

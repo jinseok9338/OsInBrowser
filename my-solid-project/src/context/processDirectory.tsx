@@ -36,7 +36,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     if (ProcessExists(state, id)) {
       return;
     }
-    let process = processesDirectory(url).find((process) => process.id == id);
+    let process = FindprocessesDirectory(id, url)[0];
     let newProcess = {
       ...process,
       active: true,
@@ -199,6 +199,27 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
       }),
       V86MetaData(url!),
     ] as ProcessState[];
+
+  const FindprocessesDirectory = (id: string, url?: string) => {
+    switch (id) {
+      case "finder": {
+        return [
+          finderMetaData({
+            FilesContext,
+            openFile,
+            url,
+          }),
+        ];
+      }
+
+      case "V86":
+        return [V86MetaData(url!)];
+
+      default:
+        throw "thd id is is missing or not right";
+        return [];
+    }
+  };
 
   return (
     <ProcessesContext.Provider

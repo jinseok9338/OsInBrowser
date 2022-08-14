@@ -35,7 +35,7 @@ export const V86MetaData = (url: string) => {
     id: "V86",
     tempDimension: undefined,
     isFullSize: false,
-    process: <V86Emulator url={url} />,
+    process: /*@once*/ <V86Emulator url={url} />,
     processName: "V86",
     menus: menus,
     isShrunk: false,
