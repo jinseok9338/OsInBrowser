@@ -1,6 +1,7 @@
 import { Menus } from "../../types/processDirectory";
-import finder from "../../assets/images/dock/finder.png";
+
 import { FilesContextValue } from "../../context/FilesContext";
+import emulation from "../../assets/images/apps/emulation.png";
 
 import { lazy } from "solid-js";
 
@@ -24,8 +25,7 @@ const menus: Menus[] = [
 export const V86MetaData = (url: string) => {
   return {
     active: false,
-    iconPath:
-      "https://w7.pngwing.com/pngs/627/851/png-transparent-game-boy-advance-gba-emulator-video-game-android-android-purple-game-gadget-thumbnail.png",
+    iconPath: emulation,
     dimension: {
       height: 500,
       left: 100,

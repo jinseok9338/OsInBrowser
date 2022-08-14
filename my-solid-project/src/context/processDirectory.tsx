@@ -206,7 +206,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         return [V86MetaData(url!)];
 
       default:
-        throw "the id is is missing or not right";
+        throw "the id  is missing or not right";
         return [];
     }
   };

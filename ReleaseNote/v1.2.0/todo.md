@@ -4,13 +4,15 @@
 
     1. pass the prop into finderMain for opening the file. [Done] // this is done because I can't pass process context into file context
 
-    2. clear the warning that computations created outside a `createRoot` or `render` will never be disposed []
+    2. clear the warning that computations created outside a `createRoot` or `render` will never be disposed [Done] -- Make process loader to load process when called ... but ...maybe it's not something to worry about
 
-    3. bugs where I can't load the linux emulation []
+    3. bugs where I can't load the linux emulation [Done]
 
     4. resize the window issue in emultion []
 
-    5. needs better icon for the emulation []
+    5. needs better icon for the emulation [Done]
+
+    6. needs to mount fs system []
 
 ### Design Change
 
@@ -18,7 +20,7 @@
 
     1.  put linux in the desktop .. https://www.youtube.com/watch?v=Hu1RYVoCbgs&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=16 dos emulator dos vs terminal [] https://www.youtube.com/watch?v=SuvXykToxQ4&list=PLM88opVjBuU7xSRoHhs3hZBz3JmHHBMMN&index=14
 
-    6. Lazy loading... []
+    6. Lazy loading... [Done]
 
 ### New Feature or changes in Version 1.2.1
 
