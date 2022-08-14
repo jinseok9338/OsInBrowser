@@ -25,7 +25,7 @@ export const V86MetaData = (url: string) => {
   return {
     active: false,
     iconPath:
-      "https://w7.pngwing.com/pngs/772/259/png-transparent-logo-fun-video-games-discord-emulator-gba-icon-game-rectangle-orange.png",
+      "https://w7.pngwing.com/pngs/627/851/png-transparent-game-boy-advance-gba-emulator-video-game-android-android-purple-game-gadget-thumbnail.png",
     dimension: {
       height: 500,
       left: 100,

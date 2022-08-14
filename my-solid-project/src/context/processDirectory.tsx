@@ -190,16 +190,6 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     alert(enc.decode(str as unknown as BufferSource));
   };
 
-  const processesDirectory = (url?: string) =>
-    [
-      finderMetaData({
-        FilesContext,
-        openFile,
-        url,
-      }),
-      V86MetaData(url!),
-    ] as ProcessState[];
-
   const FindprocessesDirectory = (id: string, url?: string) => {
     switch (id) {
       case "finder": {
@@ -216,7 +206,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
         return [V86MetaData(url!)];
 
       default:
-        throw "thd id is is missing or not right";
+        throw "the id is is missing or not right";
         return [];
     }
   };

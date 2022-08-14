@@ -1,12 +1,18 @@
-# Fix bugs and design - by Aug 5th Version 1.2.0
+# Fix bugs and design - by Aug 20th Version 1.2.0
 
 ### Bugs
 
     1. pass the prop into finderMain for opening the file. [Done] // this is done because I can't pass process context into file context
 
-### Design Change
+    2. clear the warning that computations created outside a `createRoot` or `render` will never be disposed []
 
-    1. change the background setting []
+    3. bugs where I can't load the linux emulation []
+
+    4. resize the window issue in emultion []
+
+    5. needs better icon for the emulation []
+
+### Design Change
 
 ### New Feature or changes in Version 1.2.0
 
@@ -31,3 +37,5 @@
     5. add Tooltip for the circular menu for showing if the app is hidden or not []
 
     7. create Setting panel []
+
+    1. change the background setting []
