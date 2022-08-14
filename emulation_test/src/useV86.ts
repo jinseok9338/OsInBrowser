@@ -6,6 +6,7 @@ import { v86WASM, seabios, vgabios } from "v86/build/binaries";
 import { createSignal, onMount } from "solid-js";
 
 const useV86 = (url: string, screenContainer: HTMLDivElement) => {
+  //@ts-ignore
   const [emulator, setEmulator] = createSignal<V86Starter | null>(null);
 
   onMount(() => {

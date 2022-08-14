@@ -1,6 +1,4 @@
 import { Menus } from "../../types/processDirectory";
-
-import { FilesContextValue } from "../../context/FilesContext";
 import emulation from "../../assets/images/apps/emulation.png";
 
 import { lazy } from "solid-js";
@@ -30,7 +28,7 @@ export const V86MetaData = (url: string) => {
       height: 500,
       left: 100,
       top: 100,
-      width: 500,
+      width: 700,
     },
     id: "V86",
     tempDimension: undefined,

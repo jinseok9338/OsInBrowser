@@ -49,9 +49,14 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
           vga_bios: { buffer: await vgabios },
           [isISO ? "cdrom" : "fda"]: { url: bufferToUrl(contents) },
           network_relay_url: "wss://relay.widgetry.org/",
-
+          // filesystem: {
+          //   basefs: "/",
+          //   baseurl: "/",
+          // },
           autostart: true,
         });
+
+        // set the screen size here
 
         setEmulator(Emulator);
       });
@@ -69,8 +74,7 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
       <div
         style={{
           "white-space": "pre",
-          font: "14px monospace",
-          "line-height": "14px",
+          font: "14px monospace !important",
         }}
       ></div>
       <canvas style="display: none"></canvas>
