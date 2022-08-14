@@ -51,10 +51,10 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
           [isISO ? "cdrom" : "fda"]: { url: bufferToUrl(contents) },
           network_relay_url: "wss://relay.widgetry.org/",
           /* A way to mount a file system. */
-          filesystem: {
-            basefs: Index,
-            baseurl: "/",
-          },
+          // filesystem: {
+          //   basefs: Index,
+          //   baseurl: "/",
+          // },
           autostart: true,
         });
 
