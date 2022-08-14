@@ -8,7 +8,7 @@
 
     3. bugs where I can't load the linux emulation [Done]
 
-    4. resize the window issue in emultion []
+    4. resize the window issue in emultion [Partially Done] but I don't know how to resize the window depending on the emulation...
 
     5. needs better icon for the emulation [Done]
 

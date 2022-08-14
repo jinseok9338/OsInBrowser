@@ -11,6 +11,7 @@ import { useFileSystem } from "../../context/windowFileSystem";
 import { NavigatorWithMemory } from "./types";
 import { bufferToUrl } from "../../utils/fileFunctions";
 import { BOOT_CD_FD_HD, BOOT_FD_CD_HD } from "./config";
+import Index from "../../../fs.9p.json";
 
 interface V86Props {
   url: string; // onject to url string
@@ -49,10 +50,11 @@ const V86Emulator = ({ url }: V86Props): JSX.Element => {
           vga_bios: { buffer: await vgabios },
           [isISO ? "cdrom" : "fda"]: { url: bufferToUrl(contents) },
           network_relay_url: "wss://relay.widgetry.org/",
-          // filesystem: {
-          //   basefs: "/",
-          //   baseurl: "/",
-          // },
+          /* A way to mount a file system. */
+          filesystem: {
+            basefs: Index,
+            baseurl: "/",
+          },
           autostart: true,
         });
 

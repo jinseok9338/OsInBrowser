@@ -5,7 +5,7 @@ export const config = {
   autostart: true,
   log_level: 0,
   filesystem: {
-    basefs: "/",
+    basefs: "/.index/fs.9p.json",
     baseurl: "/",
   },
   network_relay_url: "wss://relay.widgetry.org/",
