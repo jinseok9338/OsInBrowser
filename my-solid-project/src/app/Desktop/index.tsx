@@ -51,7 +51,7 @@ const Main = () => {
           <PopUpModal
             description="haha this is the test and if it's successful"
             severity="Error"
-            show={true}
+            show={false}
           />
           <Dock />
         </div>

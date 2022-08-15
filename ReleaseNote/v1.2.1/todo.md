@@ -10,7 +10,7 @@
 
 ### New Feature or changes in Version 1.2.1
 
-    1.  make error modal [] https://www.solidjs.com/tutorial/flow_portal
+    1.  make error modal [] https://www.solidjs.com/tutorial/flow_portal ... partially done.. need to wrap functions with the decorator to send the warning to the Error Portal
 
     5. add Tooltip for the circular menu for showing if the app is hidden or not [Done]
 
