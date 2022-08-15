@@ -1,6 +1,7 @@
 import { createContext, useContext, ParentComponent } from "solid-js";
 import { createStore } from "solid-js/store";
 import { finderMetaData } from "../app/Finder/metadata";
+import { V86MetaData } from "../app/V86/metaData";
 import {
   Dimension,
   ProcessesContextValue,
@@ -22,6 +23,7 @@ const ProcessesContext = createContext<ProcessesContextValue>([
     enlarge: () => undefined,
     changeActive: () => undefined,
     shrink: () => undefined,
+    openFile: () => undefined,
   },
 ]);
 
@@ -30,12 +32,11 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
 
   const FilesContext = useFiles();
 
-  const processesDirectory = [finderMetaData(FilesContext)] as ProcessState[];
-  const addProcess = (id: string) => {
+  const addProcess = (id: string, url?: string) => {
     if (ProcessExists(state, id)) {
       return;
     }
-    let process = processesDirectory.find((process) => process.id == id);
+    let process = FindprocessesDirectory(id, url)[0];
     let newProcess = {
       ...process,
       active: true,
@@ -43,6 +44,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     const newProcesses = state.concat([newProcess!]);
     setState(newProcesses);
   };
+
   const deleteProcess = (id: string) => {
     const newState = state.filter((process) => process.id != id);
     setState(newState);
@@ -153,6 +155,62 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
     setState(newState);
   };
 
+  const openFile = (processId: string, filePath: string) => {
+    // if the file type is "folder" add finder and change the directory
+    console.log(processId);
+    switch (processId) {
+      case "finder": {
+        // If it is folder open folder
+        console.log("folder");
+        addProcess(processId);
+        FilesContext.setCurrentDirectory(filePath);
+        return;
+      }
+
+      case "V86": {
+        // addProcess("id") // in the process and pass in the url of the file
+        // do shortCut stuff
+        let blob = FilesContext.readFile(filePath);
+        addProcess(processId, filePath);
+
+        return;
+      }
+
+      default: {
+        let blob = FilesContext.readFile(filePath);
+
+        alert(URL.createObjectURL(blob));
+        return;
+      }
+    }
+
+    let enc = new TextDecoder();
+    let str = FilesContext.readFile(filePath);
+    console.log(enc.decode(str as unknown as BufferSource));
+    alert(enc.decode(str as unknown as BufferSource));
+  };
+
+  const FindprocessesDirectory = (id: string, url?: string) => {
+    switch (id) {
+      case "finder": {
+        return [
+          finderMetaData({
+            FilesContext,
+            openFile,
+            url,
+          }),
+        ];
+      }
+
+      case "V86":
+        return [V86MetaData(url!)];
+
+      default:
+        throw "the id  is missing or not right";
+        return [];
+    }
+  };
+
   return (
     <ProcessesContext.Provider
       value={[
@@ -164,6 +222,7 @@ export const ProcessDirectoryProvider: ParentComponent = (props) => {
           enlarge,
           changeActive,
           shrink,
+          openFile,
         },
       ]}
     >

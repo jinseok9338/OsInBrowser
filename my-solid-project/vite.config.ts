@@ -7,6 +7,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
   return {
     define: {
       WEATHER_SECRET: JSON.stringify(env.WEATHER_SECRET),
+      global: {},
     },
     plugins: [solidPlugin()],
     server: {

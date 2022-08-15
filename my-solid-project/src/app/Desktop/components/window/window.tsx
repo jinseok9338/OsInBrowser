@@ -62,9 +62,20 @@ const WindowComponent = ({
           <span>{processName ? processName : ""}</span>
         </div>
       </div>
-      <div class="content">{process}</div>
+      {/*@once*/ process}
     </div>
   );
 };
 
 export default WindowComponent;
+
+{
+  /* <div
+class="content"
+style={`${
+  id == "finder" ? "height: calc(100% - 50px);" : "height: 100%"
+}`}
+>
+{process}
+</div> */
+}

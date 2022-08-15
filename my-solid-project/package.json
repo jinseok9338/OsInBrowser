@@ -6,7 +6,7 @@
     "dev": " vite",
     "build": "vite build",
     "serve": "vite preview",
-    "index": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../public.json && cd .."
+    "index": "cd public && node ../node_modules/browserfs/dist/scripts/make_http_index.js > ../fs.bfs.json && node ../src/utils/fs2json.js --exclude .index --out ../fs.9p.json . && cd .."
   },
   "license": "MIT",
   "devDependencies": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "browserfs": "github:jvilk/BrowserFS",
     "solid-js": "^1.4.7",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "v86": "^0.3.7"
   }
 }

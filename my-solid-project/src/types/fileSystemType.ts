@@ -19,4 +19,5 @@ export interface fileType {
   filePath: string;
   dir: string;
   filetype: string;
+  processId: string;
 }

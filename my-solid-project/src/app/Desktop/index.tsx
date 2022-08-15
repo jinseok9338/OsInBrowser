@@ -14,7 +14,7 @@ import CustomMenu from "./components/CustomMenu/customMenu";
 import CircularMenu from "./components/circularMenu";
 
 const Main = () => {
-  const [state, {}] = useProcess();
+  const [state, { openFile }] = useProcess();
   //this sets the loading state
   const mainFileSystem = useFiles();
 
@@ -40,7 +40,11 @@ const Main = () => {
         <div class="mainDesktop" id="mainDesktop">
           {/* context is the current file path where mouse is positioned  */}
           <CustomMenu open={open} position={position} menus={menus} />
-          <DesktopFiles setFocus={setFocus} mainFileSystem={mainFileSystem} />
+          <DesktopFiles
+            setFocus={setFocus}
+            mainFileSystem={mainFileSystem}
+            openFile={openFile}
+          />
           <StateLoader state={state} />
           <CircularMenu />
           <Dock />

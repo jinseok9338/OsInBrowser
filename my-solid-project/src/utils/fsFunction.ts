@@ -4,6 +4,7 @@ import folder from "../assets/images/apps/folder.png";
 import picture from "../assets/images/apps/picture.png";
 import unknown from "../assets/images/apps/unknown.png";
 import textEdit from "../assets/images/apps/textedit.png";
+import { fileType } from "../types/fileSystemType";
 
 export const fsFunction = () => {
   const { fs } = useFileSystem();
@@ -28,8 +29,10 @@ export const fsFunction = () => {
    * @returns Buffer
    */
   const readFileSync = (filePath: string) => {
-    let fileContent = fs?.readFileSync(filePath) as unknown as string;
-    return !fileContent ? "" : fileContent;
+    let fileContent = fs?.readFileSync(filePath);
+    return !fileContent
+      ? new Blob([])
+      : new Blob([new Uint8Array(fileContent)]);
   };
 
   /*
@@ -74,24 +77,35 @@ export const fsFunction = () => {
   };
 
   const getFileType = (directory: string) => {
-    let iconName = getExtension(directory)?.toString();
+    let ext = getExtension(directory)?.toString();
     // need to check if undefined is a directory or not
-    if (iconName == undefined) {
-      // get the folder icon since it's folder
-      return "folder";
-    }
-    if (IMAGE_FILE_EXTENSIONS.includes(iconName.toLowerCase())) {
-      return "image";
-    }
-    if (TEXT_FORMAT.includes(iconName.toLowerCase())) {
-      return "text";
-    }
 
-    //this is unoknown type
-    return "unknown";
+    switch (true) {
+      case ext == undefined: {
+        return "folder";
+      }
+      case ext == "url": {
+        return "url";
+      }
+      case IMAGE_FILE_EXTENSIONS.includes(ext?.toLowerCase()!): {
+        return "image";
+      }
+      case TEXT_FORMAT.includes(ext?.toLowerCase()!): {
+        return "text";
+      }
+      default:
+        return "unknown";
+    }
   };
 
-  const setIcon = (filetype: string) => {
+  const makeShortCutData = (file: fileType): string => `
+  [InternetShortcut]
+  id=${file.filetype}
+  Comment=${"The comment was created automatically"}
+  IconFile=${file.iconPath}
+  `;
+
+  const setIcon = (filetype: string, iconPath?: string) => {
     switch (filetype) {
       case "folder":
         return folder;
@@ -99,6 +113,8 @@ export const fsFunction = () => {
         return picture;
       case "text":
         return textEdit;
+      // case "url":
+      //   return getUrlIcon();
       default:
         return unknown;
     }
@@ -122,6 +138,28 @@ export const fsFunction = () => {
     return result ? true : false;
   };
 
+  const readShortCut = (filePath: string): { [key: string]: any } => {
+    let result: { [key: string]: any } = {};
+    const data = fs?.readFileSync(filePath);
+    if (data) {
+      //read shortCut data one by one and extract the file info
+      let enc = new TextDecoder();
+      let str = enc.decode(data as unknown as BufferSource);
+
+      let allrows = str.split("\n");
+
+      for (let row of allrows) {
+        let patterns = /(\s*.*)=(\s*.*)/.exec(row);
+        if (patterns) {
+          let key = patterns[1].trim();
+          let value = patterns[2].trim();
+          result[key] = value;
+        }
+      }
+    }
+    return result;
+  };
+
   return {
     exists,
     readdirSync,
@@ -132,5 +170,7 @@ export const fsFunction = () => {
     makedir,
     setIcon,
     getFileType,
+    makeShortCutData,
+    readShortCut,
   };
 };

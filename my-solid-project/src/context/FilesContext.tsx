@@ -13,13 +13,14 @@ import { v4 as uuidv4 } from "uuid";
 import { fileType } from "../types/fileSystemType";
 import { fsFunction } from "../utils/fsFunction";
 import path, { dirname } from "path";
+import { without } from "lodash";
 
 export type FilesContextValue = {
   currentFiles: fileType[];
   setCurrentFiles: SetStoreFunction<fileType[]>;
   currentDirectory: Accessor<string>;
   changeFileName: (oldPath: string, newPath: string) => void;
-  readFile: (filePath: string) => string;
+  readFile: (filePath: string) => Blob;
   setCurrentDirectory: Setter<string>;
   makeFile: (filePath: string, data: any) => void;
   readdirSync: (cd: string) => string[];
@@ -54,6 +55,8 @@ export const FilesProvider: ParentComponent = (props) => {
     setIcon,
     makedir,
     exists,
+    makeShortCutData,
+    readShortCut,
   } = fsFunction();
 
   //initialize the files and directory ... but do I need one??
@@ -67,19 +70,7 @@ export const FilesProvider: ParentComponent = (props) => {
     const cd = currentDirectory();
     if (cd != prev) {
       setCurrentDirectory(cd);
-      let cFiles = readdirSync(cd)
-        .sort()
-        .map(
-          (file) =>
-            ({
-              name: file,
-              iconPath: setIcon(getFileType(file)),
-              id: uuidv4(),
-              filePath: `${cd}/${file}`,
-              dir: cd,
-              filetype: getFileType(file),
-            } as fileType)
-        );
+      let cFiles = setFiles(cd);
       setCurrentFiles(cFiles);
     }
     return cd;
@@ -88,19 +79,7 @@ export const FilesProvider: ParentComponent = (props) => {
   //OnMount set the desktop files first
   onMount(() => {
     const cd = "/home/desktop";
-    let cFiles = readdirSync(cd)
-      .sort()
-      .map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            id: uuidv4(),
-            filePath: `${cd}/${file}`,
-            dir: cd,
-            filetype: getFileType(file),
-          } as fileType)
-      );
+    let cFiles = setFiles(cd);
     setDesktopFiles(cFiles);
   });
 
@@ -133,17 +112,32 @@ export const FilesProvider: ParentComponent = (props) => {
   const setFiles = (cd: string) => {
     const files = readdirSync(cd)
       .sort()
-      .map(
-        (file) =>
-          ({
-            name: file,
-            iconPath: setIcon(getFileType(file)),
-            filetype: getFileType(file),
-            id: uuidv4(),
-            filePath: `${cd}/${file}`,
-            dir: cd,
-          } as fileType)
-      );
+      .map((file) => {
+        let filetype = getFileType(file);
+        let filePath = `${cd}/${file}`;
+        let iconPath = setIcon(getFileType(file));
+        let name = file;
+        let id = uuidv4();
+        let dir = cd;
+        let processId = filetype == "folder" ? "finder" : ""; // need to set the pid
+        if (filetype == "url") {
+          let res = readShortCut(filePath);
+
+          filePath = res.filePath;
+          iconPath = res.iconPath;
+          name = res.name;
+          processId = res.processId;
+        }
+        return {
+          name,
+          iconPath,
+          filetype,
+          id,
+          filePath,
+          dir,
+          processId,
+        } as fileType;
+      });
     return files;
   };
 
@@ -230,6 +224,22 @@ export const FilesProvider: ParentComponent = (props) => {
     setCurrentFiles(files);
     ifDeskTopSetDesktopFiles(cd, files);
   };
+
+  const createShourtCut = (file: fileType) => {
+    let currentDirectory = file.dir;
+    let i = 0;
+    let urlName = `${path.parse(file.name).name}${i == 0 ? "" : i}.url`;
+
+    while (exists(file.dir + urlName)) {
+      i++;
+      urlName = `${path.parse(file.name).name}${i == 0 ? "" : i}.url`;
+    }
+
+    const data = makeShortCutData(file);
+
+    makeFile(urlName, data);
+  };
+  // I am not creating thr ShortCut... this is too much
 
   return (
     <FilesContext.Provider

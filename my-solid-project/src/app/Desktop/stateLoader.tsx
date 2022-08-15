@@ -10,7 +10,7 @@ const StateLoader = ({ state }: StateLoader) => (
   <For each={state}>
     {(process, _i) => (
       <WindowComponent
-        process={process.process}
+        process={/*@once*/ process.process}
         processName={process.processName!}
         dimension={process.dimension!}
         id={process.id!}

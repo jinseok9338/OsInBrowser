@@ -9,7 +9,8 @@ import {
 
 import { FSModule } from "browserfs/dist/node/core/FS";
 
-import Index from "../../public.json";
+import bfsJson from "../../fs.bfs.json";
+
 import * as BrowserFS from "browserfs";
 import { FileSystemConfiguration } from "browserfs";
 
@@ -23,7 +24,7 @@ const FileSystemConfig: FileSystemConfiguration = {
     readable: {
       fs: "HTTPRequest",
       options: {
-        index: Index,
+        index: bfsJson,
       },
     },
     writable: {
