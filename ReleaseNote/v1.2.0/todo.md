@@ -12,7 +12,7 @@
 
     5. needs better icon for the emulation [Done]
 
-    6. needs to mount fs system []
+    6. needs to mount fs system [] ... later ...
 
 ### Design Change
 
