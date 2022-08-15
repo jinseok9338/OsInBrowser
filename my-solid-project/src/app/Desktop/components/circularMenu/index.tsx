@@ -39,8 +39,11 @@ const CircularMenu = () => {
       <div class={`circularMenu-line ${open()}`}>
         <For each={state}>
           {(process) => (
-            <div class="btn-app" onClick={() => shrink(process.id)}>
-              {/* <div class="fa fa-folder-open-o"></div> */}
+            <div
+              class="btn-app tooltip tooltip-left"
+              onClick={() => shrink(process.id)}
+              data-tooltip={`${process.isShrunk ? "Show" : "Hide"}`}
+            >
               <img class="app-image" src={process.iconPath} />
             </div>
           )}

@@ -8,6 +8,7 @@ import "./style/window.scss";
 import "./style/finder.scss";
 import "./style/loader.scss";
 import "./style/dragDrop.scss";
+import "./style/tooltip.scss";
 
 //customMenu
 import "./style/customMenu.scss";
