@@ -12,6 +12,7 @@ import StateLoader from "./stateLoader";
 import { useFiles } from "../../context/FilesContext";
 import CustomMenu from "./components/CustomMenu/customMenu";
 import CircularMenu from "./components/circularMenu";
+import PopUpModal from "./components/PopUpModal";
 
 const Main = () => {
   const [state, { openFile }] = useProcess();
@@ -47,6 +48,11 @@ const Main = () => {
           />
           <StateLoader state={state} />
           <CircularMenu />
+          <PopUpModal
+            description="haha this is the test and if it's successful"
+            severity="Error"
+            show={true}
+          />
           <Dock />
         </div>
       </DragAndDrop>
